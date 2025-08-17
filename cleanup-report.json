@@ -1,0 +1,27 @@
+{
+  "cleanupDate": "2025-08-17T16:01:55.125Z",
+  "repository": "https://github.com/netroya/ai-python-egitimi",
+  "siteUrl": "https://netroya.github.io/ai-python-egitimi",
+  "remainingFiles": [
+    ".gitignore",
+    "404.html",
+    "adsense-config.json",
+    "adsense-optimizer.js",
+    "analytics-config.json",
+    "index.html",
+    "premium-styles.css"
+  ],
+  "optimizations": [
+    "Removed development files",
+    "Removed test artifacts",
+    "Minified HTML",
+    "Optimized CSS",
+    "Cleaned JavaScript",
+    "Created minimal .gitignore"
+  ],
+  "performance": {
+    "estimatedSizeReduction": "60-80%",
+    "loadTimeImprovement": "20-30%",
+    "seoImpact": "Positive"
+  }
+}
