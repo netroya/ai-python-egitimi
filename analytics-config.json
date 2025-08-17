@@ -1,0 +1,17 @@
+{
+  "measurementId": "G-BJ7HITTRGO",
+  "propertyId": "GA-BJ7HITTRGO",
+  "setupDate": "2025-08-17T13:35:45.565Z",
+  "trackingEvents": [
+    "page_view",
+    "scroll",
+    "click",
+    "file_download",
+    "ad_impression"
+  ],
+  "conversionGoals": [
+    "course_signup",
+    "premium_upgrade",
+    "contact_form"
+  ]
+}

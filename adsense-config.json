@@ -1,0 +1,19 @@
+{
+  "publisherId": "ca-pub-5994338311",
+  "adSlots": {
+    "header": 3838714977,
+    "content": 4515379030,
+    "sidebar": 2077956392,
+    "footer": 9486093631,
+    "exitIntent": 4570879085,
+    "dynamic": 2887038787
+  },
+  "setupDate": "2025-08-17T13:35:45.561Z",
+  "estimatedCPC": "$4-10",
+  "targetKeywords": [
+    "python öğrenme",
+    "yapay zeka eğitimi",
+    "programlama kursu"
+  ],
+  "optimizationLevel": "premium"
+}

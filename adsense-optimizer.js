@@ -112,7 +112,7 @@ class AdSenseOptimizer {
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <ins class="adsbygoogle"
                      style="display:block"
-                     data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                     data-ad-client="ca-pub-5994338311"
                      data-ad-slot="DYNAMIC-AD-SLOT"
                      data-ad-format="auto"></ins>
                 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -164,7 +164,7 @@ class AdSenseOptimizer {
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <ins class="adsbygoogle"
                  style="display:block"
-                 data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                 data-ad-client="ca-pub-5994338311"
                  data-ad-slot="EXIT-INTENT-AD-SLOT"
                  data-ad-format="auto"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -202,7 +202,7 @@ const highCPCKeywords = [
 const addKeywordTargeting = () => {
     const meta = document.createElement('meta');
     meta.name = 'google-adsense-platform-account';
-    meta.content = 'ca-host-pub-YOUR-HOST-ID';
+    meta.content = 'ca-host-pub-5994338311';
     document.head.appendChild(meta);
 };
 
