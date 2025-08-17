@@ -1,0 +1,5 @@
+# Production site - no development files needed
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
