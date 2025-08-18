@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python ile Veri Analizi: Pandas Kütüphanesi Rehberi | AI Python Eğitimi Blog</title>
+    <meta name="description" content="Python'da en popüler veri analizi kütüphanesi Pandas'ı sıfırdan öğrenin. Veri okuma, temizleme ve analiz teknikleri.">
+    <meta name="keywords" content="python, pandas, veri-analizi, data-science">
+    <meta name="author" content="AI Python Eğitimi">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Python ile Veri Analizi: Pandas Kütüphanesi Rehberi">
+    <meta property="og:description" content="Python'da en popüler veri analizi kütüphanesi Pandas'ı sıfırdan öğrenin. Veri okuma, temizleme ve analiz teknikleri.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://netroya.github.io/ai-python-egitimi/blog/python/python-pandas-veri-analizi-rehberi.html">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Python ile Veri Analizi: Pandas Kütüphanesi Rehberi",
+        "description": "Python'da en popüler veri analizi kütüphanesi Pandas'ı sıfırdan öğrenin. Veri okuma, temizleme ve analiz teknikleri.",
+        "author": {
+            "@type": "Organization",
+            "name": "AI Python Eğitimi"
+        },
+        "datePublished": "18.08.2025",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://netroya.github.io/ai-python-egitimi/blog/python/python-pandas-veri-analizi-rehberi.html"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="../../premium-styles.css">
+    <link rel="stylesheet" href="../blog-styles.css">
+    <link rel="canonical" href="https://netroya.github.io/ai-python-egitimi/blog/python/python-pandas-veri-analizi-rehberi.html">
+    
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023802833968711" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">🎯 AI Python Eğitimi</a>
+            <div class="nav-menu">
+                <a href="../../index.html" class="nav-link">Ana Sayfa</a>
+                <a href="../../python-kursu.html" class="nav-link">Python Kursu</a>
+                <a href="../../yapay-zeka-rehberi.html" class="nav-link">AI Rehberi</a>
+                <a href="../../veri-analizi.html" class="nav-link">Veri Analizi</a>
+                <a href="../../web-gelistirme.html" class="nav-link">Web Geliştirme</a>
+                <a href="../../programlama-araclari.html" class="nav-link">Araçlar</a>
+                <a href="../index.html" class="nav-link">Blog</a>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../../index.html">Ana Sayfa</a> › 
+            <a href="../index.html">Blog</a> › 
+            <a href="../python/index.html">Python</a> › 
+            <span>Python ile Veri Analizi: Pandas Kütüphanesi Rehberi</span>
+        </div>
+    </div>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <div class="article-meta">
+                <span class="category">Python</span>
+                <span class="read-time">📖 8 dk okuma</span>
+                <span class="publish-date">📅 18.08.2025</span>
+            </div>
+            <h1 class="article-title">Python ile Veri Analizi: Pandas Kütüphanesi Rehberi</h1>
+            <p class="article-excerpt">Python'da en popüler veri analizi kütüphanesi Pandas'ı sıfırdan öğrenin. Veri okuma, temizleme ve analiz teknikleri.</p>
+            <div class="article-tags">
+                <span class="tag">#python</span><span class="tag">#pandas</span><span class="tag">#veri-analizi</span><span class="tag">#data-science</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Ad Zone -->
+    <div class="ad-zone-content">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9023802833968711" data-ad-slot="4515379030"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Article Content -->
+    <main class="article-content">
+        <div class="container">
+            <article class="blog-post">
+                
+                <h2>🐼 Pandas Nedir?</h2>
+                <p>Pandas, Python'da veri analizi ve manipülasyonu için geliştirilmiş güçlü bir kütüphanedir. Excel'den CSV dosyalarına, veritabanlarından API'lara kadar çeşitli veri kaynaklarıyla çalışmanızı sağlar.</p>
+                
+                <h2>🚀 Pandas Kurulumu</h2>
+                <pre><code>pip install pandas</code></pre>
+                
+                <h2>📊 Temel Pandas İşlemleri</h2>
+                <h3>1. Veri Okuma</h3>
+                <pre><code>import pandas as pd
+
+# CSV dosyası okuma
+df = pd.read_csv('veri.csv')
+
+# Excel dosyası okuma
+df = pd.read_excel('veri.xlsx')
+
+# JSON dosyası okuma
+df = pd.read_json('veri.json')</code></pre>
+
+                <h3>2. Veri İnceleme</h3>
+                <pre><code># İlk 5 satırı göster
+print(df.head())
+
+# Son 5 satırı göster
+print(df.tail())
+
+# Veri hakkında bilgi
+print(df.info())
+
+# İstatistiksel özet
+print(df.describe())</code></pre>
+
+                <h3>3. Veri Temizleme</h3>
+                <pre><code># Eksik verileri kontrol et
+print(df.isnull().sum())
+
+# Eksik verileri doldur
+df.fillna(0, inplace=True)
+
+# Duplicate satırları kaldır
+df.drop_duplicates(inplace=True)</code></pre>
+
+                <h2>💡 Pratik Örnek</h2>
+                <p>Satış verilerini analiz eden basit bir örnek:</p>
+                <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# Örnek veri oluştur
+data = {
+    'Ürün': ['A', 'B', 'C', 'D', 'E'],
+    'Satış': [100, 150, 80, 200, 120],
+    'Kategori': ['Elektronik', 'Giyim', 'Ev', 'Elektronik', 'Giyim']
+}
+
+df = pd.DataFrame(data)
+
+# Kategoriye göre toplam satış
+kategori_satis = df.groupby('Kategori')['Satış'].sum()
+print(kategori_satis)
+
+# Grafik oluştur
+kategori_satis.plot(kind='bar')
+plt.title('Kategoriye Göre Satış')
+plt.show()</code></pre>
+
+                <h2>🎯 Sonuç</h2>
+                <p>Pandas, Python'da veri analizi için vazgeçilmez bir araçtır. Bu rehberde öğrendiğiniz temel işlemlerle veri analizine başlayabilir ve daha karmaşık projelere geçebilirsiniz.</p>
+
+                <div class="tip-box">
+                    <h4>💡 İpucu</h4>
+                    <p>Pandas öğrenirken pratik yapmayı unutmayın. Gerçek veri setleriyle çalışarak deneyim kazanın!</p>
+                </div>
+                
+            </article>
+            
+            <!-- Social Share -->
+            <div class="social-share">
+                <h3>Bu yazıyı paylaş:</h3>
+                <div class="share-buttons">
+                    <a href="https://twitter.com/intent/tweet?text=Python%20ile%20Veri%20Analizi%3A%20Pandas%20K%C3%BCt%C3%BCphanesi%20Rehberi&url=https%3A%2F%2Fnetroya.github.io%2Fai-python-egitimi%2Fblog%2Fpython%2Fpython-pandas-veri-analizi-rehberi.html" class="share-btn twitter" target="_blank">
+                        🐦 Twitter
+                    </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnetroya.github.io%2Fai-python-egitimi%2Fblog%2Fpython%2Fpython-pandas-veri-analizi-rehberi.html" class="share-btn facebook" target="_blank">
+                        📘 Facebook
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fnetroya.github.io%2Fai-python-egitimi%2Fblog%2Fpython%2Fpython-pandas-veri-analizi-rehberi.html" class="share-btn linkedin" target="_blank">
+                        💼 LinkedIn
+                    </a>
+                </div>
+            </div>
+
+            <!-- Ad Zone -->
+            <div class="ad-zone-content">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9023802833968711" data-ad-slot="2077956392" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+            <!-- Related Posts -->
+            <section class="related-posts">
+                <h3>İlgili Yazılar</h3>
+                <div class="related-posts-grid">
+                    <div class="related-post">
+                        <h4><a href="../../python-kursu.html">Python Programlama Kursu</a></h4>
+                        <p>Sıfırdan ileri seviyeye Python öğrenin</p>
+                    </div>
+                    <div class="related-post">
+                        <h4><a href="../../yapay-zeka-rehberi.html">Yapay Zeka Rehberi</a></h4>
+                        <p>AI ve makine öğrenmesi temelleri</p>
+                    </div>
+                    <div class="related-post">
+                        <h4><a href="../../veri-analizi.html">Veri Analizi</a></h4>
+                        <p>Python ile veri analizi teknikleri</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- CTA Section -->
+    <section class="blog-cta">
+        <div class="container">
+            <h2>Python ve AI öğrenmek istiyorsanız</h2>
+            <p>Kapsamlı eğitim programımıza katılın ve uzman olun!</p>
+            <a href="../../python-kursu.html" class="cta-button">Ücretsiz Kursa Başla</a>
+        </div>
+    </section>
+
+    <!-- Footer Ad -->
+    <div class="ad-zone-header">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9023802833968711" data-ad-slot="9486093631" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-40X5D8K6WH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-40X5D8K6WH');
+    </script>
+
+    <script>
+        // Mobile navigation
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
