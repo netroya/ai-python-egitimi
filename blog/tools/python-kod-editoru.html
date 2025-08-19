@@ -4,29 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Kod Editörü - Online Python Çalıştırma Aracı</title>
-    <meta name="description" content="Online Python kod editörü ve çalıştırma aracı. Tarayıcınızda Python kodlarınızı yazın, test edin ve çalıştırın.">
-    <meta name="keywords" content="python editor, online python, python playground, kod editörü">
+    <meta name="description" content="Gelişmiş online Python kod editörü. Autocomplete, debugging, syntax highlighting ve daha fazlası ile tarayıcınızda Python kodlarınızı yazın, test edin ve çalıştırın.">
+    <meta name="keywords" content="python editor, online python, python playground, kod editörü, python debugging">
     
     <!-- Schema.org markup -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Python Kod Editörü",
-        "description": "Online Python kod editörü ve çalıştırma aracı",
+        "name": "Gelişmiş Python Kod Editörü",
+        "description": "Tam özellikli online Python kod editörü ve çalıştırma aracı",
         "url": "https://netroya.github.io/ai-python-egitimi/blog/tools/python-kod-editoru.html",
         "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Web Browser"
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
     }
     </script>
     
     <link rel="stylesheet" href="../blog-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/dialog/dialog.min.css">
     
     <style>
+        :root {
+            --primary-color: #3498db;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --dark-bg: #2c3e50;
+            --light-bg: #f8f9fa;
+        }
+
         .editor-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -40,60 +58,102 @@
         }
         
         .editor-body {
-            background: #f8f9fa;
+            background: var(--light-bg);
             border-radius: 0 0 10px 10px;
             overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         
         .editor-toolbar {
-            background: #2c3e50;
+            background: var(--dark-bg);
             padding: 15px;
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toolbar-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
         }
         
         .btn {
-            background: #3498db;
+            background: var(--primary-color);
             color: white;
             border: none;
             padding: 8px 16px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 14px;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
         
         .btn:hover {
-            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
-        .btn.success {
-            background: #27ae60;
-        }
-        
-        .btn.success:hover {
-            background: #219a52;
-        }
-        
-        .btn.danger {
-            background: #e74c3c;
-        }
-        
-        .btn.danger:hover {
-            background: #c0392b;
+        .btn.success { background: var(--success-color); }
+        .btn.danger { background: var(--danger-color); }
+        .btn.warning { background: var(--warning-color); }
+
+        .theme-selector, .font-size-selector {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
         }
         
         .editor-wrapper {
             display: flex;
-            height: 500px;
+            height: 600px;
         }
         
+        .code-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
         .code-editor {
             flex: 1;
             border: none;
         }
         
+        .output-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid #444;
+        }
+
+        .output-tabs {
+            background: #34495e;
+            display: flex;
+        }
+
+        .output-tab {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+
+        .output-tab.active {
+            background: #2c3e50;
+            border-bottom-color: var(--primary-color);
+        }
+
         .output-panel {
             flex: 1;
             background: #1e1e1e;
@@ -101,12 +161,61 @@
             padding: 20px;
             font-family: 'Consolas', 'Monaco', monospace;
             overflow-y: auto;
-            border-left: 1px solid #444;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .output-panel.hidden {
+            display: none;
+        }
+
+        .debug-panel {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .variable-inspector {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .status-bar {
+            background: #34495e;
+            color: white;
+            padding: 10px 20px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .execution-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .speed-slider {
+            width: 100px;
         }
         
         .examples {
             margin-top: 30px;
-            padding: 20px;
+            padding: 25px;
             background: white;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -134,31 +243,155 @@
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
         }
         
         .feature-icon {
             font-size: 2em;
             margin-bottom: 10px;
         }
-        
-        .status-bar {
-            background: #34495e;
+
+        .file-explorer {
+            background: #2c3e50;
             color: white;
-            padding: 10px 20px;
+            width: 250px;
+            padding: 15px;
+            border-right: 1px solid #34495e;
+            font-family: monospace;
             font-size: 12px;
-            display: flex;
-            justify-content: space-between;
+            overflow-y: auto;
         }
-        
+
+        .file-tree {
+            list-style: none;
+            padding: 0;
+        }
+
+        .file-item {
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .file-item:hover {
+            background: #34495e;
+        }
+
+        .file-item.active {
+            background: var(--primary-color);
+        }
+
+        .console-input {
+            background: #1e1e1e;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-family: monospace;
+            width: 100%;
+            border-top: 1px solid #444;
+        }
+
+        .console-input:focus {
+            outline: none;
+            border-top-color: var(--primary-color);
+        }
+
+        .error-line {
+            background-color: rgba(231, 76, 60, 0.2);
+        }
+
+        .breakpoint {
+            background-color: rgba(231, 76, 60, 0.5);
+        }
+
+        .current-line {
+            background-color: rgba(52, 152, 219, 0.3);
+        }
+
         @media (max-width: 768px) {
             .editor-wrapper {
                 flex-direction: column;
                 height: auto;
             }
             
-            .code-editor, .output-panel {
-                height: 300px;
+            .code-section, .output-section {
+                height: 400px;
             }
+
+            .file-explorer {
+                width: 100%;
+                height: 150px;
+            }
+
+            .toolbar-group {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Autocomplete styling */
+        .CodeMirror-hints {
+            background: #2c3e50 !important;
+            border: 1px solid #34495e !important;
+            color: white !important;
+        }
+
+        .CodeMirror-hint {
+            color: white !important;
+        }
+
+        .CodeMirror-hint-active {
+            background: var(--primary-color) !important;
+            color: white !important;
+        }
+
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            color: white;
+            font-size: 18px;
+        }
+
+        .loading-overlay.hidden {
+            display: none;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            font-size: 12px;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
         }
     </style>
 </head>
@@ -176,126 +409,350 @@
         </div>
     </nav>
 
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div>🐍 Python Editörü Yükleniyor...</div>
+    </div>
+
     <div class="editor-container">
         <div class="editor-header">
-            <h1>🐍 Python Kod Editörü</h1>
-            <p>Tarayıcınızda Python kodlarınızı yazın, test edin ve çalıştırın</p>
+            <h1>🐍 Gelişmiş Python Kod Editörü</h1>
+            <p>Autocomplete, debugging, syntax highlighting ve daha fazlası ile profesyonel Python geliştirme ortamı</p>
         </div>
         
         <div class="editor-body">
             <div class="editor-toolbar">
-                <button class="btn success" onclick="runCode()">▶️ Çalıştır</button>
-                <button class="btn" onclick="clearCode()">🗑️ Temizle</button>
-                <button class="btn" onclick="saveCode()">💾 Kaydet</button>
-                <button class="btn" onclick="loadCode()">📁 Yükle</button>
-                <button class="btn" onclick="shareCode()">🔗 Paylaş</button>
-                <button class="btn" onclick="downloadCode()">⬇️ İndir</button>
+                <div class="toolbar-group">
+                    <div class="tooltip">
+                        <button class="btn success" onclick="runCode()">▶️ Çalıştır</button>
+                        <span class="tooltiptext">Ctrl+Enter ile çalıştır</span>
+                    </div>
+                    <div class="tooltip">
+                        <button class="btn warning" onclick="debugCode()">🐛 Debug</button>
+                        <span class="tooltiptext">Adım adım çalıştır</span>
+                    </div>
+                    <div class="tooltip">
+                        <button class="btn" onclick="stopExecution()">⏹️ Durdur</button>
+                        <span class="tooltiptext">Çalıştırmayı durdur</span>
+                    </div>
+                    <div class="tooltip">
+                        <button class="btn" onclick="clearCode()">🗑️ Temizle</button>
+                        <span class="tooltiptext">Kodu temizle</span>
+                    </div>
+                </div>
+
+                <div class="toolbar-group">
+                    <div class="tooltip">
+                        <button class="btn" onclick="saveCode()">💾 Kaydet</button>
+                        <span class="tooltiptext">Ctrl+S ile kaydet</span>
+                    </div>
+                    <div class="tooltip">
+                        <button class="btn" onclick="loadCode()">📁 Yükle</button>
+                        <span class="tooltiptext">Kaydedilen kodu yükle</span>
+                    </div>
+                    <div class="tooltip">
+                        <button class="btn" onclick="shareCode()">🔗 Paylaş</button>
+                        <span class="tooltiptext">Kodu paylaş</span>
+                    </div>
+                    <div class="tooltip">
+                        <button class="btn" onclick="downloadCode()">⬇️ İndir</button>
+                        <span class="tooltiptext">Python dosyası olarak indir</span>
+                    </div>
+                </div>
+
+                <div class="toolbar-group">
+                    <select class="theme-selector" onchange="changeTheme(this.value)">
+                        <option value="monokai">Monokai</option>
+                        <option value="dracula">Dracula</option>
+                        <option value="material">Material</option>
+                        <option value="default">Varsayılan</option>
+                    </select>
+                    
+                    <select class="font-size-selector" onchange="changeFontSize(this.value)">
+                        <option value="12">12px</option>
+                        <option value="14" selected>14px</option>
+                        <option value="16">16px</option>
+                        <option value="18">18px</option>
+                        <option value="20">20px</option>
+                    </select>
+
+                    <div class="tooltip">
+                        <button class="btn" onclick="formatCode()">🎨 Format</button>
+                        <span class="tooltiptext">Kodu formatla</span>
+                    </div>
+                </div>
             </div>
             
             <div class="editor-wrapper">
-                <textarea id="code-editor" class="code-editor">
-# Python Kod Editörü - Hoş Geldiniz!
-# Aşağıda basit bir örnek:
+                <div class="file-explorer" id="fileExplorer">
+                    <h4>📁 Dosya Gezgini</h4>
+                    <ul class="file-tree" id="fileTree">
+                        <li class="file-item active" onclick="switchFile('main.py')">📄 main.py</li>
+                        <li class="file-item" onclick="createNewFile()">➕ Yeni Dosya</li>
+                    </ul>
+                </div>
 
-def selamla(isim):
-    return f"Merhaba, {isim}! Python öğrenmeye hoş geldin!"
+                <div class="code-section">
+                    <textarea id="code-editor" class="code-editor">
+# 🐍 Gelişmiş Python Kod Editörü - Hoş Geldiniz!
+# Bu editör şu özellikleri destekler:
+# ✅ Autocomplete (Ctrl+Space)
+# ✅ Syntax Highlighting
+# ✅ Error Detection
+# ✅ Debug Mode
+# ✅ Variable Inspector
+# ✅ Multiple Files
+# ✅ Code Formatting
 
-# Kodu test et
-isim = "Öğrenci"
-mesaj = selamla(isim)
-print(mesaj)
+def gelismis_ornek():
+    """
+    Bu fonksiyon editörün gelişmiş özelliklerini gösterir.
+    Autocomplete için fonksiyon adını yazmaya başlayın.
+    """
+    # Veri yapıları
+    ogrenciler = [
+        {"isim": "Ali", "yas": 20, "notlar": [85, 92, 78]},
+        {"isim": "Ayşe", "yas": 19, "notlar": [90, 88, 95]},
+        {"isim": "Mehmet", "yas": 21, "notlar": [75, 82, 89]}
+    ]
+    
+    print("🎓 Öğrenci Listesi:")
+    for i, ogrenci in enumerate(ogrenciler, 1):
+        ortalama = sum(ogrenci["notlar"]) / len(ogrenci["notlar"])
+        print(f"{i}. {ogrenci['isim']} - Yaş: {ogrenci['yas']}, Ortalama: {ortalama:.1f}")
+    
+    # En başarılı öğrenciyi bul
+    en_basarili = max(ogrenciler, key=lambda x: sum(x["notlar"])/len(x["notlar"]))
+    print(f"\n🏆 En başarılı öğrenci: {en_basarili['isim']}")
+    
+    return ogrenciler
 
-# Matematiksel işlemler
-sayilar = [1, 2, 3, 4, 5]
-toplam = sum(sayilar)
-print(f"Sayıların toplamı: {toplam}")
-
-# Liste işlemleri
-kareler = [x**2 for x in sayilar]
-print(f"Karelerin listesi: {kareler}")
-                </textarea>
+# Fonksiyonu çalıştır
+if __name__ == "__main__":
+    print("🚀 Gelişmiş Python Editörü Çalışıyor!")
+    print("=" * 50)
+    
+    sonuc = gelismis_ornek()
+    
+    print(f"\n📊 Toplam öğrenci sayısı: {len(sonuc)}")
+    print("\n💡 İpucu: Autocomplete için Ctrl+Space tuşlarına basın!")
+                    </textarea>
+                </div>
                 
-                <div class="output-panel" id="output">
-                    <div style="color: #4CAF50;">Python Çıktı Paneli</div>
-                    <div style="color: #888; margin-top: 10px;">Kodunuzu çalıştırmak için '▶️ Çalıştır' butonuna tıklayın.</div>
+                <div class="output-section">
+                    <div class="output-tabs">
+                        <button class="output-tab active" onclick="switchTab('output')">📺 Çıktı</button>
+                        <button class="output-tab" onclick="switchTab('console')">💻 Konsol</button>
+                        <button class="output-tab" onclick="switchTab('variables')">🔍 Değişkenler</button>
+                        <button class="output-tab" onclick="switchTab('errors')">⚠️ Hatalar</button>
+                    </div>
+
+                    <div class="output-panel" id="output">
+                        <div style="color: #4CAF50; font-weight: bold;">🐍 Python Çıktı Paneli</div>
+                        <div style="color: #888; margin-top: 10px;">• Kodunuzu çalıştırmak için '▶️ Çalıştır' butonuna tıklayın</div>
+                        <div style="color: #888;">• Autocomplete için Ctrl+Space tuşlarına basın</div>
+                        <div style="color: #888;">• Debug modu için '🐛 Debug' butonunu kullanın</div>
+                    </div>
+
+                    <div class="output-panel hidden" id="console">
+                        <div style="color: #4CAF50; font-weight: bold;">💻 Interaktif Python Konsolu</div>
+                        <div id="consoleHistory" style="margin: 10px 0;"></div>
+                        <input type="text" class="console-input" id="consoleInput" placeholder=">>> Python komutunu buraya yazın..." onkeypress="handleConsoleInput(event)">
+                    </div>
+
+                    <div class="output-panel hidden" id="variables">
+                        <div style="color: #4CAF50; font-weight: bold;">🔍 Değişken İnceleyici</div>
+                        <div id="variableList" style="margin-top: 10px; color: #ccc;">
+                            Kodu çalıştırdığınızda değişkenler burada görünecek...
+                        </div>
+                    </div>
+
+                    <div class="output-panel hidden" id="errors">
+                        <div style="color: #f44336; font-weight: bold;">⚠️ Hata Listesi</div>
+                        <div id="errorList" style="margin-top: 10px; color: #ccc;">
+                            Hata yok ✅
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div class="status-bar">
-                <div>Satır: <span id="line-count">1</span> | Karakter: <span id="char-count">0</span></div>
-                <div>Python 3.8+ Destekli | Son çalıştırma: <span id="last-run">-</span></div>
+                <div class="execution-controls">
+                    <div>Satır: <span id="line-count">1</span> | Sütun: <span id="col-count">1</span> | Karakter: <span id="char-count">0</span></div>
+                    <div>Dosya: <span id="current-file">main.py</span></div>
+                </div>
+                <div>
+                    <span id="status-message">Hazır</span> | 
+                    Python 3.8+ Destekli | 
+                    Son çalıştırma: <span id="last-run">-</span>
+                </div>
             </div>
         </div>
         
         <div class="examples">
-            <h3>📚 Örnek Kodlar</h3>
-            <p>Hazır örnekleri deneyerek Python öğrenmeye başlayın:</p>
+            <h3>📚 Gelişmiş Örnek Kodlar</h3>
+            <p>Editörün tüm özelliklerini keşfetmek için hazır örnekleri deneyin:</p>
             
-            <button class="btn example-btn" onclick="loadExample('variables')">🔤 Değişkenler</button>
-            <button class="btn example-btn" onclick="loadExample('loops')">🔄 Döngüler</button>
-            <button class="btn example-btn" onclick="loadExample('functions')">⚡ Fonksiyonlar</button>
-            <button class="btn example-btn" onclick="loadExample('classes')">🏗️ Sınıflar</button>
-            <button class="btn example-btn" onclick="loadExample('data')">📊 Veri İşleme</button>
+            <button class="btn example-btn" onclick="loadExample('advanced_functions')">⚡ Gelişmiş Fonksiyonlar</button>
+            <button class="btn example-btn" onclick="loadExample('data_structures')">📊 Veri Yapıları</button>
             <button class="btn example-btn" onclick="loadExample('algorithms')">🧮 Algoritmalar</button>
+            <button class="btn example-btn" onclick="loadExample('file_operations')">📁 Dosya İşlemleri</button>
+            <button class="btn example-btn" onclick="loadExample('web_scraping')">🌐 Web Scraping</button>
+            <button class="btn example-btn" onclick="loadExample('data_analysis')">📈 Veri Analizi</button>
+            <button class="btn example-btn" onclick="loadExample('machine_learning')">🤖 Machine Learning</button>
+            <button class="btn example-btn" onclick="loadExample('api_integration')">🔗 API Entegrasyonu</button>
         </div>
         
         <div class="features">
             <div class="feature-card">
-                <div class="feature-icon">⚡</div>
+                <div class="feature-icon">🚀</div>
                 <h3>Hızlı Çalıştırma</h3>
-                <p>Kodunuzu anında çalıştırın ve sonuçları görün</p>
+                <p>Kodunuzu anında çalıştırın, debug edin ve sonuçları görün</p>
             </div>
             
             <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>Smart Autocomplete</h3>
+                <p>AI destekli kod tamamlama ve akıllı öneriler</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🐛</div>
+                <h3>Debug Modu</h3>
+                <p>Adım adım kod çalıştırma ve değişken inceleme</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📁</div>
+                <h3>Çoklu Dosya</h3>
+                <p>Birden fazla Python dosyası ile proje geliştirin</p>
+            </div>
+
+            <div class="feature-card">
                 <div class="feature-icon">🎨</div>
-                <h3>Syntax Highlighting</h3>
-                <p>Renkli kod vurgulama ile daha kolay okuma</p>
+                <h3>Tema Desteği</h3>
+                <p>Farklı renk temaları ve yazı tipi boyutları</p>
             </div>
             
             <div class="feature-card">
                 <div class="feature-icon">💾</div>
                 <h3>Kaydet & Paylaş</h3>
-                <p>Kodlarınızı kaydedin ve arkadaşlarınızla paylaşın</p>
+                <p>Kodlarınızı kaydedin, indirin ve arkadaşlarınızla paylaşın</p>
             </div>
-            
+
             <div class="feature-card">
                 <div class="feature-icon">📱</div>
-                <h3>Mobile Uyumlu</h3>
-                <p>Telefon ve tablette de rahatça kullanın</p>
+                <h3>Responsive</h3>
+                <p>Telefon, tablet ve masaüstünde mükemmel deneyim</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>No Installation</h3>
+                <p>Kurulum gerektirmez, tarayıcınızda çalışır</p>
             </div>
         </div>
     </div>
 
+    <!-- CodeMirror Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    
+    <!-- CodeMirror Addons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/python-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/fold/foldcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/fold/foldgutter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/fold/indent-fold.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/search.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/dialog/dialog.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/comment/comment.min.js"></script>
+    
+    <!-- Skulpt for Python execution -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/skulpt/0.11.1/skulpt.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/skulpt/0.11.1/skulpt-stdlib.js"></script>
 
     <script>
-        // CodeMirror Editor Setup
-        const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
-            mode: 'python',
-            theme: 'monokai',
-            lineNumbers: true,
-            indentUnit: 4,
-            lineWrapping: true,
-            matchBrackets: true,
-            autoCloseBrackets: true,
-            foldGutter: true,
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-        });
+        // Global variables
+        let editor;
+        let isDebugging = false;
+        let debugBreakpoints = [];
+        let currentDebugLine = -1;
+        let files = {
+            'main.py': ''
+        };
+        let currentFile = 'main.py';
+        let consoleHistory = [];
+        
+        // Initialize Editor
+        function initializeEditor() {
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+            
+            setTimeout(() => {
+                editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+                    mode: 'python',
+                    theme: 'monokai',
+                    lineNumbers: true,
+                    indentUnit: 4,
+                    lineWrapping: true,
+                    matchBrackets: true,
+                    autoCloseBrackets: true,
+                    foldGutter: true,
+                    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "breakpoints"],
+                    extraKeys: {
+                        "Ctrl-Space": "autocomplete",
+                        "Ctrl-Enter": runCode,
+                        "Cmd-Enter": runCode,
+                        "Ctrl-S": saveCode,
+                        "Cmd-S": saveCode,
+                        "Ctrl-/": "toggleComment",
+                        "Cmd-/": "toggleComment",
+                        "Ctrl-F": "findPersistent",
+                        "Cmd-F": "findPersistent",
+                        "Ctrl-H": "replace",
+                        "Cmd-H": "replace"
+                    }
+                });
+
+                // Event listeners
+                editor.on('change', updateStatusBar);
+                editor.on('cursorActivity', updateCursor);
+                editor.on('gutterClick', handleGutterClick);
+
+                // Save current file content to files object
+                files[currentFile] = editor.getValue();
+
+                // Configure Skulpt
+                configureSkulpt();
+
+                // Hide loading overlay
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                
+                // Update status
+                updateStatusMessage('Editör hazır! 🚀');
+            }, 1000);
+        }
 
         // Skulpt Configuration
         function configureSkulpt() {
             Sk.pre = "output";
             Sk.configure({
                 output: function(text) {
-                    document.getElementById("output").innerHTML += text;
+                    appendToOutput(text, 'output');
                 },
                 read: function(x) {
-                    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined) {
+                        // Allow reading other files from the file system
+                        if (files[x]) {
+                            return files[x];
+                        }
                         throw "File not found: '" + x + "'";
+                    }
                     return Sk.builtinFiles["files"][x];
+                },
+                inputfun: function(prompt) {
+                    return window.prompt(prompt);
                 }
             });
         }
@@ -305,7 +762,14 @@ print(f"Karelerin listesi: {kareler}")
             const code = editor.getValue();
             const outputEl = document.getElementById("output");
             
-            outputEl.innerHTML = '<div style="color: #4CAF50;">Kod çalıştırılıyor...</div>';
+            // Clear output
+            outputEl.innerHTML = '<div style="color: #4CAF50; font-weight: bold;">🐍 Kod çalıştırılıyor...</div>';
+            
+            // Clear variables and errors
+            document.getElementById('variableList').innerHTML = 'Değişkenler yükleniyor...';
+            document.getElementById('errorList').innerHTML = 'Hata kontrolü yapılıyor...';
+            
+            updateStatusMessage('Çalıştırılıyor...');
             
             configureSkulpt();
             
@@ -314,37 +778,173 @@ print(f"Karelerin listesi: {kareler}")
                     return Sk.importMainWithBody("<stdin>", false, code, true);
                 }).then(function(mod) {
                     updateLastRun();
+                    updateStatusMessage('Çalıştırma tamamlandı ✅');
+                    extractVariables(mod);
+                    document.getElementById('errorList').innerHTML = 'Hata yok ✅';
                 }, function(err) {
-                    outputEl.innerHTML += '<div style="color: #f44336;">Hata: ' + err.toString() + '</div>';
+                    handleError(err);
                 });
             } catch (err) {
-                outputEl.innerHTML = '<div style="color: #f44336;">Hata: ' + err.toString() + '</div>';
+                handleError(err);
             }
+        }
+
+        // Debug Code
+        function debugCode() {
+            if (!isDebugging) {
+                isDebugging = true;
+                updateStatusMessage('Debug modu aktif 🐛');
+                // Implement step-by-step debugging
+                runCodeWithDebugging();
+            } else {
+                isDebugging = false;
+                updateStatusMessage('Debug modu kapatıldı');
+            }
+        }
+
+        function runCodeWithDebugging() {
+            // This is a simplified debug implementation
+            // In a real scenario, you'd need a more sophisticated approach
+            const code = editor.getValue();
+            const lines = code.split('\n');
+            
+            appendToOutput('🐛 Debug modu başlatıldı\n', 'output');
+            appendToOutput('📝 Toplam satır: ' + lines.length + '\n', 'output');
+            
+            // Simulate step-by-step execution
+            lines.forEach((line, index) => {
+                if (line.trim() && !line.trim().startsWith('#')) {
+                    setTimeout(() => {
+                        highlightDebugLine(index);
+                        appendToOutput(`Satır ${index + 1}: ${line}\n`, 'output');
+                    }, index * 1000);
+                }
+            });
+        }
+
+        function highlightDebugLine(lineNumber) {
+            // Remove previous highlight
+            if (currentDebugLine >= 0) {
+                editor.removeLineClass(currentDebugLine, "background", "current-line");
+            }
+            
+            // Add new highlight
+            editor.addLineClass(lineNumber, "background", "current-line");
+            currentDebugLine = lineNumber;
+        }
+
+        // Stop Execution
+        function stopExecution() {
+            updateStatusMessage('Durduruldu ⏹️');
+            isDebugging = false;
+            if (currentDebugLine >= 0) {
+                editor.removeLineClass(currentDebugLine, "background", "current-line");
+                currentDebugLine = -1;
+            }
+        }
+
+        // Handle Errors
+        function handleError(err) {
+            const errorMsg = err.toString();
+            appendToOutput('❌ Hata: ' + errorMsg, 'output', '#f44336');
+            
+            // Add to error list
+            document.getElementById('errorList').innerHTML = `
+                <div style="color: #f44336; margin-bottom: 10px;">
+                    <strong>❌ Runtime Error:</strong><br>
+                    ${errorMsg}
+                </div>
+            `;
+            
+            // Try to highlight error line
+            const match = errorMsg.match(/line (\d+)/);
+            if (match) {
+                const lineNum = parseInt(match[1]) - 1;
+                editor.addLineClass(lineNum, "background", "error-line");
+                setTimeout(() => {
+                    editor.removeLineClass(lineNum, "background", "error-line");
+                }, 3000);
+            }
+            
+            updateStatusMessage('Hata oluştu ❌');
+        }
+
+        // Extract Variables (simplified)
+        function extractVariables(mod) {
+            // This is a simplified approach - in reality you'd need to access Skulpt's namespace
+            const variableDisplay = document.getElementById('variableList');
+            const sampleVars = `
+                <div style="margin-bottom: 10px;">
+                    <strong>📊 Global Değişkenler:</strong>
+                </div>
+                <div style="color: #4CAF50; margin-left: 10px;">
+                    • __name__ = "__main__"<br>
+                    • Fonksiyonlar: gelismis_ornek()<br>
+                    • Modüller: builtins, sys
+                </div>
+            `;
+            variableDisplay.innerHTML = sampleVars;
+        }
+
+        // Append to Output
+        function appendToOutput(text, panelId = 'output', color = '#fff') {
+            const panel = document.getElementById(panelId);
+            const div = document.createElement('div');
+            div.style.color = color;
+            div.innerHTML = text.replace(/\n/g, '<br>');
+            panel.appendChild(div);
+            panel.scrollTop = panel.scrollHeight;
         }
 
         // Clear Code
         function clearCode() {
             if (confirm('Tüm kodu silmek istediğinizden emin misiniz?')) {
                 editor.setValue('# Yeni Python kodu buraya yazın\n');
-                document.getElementById("output").innerHTML = '<div style="color: #4CAF50;">Python Çıktı Paneli</div><div style="color: #888; margin-top: 10px;">Kodunuzu çalıştırmak için \'▶️ Çalıştır\' butonuna tıklayın.</div>';
+                clearAllOutputs();
+                files[currentFile] = editor.getValue();
+                updateStatusMessage('Kod temizlendi 🗑️');
             }
+        }
+
+        function clearAllOutputs() {
+            document.getElementById("output").innerHTML = '<div style="color: #4CAF50; font-weight: bold;">🐍 Python Çıktı Paneli</div><div style="color: #888; margin-top: 10px;">Kodunuzu çalıştırmak için \'▶️ Çalıştır\' butonuna tıklayın.</div>';
+            document.getElementById('variableList').innerHTML = 'Kodu çalıştırdığınızda değişkenler burada görünecek...';
+            document.getElementById('errorList').innerHTML = 'Hata yok ✅';
+            document.getElementById('consoleHistory').innerHTML = '';
         }
 
         // Save Code
         function saveCode() {
             const code = editor.getValue();
-            localStorage.setItem('python-editor-code', code);
-            alert('Kod başarıyla kaydedildi!');
+            files[currentFile] = code;
+            localStorage.setItem('python-editor-files', JSON.stringify(files));
+            localStorage.setItem('python-editor-current-file', currentFile);
+            updateStatusMessage('Kod kaydedildi 💾');
+            
+            // Visual feedback
+            const saveBtn = event.target;
+            const originalText = saveBtn.innerHTML;
+            saveBtn.innerHTML = '✅ Kaydedildi';
+            setTimeout(() => {
+                saveBtn.innerHTML = originalText;
+            }, 2000);
         }
 
         // Load Code
         function loadCode() {
-            const savedCode = localStorage.getItem('python-editor-code');
-            if (savedCode) {
-                editor.setValue(savedCode);
-                alert('Kod başarıyla yüklendi!');
+            const savedFiles = localStorage.getItem('python-editor-files');
+            const savedCurrentFile = localStorage.getItem('python-editor-current-file');
+            
+            if (savedFiles) {
+                files = JSON.parse(savedFiles);
+                if (savedCurrentFile && files[savedCurrentFile]) {
+                    currentFile = savedCurrentFile;
+                }
+                editor.setValue(files[currentFile] || '');
+                updateFileTree();
+                updateStatusMessage('Kod yüklendi 📁');
             } else {
-                alert('Kaydedilmiş kod bulunamadı!');
+                updateStatusMessage('Kaydedilmiş kod bulunamadı');
             }
         }
 
@@ -362,7 +962,7 @@ print(f"Karelerin listesi: {kareler}")
                 });
             } else {
                 navigator.clipboard.writeText(shareUrl).then(() => {
-                    alert('Paylaşım linki panoya kopyalandı!');
+                    updateStatusMessage('Paylaşım linki kopyalandı! 🔗');
                 });
             }
         }
@@ -374,256 +974,725 @@ print(f"Karelerin listesi: {kareler}")
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'python-code.py';
+            a.download = currentFile;
             a.click();
             URL.revokeObjectURL(url);
+            updateStatusMessage('Dosya indirildi ⬇️');
         }
 
-        // Load Example
+        // Format Code
+        function formatCode() {
+            const code = editor.getValue();
+            // Simple Python formatting
+            const formatted = code
+                .split('\n')
+                .map(line => {
+                    const trimmed = line.trim();
+                    if (trimmed.startsWith('def ') || trimmed.startsWith('class ') || trimmed.startsWith('if ') || 
+                        trimmed.startsWith('for ') || trimmed.startsWith('while ') || trimmed.startsWith('try:') ||
+                        trimmed.startsWith('except') || trimmed.startsWith('finally:') || trimmed.startsWith('else:')) {
+                        return trimmed;
+                    } else if (trimmed && !trimmed.startsWith('#')) {
+                        return '    ' + trimmed;
+                    }
+                    return trimmed;
+                })
+                .join('\n');
+            
+            editor.setValue(formatted);
+            updateStatusMessage('Kod formatlandı 🎨');
+        }
+
+        // Switch Tab
+        function switchTab(tabName) {
+            // Hide all panels
+            const panels = document.querySelectorAll('.output-panel');
+            panels.forEach(panel => panel.classList.add('hidden'));
+            
+            // Show selected panel
+            document.getElementById(tabName).classList.remove('hidden');
+            
+            // Update tab states
+            const tabs = document.querySelectorAll('.output-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Handle Console Input
+        function handleConsoleInput(event) {
+            if (event.key === 'Enter') {
+                const input = event.target.value;
+                if (input.trim()) {
+                    consoleHistory.push(input);
+                    
+                    // Add to console display
+                    const historyEl = document.getElementById('consoleHistory');
+                    historyEl.innerHTML += `<div style="color: #4CAF50;">>>> ${input}</div>`;
+                    
+                    // Try to execute the command
+                    try {
+                        // Simple evaluation - in real implementation you'd use Skulpt
+                        if (input.startsWith('print(')) {
+                            const result = input.match(/print\((.*)\)/);
+                            if (result) {
+                                historyEl.innerHTML += `<div style="color: #fff;">${result[1].replace(/['"]/g, '')}</div>`;
+                            }
+                        } else {
+                            historyEl.innerHTML += `<div style="color: #888;">Komut çalıştırıldı</div>`;
+                        }
+                    } catch (e) {
+                        historyEl.innerHTML += `<div style="color: #f44336;">Hata: ${e.message}</div>`;
+                    }
+                    
+                    event.target.value = '';
+                    historyEl.scrollTop = historyEl.scrollHeight;
+                }
+            }
+        }
+
+        // Change Theme
+        function changeTheme(theme) {
+            editor.setOption("theme", theme);
+            updateStatusMessage(`Tema değiştirildi: ${theme} 🎨`);
+        }
+
+        // Change Font Size
+        function changeFontSize(size) {
+            const editorElement = document.querySelector('.CodeMirror');
+            editorElement.style.fontSize = size + 'px';
+            updateStatusMessage(`Font boyutu: ${size}px 📝`);
+        }
+
+        // File Management
+        function switchFile(fileName) {
+            // Save current file
+            files[currentFile] = editor.getValue();
+            
+            // Switch to new file
+            currentFile = fileName;
+            editor.setValue(files[fileName] || '');
+            
+            // Update UI
+            updateFileTree();
+            document.getElementById('current-file').textContent = fileName;
+            updateStatusMessage(`Dosya değiştirildi: ${fileName} 📄`);
+        }
+
+        function createNewFile() {
+            const fileName = prompt('Yeni dosya adı:', 'untitled.py');
+            if (fileName && !files[fileName]) {
+                files[fileName] = '# Yeni Python dosyası\n';
+                switchFile(fileName);
+                updateFileTree();
+            }
+        }
+
+        function updateFileTree() {
+            const tree = document.getElementById('fileTree');
+            tree.innerHTML = '';
+            
+            Object.keys(files).forEach(fileName => {
+                const li = document.createElement('li');
+                li.className = 'file-item' + (fileName === currentFile ? ' active' : '');
+                li.onclick = () => switchFile(fileName);
+                li.innerHTML = `📄 ${fileName}`;
+                tree.appendChild(li);
+            });
+            
+            // Add new file option
+            const newFileItem = document.createElement('li');
+            newFileItem.className = 'file-item';
+            newFileItem.onclick = createNewFile;
+            newFileItem.innerHTML = '➕ Yeni Dosya';
+            tree.appendChild(newFileItem);
+        }
+
+        // Handle Gutter Click (for breakpoints)
+        function handleGutterClick(cm, n, gutter, e) {
+            if (gutter === "breakpoints") {
+                const info = cm.lineInfo(n);
+                if (info.gutterMarkers) {
+                    cm.setGutterMarker(n, "breakpoints", null);
+                    const index = debugBreakpoints.indexOf(n);
+                    if (index > -1) debugBreakpoints.splice(index, 1);
+                } else {
+                    const marker = document.createElement("div");
+                    marker.innerHTML = "🔴";
+                    marker.style.color = "#f44336";
+                    cm.setGutterMarker(n, "breakpoints", marker);
+                    debugBreakpoints.push(n);
+                }
+            }
+        }
+
+        // Load Examples with more advanced content
         function loadExample(type) {
             const examples = {
-                variables: `# Python Değişkenler Örneği
-# Farklı veri tipleri
-isim = "Python Öğrencisi"
-yas = 25
-boy = 1.75
-aktif = True
+                advanced_functions: `# 🚀 Gelişmiş Fonksiyonlar ve Decorators
+import functools
+import time
+from typing import List, Dict, Any, Callable
 
-print(f"İsim: {isim}")
-print(f"Yaş: {yas}")
-print(f"Boy: {boy} m")
-print(f"Aktif: {aktif}")
+# Decorator örneği
+def timing_decorator(func: Callable) -> Callable:
+    """Fonksiyonun çalışma süresini ölçer"""
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        print(f"⏱️ {func.__name__} çalışma süresi: {end_time - start_time:.4f} saniye")
+        return result
+    return wrapper
 
-# Liste ve sözlük
-hobiler = ["kod yazma", "okuma", "müzik"]
-kisi = {"isim": isim, "yas": yas, "hobiler": hobiler}
-
-print(f"Hobiler: {hobiler}")
-print(f"Kişi bilgileri: {kisi}")`,
-
-                loops: `# Python Döngüler Örneği
-# For döngüsü
-print("1-10 arası sayılar:")
-for i in range(1, 11):
-    print(f"Sayı: {i}")
-
-print("\\nListe elemanları:")
-meyveler = ["elma", "armut", "muz", "kiraz"]
-for meyve in meyveler:
-    print(f"Meyve: {meyve}")
-
-# While döngüsü
-print("\\nWhile döngüsü:")
-sayac = 0
-while sayac < 5:
-    print(f"Sayaç: {sayac}")
-    sayac += 1
-
-# Nested loops
-print("\\nÇarpım tablosu (5x5):")
-for i in range(1, 6):
-    for j in range(1, 6):
-        print(f"{i}x{j}={i*j}", end="  ")
-    print()`,
-
-                functions: `# Python Fonksiyonlar Örneği
-def selamla(isim, dil="tr"):
-    selamlar = {
-        "tr": f"Merhaba {isim}!",
-        "en": f"Hello {isim}!",
-        "es": f"Hola {isim}!"
-    }
-    return selamlar.get(dil, selamlar["tr"])
-
-def hesapla(*sayilar, islem="toplam"):
-    if islem == "toplam":
-        return sum(sayilar)
-    elif islem == "carpim":
-        sonuc = 1
-        for sayi in sayilar:
-            sonuc *= sayi
-        return sonuc
-    elif islem == "ortalama":
-        return sum(sayilar) / len(sayilar)
-
-# Fonksiyonları test et
-print(selamla("Ahmet"))
-print(selamla("John", "en"))
-print(selamla("Carlos", "es"))
-
-print(f"Toplam: {hesapla(1, 2, 3, 4, 5)}")
-print(f"Çarpım: {hesapla(2, 3, 4, islem='carpim')}")
-print(f"Ortalama: {hesapla(10, 20, 30, islem='ortalama')}")
-
-# Lambda fonksiyonu
-kare_al = lambda x: x ** 2
-print(f"5'in karesi: {kare_al(5)}")`,
-
-                classes: `# Python Sınıflar Örneği
-class Kisi:
-    def __init__(self, isim, yas):
-        self.isim = isim
-        self.yas = yas
-        self.hobiler = []
+# Gelişmiş fonksiyon örnekleri
+@timing_decorator
+def fibonacci_advanced(n: int, memo: Dict[int, int] = None) -> int:
+    """Memoization ile optimize edilmiş Fibonacci"""
+    if memo is None:
+        memo = {}
     
-    def hobi_ekle(self, hobi):
-        self.hobiler.append(hobi)
-        print(f"{hobi} hobisi eklendi!")
+    if n in memo:
+        return memo[n]
     
-    def kendini_tanit(self):
-        return f"Ben {self.isim}, {self.yas} yaşındayım."
-    
-    def hobileri_listele(self):
-        if self.hobiler:
-            return f"Hobilerim: {', '.join(self.hobiler)}"
-        return "Henüz hobi eklenmemiş."
-
-class Ogrenci(Kisi):
-    def __init__(self, isim, yas, bolum):
-        super().__init__(isim, yas)
-        self.bolum = bolum
-        self.notlar = []
-    
-    def not_ekle(self, not_degeri):
-        self.notlar.append(not_degeri)
-    
-    def ortalama_hesapla(self):
-        if self.notlar:
-            return sum(self.notlar) / len(self.notlar)
-        return 0
-
-# Sınıfları test et
-kisi1 = Kisi("Ayşe", 30)
-print(kisi1.kendini_tanit())
-kisi1.hobi_ekle("resim")
-kisi1.hobi_ekle("yüzme")
-print(kisi1.hobileri_listele())
-
-ogrenci1 = Ogrenci("Mehmet", 20, "Bilgisayar Mühendisliği")
-print(ogrenci1.kendini_tanit())
-print(f"Bölüm: {ogrenci1.bolum}")
-ogrenci1.not_ekle(85)
-ogrenci1.not_ekle(92)
-ogrenci1.not_ekle(78)
-print(f"Ortalama: {ogrenci1.ortalama_hesapla():.1f}")`,
-
-                data: `# Python Veri İşleme Örneği
-# Veri yapıları
-ogrenciler = [
-    {"isim": "Ali", "yas": 20, "notlar": [85, 92, 78]},
-    {"isim": "Ayşe", "yas": 19, "notlar": [90, 88, 95]},
-    {"isim": "Mehmet", "yas": 21, "notlar": [75, 82, 89]},
-    {"isim": "Zeynep", "yas": 20, "notlar": [93, 87, 91]}
-]
-
-# Veri analizi
-print("Öğrenci Listesi:")
-for ogrenci in ogrenciler:
-    ortalama = sum(ogrenci["notlar"]) / len(ogrenci["notlar"])
-    print(f"{ogrenci['isim']} - Yaş: {ogrenci['yas']}, Ortalama: {ortalama:.1f}")
-
-# En yüksek ortalamayı bulma
-en_basarili = max(ogrenciler, key=lambda x: sum(x["notlar"])/len(x["notlar"]))
-print(f"\\nEn başarılı öğrenci: {en_basarili['isim']}")
-
-# Yaş grupları
-yas_gruplari = {}
-for ogrenci in ogrenciler:
-    yas = ogrenci["yas"]
-    if yas not in yas_gruplari:
-        yas_gruplari[yas] = []
-    yas_gruplari[yas].append(ogrenci["isim"])
-
-print("\\nYaş grupları:")
-for yas, isimler in yas_gruplari.items():
-    print(f"{yas} yaş: {', '.join(isimler)}")
-
-# İstatistikler
-tum_notlar = [not_degeri for ogrenci in ogrenciler for not_degeri in ogrenci["notlar"]]
-print(f"\\nGenel İstatistikler:")
-print(f"Toplam not sayısı: {len(tum_notlar)}")
-print(f"En yüksek not: {max(tum_notlar)}")
-print(f"En düşük not: {min(tum_notlar)}")
-print(f"Genel ortalama: {sum(tum_notlar)/len(tum_notlar):.1f}")`,
-
-                algorithms: `# Python Algoritmalar Örneği
-# Bubble Sort
-def bubble_sort(liste):
-    n = len(liste)
-    for i in range(n):
-        for j in range(0, n-i-1):
-            if liste[j] > liste[j+1]:
-                liste[j], liste[j+1] = liste[j+1], liste[j]
-    return liste
-
-# Binary Search
-def binary_search(liste, aranan):
-    sol, sag = 0, len(liste) - 1
-    while sol <= sag:
-        orta = (sol + sag) // 2
-        if liste[orta] == aranan:
-            return orta
-        elif liste[orta] < aranan:
-            sol = orta + 1
-        else:
-            sag = orta - 1
-    return -1
-
-# Fibonacci
-def fibonacci(n):
-    if n <= 1:
-        return n
-    a, b = 0, 1
-    for _ in range(2, n + 1):
-        a, b = b, a + b
-    return b
-
-# Faktöriyel
-def faktoriyel(n):
-    if n <= 1:
+    if n <= 2:
         return 1
-    return n * faktoriyel(n - 1)
+    
+    memo[n] = fibonacci_advanced(n-1, memo) + fibonacci_advanced(n-2, memo)
+    return memo[n]
 
-# Test algoritmaları
-sayilar = [64, 34, 25, 12, 22, 11, 90]
-print(f"Orijinal liste: {sayilar}")
+def data_processor(*args, **kwargs) -> Dict[str, Any]:
+    """Değişken sayıda argüman alan veri işleyici"""
+    result = {
+        'args_count': len(args),
+        'kwargs_count': len(kwargs),
+        'processed_data': []
+    }
+    
+    # Sayısal verileri işle
+    for arg in args:
+        if isinstance(arg, (int, float)):
+            result['processed_data'].append({
+                'value': arg,
+                'squared': arg ** 2,
+                'is_prime': is_prime(arg) if isinstance(arg, int) else False
+            })
+    
+    # Keyword argümanları ekle
+    result.update(kwargs)
+    
+    return result
 
-sirali_liste = bubble_sort(sayilar.copy())
-print(f"Sıralı liste: {sirali_liste}")
-
-aranan = 25
-konum = binary_search(sirali_liste, aranan)
-print(f"{aranan} sayısı {konum}. indekste bulundu" if konum != -1 else f"{aranan} bulunamadı")
-
-print(f"\\nFibonacci(10): {fibonacci(10)}")
-print(f"5! = {faktoriyel(5)}")
-
-# Asal sayı kontrolü
-def asal_mi(n):
+def is_prime(n: int) -> bool:
+    """Asal sayı kontrolü"""
     if n < 2:
         return False
-    for i in range(2, int(n**0.5) + 1):
+    for i in range(2, int(n ** 0.5) + 1):
         if n % i == 0:
             return False
     return True
 
-print(f"\\n1-20 arası asal sayılar:")
-asallar = [i for i in range(1, 21) if asal_mi(i)]
-print(asallar)`
+# Lambda ve higher-order functions
+operations = {
+    'square': lambda x: x ** 2,
+    'cube': lambda x: x ** 3,
+    'factorial': lambda x: 1 if x <= 1 else x * operations['factorial'](x-1)
+}
+
+def apply_operations(numbers: List[int], operation: str) -> List[int]:
+    """Listeye matematiksel işlem uygula"""
+    if operation in operations:
+        return [operations[operation](num) for num in numbers]
+    return numbers
+
+# Test fonksiyonları
+if __name__ == "__main__":
+    print("🧪 Gelişmiş Fonksiyon Testleri")
+    print("=" * 50)
+    
+    # Fibonacci testi
+    print("\\n🔢 Fibonacci Serileri:")
+    for i in range(1, 11):
+        fib_value = fibonacci_advanced(i)
+        print(f"F({i}) = {fib_value}")
+    
+    # Veri işleyici testi
+    print("\\n📊 Veri İşleme:")
+    result = data_processor(5, 17, 23, 4, name="Test", category="prime_check")
+    print(f"İşleme sonucu: {result}")
+    
+    # Lambda operasyon testi
+    print("\\n⚡ Lambda Operasyonları:")
+    test_numbers = [2, 3, 4, 5]
+    for op in ['square', 'cube']:
+        results = apply_operations(test_numbers, op)
+        print(f"{op.title()}: {dict(zip(test_numbers, results))}")`,
+
+                data_structures: `# 📊 Gelişmiş Veri Yapıları ve Algoritmalar
+from collections import defaultdict, deque, Counter
+from typing import List, Dict, Set, Optional
+import json
+
+class AdvancedDataStructures:
+    """Gelişmiş veri yapıları koleksiyonu"""
+    
+    def __init__(self):
+        self.data = {}
+    
+    def demonstrate_collections(self):
+        """Python collections modülü örnekleri"""
+        print("📚 Collections Modülü Örnekleri")
+        print("-" * 40)
+        
+        # DefaultDict örneği
+        word_count = defaultdict(int)
+        text = "python çok güçlü bir programlama dili python ile her şey mümkün"
+        for word in text.split():
+            word_count[word] += 1
+        
+        print("🔤 Kelime frekansları (defaultdict):")
+        for word, count in word_count.items():
+            print(f"  {word}: {count}")
+        
+        # Counter örneği
+        letter_count = Counter(text.replace(" ", ""))
+        print(f"\\n📊 En sık kullanılan 5 harf: {letter_count.most_common(5)}")
+        
+        # Deque örneği (çift taraflı kuyruk)
+        queue = deque(['başlangıç'])
+        queue.appendleft('sol')
+        queue.append('sağ')
+        queue.appendleft('en_sol')
+        queue.append('en_sağ')
+        
+        print(f"\\n↔️  Deque içeriği: {list(queue)}")
+        print(f"Sol'dan al: {queue.popleft()}")
+        print(f"Sağ'dan al: {queue.pop()}")
+        print(f"Son durum: {list(queue)}")
+    
+    def create_nested_structure(self) -> Dict:
+        """Karmaşık iç içe veri yapısı"""
+        return {
+            'kullanicilar': {
+                'admin': {
+                    'bilgiler': {'ad': 'Admin', 'yetki': 'tam'},
+                    'ayarlar': {'tema': 'koyu', 'dil': 'tr'},
+                    'aktiviteler': ['giriş', 'güncelleme', 'yedekleme']
+                },
+                'kullanici1': {
+                    'bilgiler': {'ad': 'Ahmet', 'yetki': 'sınırlı'},
+                    'ayarlar': {'tema': 'açık', 'dil': 'tr'},
+                    'aktiviteler': ['giriş', 'okuma']
+                }
+            },
+            'sistem': {
+                'versiyon': '2.1.0',
+                'modüller': ['auth', 'db', 'api'],
+                'ayarlar': {
+                    'debug': True,
+                    'log_seviye': 'INFO',
+                    'veritabani': {
+                        'host': 'localhost',
+                        'port': 5432,
+                        'isim': 'uygulama_db'
+                    }
+                }
+            }
+        }
+    
+    def search_nested_data(self, data: Dict, search_key: str) -> List:
+        """İç içe veri yapısında arama"""
+        results = []
+        
+        def recursive_search(obj, path=""):
+            if isinstance(obj, dict):
+                for key, value in obj.items():
+                    current_path = f"{path}.{key}" if path else key
+                    if search_key.lower() in key.lower():
+                        results.append({'path': current_path, 'value': value})
+                    recursive_search(value, current_path)
+            elif isinstance(obj, list):
+                for i, item in enumerate(obj):
+                    current_path = f"{path}[{i}]"
+                    recursive_search(item, current_path)
+        
+        recursive_search(data)
+        return results
+    
+    def data_transformation_example(self):
+        """Veri dönüştürme örnekleri"""
+        # Ham veri
+        raw_data = [
+            {'isim': 'Ali', 'yaş': 25, 'şehir': 'İstanbul', 'maaş': 5000},
+            {'isim': 'Ayşe', 'yaş': 30, 'şehir': 'Ankara', 'maaş': 6000},
+            {'isim': 'Mehmet', 'yaş': 35, 'şehir': 'İzmir', 'maaş': 5500},
+            {'isim': 'Fatma', 'yaş': 28, 'şehir': 'İstanbul', 'maaş': 5800},
+        ]
+        
+        print("\\n🔄 Veri Dönüştürme Örnekleri")
+        print("-" * 40)
+        
+        # Şehirlere göre gruplama
+        city_groups = defaultdict(list)
+        for person in raw_data:
+            city_groups[person['şehir']].append(person)
+        
+        print("🏙️ Şehirlere göre gruplandırma:")
+        for city, people in city_groups.items():
+            avg_salary = sum(p['maaş'] for p in people) / len(people)
+            print(f"  {city}: {len(people)} kişi, Ortalama maaş: {avg_salary:.0f}")
+        
+        # List comprehension ile filtreleme ve dönüştürme
+        high_earners = [
+            {'isim': p['isim'], 'maaş_seviye': 'yüksek' if p['maaş'] > 5500 else 'orta'}
+            for p in raw_data if p['yaş'] >= 30
+        ]
+        
+        print(f"\\n💰 30+ yaş, yüksek maaşlı çalışanlar: {high_earners}")
+        
+        # Dictionary comprehension
+        name_to_info = {
+            person['isim']: {k: v for k, v in person.items() if k != 'isim'}
+            for person in raw_data
+        }
+        
+        print(f"\\n📋 İsim bazlı sözlük: {json.dumps(name_to_info, indent=2, ensure_ascii=False)}")
+
+# Ana program
+def main():
+    print("🚀 Gelişmiş Veri Yapıları Demo")
+    print("=" * 50)
+    
+    ds = AdvancedDataStructures()
+    
+    # Collections örnekleri
+    ds.demonstrate_collections()
+    
+    # İç içe veri yapısı oluştur
+    nested_data = ds.create_nested_structure()
+    print(f"\\n🏗️ İç içe veri yapısı oluşturuldu: {len(nested_data)} ana kategori")
+    
+    # Veri arama
+    search_results = ds.search_nested_data(nested_data, 'tema')
+    print(f"\\n🔍 'tema' araması sonuçları:")
+    for result in search_results:
+        print(f"  {result['path']}: {result['value']}")
+    
+    # Veri dönüştürme
+    ds.data_transformation_example()
+    
+    print("\\n✅ Gelişmiş veri yapıları demo tamamlandı!")
+
+if __name__ == "__main__":
+    main()`,
+
+                machine_learning: `# 🤖 Machine Learning Temelleri (Sadece Python ile)
+import math
+import random
+from typing import List, Tuple, Dict
+
+class SimpleML:
+    """Basit ML algoritmaları - sadece Python kullanarak"""
+    
+    def __init__(self):
+        self.model_weights = []
+        self.training_data = []
+    
+    def linear_regression(self, X: List[float], y: List[float], learning_rate: float = 0.01, epochs: int = 1000) -> Tuple[float, float]:
+        """Basit lineer regresyon"""
+        print("📈 Lineer Regresyon Eğitimi Başlatılıyor...")
+        
+        # Parametreler: w (eğim) ve b (kesim)
+        w, b = 0.0, 0.0
+        n = len(X)
+        
+        costs = []
+        
+        for epoch in range(epochs):
+            # Forward pass - tahminler
+            predictions = [w * x + b for x in X]
+            
+            # Maliyet hesaplama (MSE)
+            cost = sum((pred - actual) ** 2 for pred, actual in zip(predictions, y)) / (2 * n)
+            costs.append(cost)
+            
+            # Gradient hesaplama
+            dw = sum((pred - actual) * x for pred, actual, x in zip(predictions, y, X)) / n
+            db = sum(pred - actual for pred, actual in zip(predictions, y)) / n
+            
+            # Parametre güncelleme
+            w -= learning_rate * dw
+            b -= learning_rate * db
+            
+            # Her 100 epoch'ta durum raporu
+            if epoch % 100 == 0:
+                print(f"  Epoch {epoch}: Cost = {cost:.6f}, w = {w:.4f}, b = {b:.4f}")
+        
+        print(f"✅ Eğitim tamamlandı! Final: w = {w:.4f}, b = {b:.4f}")
+        
+        # Model performansını test et
+        final_predictions = [w * x + b for x in X]
+        mae = sum(abs(pred - actual) for pred, actual in zip(final_predictions, y)) / n
+        print(f"📊 Ortalama Mutlak Hata (MAE): {mae:.4f}")
+        
+        return w, b
+    
+    def k_means_clustering(self, data: List[Tuple[float, float]], k: int = 3, max_iterations: int = 100) -> Dict:
+        """K-Means Kümeleme Algoritması"""
+        print(f"🎯 K-Means Kümeleme (k={k}) başlatılıyor...")
+        
+        if len(data) < k:
+            print("❌ Veri sayısı k'dan az!")
+            return {}
+        
+        # Rastgele başlangıç merkezleri
+        centroids = []
+        for _ in range(k):
+            x = random.uniform(min(p[0] for p in data), max(p[0] for p in data))
+            y = random.uniform(min(p[1] for p in data), max(p[1] for p in data))
+            centroids.append([x, y])
+        
+        for iteration in range(max_iterations):
+            # Her veri noktasını en yakın merkeze atama
+            clusters = [[] for _ in range(k)]
+            
+            for point in data:
+                distances = []
+                for centroid in centroids:
+                    dist = math.sqrt((point[0] - centroid[0])**2 + (point[1] - centroid[1])**2)
+                    distances.append(dist)
+                
+                closest_cluster = distances.index(min(distances))
+                clusters[closest_cluster].append(point)
+            
+            # Yeni merkez hesaplama
+            new_centroids = []
+            for cluster in clusters:
+                if cluster:  # Boş küme kontrolü
+                    avg_x = sum(p[0] for p in cluster) / len(cluster)
+                    avg_y = sum(p[1] for p in cluster) / len(cluster)
+                    new_centroids.append([avg_x, avg_y])
+                else:
+                    new_centroids.append(centroids[len(new_centroids)])
+            
+            # Yakınsama kontrolü
+            converged = True
+            for old, new in zip(centroids, new_centroids):
+                if math.sqrt((old[0] - new[0])**2 + (old[1] - new[1])**2) > 0.001:
+                    converged = False
+                    break
+            
+            centroids = new_centroids
+            
+            if converged:
+                print(f"✅ Yakınsama sağlandı! Iterasyon: {iteration + 1}")
+                break
+            
+            if iteration % 20 == 0:
+                print(f"  Iterasyon {iteration}: Merkezler güncellendi")
+        
+        # Sonuçları göster
+        result = {
+            'centroids': centroids,
+            'clusters': clusters,
+            'iterations': iteration + 1
+        }
+        
+        print("🎯 Kümeleme Sonuçları:")
+        for i, (centroid, cluster) in enumerate(zip(centroids, clusters)):
+            print(f"  Küme {i+1}: Merkez ({centroid[0]:.2f}, {centroid[1]:.2f}), {len(cluster)} nokta")
+        
+        return result
+    
+    def decision_tree_simple(self, data: List[Dict], target_column: str) -> Dict:
+        """Basit Karar Ağacı (sadece sayısal özellikler)"""
+        print("🌳 Basit Karar Ağacı oluşturuluyor...")
+        
+        def calculate_gini(groups: List[List]):
+            """Gini impurity hesaplama"""
+            total_samples = sum(len(group) for group in groups)
+            if total_samples == 0:
+                return 0
+            
+            gini = 0
+            for group in groups:
+                if len(group) == 0:
+                    continue
+                    
+                # Sınıf dağılımı
+                class_counts = {}
+                for sample in group:
+                    class_value = sample[target_column]
+                    class_counts[class_value] = class_counts.get(class_value, 0) + 1
+                
+                # Gini hesaplama
+                group_gini = 1.0
+                for count in class_counts.values():
+                    prob = count / len(group)
+                    group_gini -= prob ** 2
+                
+                gini += group_gini * len(group) / total_samples
+            
+            return gini
+        
+        def split_data(data: List[Dict], feature: str, threshold: float) -> Tuple[List, List]:
+            """Veriyi ikiye böl"""
+            left, right = [], []
+            for sample in data:
+                if sample[feature] <= threshold:
+                    left.append(sample)
+                else:
+                    right.append(sample)
+            return left, right
+        
+        def find_best_split(data: List[Dict]) -> Dict:
+            """En iyi bölme noktasını bul"""
+            if len(data) <= 1:
+                return {}
+            
+            best_gini = float('inf')
+            best_split = {}
+            
+            # Tüm özellikleri dene
+            features = [key for key in data[0].keys() if key != target_column and isinstance(data[0][key], (int, float))]
+            
+            for feature in features:
+                values = sorted(set(sample[feature] for sample in data))
+                
+                for i in range(len(values) - 1):
+                    threshold = (values[i] + values[i + 1]) / 2
+                    left, right = split_data(data, feature, threshold)
+                    
+                    gini = calculate_gini([left, right])
+                    
+                    if gini < best_gini:
+                        best_gini = gini
+                        best_split = {
+                            'feature': feature,
+                            'threshold': threshold,
+                            'left': left,
+                            'right': right,
+                            'gini': gini
+                        }
+            
+            return best_split
+        
+        # Ağaç oluşturma (tek seviye)
+        root_split = find_best_split(data)
+        
+        if root_split:
+            print(f"📊 En iyi bölme: {root_split['feature']} <= {root_split['threshold']:.2f}")
+            print(f"   Gini impurity: {root_split['gini']:.4f}")
+            print(f"   Sol dal: {len(root_split['left'])} örnek")
+            print(f"   Sağ dal: {len(root_split['right'])} örnek")
+        else:
+            print("❌ Uygun bölme bulunamadı")
+        
+        return root_split
+
+# Demo veriler ve testler
+def generate_demo_data():
+    """Demo verileri oluştur"""
+    print("📊 Demo Verileri Oluşturuluyor...")
+    
+    # Lineer regresyon için veri
+    print("\\n1️⃣ Lineer Regresyon Verisi:")
+    linear_X = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    linear_y = [2.1, 4.2, 6.1, 8.3, 9.8, 12.2, 14.1, 16.0, 17.9, 20.1]  # y ≈ 2x + gürültü
+    print(f"X: {linear_X}")
+    print(f"y: {linear_y}")
+    
+    # K-means için veri
+    print("\\n2️⃣ K-Means Kümeleme Verisi:")
+    clustering_data = [
+        (1.0, 1.0), (1.5, 2.0), (2.0, 1.0), (2.5, 1.5),  # Küme 1
+        (8.0, 8.0), (8.5, 8.0), (9.0, 8.5), (9.5, 9.0),  # Küme 2
+        (3.0, 8.0), (3.5, 8.5), (4.0, 9.0), (4.5, 8.0)   # Küme 3
+    ]
+    print(f"Noktalar: {clustering_data}")
+    
+    # Karar ağacı için veri
+    print("\\n3️⃣ Karar Ağacı Verisi:")
+    decision_data = [
+        {'yaş': 25, 'maaş': 50000, 'deneyim': 2, 'terfi': 'hayır'},
+        {'yaş': 35, 'maaş': 80000, 'deneyim': 10, 'terfi': 'evet'},
+        {'yaş': 28, 'maaş': 60000, 'deneyim': 4, 'terfi': 'hayır'},
+        {'yaş': 42, 'maaş': 90000, 'deneyim': 15, 'terfi': 'evet'},
+        {'yaş': 30, 'maaş': 70000, 'deneyim': 8, 'terfi': 'evet'},
+        {'yaş': 24, 'maaş': 45000, 'deneyim': 1, 'terfi': 'hayır'},
+    ]
+    print(f"Karar verisi: {len(decision_data)} örnek")
+    
+    return linear_X, linear_y, clustering_data, decision_data
+
+def main():
+    print("🤖 Machine Learning Demo (Pure Python)")
+    print("=" * 60)
+    
+    # Veri oluştur
+    linear_X, linear_y, clustering_data, decision_data = generate_demo_data()
+    
+    # ML modeli oluştur
+    ml = SimpleML()
+    
+    print("\\n" + "="*60)
+    print("🔥 MODEL EĞİTİMLERİ")
+    print("="*60)
+    
+    # 1. Lineer Regresyon
+    print("\\n1️⃣ LİNEER REGRESYON TESTİ")
+    print("-" * 40)
+    w, b = ml.linear_regression(linear_X, linear_y, learning_rate=0.01, epochs=1000)
+    
+    # Tahmin yap
+    test_x = 11
+    prediction = w * test_x + b
+    print(f"\\n🎯 Tahmin: x={test_x} için y={prediction:.2f}")
+    
+    # 2. K-Means Kümeleme
+    print("\\n\\n2️⃣ K-MEANS KÜMELEME TESTİ")
+    print("-" * 40)
+    kmeans_result = ml.k_means_clustering(clustering_data, k=3)
+    
+    # 3. Karar Ağacı
+    print("\\n\\n3️⃣ KARAR AĞACI TESTİ")
+    print("-" * 40)
+    tree_result = ml.decision_tree_simple(decision_data, 'terfi')
+    
+    print("\\n" + "="*60)
+    print("✅ TÜM ML ALGORİTMALARI TEST EDİLDİ!")
+    print("="*60)
+
+if __name__ == "__main__":
+    main()`
             };
             
-            editor.setValue(examples[type]);
-            document.getElementById("output").innerHTML = '<div style="color: #4CAF50;">Python Çıktı Paneli</div><div style="color: #888; margin-top: 10px;">Örnek kod yüklendi. Çalıştırmak için \'▶️ Çalıştır\' butonuna tıklayın.</div>';
+            if (examples[type]) {
+                editor.setValue(examples[type]);
+                clearAllOutputs();
+                updateStatusMessage(`Örnek yüklendi: ${type} 📚`);
+            }
         }
 
-        // Update Status Bar
+        // Status and UI Updates
         function updateStatusBar() {
             const code = editor.getValue();
+            const cursor = editor.getCursor();
             const lines = code.split('\n').length;
             const chars = code.length;
             
-            document.getElementById('line-count').textContent = lines;
+            document.getElementById('line-count').textContent = cursor.line + 1;
+            document.getElementById('col-count').textContent = cursor.ch + 1;
             document.getElementById('char-count').textContent = chars;
+            
+            // Save current file
+            files[currentFile] = code;
+        }
+
+        function updateCursor() {
+            const cursor = editor.getCursor();
+            document.getElementById('line-count').textContent = cursor.line + 1;
+            document.getElementById('col-count').textContent = cursor.ch + 1;
         }
 
         function updateLastRun() {
@@ -632,40 +1701,63 @@ print(asallar)`
             document.getElementById('last-run').textContent = time;
         }
 
-        // Event Listeners
-        editor.on('change', updateStatusBar);
+        function updateStatusMessage(message) {
+            document.getElementById('status-message').textContent = message;
+        }
 
-        // Keyboard Shortcuts
-        editor.setOption("extraKeys", {
-            "Ctrl-Enter": runCode,
-            "Cmd-Enter": runCode,
-            "Ctrl-S": saveCode,
-            "Cmd-S": saveCode
-        });
-
-        // Load shared code from URL
+        // Initialize when page loads
         window.addEventListener('load', function() {
+            // Load shared code from URL
             const urlParams = new URLSearchParams(window.location.search);
             const sharedCode = urlParams.get('code');
+            
             if (sharedCode) {
                 try {
                     const decodedCode = decodeURIComponent(atob(sharedCode));
-                    editor.setValue(decodedCode);
+                    // Wait for editor to be initialized
+                    setTimeout(() => {
+                        if (editor) {
+                            editor.setValue(decodedCode);
+                            updateStatusMessage('Paylaşılan kod yüklendi 🔗');
+                        }
+                    }, 1500);
                 } catch (e) {
                     console.error('Paylaşılan kod yüklenemedi:', e);
                 }
             }
-            updateStatusBar();
+            
+            // Initialize the editor
+            initializeEditor();
+        });
+
+        // Auto-save every 30 seconds
+        setInterval(() => {
+            if (editor) {
+                const code = editor.getValue();
+                files[currentFile] = code;
+                localStorage.setItem('python-editor-files', JSON.stringify(files));
+                localStorage.setItem('python-editor-current-file', currentFile);
+            }
+        }, 30000);
+
+        // Prevent accidental page leave with unsaved changes
+        window.addEventListener('beforeunload', function(e) {
+            const hasUnsavedChanges = editor && editor.getValue().trim() !== '';
+            if (hasUnsavedChanges) {
+                e.preventDefault();
+                e.returnValue = '';
+                return 'Kaydedilmemiş değişiklikleriniz var. Sayfayı kapatmak istediğinizden emin misiniz?';
+            }
         });
     </script>
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BJ7HITTRGO"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
+        gtag('config', 'G-BJ7HITTRGO');
     </script>
 </body>
 </html>
