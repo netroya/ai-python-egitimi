@@ -324,11 +324,14 @@ print("💡 Kendi kodlarınızı yazıp test edebilirsiniz!")</textarea>
     </main>
 
     <!-- CodeMirror JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js" 
+            onerror="this.onerror=null; this.src='https://unpkg.com/codemirror@5.65.2/lib/codemirror.js'"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"
+            onerror="this.onerror=null; this.src='https://unpkg.com/codemirror@5.65.2/mode/python/python.js'"></script>
 
     <!-- Pyodide for Python execution -->
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"
+            onerror="console.error('Pyodide yüklenemedi:', this.src)"></script>
 
     <script>
         let pyodide = null;
@@ -336,17 +339,46 @@ print("💡 Kendi kodlarınızı yazıp test edebilirsiniz!")</textarea>
         
         // Initialize CodeMirror
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Kod editörü yükleniyor...');
+            
             const textarea = document.getElementById('codeEditor');
-            editor = CodeMirror.fromTextArea(textarea, {
-                mode: 'python',
-                theme: 'monokai',
-                lineNumbers: true,
-                autoCloseBrackets: true,
-                matchBrackets: true,
-                indentUnit: 4,
-                lineWrapping: true,
-                fontSize: '14px'
-            });
+            if (!textarea) {
+                console.error('❌ Textarea element bulunamadı!');
+                return;
+            }
+            
+            // CodeMirror yüklü mü kontrol et
+            if (typeof CodeMirror === 'undefined') {
+                console.error('❌ CodeMirror yüklenemedi!');
+                document.getElementById('output').textContent = '❌ Kod editörü yüklenemedi. Sayfayı yenileyin.';
+                return;
+            }
+            
+            try {
+                editor = CodeMirror.fromTextArea(textarea, {
+                    mode: 'python',
+                    theme: 'monokai',
+                    lineNumbers: true,
+                    autoCloseBrackets: true,
+                    matchBrackets: true,
+                    indentUnit: 4,
+                    lineWrapping: true,
+                    fontSize: '14px'
+                });
+                
+                console.log('✅ CodeMirror başarıyla yüklendi');
+                
+                // Editör hazır olduğunu bildiren event
+                setTimeout(() => {
+                    if (editor && document.getElementById('output')) {
+                        document.getElementById('output').textContent = '📝 Kod editörü hazır!\n\nPython ortamı yükleniyor... ⏳';
+                    }
+                }, 500);
+                
+            } catch (error) {
+                console.error('❌ CodeMirror başlatma hatası:', error);
+                document.getElementById('output').textContent = '❌ Kod editörü başlatılamadı: ' + error.message;
+            }
             
             // Initialize Pyodide
             initializePyodide();
@@ -453,12 +485,15 @@ sys.stderr = old_stderr
         }
         
         function clearOutput() {
-            document.getElementById('output').textContent = 'Çıktı temizlendi.\n\n💡 Yeni kod çalıştırmak için "Çalıştır" butonunu kullanın.';
+            const outputElement = document.getElementById('output');
+            if (outputElement) {
+                outputElement.textContent = 'Çıktı temizlendi.\n\n💡 Yeni kod çalıştırmak için "Çalıştır" butonunu kullanın.';
+            }
         }
         
         function loadExample(type) {
             const examples = {
-                basic: \`# Temel Python Örnekleri
+                basic: `# Temel Python Örnekleri
 print("🐍 Python'a Hoş Geldiniz!")
 
 # Değişkenler
@@ -474,9 +509,9 @@ a, b = 15, 4
 print(f"{a} + {b} = {a + b}")
 print(f"{a} - {b} = {a - b}")
 print(f"{a} * {b} = {a * b}")
-print(f"{a} / {b} = {a / b:.2f}")\`,
+print(f"{a} / {b} = {a / b:.2f}")`,
 
-                functions: \`# Fonksiyon Örnekleri
+                functions: `# Fonksiyon Örnekleri
 def selamla(isim):
     return f"Merhaba {isim}! 👋"
 
@@ -497,9 +532,9 @@ print(f"5 + 3 = {topla(5, 3)}")
 
 # 1-20 arası asal sayılar
 asallar = [i for i in range(1, 21) if asal_mi(i)]
-print(f"1-20 arası asal sayılar: {asallar}")\`,
+print(f"1-20 arası asal sayılar: {asallar}")`,
 
-                lists: \`# Liste İşlemleri
+                lists: `# Liste İşlemleri
 # Farklı liste oluşturma yöntemleri
 sayilar = [1, 2, 3, 4, 5]
 isimler = ["Ali", "Ayşe", "Mehmet"]
@@ -519,32 +554,32 @@ print(f"1-5 arası sayıların kareleri: {kareler}")
 
 # Liste filtreleme
 cift_sayilar = [x for x in sayilar if x % 2 == 0]
-print(f"Çift sayılar: {cift_sayilar}")\`,
+print(f"Çift sayılar: {cift_sayilar}")`,
 
-                loops: \`# Döngü Örnekleri
+                loops: `# Döngü Örnekleri
 print("=== FOR DÖNGÜSÜ ===")
 # Basit for döngüsü
 for i in range(5):
     print(f"Adım {i + 1}")
 
-print("\n=== LİSTE ÜZERİNDE DÖNGÜ ===")
+print("\\n=== LİSTE ÜZERİNDE DÖNGÜ ===")
 meyveler = ["elma", "armut", "muz", "portakal"]
 for meyve in meyveler:
     print(f"🍎 {meyve}")
 
-print("\n=== WHILE DÖNGÜSÜ ===")
+print("\\n=== WHILE DÖNGÜSÜ ===")
 sayac = 1
 while sayac <= 5:
     print(f"Sayaç: {sayac}")
     sayac += 1
 
-print("\n=== İÇ İÇE DÖNGÜ ===")
+print("\\n=== İÇ İÇE DÖNGÜ ===")
 for i in range(1, 4):
     for j in range(1, 4):
         print(f"{i}x{j}={i*j}", end="  ")
-    print()  # Yeni satır\`,
+    print()  # Yeni satır`,
 
-                classes: \`# Sınıf (Class) Örnekleri
+                classes: `# Sınıf (Class) Örnekleri
 class Araba:
     def __init__(self, marka, model, yil):
         self.marka = marka
@@ -574,9 +609,9 @@ araba1.fren_yap()
 # İkinci araba
 araba2 = Araba("BMW", "320i", 2024)
 print(f"İkinci araba: {araba2.bilgi_ver()}")
-araba2.hizlan(80)\`,
+araba2.hizlan(80)`,
 
-                data: \`# Veri İşleme Örnekleri
+                data: `# Veri İşleme Örnekleri
 # Öğrenci notları analizi
 ogrenciler = {
     "Ali": [85, 92, 78, 96],
@@ -595,24 +630,45 @@ ortalamalar = {isim: sum(notlar)/len(notlar) for isim, notlar in ogrenciler.item
 en_yuksek = max(ortalamalar, key=ortalamalar.get)
 en_dusuk = min(ortalamalar, key=ortalamalar.get)
 
-print(f"\n🏆 En yüksek ortalama: {en_yuksek} ({ortalamalar[en_yuksek]:.1f})")
+print(f"\\n🏆 En yüksek ortalama: {en_yuksek} ({ortalamalar[en_yuksek]:.1f})")
 print(f"📚 En düşük ortalama: {en_dusuk} ({ortalamalar[en_dusuk]:.1f})")
 
 # Sınıf ortalaması
 tum_notlar = [not for notlar in ogrenciler.values() for not in notlar]
 sinif_ortalamasi = sum(tum_notlar) / len(tum_notlar)
-print(f"\n📊 Sınıf ortalaması: {sinif_ortalamasi:.1f}")\`
+print(f"\\n📊 Sınıf ortalaması: {sinif_ortalamasi:.1f}")`
             };
             
             if (examples[type]) {
-                editor.setValue(examples[type]);
-                document.getElementById('output').textContent = \`📋 \${type.toUpperCase()} örneği yüklendi. "Çalıştır" butonuna tıklayın!\`;
+                if (!editor) {
+                    document.getElementById('output').textContent = '⚠️ Editör henüz hazır değil. Lütfen bekleyin ve tekrar deneyin...';
+                    return;
+                }
+                
+                try {
+                    editor.setValue(examples[type]);
+                    document.getElementById('output').textContent = `📋 ${type.toUpperCase()} örneği yüklendi. "Çalıştır" butonuna tıklayın!`;
+                } catch (error) {
+                    document.getElementById('output').textContent = `❌ Örnek yüklenirken hata oluştu: ${error.message}`;
+                }
+            } else {
+                document.getElementById('output').textContent = '❌ Geçersiz örnek türü!';
             }
         }
 
         // Kod kaydetme fonksiyonu
         function saveCode() {
+            if (!editor) {
+                document.getElementById('output').textContent = '⚠️ Editör henüz hazır değil. Lütfen bekleyin...';
+                return;
+            }
+            
             const code = editor.getValue();
+            if (!code.trim()) {
+                document.getElementById('output').textContent = '⚠️ Kaydedilecek kod bulunamadı!';
+                return;
+            }
+            
             const blob = new Blob([code], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -630,6 +686,11 @@ print(f"\n📊 Sınıf ortalaması: {sinif_ortalamasi:.1f}")\`
         
         // Kod yükleme fonksiyonu
         function loadCode() {
+            if (!editor) {
+                document.getElementById('output').textContent = '⚠️ Editör henüz hazır değil. Lütfen bekleyin...';
+                return;
+            }
+            
             const input = document.createElement('input');
             input.type = 'file';
             input.accept = '.py,.txt';
@@ -638,8 +699,12 @@ print(f"\n📊 Sınıf ortalaması: {sinif_ortalamasi:.1f}")\`
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        editor.setValue(e.target.result);
-                        document.getElementById('output').textContent = `📁 Dosya yüklendi: ${file.name}\n\nKod editörüne aktarıldı. "Çalıştır" butonuna tıklayarak test edebilirsiniz.`;
+                        try {
+                            editor.setValue(e.target.result);
+                            document.getElementById('output').textContent = `📁 Dosya yüklendi: ${file.name}\n\nKod editörüne aktarıldı. "Çalıştır" butonuna tıklayarak test edebilirsiniz.`;
+                        } catch (error) {
+                            document.getElementById('output').textContent = `❌ Dosya yüklenirken hata oluştu: ${error.message}`;
+                        }
                     };
                     reader.readAsText(file);
                 }
@@ -707,6 +772,49 @@ print(f"\n📊 Sınıf ortalaması: {sinif_ortalamasi:.1f}")\`
                 loadSavedCode();
             }
         }, 2000);
+
+        // Debug fonksiyonu - konsolda sistem durumunu kontrol eder
+        function checkSystemStatus() {
+            console.log('=== SİSTEM DURUMU ===');
+            console.log('Editor hazır:', !!editor);
+            console.log('Pyodide hazır:', !!pyodide);
+            console.log('CodeMirror yüklü:', typeof CodeMirror !== 'undefined');
+            
+            if (editor) {
+                console.log('Editor içeriği:', editor.getValue().substring(0, 50) + '...');
+            }
+            
+            return {
+                editor: !!editor,
+                pyodide: !!pyodide,
+                codemirror: typeof CodeMirror !== 'undefined'
+            };
+        }
+        
+        // Test buton fonksiyonu
+        function testButtons() {
+            console.log('🧪 Buton testleri başlatılıyor...');
+            
+            // Örnek buton testi
+            try {
+                loadExample('basic');
+                console.log('✅ loadExample çalışıyor');
+            } catch (error) {
+                console.error('❌ loadExample hatası:', error);
+            }
+            
+            // Clear test
+            try {
+                clearOutput();
+                console.log('✅ clearOutput çalışıyor');
+            } catch (error) {
+                console.error('❌ clearOutput hatası:', error);
+            }
+        }
+        
+        // Global fonksiyonlar - debug için
+        window.checkSystemStatus = checkSystemStatus;
+        window.testButtons = testButtons;
     </script>
 </body>
 </html>
