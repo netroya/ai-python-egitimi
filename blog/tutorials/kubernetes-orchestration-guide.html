@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kubernetes Orchestration Guide - Container Yönetimi</title>
+    <meta name="description" content="Kubernetes ile container orchestration öğrenin. Pods, Services, Deployments ve cluster yönetimi rehberi.">
+    <meta name="keywords" content="kubernetes, k8s, container orchestration, devops, microservices">
+    <link rel="stylesheet" href="../blog-styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/python-kursu.html">Python Kursu</a></li>
+                <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header class="post-header">
+            <div class="post-meta">
+                <span class="category">📚 Tutorial</span>
+                <time datetime="2025-08-19">19 Ağustos 2025</time>
+                <span class="read-time">⏱️ 40 dakika okuma</span>
+            </div>
+            <h1>Kubernetes Orchestration Guide - Container Yönetimi</h1>
+            <p class="lead">Kubernetes ile modern container orchestration, mikroservis yönetimi ve production deployment rehberi</p>
+        </header>
+
+        <div class="post-content">
+            <h2>Kubernetes Nedir?</h2>
+            <p>Kubernetes (k8s), container'ları otomatik olarak deploy eden, scale eden ve yöneten açık kaynak container orchestration platformudur. Google tarafından geliştirilmiş ve şu anda Cloud Native Computing Foundation tarafından maintain edilmektedir.</p>
+
+            <h2>Kubernetes'in Avantajları</h2>
+            <ul>
+                <li><strong>Automatic Scaling:</strong> Yük bazlı otomatik ölçeklendirme</li>
+                <li><strong>Self-healing:</strong> Başarısız container'ları otomatik restart</li>
+                <li><strong>Load Balancing:</strong> Trafik dağıtımı ve service discovery</li>
+                <li><strong>Rolling Updates:</strong> Zero-downtime deployments</li>
+                <li><strong>Resource Management:</strong> CPU, memory limitleri</li>
+                <li><strong>Secret Management:</strong> Sensitive data yönetimi</li>
+            </ul>
+
+            <h2>1. Kubernetes Kurulumu</h2>
+
+            <h3>Minikube (Local Development)</h3>
+            <pre><code># Minikube kurulumu (macOS)
+brew install minikube
+
+# Linux
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+# Windows (Chocolatey)
+choco install minikube
+
+# Minikube başlat
+minikube start --driver=docker
+minikube status
+
+# Dashboard
+minikube dashboard</code></pre>
+
+            <h3>kubectl Kurulumu</h3>
+            <pre><code># macOS
+brew install kubectl
+
+# Linux
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+# Windows
+choco install kubernetes-cli
+
+# Verify installation
+kubectl version --client
+kubectl cluster-info</code></pre>
+
+            <h3>Cloud Provider Setup</h3>
+            <pre><code># Google Kubernetes Engine (GKE)
+gcloud container clusters create my-cluster \
+    --zone=us-central1-a \
+    --num-nodes=3
+
+# Amazon EKS
+eksctl create cluster --name my-cluster --region us-west-2
+
+# Azure AKS
+az aks create \
+    --resource-group myResourceGroup \
+    --name myAKSCluster \
+    --node-count 3 \
+    --enable-addons monitoring \
+    --generate-ssh-keys</code></pre>
+
+            <h2>2. Kubernetes Architecture</h2>
+
+            <h3>Master Components</h3>
+            <pre><code># Control Plane Components:
+- API Server: REST API for all cluster operations
+- etcd: Distributed key-value store for cluster data
+- Controller Manager: Runs controller processes
+- Scheduler: Assigns pods to nodes
+
+# Node Components:
+- kubelet: Node agent that communicates with API server  
+- kube-proxy: Network proxy for services
+- Container Runtime: Docker, containerd, CRI-O</code></pre>
+
+            <h3>Temel Kubernetes Objeleri</h3>
+            <pre><code>Pod          # Smallest deployable unit
+ReplicaSet   # Maintains desired number of pod replicas
+Deployment   # Manages ReplicaSets and provides updates
+Service      # Exposes pods as network service
+Ingress      # HTTP/HTTPS routing to services
+ConfigMap    # Configuration data
+Secret       # Sensitive data
+Volume       # Storage for pods
+Namespace    # Virtual cluster separation</code></pre>
+
+            <h2>3. Pods - Temel Yapı Taşı</h2>
+
+            <h3>Basic Pod Definition</h3>
+            <pre><code># simple-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.21
+    ports:
+    - containerPort: 80
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"</code></pre>
+
+            <h3>Multi-container Pod</h3>
+            <pre><code># multi-container-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-app
+spec:
+  containers:
+  - name: web-server
+    image: nginx:1.21
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: shared-storage
+      mountPath: /usr/share/nginx/html
+  
+  - name: content-loader
+    image: busybox
+    command: ['sh', '-c']
+    args:
+    - while true; do
+        echo "Updated at $(date)" > /shared/index.html;
+        sleep 60;
+      done
+    volumeMounts:
+    - name: shared-storage
+      mountPath: /shared
+  
+  volumes:
+  - name: shared-storage
+    emptyDir: {}</code></pre>
+
+            <h3>Pod Operations</h3>
+            <pre><code># Pod oluştur
+kubectl apply -f simple-pod.yaml
+
+# Pod'ları listele
+kubectl get pods
+kubectl get pods -o wide
+kubectl get pods --show-labels
+
+# Pod detayları
+kubectl describe pod nginx-pod
+
+# Pod logları
+kubectl logs nginx-pod
+kubectl logs nginx-pod -c container-name  # Multi-container
+
+# Pod'a bağlan
+kubectl exec -it nginx-pod -- /bin/bash
+kubectl exec nginx-pod -- ls -la
+
+# Pod sil
+kubectl delete pod nginx-pod
+kubectl delete -f simple-pod.yaml</code></pre>
+
+            <h2>4. Deployments - Scalable Applications</h2>
+
+            <h3>Deployment Definition</h3>
+            <pre><code># nginx-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5</code></pre>
+
+            <h3>Deployment Operations</h3>
+            <pre><code># Deployment oluştur
+kubectl apply -f nginx-deployment.yaml
+
+# Deployment'ları listele
+kubectl get deployments
+kubectl get rs  # ReplicaSets
+kubectl get pods
+
+# Deployment scale et
+kubectl scale deployment nginx-deployment --replicas=5
+
+# Rolling update
+kubectl set image deployment/nginx-deployment nginx=nginx:1.22
+kubectl rollout status deployment/nginx-deployment
+
+# Rollout history
+kubectl rollout history deployment/nginx-deployment
+
+# Rollback
+kubectl rollout undo deployment/nginx-deployment
+kubectl rollout undo deployment/nginx-deployment --to-revision=2
+
+# Deployment sil
+kubectl delete deployment nginx-deployment</code></pre>
+
+            <h2>5. Services - Network Abstraction</h2>
+
+            <h3>ClusterIP Service</h3>
+            <pre><code># nginx-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP  # Default type</code></pre>
+
+            <h3>NodePort Service</h3>
+            <pre><code># nginx-nodeport.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-nodeport
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30080
+  type: NodePort</code></pre>
+
+            <h3>LoadBalancer Service</h3>
+            <pre><code># nginx-loadbalancer.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-loadbalancer
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer</code></pre>
+
+            <h3>Service Operations</h3>
+            <pre><code># Service oluştur
+kubectl apply -f nginx-service.yaml
+
+# Service'leri listele
+kubectl get services
+kubectl get svc
+
+# Service detayları
+kubectl describe service nginx-service
+
+# Endpoints kontrol et
+kubectl get endpoints nginx-service
+
+# Service test et (cluster içinden)
+kubectl run test-pod --image=busybox -it --rm -- /bin/sh
+wget -qO- nginx-service</code></pre>
+
+            <h2>6. ConfigMaps ve Secrets</h2>
+
+            <h3>ConfigMap</h3>
+            <pre><code># app-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  database.host: "mysql.example.com"
+  database.port: "3306" 
+  app.debug: "true"
+  log.level: "info"
+  config.properties: |
+    property1=value1
+    property2=value2
+    property3=value3
+
+---
+# Pod using ConfigMap
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod
+spec:
+  containers:
+  - name: app
+    image: myapp:latest
+    env:
+    - name: DATABASE_HOST
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: database.host
+    - name: DATABASE_PORT
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: database.port
+    envFrom:
+    - configMapRef:
+        name: app-config
+    volumeMounts:
+    - name: config-volume
+      mountPath: /etc/config
+  volumes:
+  - name: config-volume
+    configMap:
+      name: app-config</code></pre>
+
+            <h3>Secrets</h3>
+            <pre><code># Create secret imperatively
+kubectl create secret generic app-secret \
+  --from-literal=username=admin \
+  --from-literal=password=secretpassword
+
+# app-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+type: Opaque
+data:
+  username: YWRtaW4=      # base64 encoded 'admin'
+  password: c2VjcmV0cGFzc3dvcmQ=  # base64 encoded 'secretpassword'
+
+---
+# Pod using Secret
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod
+spec:
+  containers:
+  - name: app
+    image: myapp:latest
+    env:
+    - name: DB_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: app-secret
+          key: username
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: app-secret
+          key: password
+    volumeMounts:
+    - name: secret-volume
+      mountPath: /etc/secrets
+      readOnly: true
+  volumes:
+  - name: secret-volume
+    secret:
+      secretName: app-secret</code></pre>
+
+            <h2>7. Persistent Storage</h2>
+
+            <h3>PersistentVolume ve PersistentVolumeClaim</h3>
+            <pre><code># persistent-volume.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  hostPath:
+    path: /data/mysql
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: manual
+
+---
+# Pod using PVC
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-pod
+spec:
+  containers:
+  - name: mysql
+    image: mysql:8.0
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: "rootpassword"
+    volumeMounts:
+    - name: mysql-storage
+      mountPath: /var/lib/mysql
+  volumes:
+  - name: mysql-storage
+    persistentVolumeClaim:
+      claimName: mysql-pvc</code></pre>
+
+            <h3>StorageClass (Dynamic Provisioning)</h3>
+            <pre><code># storage-class.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast-ssd
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+  zones: us-central1-a, us-central1-b
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+
+---
+# PVC using StorageClass
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: fast-ssd</code></pre>
+
+            <h2>8. Ingress - HTTP Routing</h2>
+
+            <h3>Nginx Ingress Controller</h3>
+            <pre><code># Install Nginx Ingress Controller
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.1/deploy/static/provider/cloud/deploy.yaml
+
+# Verify installation
+kubectl get pods -n ingress-nginx</code></pre>
+
+            <h3>Ingress Rules</h3>
+            <pre><code># web-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - myapp.example.com
+    secretName: tls-secret
+  rules:
+  - host: myapp.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-service
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8000
+
+---
+# TLS Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tls-secret
+type: kubernetes.io/tls
+data:
+  tls.crt: LS0tLS1CRUdJTi... # base64 encoded certificate
+  tls.key: LS0tLS1CRUdJTi... # base64 encoded private key</code></pre>
+
+            <h2>9. Namespaces - Resource Separation</h2>
+
+            <h3>Namespace Operations</h3>
+            <pre><code># Namespace oluştur
+kubectl create namespace development
+kubectl create namespace staging
+kubectl create namespace production
+
+# Namespace'leri listele
+kubectl get namespaces
+
+# Namespace'e resource oluştur
+kubectl apply -f deployment.yaml -n development
+
+# Default namespace set et
+kubectl config set-context --current --namespace=development
+
+# Namespace sil
+kubectl delete namespace development</code></pre>
+
+            <h3>Resource Quotas</h3>
+            <pre><code># resource-quota.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: dev-quota
+  namespace: development
+spec:
+  hard:
+    requests.cpu: "4"
+    requests.memory: 8Gi
+    limits.cpu: "8"
+    limits.memory: 16Gi
+    persistentvolumeclaims: "10"
+    pods: "10"
+    services: "5"
+
+---
+# Limit Range for default values
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: dev-limits
+  namespace: development
+spec:
+  limits:
+  - default:
+      cpu: "500m"
+      memory: "512Mi"
+    defaultRequest:
+      cpu: "100m"
+      memory: "128Mi"
+    type: Container</code></pre>
+
+            <h2>10. Monitoring ve Debugging</h2>
+
+            <h3>Basic Monitoring Commands</h3>
+            <pre><code># Cluster info
+kubectl cluster-info
+kubectl get nodes -o wide
+
+# Resource usage
+kubectl top nodes
+kubectl top pods
+kubectl top pods -A  # All namespaces
+
+# Events
+kubectl get events
+kubectl get events --sort-by='.lastTimestamp'
+
+# Logs
+kubectl logs -f deployment/nginx-deployment
+kubectl logs -f pod/nginx-pod --previous
+
+# Debug failing pod
+kubectl describe pod failing-pod
+kubectl get pod failing-pod -o yaml</code></pre>
+
+            <h3>Troubleshooting Common Issues</h3>
+            <pre><code># Pod'lar başlamıyor
+kubectl describe pod problem-pod
+kubectl logs problem-pod
+
+# Service'e ulaşamıyor
+kubectl get endpoints service-name
+kubectl describe service service-name
+
+# DNS resolution problems
+kubectl exec -it test-pod -- nslookup kubernetes.default
+
+# Resource constraints
+kubectl describe node node-name
+kubectl top nodes
+kubectl get pods --field-selector=status.phase=Pending
+
+# Network connectivity test
+kubectl run network-test --image=busybox -it --rm -- /bin/sh</code></pre>
+
+            <h2>11. Helm - Package Manager</h2>
+
+            <h3>Helm Installation</h3>
+            <pre><code># Install Helm
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+# Add repositories
+helm repo add stable https://charts.helm.sh/stable
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+
+# List repositories
+helm repo list</code></pre>
+
+            <h3>Using Helm Charts</h3>
+            <pre><code># Search charts
+helm search repo mysql
+helm search hub wordpress
+
+# Install chart
+helm install my-mysql bitnami/mysql \
+  --set auth.rootPassword=secretpassword \
+  --set auth.database=myapp
+
+# List releases
+helm list
+helm list -A
+
+# Upgrade release
+helm upgrade my-mysql bitnami/mysql --version 9.4.1
+
+# Rollback
+helm rollback my-mysql 1
+
+# Uninstall
+helm uninstall my-mysql</code></pre>
+
+            <h3>Creating Custom Chart</h3>
+            <pre><code># Create chart structure
+helm create myapp
+
+# myapp/values.yaml
+replicaCount: 2
+
+image:
+  repository: myapp
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: myapp.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+# Install custom chart
+helm install myapp-release ./myapp
+
+# Package chart
+helm package myapp</code></pre>
+
+            <h2>12. Production Best Practices</h2>
+
+            <h3>Security Hardening</h3>
+            <pre><code># Pod Security Standards
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-pod
+spec:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 2000
+  containers:
+  - name: app
+    image: myapp:latest
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      capabilities:
+        drop:
+        - ALL
+
+# Network Policy
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress</code></pre>
+
+            <h3>Resource Management</h3>
+            <pre><code># Horizontal Pod Autoscaler
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx-deployment
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+
+# Pod Disruption Budget
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: nginx-pdb
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: nginx</code></pre>
+
+            <h3>Health Checks</h3>
+            <pre><code># Comprehensive health checks
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthy-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: healthy-app
+  template:
+    metadata:
+      labels:
+        app: healthy-app
+    spec:
+      containers:
+      - name: app
+        image: myapp:latest
+        ports:
+        - containerPort: 8080
+        
+        # Startup probe (new containers)
+        startupProbe:
+          httpGet:
+            path: /startup
+            port: 8080
+          failureThreshold: 30
+          periodSeconds: 10
+        
+        # Liveness probe (restart container)
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          failureThreshold: 3
+        
+        # Readiness probe (remove from service)
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          failureThreshold: 3</code></pre>
+
+            <h2>Sonuç</h2>
+            <p>Kubernetes modern container orchestration'ın de facto standardıdır. Bu rehberde öğrendiklerinizi özetlersek:</p>
+
+            <h3>Temel Kavramlar:</h3>
+            <ul>
+                <li>Pods - En küçük deployment unit</li>
+                <li>Deployments - Scalable uygulama yönetimi</li>
+                <li>Services - Network abstraction</li>
+                <li>ConfigMaps/Secrets - Configuration management</li>
+                <li>Ingress - HTTP routing</li>
+            </ul>
+
+            <h3>Production Considerations:</h3>
+            <ul>
+                <li>Resource limits ve requests</li>
+                <li>Health checks (liveness, readiness, startup)</li>
+                <li>Security practices (non-root, network policies)</li>
+                <li>Monitoring ve logging</li>
+                <li>Backup ve disaster recovery</li>
+            </ul>
+
+            <p>Kubernetes öğrenmek için en iyi yol hands-on practice yapmaktır. Minikube ile başlayıp gerçek cluster'larda deneyim kazanın. Modern cloud-native uygulamaların temelini oluşturan bu teknoloji, DevOps career'ınız için kritik öneme sahiptir.</p>
+        </div>
+    </article>
+</body>
+</html>

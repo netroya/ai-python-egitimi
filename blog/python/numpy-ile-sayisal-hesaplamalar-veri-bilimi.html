@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NumPy ile Sayısal Hesaplamalar: Veri Biliminin Temeli | AI Python Eğitimi Blog</title>
+    <meta name="description" content="NumPy kütüphanesi ile Python'da hızlı ve etkili sayısal hesaplamalar nasıl yapılır? Temel kavramlar ve pratik örnekler.">
+    <meta name="keywords" content="numpy, veri-bilimi, python, matematik">
+    <link rel="canonical" href="https://netroya.github.io/ai-python-egitimi/blog/python/numpy-ile-sayisal-hesaplamalar-veri-bilimi.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://netroya.github.io/ai-python-egitimi/blog/python/numpy-ile-sayisal-hesaplamalar-veri-bilimi.html">
+    <meta property="og:title" content="NumPy ile Sayısal Hesaplamalar: Veri Biliminin Temeli">
+    <meta property="og:description" content="NumPy kütüphanesi ile Python'da hızlı ve etkili sayısal hesaplamalar nasıl yapılır? Temel kavramlar ve pratik örnekler.">
+    <meta property="og:image" content="https://netroya.github.io/ai-python-egitimi/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://netroya.github.io/ai-python-egitimi/blog/python/numpy-ile-sayisal-hesaplamalar-veri-bilimi.html">
+    <meta property="twitter:title" content="NumPy ile Sayısal Hesaplamalar: Veri Biliminin Temeli">
+    <meta property="twitter:description" content="NumPy kütüphanesi ile Python'da hızlı ve etkili sayısal hesaplamalar nasıl yapılır? Temel kavramlar ve pratik örnekler.">
+    <meta property="twitter:image" content="https://netroya.github.io/ai-python-egitimi/og-image.jpg">
+
+    <link rel="stylesheet" href="../../premium-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "NumPy ile Sayısal Hesaplamalar: Veri Biliminin Temeli",
+        "description": "NumPy kütüphanesi ile Python'da hızlı ve etkili sayısal hesaplamalar nasıl yapılır? Temel kavramlar ve pratik örnekler.",
+        "author": {
+            "@type": "Person",
+            "name": "AI Python Eğitimi"
+        },
+        "datePublished": "2025-08-19T04:17:42.471Z",
+        "dateModified": "2025-08-19T04:17:42.471Z",
+        "publisher": {
+            "@type": "Organization",
+            "name": "AI Python Eğitimi",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://netroya.github.io/ai-python-egitimi/logo.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://netroya.github.io/ai-python-egitimi/blog/python/numpy-ile-sayisal-hesaplamalar-veri-bilimi.html"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">🐍 AI Python</a>
+            <div class="nav-menu">
+                <a href="../../index.html" class="nav-link">Ana Sayfa</a>
+                <a href="../../python-kursu.html" class="nav-link">Python Kursu</a>
+                <a href="../../yapay-zeka-rehberi.html" class="nav-link">AI Rehberi</a>
+                <a href="../index.html" class="nav-link active">Blog</a>
+                <a href="../../kariyer-rehberi.html" class="nav-link">Kariyer</a>
+            </div>
+        </div>
+    </nav>
+
+    <main style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
+        <nav style="margin-bottom: 30px; font-size: 0.9rem; color: var(--text-light);">
+            <a href="../../index.html" style="color: var(--text-light); text-decoration: none;">Ana Sayfa</a> / 
+            <a href="../index.html" style="color: var(--text-light); text-decoration: none;">Blog</a> / 
+            <span>NumPy ile Sayısal Hesaplamalar: Veri Biliminin Temeli</span>
+        </nav>
+
+        <article>
+            <header style="margin-bottom: 40px; text-align: center;">
+                <div style="margin-bottom: 20px;">
+                    <span style="background: var(--primary); color: white; padding: 6px 12px; border-radius: 12px; font-size: 0.9rem; font-weight: 600;">PYTHON</span>
+                </div>
+                <h1 style="font-size: 2.5rem; margin-bottom: 20px; line-height: 1.2; color: var(--text);">NumPy ile Sayısal Hesaplamalar: Veri Biliminin Temeli</h1>
+                <div style="display: flex; justify-content: center; gap: 20px; color: var(--text-light); font-size: 0.9rem;">
+                    <span>📅 19.08.2025</span>
+                    <span>⏱️ 10 dk okuma</span>
+                    <span>👤 AI Python Eğitimi</span>
+                </div>
+            </header>
+
+            <!-- AdSense Header Ad -->
+            <div class="ad-zone-header">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            </div>
+
+            <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text);">
+                
+                    <h2>🔢 NumPy Nedir?</h2>
+                    <p>NumPy (Numerical Python), Python'da bilimsel hesaplamalar için en temel kütüphanedir. Çok boyutlu diziler ve bu diziler üzerinde hızlı işlemler yapmanızı sağlar.</p>
+
+                    <h3>NumPy'nin Avantajları:</h3>
+                    <ul>
+                        <li><strong>Hız:</strong> C dilinde yazılmış, son derece hızlı</li>
+                        <li><strong>Bellek Verimliliği:</strong> Python listelerinden çok daha az bellek kullanır</li>
+                        <li><strong>Vektörize İşlemler:</strong> Döngü yazmadan toplu işlemler</li>
+                        <li><strong>Broadcasting:</strong> Farklı boyutlardaki dizilerde işlem</li>
+                    </ul>
+
+                    <h2>📦 NumPy Kurulumu</h2>
+                    <p>NumPy'yi pip ile kolayca kurabilirsiniz:</p>
+                    <pre><code>pip install numpy</code></pre>
+
+                    <h2>🚀 Temel NumPy Kullanımı</h2>
+                    
+                    <h3>Dizi Oluşturma</h3>
+                    <p>NumPy dizileri (array) oluşturmanın farklı yolları:</p>
+                    <pre><code>import numpy as np
+
+# Liste'den dizi oluşturma
+arr1 = np.array([1, 2, 3, 4, 5])
+
+# Çok boyutlu dizi
+matrix = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Sıfırlarla dolu dizi
+zeros = np.zeros((3, 4))  # 3x4 boyutunda
+
+# Birlerle dolu dizi  
+ones = np.ones((2, 3))
+
+# Belirli aralıkta sayılar
+range_arr = np.arange(0, 10, 2)  # [0, 2, 4, 6, 8]
+
+# Eşit aralıklı sayılar
+linspace_arr = np.linspace(0, 1, 5)  # 0'dan 1'e 5 eşit parça</code></pre>
+
+                    <h3>Dizi Özellikleri</h3>
+                    <pre><code>arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+print(f"Shape: {arr.shape}")      # (2, 3)
+print(f"Size: {arr.size}")        # 6  
+print(f"Ndim: {arr.ndim}")        # 2
+print(f"Dtype: {arr.dtype}")      # int64</code></pre>
+
+                    <h2>🧮 Matematiksel İşlemler</h2>
+                    
+                    <h3>Temel İstatistikler</h3>
+                    <pre><code>data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+print(f"Ortalama: {np.mean(data)}")        # 5.5
+print(f"Medyan: {np.median(data)}")        # 5.5  
+print(f"Standart Sapma: {np.std(data)}")   # 2.87
+print(f"Varyans: {np.var(data)}")          # 8.25
+print(f"Minimum: {np.min(data)}")          # 1
+print(f"Maksimum: {np.max(data)}")         # 10</code></pre>
+
+                    <h3>Matematiksel Fonksiyonlar</h3>
+                    <pre><code>arr = np.array([1, 4, 9, 16, 25])
+
+# Karekök
+sqrt_arr = np.sqrt(arr)
+
+# Logaritma
+log_arr = np.log(arr)
+
+# Trigonometrik fonksiyonlar
+angles = np.array([0, 30, 45, 60, 90]) * np.pi / 180
+sin_values = np.sin(angles)
+cos_values = np.cos(angles)</code></pre>
+
+                    <h2>🎲 Rastgele Sayılar</h2>
+                    <pre><code># Rastgele sayı üreteci ayarlama
+np.random.seed(42)
+
+# 0-1 arası rastgele sayılar
+random_nums = np.random.rand(5)
+
+# Belirli aralıkta rastgele tamsayılar  
+random_ints = np.random.randint(1, 100, size=10)
+
+# Normal dağılım
+normal = np.random.normal(0, 1, 1000)  # ortalama=0, std=1</code></pre>
+
+                    <h2>🔧 Dizi Manipülasyonu</h2>
+                    
+                    <h3>Reshaping (Yeniden Şekillendirme)</h3>
+                    <pre><code>arr = np.arange(12)
+reshaped = arr.reshape(3, 4)  # 3x4 matris
+
+# Düzleştirme
+flattened = reshaped.flatten()
+
+# Transpoz
+transposed = reshaped.T</code></pre>
+
+                    <h3>Dizileri Birleştirme</h3>
+                    <pre><code>arr1 = np.array([1, 2, 3])
+arr2 = np.array([4, 5, 6])
+
+# Yatay birleştirme
+horizontal = np.hstack([arr1, arr2])
+
+# Dikey birleştirme  
+vertical = np.vstack([arr1, arr2])
+
+# Genel birleştirme
+concatenated = np.concatenate([arr1, arr2])</code></pre>
+
+                    <h2>📊 Pratik Örnek: Veri Analizi</h2>
+                    <pre><code># Öğrenci notları örneği
+notlar = np.array([85, 92, 78, 96, 88, 91, 84, 89, 93, 87])
+
+print(f"Toplam öğrenci: {len(notlar)}")
+print(f"Ortalama not: {np.mean(notlar):.2f}")
+print(f"Medyan not: {np.median(notlar):.2f}")  
+print(f"Standart sapma: {np.std(notlar):.2f}")
+print(f"En yüksek not: {np.max(notlar)}")
+print(f"En düşük not: {np.min(notlar)}")
+
+# 90'dan yüksek notlar
+yuksek_notlar = notlar[notlar >= 90]
+print(f"90+ not alan öğrenci sayısı: {len(yuksek_notlar)}")</code></pre>
+
+                    <h2>⚡ Performans İpuçları</h2>
+                    <ul>
+                        <li><strong>Vektörize İşlemler:</strong> Döngü yerine NumPy fonksiyonları kullanın</li>
+                        <li><strong>Broadcasting:</strong> Farklı boyutlu dizilerle doğrudan işlem yapın</li>
+                        <li><strong>In-place İşlemler:</strong> Bellek tasarrufu için mümkün olduğunda kullanın</li>
+                        <li><strong>Doğru Veri Tipi:</strong> İhtiyacınıza uygun dtype seçin</li>
+                    </ul>
+
+                    <h2>🎯 Sonuç</h2>
+                    <p>NumPy, veri bilimi ve makine öğrenmesi projelerinin temel taşıdır. Bu rehberde öğrendiklerinizle artık NumPy ile etkili sayısal hesaplamalar yapabilirsiniz. Pandas, Matplotlib ve Scikit-learn gibi diğer kütüphaneler de NumPy temeli üzerine inşa edilmiştir.</p>
+                
+            </div>
+
+            <div style="margin: 40px 0; display: flex; flex-wrap: wrap; gap: 8px;">
+                <strong style="color: var(--text); margin-right: 10px;">Etiketler:</strong>
+                <span style="background: var(--bg-alt); color: var(--text); padding: 4px 10px; border-radius: 8px; font-size: 0.85rem;">numpy</span> <span style="background: var(--bg-alt); color: var(--text); padding: 4px 10px; border-radius: 8px; font-size: 0.85rem;">veri-bilimi</span> <span style="background: var(--bg-alt); color: var(--text); padding: 4px 10px; border-radius: 8px; font-size: 0.85rem;">python</span> <span style="background: var(--bg-alt); color: var(--text); padding: 4px 10px; border-radius: 8px; font-size: 0.85rem;">matematik</span>
+            </div>
+
+            <!-- Social Sharing -->
+            <div style="margin: 40px 0; padding: 30px; background: var(--bg-alt); border-radius: 12px; text-align: center;">
+                <h3 style="margin-bottom: 20px; color: var(--text);">Bu yazıyı paylaş</h3>
+                <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                    <a href="https://twitter.com/intent/tweet?text=NumPy%20ile%20Say%C4%B1sal%20Hesaplamalar%3A%20Veri%20Biliminin%20Temeli&url=https%3A%2F%2Fnetroya.github.io%2Fai-python-egitimi%2Fblog%2Fpython%2Fnumpy-ile-sayisal-hesaplamalar-veri-bilimi.html" target="_blank" style="background: #1DA1F2; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">Twitter</a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnetroya.github.io%2Fai-python-egitimi%2Fblog%2Fpython%2Fnumpy-ile-sayisal-hesaplamalar-veri-bilimi.html" target="_blank" style="background: #4267B2; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">Facebook</a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fnetroya.github.io%2Fai-python-egitimi%2Fblog%2Fpython%2Fnumpy-ile-sayisal-hesaplamalar-veri-bilimi.html" target="_blank" style="background: #0077B5; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">LinkedIn</a>
+                </div>
+            </div>
+
+            <!-- AdSense Content Ad -->
+            <div class="ad-zone-content">
+                <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX"></ins>
+            </div>
+        </article>
+
+        <section style="margin-top: 60px; padding: 40px; background: var(--bg-alt); border-radius: 16px; text-align: center;">
+            <h3 style="color: var(--text); margin-bottom: 20px;">🚀 Python ve AI öğrenmeye devam et!</h3>
+            <p style="color: var(--text-light); margin-bottom: 30px;">Ücretsiz Python kursumuza katıl ve AI dünyasında kariyerine başla.</p>
+            <a href="../../python-kursu.html" style="background: var(--primary); color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Python Kursuna Başla</a>
+        </section>
+    </main>
+
+    <script>
+        // AdSense ads
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>

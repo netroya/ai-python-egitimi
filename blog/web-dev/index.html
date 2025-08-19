@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Blog - Modern Web Geliştirme İçerikleri | 2025</title>
+    <meta name="description" content="Web geliştirme alanında güncel blog yazıları. React, Vue.js, Node.js, JavaScript, HTML5, CSS3 ve modern web teknolojileri.">
+    <meta name="keywords" content="web development, react, javascript, nodejs, vue.js, html5, css3, web geliştirme, frontend, backend">
+    <link rel="stylesheet" href="../blog-styles.css">
+    <link rel="stylesheet" href="../../hero-styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="../../index.html">Ana Sayfa</a></li>
+                <li><a href="../index.html">Blog</a></li>
+                <li><a href="../../python-kursu.html">Python Kursu</a></li>
+                <li><a href="../../veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="../../yapay-zeka-rehberi.html">AI Rehberi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content animate-in">
+            <div class="hero-badge">🌐 Web Development</div>
+            <h1>Modern Web Geliştir<br><span class="highlight">Frontend & Backend</span></h1>
+            <p class="subtitle">Modern web teknolojileri ile profesyonel web uygulamaları geliştirin. React, Vue.js, Node.js, JavaScript ve web standartları.</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Web Makalesi</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Framework</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Kod Örneği</span>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <button class="cta-button primary" onclick="scrollToSection('featured-posts')">
+                    💻 Makaleleri Keşfet
+                </button>
+                <button class="cta-button secondary" onclick="scrollToSection('web-topics')">
+                    🎯 Web Konularını Gör
+                </button>
+            </div>
+            
+            <div class="hero-features">
+                <div class="feature">
+                    <span class="feature-icon">⚛️</span>
+                    <span class="feature-text">React</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">💚</span>
+                    <span class="feature-text">Vue.js</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🟢</span>
+                    <span class="feature-text">Node.js</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">⚡</span>
+                    <span class="feature-text">JavaScript</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="blog-container">
+            <!-- Featured Posts -->
+            <section id="featured-posts" class="featured-section">
+                <h2>🌟 Öne Çıkan Web Development Yazıları</h2>
+                
+                <div class="featured-posts-grid">
+                    <article class="featured-post">
+                        <div class="post-image react-gradient">
+                            <span class="post-icon">⚛️</span>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span class="category react">React</span>
+                                <span class="read-time">⏱️ 45 dakika</span>
+                            </div>
+                            <h3><a href="react-hooks-ve-modern-patterns.html">React Hooks ve Modern Patterns</a></h3>
+                            <p>React Hooks ile modern component development. useState, useEffect, custom hooks ve performance optimization technikleri.</p>
+                            <div class="post-tags">
+                                <span class="tag">#react</span>
+                                <span class="tag">#hooks</span>
+                                <span class="tag">#patterns</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="featured-post">
+                        <div class="post-image vue-gradient">
+                            <span class="post-icon">💚</span>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span class="category vue">Vue.js</span>
+                                <span class="read-time">⏱️ 40 dakika</span>
+                            </div>
+                            <h3><a href="vue3-composition-api-rehberi.html">Vue 3 Composition API Rehberi</a></h3>
+                            <p>Vue 3'ün yeni Composition API'si ile reactive programming. Setup function, reactivity ve performance benefits.</p>
+                            <div class="post-tags">
+                                <span class="tag">#vue3</span>
+                                <span class="tag">#composition-api</span>
+                                <span class="tag">#reactive</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="featured-post">
+                        <div class="post-image node-gradient">
+                            <span class="post-icon">🟢</span>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span class="category node">Node.js</span>
+                                <span class="read-time">⏱️ 50 dakika</span>
+                            </div>
+                            <h3><a href="nodejs-express-rest-api-gelistirme.html">Node.js Express REST API Geliştirme</a></h3>
+                            <p>Express.js ile professional REST API development. Middleware, authentication, validation ve best practices.</p>
+                            <div class="post-tags">
+                                <span class="tag">#nodejs</span>
+                                <span class="tag">#express</span>
+                                <span class="tag">#rest-api</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Web Topics -->
+            <section id="web-topics" class="topics-section">
+                <h2>🎯 Web Development Konu Alanları</h2>
+                
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <div class="topic-icon">⚛️</div>
+                        <h3>Frontend Frameworks</h3>
+                        <p>React, Vue.js, Angular gibi modern frontend framework'leri ve component-based development</p>
+                        <div class="topic-count">3 makale</div>
+                        <div class="topic-skills">
+                            <span class="skill">React</span>
+                            <span class="skill">Vue.js</span>
+                            <span class="skill">Angular</span>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-icon">🟢</div>
+                        <h3>Backend Development</h3>
+                        <p>Node.js, Express.js, API development ve server-side programming teknikleri</p>
+                        <div class="topic-count">2 makale</div>
+                        <div class="topic-skills">
+                            <span class="skill">Node.js</span>
+                            <span class="skill">Express</span>
+                            <span class="skill">REST API</span>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-icon">⚡</div>
+                        <h3>Modern JavaScript</h3>
+                        <p>ES6+, TypeScript, async programming ve modern JavaScript development patterns</p>
+                        <div class="topic-count">2 makale</div>
+                        <div class="topic-skills">
+                            <span class="skill">ES6+</span>
+                            <span class="skill">TypeScript</span>
+                            <span class="skill">Async/Await</span>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-icon">🎨</div>
+                        <h3>UI/UX Design</h3>
+                        <p>CSS Grid, Flexbox, responsive design ve modern UI component development</p>
+                        <div class="topic-count">1 makale</div>
+                        <div class="topic-skills">
+                            <span class="skill">CSS3</span>
+                            <span class="skill">Flexbox</span>
+                            <span class="skill">Grid</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- All Articles -->
+            <section id="all-articles" class="articles-section">
+                <h2>💻 Tüm Web Development Makaleleri</h2>
+                
+                <div class="articles-list">
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category react">React</span>
+                        </div>
+                        <h3><a href="react-hooks-ve-modern-patterns.html">React Hooks ve Modern Patterns</a></h3>
+                        <p>React Hooks ile modern component development rehberi. useState, useEffect, useContext ve custom hooks ile reusable component patterns.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 45 dakika okuma</span>
+                            <span class="difficulty intermediate">📊 Orta</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category vue">Vue.js</span>
+                        </div>
+                        <h3><a href="vue3-composition-api-rehberi.html">Vue 3 Composition API Rehberi</a></h3>
+                        <p>Vue 3'ün yeni Composition API'si ile reactive programming. Setup function, ref, reactive ve modern Vue development patterns.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 40 dakika okuma</span>
+                            <span class="difficulty intermediate">📊 Orta</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category node">Node.js</span>
+                        </div>
+                        <h3><a href="nodejs-express-rest-api-gelistirme.html">Node.js Express REST API Geliştirme</a></h3>
+                        <p>Express.js ile professional REST API development. Middleware, authentication, validation, error handling ve production deployment.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 50 dakika okuma</span>
+                            <span class="difficulty advanced">🔥 İleri</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category js">JavaScript</span>
+                        </div>
+                        <h3><a href="javascript-es6-modern-features.html">JavaScript ES6+ Modern Features</a></h3>
+                        <p>Modern JavaScript features rehberi. Arrow functions, destructuring, modules, promises, async/await ve class syntax.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 35 dakika okuma</span>
+                            <span class="difficulty intermediate">📊 Orta</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category typescript">TypeScript</span>
+                        </div>
+                        <h3><a href="typescript-web-development.html">TypeScript ile Web Development</a></h3>
+                        <p>TypeScript ile güvenli web development. Type safety, interfaces, generics ve React/Vue.js entegrasyonu.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 40 dakika okuma</span>
+                            <span class="difficulty advanced">🔥 İleri</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category performance">Performance</span>
+                        </div>
+                        <h3><a href="web-performance-optimization.html">Web Performance Optimization</a></h3>
+                        <p>Web uygulamalarında performance optimization. Code splitting, lazy loading, caching strategies ve Core Web Vitals.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 35 dakika okuma</span>
+                            <span class="difficulty advanced">🔥 İleri</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category css">CSS</span>
+                        </div>
+                        <h3><a href="modern-css-layout-techniques.html">Modern CSS Layout Techniques</a></h3>
+                        <p>Modern CSS ile layout development. CSS Grid, Flexbox, container queries ve responsive design best practices.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 30 dakika okuma</span>
+                            <span class="difficulty intermediate">📊 Orta</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category fullstack">Full Stack</span>
+                        </div>
+                        <h3><a href="full-stack-web-development-roadmap.html">Full Stack Web Development Roadmap</a></h3>
+                        <p>2025 Full stack developer olmak için kapsamlı rehber. Frontend, backend, database ve deployment technologies.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 60 dakika okuma</span>
+                            <span class="difficulty beginner">👶 Başlangıç</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Technology Trends -->
+            <section class="trends-section">
+                <h2>📈 2025 Web Development Trendleri</h2>
+                <div class="trends-grid">
+                    <div class="trend-item">
+                        <div class="trend-icon">🚀</div>
+                        <h3>JAMstack Architecture</h3>
+                        <p>JavaScript, APIs, Markup ile modern web development approach</p>
+                    </div>
+                    <div class="trend-item">
+                        <div class="trend-icon">⚡</div>
+                        <h3>Serverless Functions</h3>
+                        <p>Edge computing ve serverless architecture ile scalable applications</p>
+                    </div>
+                    <div class="trend-item">
+                        <div class="trend-icon">🎨</div>
+                        <h3>Component Libraries</h3>
+                        <p>Design systems ve reusable component development</p>
+                    </div>
+                    <div class="trend-item">
+                        <div class="trend-icon">📱</div>
+                        <h3>Progressive Web Apps</h3>
+                        <p>PWA technology ile native app experience web'de</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Newsletter -->
+            <section class="newsletter-section web-theme">
+                <div class="newsletter-content">
+                    <h2>💻 Web Dev Newsletter</h2>
+                    <p>Web development alanındaki en güncel teknolojileri ve trendleri kaçırmayın!</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Email adresinizi girin...">
+                        <button type="submit">Web Haberleri Al</button>
+                    </div>
+                    <small>Haftada bir web development haberleri, spam yok!</small>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 AI Python Eğitimi. Tüm hakları saklıdır.</p>
+            <div class="footer-links">
+                <a href="../../index.html">Ana Sayfa</a>
+                <a href="../index.html">Blog</a>
+                <a href="../../python-kursu.html">Python Kursu</a>
+                <a href="../../veri-analizi.html">Veri Analizi</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enhanced Web Dev Styles -->
+    <style>
+        /* Web dev specific gradients */
+        .react-gradient {
+            background: linear-gradient(135deg, #61dafb 0%, #21759b 100%);
+        }
+        
+        .vue-gradient {
+            background: linear-gradient(135deg, #4fc08d 0%, #42b883 100%);
+        }
+        
+        .node-gradient {
+            background: linear-gradient(135deg, #68a063 0%, #3c6e37 100%);
+        }
+
+        /* Category colors */
+        .category.react {
+            background: #61dafb;
+            color: #333;
+        }
+        
+        .category.vue {
+            background: #4fc08d;
+        }
+        
+        .category.node {
+            background: #68a063;
+        }
+        
+        .category.js {
+            background: #f7df1e;
+            color: #333;
+        }
+        
+        .category.typescript {
+            background: #3178c6;
+        }
+        
+        .category.css {
+            background: #1572b6;
+        }
+        
+        .category.performance {
+            background: #ff6b35;
+        }
+        
+        .category.fullstack {
+            background: #764abc;
+        }
+
+        /* Article categories */
+        .article-category.react { background: #e3f2fd; color: #0277bd; }
+        .article-category.vue { background: #e8f5e8; color: #2e7d32; }
+        .article-category.node { background: #f1f8e9; color: #558b2f; }
+        .article-category.js { background: #fff8e1; color: #f57c00; }
+        .article-category.typescript { background: #e3f2fd; color: #1565c0; }
+        .article-category.css { background: #e1f5fe; color: #0277bd; }
+        .article-category.performance { background: #ffeae6; color: #d84315; }
+        .article-category.fullstack { background: #f3e5f5; color: #7b1fa2; }
+
+        /* Topic cards enhancement */
+        .topics-section {
+            margin-bottom: 4rem;
+        }
+
+        .topics-section h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .topic-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .topic-card:hover {
+            border-color: #61dafb;
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .topic-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .topic-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .topic-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .topic-count {
+            background: #61dafb;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .topic-skills {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .skill {
+            background: #f0f0f0;
+            color: #666;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        /* Trends section */
+        .trends-section {
+            margin: 4rem 0;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            padding: 3rem;
+            border-radius: 15px;
+        }
+
+        .trends-section h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .trends-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .trend-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .trend-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .trend-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .trend-item h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .trend-item p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Web-themed newsletter */
+        .newsletter-section.web-theme {
+            background: linear-gradient(135deg, #61dafb 0%, #21759b 100%);
+        }
+
+        .newsletter-section.web-theme .newsletter-form button {
+            background: #4fc08d;
+        }
+
+        .newsletter-section.web-theme .newsletter-form button:hover {
+            background: #42b883;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trends-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+
+    <!-- JavaScript -->
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Animation and scroll effects
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Newsletter form
+        document.querySelector('.newsletter-form button').addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = document.querySelector('.newsletter-form input').value;
+            if (email) {
+                alert('Harika! Web Development Newsletter\'a kaydoldunuz: ' + email);
+                document.querySelector('.newsletter-form input').value = '';
+            }
+        });
+
+        // Interactive category hover effects
+        document.querySelectorAll('.topic-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Animate statistics
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numberElement = entry.target.querySelector('.stat-number');
+                    const finalValue = parseInt(numberElement.textContent.replace(/[^0-9]/g, ''));
+                    animateValue(numberElement, 0, finalValue, 2000);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerText = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        document.querySelectorAll('.stat').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+    </script>
+</body>
+</html>

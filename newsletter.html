@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter | AI Python Eğitimi - Haftalık Python ve AI İçerikleri</title>
+    <meta name="description" content="Python programlama ve yapay zeka konularında haftalık newsletter. Ücretsiz kaydol, güncel içerikleri ilk sen öğren.">
+    <meta name="keywords" content="python newsletter, ai newsletter, programlama haberleri, python eğitimi, yapay zeka">
+    <link rel="stylesheet" href="premium-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <style>
+        .newsletter-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .newsletter-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .newsletter-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .newsletter-form button {
+            padding: 15px 30px;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+        
+        .benefits-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 50px 0;
+        }
+        
+        .benefit-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .benefit-card h3 {
+            color: var(--text);
+            margin-bottom: 15px;
+        }
+        
+        .benefit-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .sample-newsletter {
+            background: var(--bg-alt);
+            padding: 60px 0;
+        }
+        
+        .newsletter-preview {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-header {
+            text-align: center;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .newsletter-content {
+            margin: 30px 0;
+        }
+        
+        .newsletter-item {
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            margin: 20px 0;
+            background: var(--bg-alt);
+        }
+        
+        .newsletter-item h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stats-section {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .success-message {
+            background: var(--success);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .error-message {
+            background: #dc3545;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .newsletter-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input[type="email"] {
+                min-width: auto;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🐍 AI Python</a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="python-kursu.html" class="nav-link">Python Kursu</a>
+                <a href="yapay-zeka-rehberi.html" class="nav-link">AI Rehberi</a>
+                <a href="blog/index.html" class="nav-link">Blog</a>
+                <a href="interactive-python-editor.html" class="nav-link">Kod Editörü</a>
+                <a href="newsletter.html" class="nav-link active">Newsletter</a>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="newsletter-hero">
+        <div class="container">
+            <h1>📧 Python & AI Newsletter</h1>
+            <p>Haftalık Python programlama ve yapay zeka içerikleri doğrudan e-posta kutunuzda!</p>
+            
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input 
+                    type="email" 
+                    id="emailInput"
+                    placeholder="E-posta adresinizi girin" 
+                    required
+                >
+                <button type="submit" id="subscribeBtn">
+                    🚀 Ücretsiz Katıl
+                </button>
+            </form>
+            
+            <div id="successMessage" class="success-message">
+                ✅ Tebrikler! Newsletter'a başarıyla kaydoldunuz. E-posta kutunuzu kontrol edin.
+            </div>
+            
+            <div id="errorMessage" class="error-message">
+                ❌ Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 20px;">Newsletter'da Neler Var?</h2>
+            <p style="text-align: center; color: var(--text-light); font-size: 1.2rem; margin-bottom: 50px;">
+                Her hafta size özel hazırladığımız içeriklerle Python ve AI dünyasındaki gelişmeleri takip edin.
+            </p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🐍</div>
+                    <h3>Python İpuçları</h3>
+                    <p>Haftalık Python kod örnekleri, best practices ve performans ipuçları. Kod yazma becerinizi geliştirin.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤖</div>
+                    <h3>AI & ML Haberleri</h3>
+                    <p>Yapay zeka alanındaki en son gelişmeler, yeni araçlar ve teknolojiler hakkında güncel bilgiler.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">📚</div>
+                    <h3>Öğrenme Kaynakları</h3>
+                    <p>Seçilmiş kitaplar, kurslar, makaleler ve ücretsiz kaynaklar. Öğrenme yolculuğunuzu hızlandırın.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">💼</div>
+                    <h3>Kariyer Tavsiyeleri</h3>
+                    <p>Tech sektöründe iş bulma, mülakat hazırlığı ve kariyer geliştirme konularında uzman tavsiyeleri.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔧</div>
+                    <h3>Araç ve Teknolojiler</h3>
+                    <p>Developer productivity araçları, IDE konfigürasyonları ve workflow optimizasyonları.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Proje Önerileri</h3>
+                    <p>Portfolyonuzu güçlendirecek proje fikirleri ve step-by-step rehberler.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Newsletter -->
+    <section class="sample-newsletter">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">📮 Örnek Newsletter İçeriği</h2>
+            
+            <div class="newsletter-preview">
+                <div class="newsletter-header">
+                    <h3>🐍 Python & AI Weekly #42</h3>
+                    <p style="color: var(--text-light);">18 Ağustos 2025 • 5 dakikalık okuma</p>
+                </div>
+                
+                <div class="newsletter-content">
+                    <div class="newsletter-item">
+                        <h4>🔥 Bu Haftanın En Popüler Python Kütüphanesi</h4>
+                        <p><strong>Polars:</strong> Pandas'tan 10x daha hızlı veri işleme kütüphanesi. Büyük veri setleriyle çalışıyorsanız mutlaka deneyin!</p>
+                    </div>
+                    
+                    <div class="newsletter-item">
+                        <h4>🤖 AI Dünyasından Haberler</h4>
+                        <p><strong>Claude 4:</strong> Anthropic'in yeni dil modeli çıktı. Code generation konusunda GPT-4'ü geride bırakıyor.</p>
+                    </div>
+                    
+                    <div class="newsletter-item">
+                        <h4>💡 Python İpucu</h4>
+                        <p><code>match-case</code> ile daha temiz kod yazın:
+                        <pre style="background: #f8f9fa; padding: 10px; margin-top: 10px; border-radius: 4px;"><code>match response_code:
+    case 200: return "Success"
+    case 404: return "Not Found"
+    case _: return "Unknown"</code></pre>
+                        </p>
+                    </div>
+                    
+                    <div class="newsletter-item">
+                        <h4>📚 Bu Haftanın Önerisi</h4>
+                        <p><strong>Kitap:</strong> "Clean Code in Python" - Yazılım kalitesini artırmak isteyen Python developer'lar için must-read.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section">
+        <div class="container">
+            <h2>📊 Newsletter İstatistikleri</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" data-target="5247">0</div>
+                    <div>Aktif Abone</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" data-target="92">0</div>
+                    <div>Açılma Oranı %</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" data-target="42">0</div>
+                    <div>Sayı Yayınlandı</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" data-target="4.8">0</div>
+                    <div>Memnuniyet /5</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>📬 Hemen Katıl, Hiçbir Şeyi Kaçırma!</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 40px;">
+                Ücretsiz newsletter'ımıza katıl ve Python & AI dünyasındaki en son gelişmeleri ilk sen öğren.
+            </p>
+            
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input 
+                    type="email" 
+                    placeholder="E-posta adresinizi girin" 
+                    required
+                >
+                <button type="submit">
+                    ⚡ Hemen Katıl
+                </button>
+            </form>
+            
+            <div style="margin-top: 30px; font-size: 0.9rem; opacity: 0.8;">
+                ✅ Spam yok, sadece kaliteli içerik<br>
+                ✅ İstediğiniz zaman abonelikten çıkabilirsiniz<br>
+                ✅ E-posta adresiniz güvende
+            </div>
+        </div>
+    </section>
+
+    <!-- AdSense -->
+    <div class="ad-zone-header">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <script>
+        // Newsletter subscription
+        async function subscribeNewsletter(event) {
+            event.preventDefault();
+            
+            const email = event.target.querySelector('input[type="email"]').value;
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            // Button durumunu değiştir
+            submitBtn.textContent = '⏳ Kaydediliyor...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Simulated API call (gerçek uygulamada bir newsletter servisi kullanın)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Email validation
+                if (validateEmail(email)) {
+                    // Başarılı kayıt simülasyonu
+                    showSuccessMessage();
+                    
+                    // Form'u temizle
+                    event.target.reset();
+                    
+                    // Analytics
+                    gtag('event', 'newsletter_subscribe', {
+                        'event_category': 'engagement',
+                        'event_label': 'newsletter',
+                        'value': 1
+                    });
+                    
+                } else {
+                    throw new Error('Geçersiz e-posta adresi');
+                }
+                
+            } catch (error) {
+                showErrorMessage();
+                console.error('Newsletter subscription error:', error);
+            } finally {
+                // Button'u eski haline getir
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+        
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        function showSuccessMessage() {
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        }
+        
+        function showErrorMessage() {
+            document.getElementById('errorMessage').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            
+            setTimeout(() => {
+                document.getElementById('errorMessage').style.display = 'none';
+            }, 5000);
+        }
+        
+        // Animated counter for stats
+        function animateCounter(element, target, duration = 2000) {
+            let current = 0;
+            const increment = target / (duration / 16);
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 16);
+        }
+        
+        // Intersection Observer for stats animation
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(element => {
+                        const target = parseFloat(element.dataset.target);
+                        animateCounter(element, target);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe stats section
+        document.addEventListener('DOMContentLoaded', () => {
+            const statsSection = document.querySelector('.stats-section');
+            observer.observe(statsSection);
+        });
+
+        // Mobile navigation
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (navToggle) {
+            navToggle.addEventListener('click', () => {
+                navToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

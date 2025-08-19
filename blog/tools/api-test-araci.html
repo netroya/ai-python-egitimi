@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test Aracı - Online REST API Tester | AI & Python Eğitimi</title>
+    <meta name="description" content="Ücretsiz online API test aracı. REST API'leri test edin, HTTP istekleri gönderin, JSON yanıtlarını analiz edin. GET, POST, PUT, DELETE desteği.">
+    <meta name="keywords" content="api test, rest api, http client, postman alternatifi, api testing tool">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "API Test Aracı",
+        "description": "Online REST API test aracı",
+        "url": "https://netroya.github.io/ai-python-egitimi/blog/tools/api-test-araci.html",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="../blog-styles.css">
+    
+    <style>
+        .api-tester {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+        
+        .api-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+        
+        .request-section {
+            background: white;
+            padding: 30px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .method-select {
+            width: 120px;
+            background: #667eea;
+            color: white;
+            border: none;
+            font-weight: bold;
+        }
+        
+        .send-btn {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+        
+        .send-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+            padding: 5px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 10px 20px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            min-height: 200px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .headers-container {
+            margin-bottom: 20px;
+        }
+        
+        .header-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .header-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .add-header-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .remove-header-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .json-editor {
+            width: 100%;
+            height: 200px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            resize: vertical;
+        }
+        
+        .response-section {
+            margin-top: 30px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .response-header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+        }
+        
+        .response-body {
+            padding: 20px;
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .status-200 { background: #27ae60; color: white; }
+        .status-400 { background: #f39c12; color: white; }
+        .status-500 { background: #e74c3c; color: white; }
+        
+        .response-tabs {
+            display: flex;
+            border-bottom: 2px solid #f1f3f4;
+        }
+        
+        .response-tab {
+            padding: 15px 25px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .response-tab.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .json-viewer {
+            background: #1e1e1e;
+            color: #f8f8f2;
+            padding: 20px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+            border-radius: 5px;
+            overflow-x: auto;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .loading::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .examples-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .example-btn {
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 13px;
+        }
+        
+        .example-btn:hover {
+            background: #8e44ad;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .response-tabs {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/python-kursu.html">Python Kursu</a></li>
+                <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="api-tester">
+        <div class="api-header">
+            <h1>🔧 API Test Aracı</h1>
+            <p>REST API'lerinizi test edin, HTTP istekleri gönderin, yanıtları analiz edin</p>
+        </div>
+        
+        <div class="request-section">
+            <div class="form-row">
+                <div class="form-group" style="flex: 0 0 120px;">
+                    <label for="method">Method</label>
+                    <select id="method" class="form-control method-select">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="DELETE">DELETE</option>
+                        <option value="PATCH">PATCH</option>
+                        <option value="HEAD">HEAD</option>
+                        <option value="OPTIONS">OPTIONS</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="url">URL</label>
+                    <input type="text" id="url" class="form-control" placeholder="https://api.example.com/users" value="https://jsonplaceholder.typicode.com/posts/1">
+                </div>
+                
+                <div class="form-group" style="flex: 0 0 120px;">
+                    <label>&nbsp;</label>
+                    <button id="send-btn" class="send-btn form-control">📤 Gönder</button>
+                </div>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('headers')">📋 Headers</button>
+                <button class="tab" onclick="switchTab('body')">📝 Body</button>
+                <button class="tab" onclick="switchTab('params')">🔗 Params</button>
+                <button class="tab" onclick="switchTab('auth')">🔐 Auth</button>
+            </div>
+            
+            <!-- Headers Tab -->
+            <div id="headers-tab" class="tab-content active">
+                <div class="headers-container">
+                    <h4>Request Headers</h4>
+                    <div id="headers-list">
+                        <div class="header-row">
+                            <input type="text" class="header-input" placeholder="Header Name" value="Content-Type">
+                            <input type="text" class="header-input" placeholder="Header Value" value="application/json">
+                            <button class="remove-header-btn" onclick="removeHeader(this)">❌</button>
+                        </div>
+                    </div>
+                    <button class="add-header-btn" onclick="addHeader()">➕ Header Ekle</button>
+                </div>
+            </div>
+            
+            <!-- Body Tab -->
+            <div id="body-tab" class="tab-content">
+                <h4>Request Body</h4>
+                <select id="body-type" class="form-control" style="width: 200px; margin-bottom: 15px;" onchange="changeBodyType()">
+                    <option value="none">None</option>
+                    <option value="json">JSON</option>
+                    <option value="form">Form Data</option>
+                    <option value="text">Raw Text</option>
+                </select>
+                
+                <div id="json-body" style="display: none;">
+                    <textarea id="json-editor" class="json-editor" placeholder="{\n  \"title\": \"foo\",\n  \"body\": \"bar\",\n  \"userId\": 1\n}"></textarea>
+                </div>
+                
+                <div id="form-body" style="display: none;">
+                    <div id="form-data-list"></div>
+                    <button class="add-header-btn" onclick="addFormData()">➕ Form Data Ekle</button>
+                </div>
+                
+                <div id="text-body" style="display: none;">
+                    <textarea id="text-editor" class="json-editor" placeholder="Raw text content..."></textarea>
+                </div>
+            </div>
+            
+            <!-- Params Tab -->
+            <div id="params-tab" class="tab-content">
+                <h4>Query Parameters</h4>
+                <div id="params-list">
+                    <div class="header-row">
+                        <input type="text" class="header-input" placeholder="Parameter Name">
+                        <input type="text" class="header-input" placeholder="Parameter Value">
+                        <button class="remove-header-btn" onclick="removeHeader(this)">❌</button>
+                    </div>
+                </div>
+                <button class="add-header-btn" onclick="addParam()">➕ Parametre Ekle</button>
+            </div>
+            
+            <!-- Auth Tab -->
+            <div id="auth-tab" class="tab-content">
+                <h4>Authentication</h4>
+                <select id="auth-type" class="form-control" style="width: 200px; margin-bottom: 15px;" onchange="changeAuthType()">
+                    <option value="none">No Auth</option>
+                    <option value="bearer">Bearer Token</option>
+                    <option value="basic">Basic Auth</option>
+                    <option value="apikey">API Key</option>
+                </select>
+                
+                <div id="bearer-auth" style="display: none;">
+                    <label>Bearer Token:</label>
+                    <input type="text" id="bearer-token" class="form-control" placeholder="your-jwt-token">
+                </div>
+                
+                <div id="basic-auth" style="display: none;">
+                    <label>Username:</label>
+                    <input type="text" id="basic-username" class="form-control" placeholder="username">
+                    <label>Password:</label>
+                    <input type="password" id="basic-password" class="form-control" placeholder="password">
+                </div>
+                
+                <div id="apikey-auth" style="display: none;">
+                    <label>Key:</label>
+                    <input type="text" id="apikey-key" class="form-control" placeholder="X-API-Key">
+                    <label>Value:</label>
+                    <input type="text" id="apikey-value" class="form-control" placeholder="your-api-key">
+                </div>
+            </div>
+        </div>
+        
+        <div class="response-section" id="response-section" style="display: none;">
+            <div class="response-header">
+                <span>Response</span>
+                <span id="status-badge" class="status-badge"></span>
+                <span id="response-time" style="margin-left: 10px; font-size: 14px;"></span>
+            </div>
+            
+            <div class="response-tabs">
+                <button class="response-tab active" onclick="switchResponseTab('response-body')">📄 Body</button>
+                <button class="response-tab" onclick="switchResponseTab('response-headers')">📋 Headers</button>
+                <button class="response-tab" onclick="switchResponseTab('response-raw')">🔧 Raw</button>
+            </div>
+            
+            <div class="response-body">
+                <div id="response-body-tab" class="response-content active">
+                    <div id="response-loading" class="loading" style="display: none;">
+                        İstek gönderiliyor...
+                    </div>
+                    <div id="response-json" class="json-viewer"></div>
+                </div>
+                
+                <div id="response-headers-tab" class="response-content" style="display: none;">
+                    <div id="response-headers-content" class="json-viewer"></div>
+                </div>
+                
+                <div id="response-raw-tab" class="response-content" style="display: none;">
+                    <div id="response-raw-content" class="json-viewer"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="examples-section">
+            <h3>📚 Örnek API Çağrıları</h3>
+            <p>Hazır örnekleri deneyerek API test aracını keşfedin:</p>
+            
+            <button class="example-btn" onclick="loadExample('get-users')">👥 GET Users</button>
+            <button class="example-btn" onclick="loadExample('post-user')">➕ POST User</button>
+            <button class="example-btn" onclick="loadExample('put-user')">✏️ PUT User</button>
+            <button class="example-btn" onclick="loadExample('delete-user')">🗑️ DELETE User</button>
+            <button class="example-btn" onclick="loadExample('github-api')">🐙 GitHub API</button>
+            <button class="example-btn" onclick="loadExample('weather-api')">🌤️ Weather API</button>
+        </div>
+    </div>
+
+    <script>
+        let currentRequest = null;
+        
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function switchResponseTab(tabName) {
+            // Hide all response tabs
+            document.querySelectorAll('.response-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            document.querySelectorAll('.response-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            event.target.classList.add('active');
+        }
+        
+        // Header management
+        function addHeader() {
+            const headersList = document.getElementById('headers-list');
+            const headerRow = document.createElement('div');
+            headerRow.className = 'header-row';
+            headerRow.innerHTML = `
+                <input type="text" class="header-input" placeholder="Header Name">
+                <input type="text" class="header-input" placeholder="Header Value">
+                <button class="remove-header-btn" onclick="removeHeader(this)">❌</button>
+            `;
+            headersList.appendChild(headerRow);
+        }
+        
+        function removeHeader(button) {
+            button.parentElement.remove();
+        }
+        
+        function addParam() {
+            const paramsList = document.getElementById('params-list');
+            const paramRow = document.createElement('div');
+            paramRow.className = 'header-row';
+            paramRow.innerHTML = `
+                <input type="text" class="header-input" placeholder="Parameter Name">
+                <input type="text" class="header-input" placeholder="Parameter Value">
+                <button class="remove-header-btn" onclick="removeHeader(this)">❌</button>
+            `;
+            paramsList.appendChild(paramRow);
+        }
+        
+        function addFormData() {
+            const formDataList = document.getElementById('form-data-list');
+            const formDataRow = document.createElement('div');
+            formDataRow.className = 'header-row';
+            formDataRow.innerHTML = `
+                <input type="text" class="header-input" placeholder="Key">
+                <input type="text" class="header-input" placeholder="Value">
+                <button class="remove-header-btn" onclick="removeHeader(this)">❌</button>
+            `;
+            formDataList.appendChild(formDataRow);
+        }
+        
+        // Body type change
+        function changeBodyType() {
+            const bodyType = document.getElementById('body-type').value;
+            
+            // Hide all body types
+            document.querySelectorAll('[id$="-body"]').forEach(div => {
+                div.style.display = 'none';
+            });
+            
+            // Show selected body type
+            if (bodyType !== 'none') {
+                document.getElementById(bodyType + '-body').style.display = 'block';
+            }
+        }
+        
+        // Auth type change
+        function changeAuthType() {
+            const authType = document.getElementById('auth-type').value;
+            
+            // Hide all auth types
+            document.querySelectorAll('[id$="-auth"]').forEach(div => {
+                div.style.display = 'none';
+            });
+            
+            // Show selected auth type
+            if (authType !== 'none') {
+                document.getElementById(authType + '-auth').style.display = 'block';
+            }
+        }
+        
+        // Collect headers
+        function collectHeaders() {
+            const headers = {};
+            const headerRows = document.querySelectorAll('#headers-list .header-row');
+            
+            headerRows.forEach(row => {
+                const inputs = row.querySelectorAll('.header-input');
+                const key = inputs[0].value.trim();
+                const value = inputs[1].value.trim();
+                
+                if (key && value) {
+                    headers[key] = value;
+                }
+            });
+            
+            // Add auth headers
+            const authType = document.getElementById('auth-type').value;
+            if (authType === 'bearer') {
+                const token = document.getElementById('bearer-token').value.trim();
+                if (token) {
+                    headers['Authorization'] = `Bearer ${token}`;
+                }
+            } else if (authType === 'basic') {
+                const username = document.getElementById('basic-username').value.trim();
+                const password = document.getElementById('basic-password').value.trim();
+                if (username && password) {
+                    headers['Authorization'] = `Basic ${btoa(username + ':' + password)}`;
+                }
+            } else if (authType === 'apikey') {
+                const key = document.getElementById('apikey-key').value.trim();
+                const value = document.getElementById('apikey-value').value.trim();
+                if (key && value) {
+                    headers[key] = value;
+                }
+            }
+            
+            return headers;
+        }
+        
+        // Collect params
+        function collectParams() {
+            const params = new URLSearchParams();
+            const paramRows = document.querySelectorAll('#params-list .header-row');
+            
+            paramRows.forEach(row => {
+                const inputs = row.querySelectorAll('.header-input');
+                const key = inputs[0].value.trim();
+                const value = inputs[1].value.trim();
+                
+                if (key && value) {
+                    params.append(key, value);
+                }
+            });
+            
+            return params.toString();
+        }
+        
+        // Collect body
+        function collectBody() {
+            const bodyType = document.getElementById('body-type').value;
+            
+            if (bodyType === 'json') {
+                const jsonContent = document.getElementById('json-editor').value.trim();
+                return jsonContent ? JSON.parse(jsonContent) : null;
+            } else if (bodyType === 'form') {
+                const formData = new FormData();
+                const formRows = document.querySelectorAll('#form-data-list .header-row');
+                
+                formRows.forEach(row => {
+                    const inputs = row.querySelectorAll('.header-input');
+                    const key = inputs[0].value.trim();
+                    const value = inputs[1].value.trim();
+                    
+                    if (key && value) {
+                        formData.append(key, value);
+                    }
+                });
+                
+                return formData;
+            } else if (bodyType === 'text') {
+                return document.getElementById('text-editor').value.trim();
+            }
+            
+            return null;
+        }
+        
+        // Send request
+        async function sendRequest() {
+            const method = document.getElementById('method').value;
+            let url = document.getElementById('url').value.trim();
+            
+            if (!url) {
+                alert('Lütfen bir URL girin.');
+                return;
+            }
+            
+            // Add params to URL
+            const paramsString = collectParams();
+            if (paramsString) {
+                url += (url.includes('?') ? '&' : '?') + paramsString;
+            }
+            
+            const headers = collectHeaders();
+            const body = collectBody();
+            
+            // Show loading
+            document.getElementById('response-section').style.display = 'block';
+            document.getElementById('response-loading').style.display = 'block';
+            document.getElementById('response-json').innerHTML = '';
+            
+            const sendBtn = document.getElementById('send-btn');
+            sendBtn.disabled = true;
+            sendBtn.textContent = '⏳ Gönderiliyor...';
+            
+            const startTime = Date.now();
+            
+            try {
+                const requestOptions = {
+                    method: method,
+                    headers: headers
+                };
+                
+                // Add body if not GET or HEAD
+                if (body && !['GET', 'HEAD'].includes(method)) {
+                    if (body instanceof FormData) {
+                        requestOptions.body = body;
+                        // Remove Content-Type header for FormData (browser sets it automatically)
+                        delete requestOptions.headers['Content-Type'];
+                    } else if (typeof body === 'object') {
+                        requestOptions.body = JSON.stringify(body);
+                    } else {
+                        requestOptions.body = body;
+                    }
+                }
+                
+                const response = await fetch(url, requestOptions);
+                const endTime = Date.now();
+                const responseTime = endTime - startTime;
+                
+                // Update status
+                const statusBadge = document.getElementById('status-badge');
+                statusBadge.textContent = `${response.status} ${response.statusText}`;
+                statusBadge.className = `status-badge status-${Math.floor(response.status / 100) * 100}`;
+                
+                document.getElementById('response-time').textContent = `⏱️ ${responseTime}ms`;
+                
+                // Get response headers
+                const responseHeaders = {};
+                response.headers.forEach((value, key) => {
+                    responseHeaders[key] = value;
+                });
+                
+                // Get response body
+                const contentType = response.headers.get('content-type');
+                let responseData;
+                let responseText = await response.text();
+                
+                if (contentType && contentType.includes('application/json')) {
+                    try {
+                        responseData = JSON.parse(responseText);
+                    } catch (e) {
+                        responseData = responseText;
+                    }
+                } else {
+                    responseData = responseText;
+                }
+                
+                // Display response
+                displayResponse(responseData, responseHeaders, responseText);
+                
+            } catch (error) {
+                document.getElementById('response-json').innerHTML = 
+                    `<div style="color: #e74c3c;">
+                        <h4>Error:</h4>
+                        <pre>${error.message}</pre>
+                    </div>`;
+                
+                const statusBadge = document.getElementById('status-badge');
+                statusBadge.textContent = 'ERROR';
+                statusBadge.className = 'status-badge status-500';
+            } finally {
+                document.getElementById('response-loading').style.display = 'none';
+                sendBtn.disabled = false;
+                sendBtn.textContent = '📤 Gönder';
+            }
+        }
+        
+        function displayResponse(data, headers, raw) {
+            // Body tab
+            const responseJson = document.getElementById('response-json');
+            if (typeof data === 'object') {
+                responseJson.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            } else {
+                responseJson.innerHTML = `<pre>${data}</pre>`;
+            }
+            
+            // Headers tab
+            const responseHeaders = document.getElementById('response-headers-content');
+            responseHeaders.innerHTML = `<pre>${JSON.stringify(headers, null, 2)}</pre>`;
+            
+            // Raw tab
+            const responseRaw = document.getElementById('response-raw-content');
+            responseRaw.innerHTML = `<pre>${raw}</pre>`;
+        }
+        
+        // Load examples
+        function loadExample(exampleType) {
+            const examples = {
+                'get-users': {
+                    method: 'GET',
+                    url: 'https://jsonplaceholder.typicode.com/users',
+                    headers: {},
+                    body: null
+                },
+                'post-user': {
+                    method: 'POST',
+                    url: 'https://jsonplaceholder.typicode.com/posts',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: {
+                        title: 'foo',
+                        body: 'bar',
+                        userId: 1
+                    }
+                },
+                'put-user': {
+                    method: 'PUT',
+                    url: 'https://jsonplaceholder.typicode.com/posts/1',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: {
+                        id: 1,
+                        title: 'updated title',
+                        body: 'updated body',
+                        userId: 1
+                    }
+                },
+                'delete-user': {
+                    method: 'DELETE',
+                    url: 'https://jsonplaceholder.typicode.com/posts/1',
+                    headers: {},
+                    body: null
+                },
+                'github-api': {
+                    method: 'GET',
+                    url: 'https://api.github.com/users/octocat',
+                    headers: { 'User-Agent': 'API-Tester' },
+                    body: null
+                },
+                'weather-api': {
+                    method: 'GET',
+                    url: 'https://api.openweathermap.org/data/2.5/weather?q=Istanbul&appid=YOUR_API_KEY',
+                    headers: {},
+                    body: null
+                }
+            };
+            
+            const example = examples[exampleType];
+            if (!example) return;
+            
+            // Set method and URL
+            document.getElementById('method').value = example.method;
+            document.getElementById('url').value = example.url;
+            
+            // Clear and set headers
+            document.getElementById('headers-list').innerHTML = '';
+            Object.entries(example.headers).forEach(([key, value]) => {
+                const headerRow = document.createElement('div');
+                headerRow.className = 'header-row';
+                headerRow.innerHTML = `
+                    <input type="text" class="header-input" placeholder="Header Name" value="${key}">
+                    <input type="text" class="header-input" placeholder="Header Value" value="${value}">
+                    <button class="remove-header-btn" onclick="removeHeader(this)">❌</button>
+                `;
+                document.getElementById('headers-list').appendChild(headerRow);
+            });
+            
+            // Set body
+            if (example.body) {
+                document.getElementById('body-type').value = 'json';
+                changeBodyType();
+                document.getElementById('json-editor').value = JSON.stringify(example.body, null, 2);
+            } else {
+                document.getElementById('body-type').value = 'none';
+                changeBodyType();
+            }
+            
+            // Switch to headers tab
+            switchTab('headers');
+        }
+        
+        // Event listeners
+        document.getElementById('send-btn').addEventListener('click', sendRequest);
+        
+        // Enter key support
+        document.getElementById('url').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendRequest();
+            }
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load a default example
+            loadExample('get-users');
+        });
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</body>
+</html>

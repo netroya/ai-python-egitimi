@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Eğitimler - AI & Python | Görsel Öğrenme Platformu</title>
+    <meta name="description" content="Python, AI ve yazılım geliştirme üzerine kapsamlı video eğitimler. Görsel öğrenme ile programlama becerilerinizi geliştirin.">
+    <meta name="keywords" content="python video eğitimleri, ai video kurs, programlama videoları, yazılım geliştirme eğitimi">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "AI & Python Video Eğitimleri",
+        "description": "Python ve AI konularında kapsamlı video eğitim serisi",
+        "provider": {
+            "@type": "Organization",
+            "name": "AI & Python Eğitimi"
+        },
+        "educationalLevel": "Beginner to Advanced",
+        "teaches": ["Python Programming", "Artificial Intelligence", "Machine Learning", "Web Development"]
+    }
+    </script>
+    
+    <link rel="stylesheet" href="premium-styles.css">
+    
+    <style>
+        .video-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="30,20 70,50 30,80" fill="rgba(255,255,255,0.1)"/></svg>') center/50px no-repeat;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(45deg, #f1f3f4, #e8eaf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        .video-thumbnail::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .video-card:hover .video-thumbnail::before {
+            opacity: 1;
+        }
+        
+        .play-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #667eea;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        
+        .video-card:hover .play-button {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .video-content {
+            padding: 25px;
+        }
+        
+        .video-category {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .video-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .video-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+        
+        .video-level {
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        .level-beginner { background: #e8f5e8; color: #27ae60; }
+        .level-intermediate { background: #fff3cd; color: #f39c12; }
+        .level-advanced { background: #f8d7da; color: #e74c3c; }
+        
+        .watch-button {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .watch-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .playlist-section {
+            background: #f8f9fa;
+            padding: 60px 20px;
+            margin: 40px 0;
+        }
+        
+        .playlist-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .playlist-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .playlist-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .playlist-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin-right: 20px;
+        }
+        
+        .playlist-info h3 {
+            margin: 0 0 5px 0;
+            color: #2c3e50;
+        }
+        
+        .playlist-stats {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .video-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .video-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .video-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .video-item-thumb {
+            width: 40px;
+            height: 30px;
+            background: #667eea;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .video-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .video-item-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .video-item-duration {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #f39c12;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        
+        .video-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        
+        .video-modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: hidden;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .close-modal:hover {
+            color: #667eea;
+        }
+        
+        .video-player {
+            width: 100%;
+            height: 500px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        
+        .video-info {
+            padding: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .video-hero {
+                padding: 60px 20px;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+            }
+            
+            .playlist-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .playlist-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .video-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/python-kursu.html">Python Kursu</a></li>
+                <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+                <li><a href="/video-egitimler.html" class="active">Video Eğitimler</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="video-hero">
+        <div class="container">
+            <h1>🎥 Video Eğitimler</h1>
+            <p class="lead">Görsel öğrenme ile Python ve AI becerilerinizi geliştirin</p>
+            <p>100+ saatlik premium video içeriği ile adım adım öğrenin</p>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <h2 style="margin-bottom: 50px;">📊 Video Eğitim İstatistikleri</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">120+</span>
+                    <div class="stat-label">Video Dersi</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <div class="stat-label">Saatlik İçerik</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15K+</span>
+                    <div class="stat-label">Aktif Öğrenci</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4.8/5</span>
+                    <div class="stat-label">Ortalama Puan</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-grid">
+        <!-- Python Temelleri -->
+        <div class="video-card" data-category="python">
+            <div class="video-thumbnail" onclick="openVideoModal('python-basics')">
+                <div class="play-button">▶️</div>
+                <div class="video-duration">25:30</div>
+            </div>
+            <div class="video-content">
+                <div class="video-category">🐍 Python</div>
+                <h3 class="video-title">Python Programlamaya Giriş</h3>
+                <p class="video-description">Python diline ilk adım! Değişkenler, veri tipleri ve temel kavramlar.</p>
+                <div class="video-meta">
+                    <span>📅 2 hafta önce</span>
+                    <span class="video-level level-beginner">Başlangıç</span>
+                </div>
+                <button class="watch-button" onclick="openVideoModal('python-basics')">🎥 İzle</button>
+            </div>
+        </div>
+
+        <!-- Veri Analizi -->
+        <div class="video-card" data-category="data-science">
+            <div class="video-thumbnail" onclick="openVideoModal('pandas-intro')">
+                <div class="play-button">▶️</div>
+                <div class="video-duration">35:45</div>
+            </div>
+            <div class="video-content">
+                <div class="video-category">📊 Veri Analizi</div>
+                <h3 class="video-title">Pandas ile Veri Manipülasyonu</h3>
+                <p class="video-description">Pandas kütüphanesi ile veri okuma, temizleme ve dönüştürme işlemleri.</p>
+                <div class="video-meta">
+                    <span>📅 1 hafta önce</span>
+                    <span class="video-level level-intermediate">Orta</span>
+                </div>
+                <button class="watch-button" onclick="openVideoModal('pandas-intro')">🎥 İzle</button>
+            </div>
+        </div>
+
+        <!-- Machine Learning -->
+        <div class="video-card" data-category="machine-learning">
+            <div class="video-thumbnail" onclick="openVideoModal('ml-intro')">
+                <div class="play-button">▶️</div>
+                <div class="video-duration">42:15</div>
+            </div>
+            <div class="video-content">
+                <div class="video-category">🤖 Machine Learning</div>
+                <h3 class="video-title">Makine Öğrenmesine Giriş</h3>
+                <p class="video-description">ML temelları, supervised/unsupervised learning ve ilk modelinizi oluşturma.</p>
+                <div class="video-meta">
+                    <span>📅 3 gün önce</span>
+                    <span class="video-level level-intermediate">Orta</span>
+                </div>
+                <button class="watch-button" onclick="openVideoModal('ml-intro')">🎥 İzle</button>
+            </div>
+        </div>
+
+        <!-- Web Development -->
+        <div class="video-card" data-category="web-dev">
+            <div class="video-thumbnail" onclick="openVideoModal('flask-api')">
+                <div class="play-button">▶️</div>
+                <div class="video-duration">38:20</div>
+            </div>
+            <div class="video-content">
+                <div class="video-category">🌐 Web Development</div>
+                <h3 class="video-title">Flask ile REST API Geliştirme</h3>
+                <p class="video-description">Python Flask framework ile web API'leri oluşturma ve database entegrasyonu.</p>
+                <div class="video-meta">
+                    <span>📅 5 gün önce</span>
+                    <span class="video-level level-advanced">İleri</span>
+                </div>
+                <button class="watch-button" onclick="openVideoModal('flask-api')">🎥 İzle</button>
+            </div>
+        </div>
+
+        <!-- Deep Learning -->
+        <div class="video-card" data-category="deep-learning">
+            <div class="video-thumbnail" onclick="openVideoModal('neural-networks')">
+                <div class="play-button">▶️</div>
+                <div class="video-duration">50:30</div>
+            </div>
+            <div class="video-content">
+                <div class="video-category">🧠 Deep Learning</div>
+                <h3 class="video-title">Neural Networks ile Derin Öğrenme</h3>
+                <p class="video-description">TensorFlow ile neural network oluşturma ve image classification projesi.</p>
+                <div class="video-meta">
+                    <span>📅 1 gün önce</span>
+                    <span class="video-level level-advanced">İleri</span>
+                </div>
+                <button class="watch-button" onclick="openVideoModal('neural-networks')">🎥 İzle</button>
+            </div>
+        </div>
+
+        <!-- Data Visualization -->
+        <div class="video-card" data-category="data-science">
+            <div class="video-thumbnail" onclick="openVideoModal('data-viz')">
+                <div class="play-button">▶️</div>
+                <div class="video-duration">28:15</div>
+            </div>
+            <div class="video-content">
+                <div class="video-category">📈 Veri Görselleştirme</div>
+                <h3 class="video-title">Matplotlib ve Seaborn ile Grafikler</h3>
+                <p class="video-description">Python ile profesyonel veri görselleştirme teknikleri ve dashboard oluşturma.</p>
+                <div class="video-meta">
+                    <span>📅 4 gün önce</span>
+                    <span class="video-level level-beginner">Başlangıç</span>
+                </div>
+                <button class="watch-button" onclick="openVideoModal('data-viz')">🎥 İzle</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="playlist-section">
+        <div class="playlist-container">
+            <h2 style="text-align: center; margin-bottom: 50px; color: #2c3e50;">🎬 Video Serileri</h2>
+            
+            <!-- Python Complete Series -->
+            <div class="playlist-card">
+                <div class="playlist-header">
+                    <div class="playlist-icon">🐍</div>
+                    <div class="playlist-info">
+                        <h3>Python Complete Series</h3>
+                        <div class="playlist-stats">12 video • 8 saat • Başlangıç - İleri</div>
+                    </div>
+                </div>
+                <div class="video-list">
+                    <div class="video-item" onclick="openVideoModal('python-1')">
+                        <div class="video-item-thumb">▶️</div>
+                        <div class="video-item-info">
+                            <div class="video-item-title">1. Python Kurulumu ve İlk Program</div>
+                            <div class="video-item-duration">15:30</div>
+                        </div>
+                    </div>
+                    <div class="video-item" onclick="openVideoModal('python-2')">
+                        <div class="video-item-thumb">▶️</div>
+                        <div class="video-item-info">
+                            <div class="video-item-title">2. Değişkenler ve Veri Tipleri</div>
+                            <div class="video-item-duration">22:15</div>
+                        </div>
+                    </div>
+                    <div class="video-item" onclick="openVideoModal('python-3')">
+                        <div class="video-item-thumb">▶️</div>
+                        <div class="video-item-info">
+                            <div class="video-item-title">3. Kontrol Yapıları ve Döngüler</div>
+                            <div class="video-item-duration">28:45</div>
+                        </div>
+                    </div>
+                    <div class="video-item" onclick="openVideoModal('python-4')">
+                        <div class="video-item-thumb">▶️</div>
+                        <div class="video-item-info">
+                            <div class="video-item-title">4. Fonksiyonlar ve Modüller</div>
+                            <div class="video-item-duration">35:20</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Science Path -->
+            <div class="playlist-card">
+                <div class="playlist-header">
+                    <div class="playlist-icon">📊</div>
+                    <div class="playlist-info">
+                        <h3>Data Science Learning Path</h3>
+                        <div class="playlist-stats">15 video • 12 saat • Orta - İleri</div>
+                    </div>
+                </div>
+                <div class="video-list">
+                    <div class="video-item" onclick="openVideoModal('ds-1')">
+                        <div class="video-item-thumb">▶️</div>
+                        <div class="video-item-info">
+                            <div class="video-item-title">1. Data Science'a Giriş</div>
+                            <div class="video-item-duration">20:10</div>
+                        </div>
+                    </div>
+                    <div class="video-item" onclick="openVideoModal('ds-2')">
+                        <div class="video-item-thumb">▶️</div>
+                        <div class="video-item-info">
+                            <div class="video-item-title">2. NumPy ile Sayısal Hesaplamalar</div>
+                            <div class="video-item-duration">32:30</div>
+                        </div>
+                    </div>
+                    <div class="video-item" onclick="openVideoModal('ds-3')">
+                        <div class="video-item-thumb">▶️</div>
+                        <div class="video-item-info">
+                            <div class="video-item-title">3. Pandas ile Veri Analizi</div>
+                            <div class="video-item-duration">45:15</div>
+                        </div>
+                    </div>
+                    <div class="video-item" onclick="openVideoModal('ds-4')">
+                        <div class="video-item-thumb">▶️</div>
+                        <div class="video-item-info">
+                            <div class="video-item-title">4. Veri Görselleştirme</div>
+                            <div class="video-item-duration">38:45</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI & Machine Learning -->
+            <div class="playlist-card">
+                <div class="playlist-header">
+                    <div class="playlist-icon">🤖</div>
+                    <div class="playlist-info">
+                        <h3>AI & Machine Learning Masterclass</h3>
+                        <div class="playlist-stats">20 video • 18 saat • İleri</div>
+                    </div>
+                </div>
+                <div class="video-list">
+                    <div class="video-item" onclick="openVideoModal('ai-1')">
+                        <div class="video-item-thumb">▶️</div>
+                        <div class="video-item-info">
+                            <div class="video-item-title">1. AI ve ML Temelleri</div>
+                            <div class="video-item-duration">25:00</div>
+                        </div>
+                    </div>
+                    <div class="video-item" onclick="openVideoModal('ai-2')">
+                        <div class="video-item-thumb">▶️</div>
+                        <div class="video-item-info">
+                            <div class="video-item-title">2. Scikit-learn ile İlk Model</div>
+                            <div class="video-item-duration">42:30</div>
+                        </div>
+                    </div>
+                    <div class="video-item" onclick="openVideoModal('ai-3')">
+                        <div class="video-item-thumb">▶️</div>
+                        <div class="video-item-info">
+                            <div class="video-item-title">3. Deep Learning Giriş</div>
+                            <div class="video-item-duration">55:20</div>
+                        </div>
+                    </div>
+                    <div class="video-item" onclick="openVideoModal('ai-4')">
+                        <div class="video-item-thumb">▶️</div>
+                        <div class="video-item-info">
+                            <div class="video-item-title">4. Computer Vision Projeleri</div>
+                            <div class="video-item-duration">48:15</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="video-modal">
+        <div class="video-modal-content">
+            <span class="close-modal" onclick="closeVideoModal()">&times;</span>
+            <div id="video-player" class="video-player">
+                <div>🎥 Video oynatıcı yükleniyor...</div>
+            </div>
+            <div class="video-info">
+                <h3 id="modal-title">Video Başlığı</h3>
+                <p id="modal-description">Video açıklaması burada gösterilecek.</p>
+                <div id="modal-meta" style="color: #666; margin-top: 15px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🚀 AI & Python Eğitimi</h3>
+                <p>Modern yazılım geliştirme teknolojilerini öğrenin</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                    <a href="#" aria-label="GitHub">👨‍💻</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>📚 Eğitimler</h4>
+                <ul>
+                    <li><a href="/python-kursu.html">Python Kursu</a></li>
+                    <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                    <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+                    <li><a href="/video-egitimler.html">Video Eğitimler</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>🔗 Bağlantılar</h4>
+                <ul>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/newsletter.html">Newsletter</a></li>
+                    <li><a href="/programlama-araclari.html">Araçlar</a></li>
+                    <li><a href="/kariyer-rehberi.html">Kariyer</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>📧 İletişim</h4>
+                <p>Email: info@example.com</p>
+                <p>Video Kütüphanesi: 120+ video</p>
+                <a href="/newsletter.html" class="cta-button">📧 Newsletter'a Katıl</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 AI & Python Eğitimi. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Video data
+        const videoData = {
+            'python-basics': {
+                title: 'Python Programlamaya Giriş',
+                description: 'Bu videoda Python diline giriş yapıyoruz. Kurulum, IDE seçimi ve ilk programımızı yazıyoruz.',
+                duration: '25:30',
+                level: 'Başlangıç',
+                category: 'Python'
+            },
+            'pandas-intro': {
+                title: 'Pandas ile Veri Manipülasyonu',
+                description: 'Pandas kütüphanesinin temellerini öğreniyoruz. DataFrame oluşturma, veri okuma ve temel işlemler.',
+                duration: '35:45',
+                level: 'Orta',
+                category: 'Veri Analizi'
+            },
+            'ml-intro': {
+                title: 'Makine Öğrenmesine Giriş',
+                description: 'Machine Learning temellerini öğreniyoruz. İlk modelimizi oluşturuyoruz.',
+                duration: '42:15',
+                level: 'Orta',
+                category: 'Machine Learning'
+            },
+            'flask-api': {
+                title: 'Flask ile REST API Geliştirme',
+                description: 'Python Flask framework ile profesyonel web API\'leri geliştiriyoruz.',
+                duration: '38:20',
+                level: 'İleri',
+                category: 'Web Development'
+            },
+            'neural-networks': {
+                title: 'Neural Networks ile Derin Öğrenme',
+                description: 'TensorFlow kullanarak neural network oluşturuyor ve image classification yapıyoruz.',
+                duration: '50:30',
+                level: 'İleri',
+                category: 'Deep Learning'
+            },
+            'data-viz': {
+                title: 'Matplotlib ve Seaborn ile Grafikler',
+                description: 'Python ile profesyonel veri görselleştirme teknikleri öğreniyoruz.',
+                duration: '28:15',
+                level: 'Başlangıç',
+                category: 'Veri Görselleştirme'
+            }
+        };
+
+        function openVideoModal(videoId) {
+            const modal = document.getElementById('video-modal');
+            const video = videoData[videoId];
+            
+            if (video) {
+                document.getElementById('modal-title').textContent = video.title;
+                document.getElementById('modal-description').textContent = video.description;
+                document.getElementById('modal-meta').innerHTML = 
+                    `⏱️ ${video.duration} • 📊 ${video.level} • 🏷️ ${video.category}`;
+                
+                // Simulate video player
+                document.getElementById('video-player').innerHTML = `
+                    <div style="text-align: center;">
+                        <h3 style="color: white; margin-bottom: 20px;">🎥 ${video.title}</h3>
+                        <div style="font-size: 60px; margin-bottom: 20px;">▶️</div>
+                        <p>Bu bir demo video oynatıcısıdır.</p>
+                        <p>Gerçek uygulamada YouTube, Vimeo veya custom video player kullanılabilir.</p>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 5px; margin-top: 20px;">
+                            <strong>Video Detayları:</strong><br>
+                            Süre: ${video.duration}<br>
+                            Seviye: ${video.level}<br>
+                            Kategori: ${video.category}
+                        </div>
+                    </div>
+                `;
+                
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('video-modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('video-modal');
+            if (event.target == modal) {
+                closeVideoModal();
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
+
+        // Animate stats on scroll
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const text = target.textContent;
+                        const hasPlus = text.includes('+');
+                        const hasSlash = text.includes('/');
+                        
+                        if (hasSlash) {
+                            // For ratings like 4.8/5
+                            const rating = parseFloat(text);
+                            animateNumber(target, 0, rating, '/5', 2000);
+                        } else {
+                            const number = parseInt(text.replace(/\D/g, ''));
+                            if (number > 0) {
+                                const suffix = hasPlus ? '+' : '';
+                                animateNumber(target, 0, number, suffix, 2000);
+                            }
+                        }
+                    }
+                });
+            });
+            
+            statNumbers.forEach(stat => observer.observe(stat));
+        }
+        
+        function animateNumber(element, start, end, suffix, duration) {
+            const increment = end / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= end) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                
+                if (suffix === '/5') {
+                    element.textContent = current.toFixed(1) + suffix;
+                } else {
+                    element.textContent = Math.floor(current) + suffix;
+                }
+            }, 16);
+        }
+        
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            animateStats();
+        });
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</body>
+</html>

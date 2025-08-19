@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Tools Blog - Yazılım Geliştirme Araçları | 2025</title>
+    <meta name="description" content="Yazılım geliştirme araçları, IDE'ler, framework'ler ve development tools hakkında güncel blog yazıları. VS Code, Git, Docker ve daha fazlası.">
+    <meta name="keywords" content="developer tools, ide, vscode, git, docker, development tools, yazılım geliştirme araçları, productivity">
+    <link rel="stylesheet" href="../blog-styles.css">
+    <link rel="stylesheet" href="../../hero-styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="../../index.html">Ana Sayfa</a></li>
+                <li><a href="../index.html">Blog</a></li>
+                <li><a href="../../python-kursu.html">Python Kursu</a></li>
+                <li><a href="../../veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="../../yapay-zeka-rehberi.html">AI Rehberi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content animate-in">
+            <div class="hero-badge">🛠️ Developer Tools & Productivity</div>
+            <h1>Geliştirici Araçları<br><span class="highlight">Productivite Artır</span></h1>
+            <p class="subtitle">Modern yazılım geliştirme araçları ve productivity teknikleri. IDE'ler, terminal tools, automation ve developer workflow optimization.</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">Tool Rehberi</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Developer Tool</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">75%</span>
+                    <span class="stat-label">Productivity Artışı</span>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <button class="cta-button primary" onclick="scrollToSection('featured-posts')">
+                    🔧 Tool Rehberlerini Gör
+                </button>
+                <button class="cta-button secondary" onclick="scrollToSection('tool-categories')">
+                    🎯 Araç Kategorilerini Keşfet
+                </button>
+            </div>
+            
+            <div class="hero-features">
+                <div class="feature">
+                    <span class="feature-icon">💻</span>
+                    <span class="feature-text">VS Code</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">📋</span>
+                    <span class="feature-text">Git</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🐳</span>
+                    <span class="feature-text">Docker</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">⚡</span>
+                    <span class="feature-text">Terminal</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="blog-container">
+            <!-- Featured Posts -->
+            <section id="featured-posts" class="featured-section">
+                <h2>🌟 Öne Çıkan Tool Rehberleri</h2>
+                
+                <div class="featured-posts-grid">
+                    <article class="featured-post">
+                        <div class="post-image vscode-gradient">
+                            <span class="post-icon">💻</span>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span class="category vscode">VS Code</span>
+                                <span class="read-time">⏱️ 40 dakika</span>
+                            </div>
+                            <h3><a href="vscode-ultimate-setup-guide-2025.html">VS Code Ultimate Setup Guide 2025</a></h3>
+                            <p>VS Code'u professional development için optimize etme. Extensions, themes, settings ve productivity tricks.</p>
+                            <div class="post-tags">
+                                <span class="tag">#vscode</span>
+                                <span class="tag">#ide</span>
+                                <span class="tag">#productivity</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="featured-post">
+                        <div class="post-image git-gradient">
+                            <span class="post-icon">📋</span>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span class="category git">Git & GitHub</span>
+                                <span class="read-time">⏱️ 45 dakika</span>
+                            </div>
+                            <h3><a href="git-github-professional-workflow.html">Git & GitHub Professional Workflow</a></h3>
+                            <p>Professional Git workflow, branch strategies, pull requests ve team collaboration best practices.</p>
+                            <div class="post-tags">
+                                <span class="tag">#git</span>
+                                <span class="tag">#github</span>
+                                <span class="tag">#workflow</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="featured-post">
+                        <div class="post-image docker-gradient">
+                            <span class="post-icon">🐳</span>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span class="category docker">Docker</span>
+                                <span class="read-time">⏱️ 50 dakika</span>
+                            </div>
+                            <h3><a href="docker-development-environment-setup.html">Docker Development Environment Setup</a></h3>
+                            <p>Docker ile consistent development environments. Containers, Docker Compose ve local development optimization.</p>
+                            <div class="post-tags">
+                                <span class="tag">#docker</span>
+                                <span class="tag">#containers</span>
+                                <span class="tag">#devops</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Tool Categories -->
+            <section id="tool-categories" class="categories-section">
+                <h2>🎯 Developer Tool Kategorileri</h2>
+                
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-icon">💻</div>
+                        <h3>Code Editors & IDEs</h3>
+                        <p>VS Code, IntelliJ IDEA, Sublime Text ve modern code editor'lar için setup ve optimization rehberleri</p>
+                        <div class="category-count">3 makale</div>
+                        <div class="category-tools">
+                            <span class="tool">VS Code</span>
+                            <span class="tool">WebStorm</span>
+                            <span class="tool">PyCharm</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">📋</div>
+                        <h3>Version Control</h3>
+                        <p>Git, GitHub, GitLab ve modern version control workflow'ları ve best practices</p>
+                        <div class="category-count">2 makale</div>
+                        <div class="category-tools">
+                            <span class="tool">Git</span>
+                            <span class="tool">GitHub</span>
+                            <span class="tool">GitLab</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">🐳</div>
+                        <h3>DevOps Tools</h3>
+                        <p>Docker, Kubernetes, CI/CD pipelines ve modern DevOps araçları ile automation</p>
+                        <div class="category-count">3 makale</div>
+                        <div class="category-tools">
+                            <span class="tool">Docker</span>
+                            <span class="tool">Kubernetes</span>
+                            <span class="tool">GitHub Actions</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">⚡</div>
+                        <h3>Terminal & CLI</h3>
+                        <p>Terminal customization, shell scripting, command line tools ve productivity enhancements</p>
+                        <div class="category-count">2 makale</div>
+                        <div class="category-tools">
+                            <span class="tool">Zsh</span>
+                            <span class="tool">Oh My Zsh</span>
+                            <span class="tool">CLI Tools</span>
+                        </div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">🎨</div>
+                        <h3>Design & Prototyping</h3>
+                        <p>Figma, Sketch, prototyping tools ve developer-designer collaboration araçları</p>
+                        <div class="category-count">1 makale</div>
+                        <div class="category-tools">
+                            <span class="tool">Figma</span>
+                            <span class="tool">Sketch</span>
+                            <span class="tool">InVision</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">📊</div>
+                        <h3>Monitoring & Analytics</h3>
+                        <p>Application monitoring, performance tracking ve analytics tools</p>
+                        <div class="category-count">1 makale</div>
+                        <div class="category-tools">
+                            <span class="tool">Sentry</span>
+                            <span class="tool">New Relic</span>
+                            <span class="tool">Google Analytics</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- All Articles -->
+            <section id="all-articles" class="articles-section">
+                <h2>🛠️ Tüm Developer Tool Rehberleri</h2>
+                
+                <div class="articles-list">
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category vscode">VS Code</span>
+                        </div>
+                        <h3><a href="vscode-ultimate-setup-guide-2025.html">VS Code Ultimate Setup Guide 2025</a></h3>
+                        <p>VS Code'u professional development için optimize etme rehberi. Must-have extensions, themes, settings sync ve productivity tips.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 40 dakika okuma</span>
+                            <span class="difficulty intermediate">📊 Orta</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category git">Git & GitHub</span>
+                        </div>
+                        <h3><a href="git-github-professional-workflow.html">Git & GitHub Professional Workflow</a></h3>
+                        <p>Professional Git workflow rehberi. Branch strategies, pull requests, code reviews ve team collaboration best practices.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 45 dakika okuma</span>
+                            <span class="difficulty advanced">🔥 İleri</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category docker">Docker</span>
+                        </div>
+                        <h3><a href="docker-development-environment-setup.html">Docker Development Environment Setup</a></h3>
+                        <p>Docker ile consistent development environments kurma. Containers, Docker Compose, multi-service apps ve local development optimization.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 50 dakika okuma</span>
+                            <span class="difficulty advanced">🔥 İleri</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category terminal">Terminal</span>
+                        </div>
+                        <h3><a href="terminal-productivity-setup-guide.html">Terminal Productivity Setup Guide</a></h3>
+                        <p>Terminal ve shell customization rehberi. Zsh, Oh My Zsh, aliases, functions ve command line productivity tools.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 35 dakika okuma</span>
+                            <span class="difficulty intermediate">📊 Orta</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category cicd">CI/CD</span>
+                        </div>
+                        <h3><a href="github-actions-cicd-pipeline-guide.html">GitHub Actions CI/CD Pipeline Guide</a></h3>
+                        <p>GitHub Actions ile automated testing, building ve deployment. Workflow automation ve modern CI/CD best practices.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 40 dakika okuma</span>
+                            <span class="difficulty advanced">🔥 İleri</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category ide">IDE Setup</span>
+                        </div>
+                        <h3><a href="jetbrains-ide-ultimate-guide.html">JetBrains IDE Ultimate Guide</a></h3>
+                        <p>IntelliJ IDEA, PyCharm, WebStorm setup ve optimization. Plugins, themes, debugging ve refactoring tools.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 45 dakika okuma</span>
+                            <span class="difficulty intermediate">📊 Orta</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category package">Package Managers</span>
+                        </div>
+                        <h3><a href="package-managers-npm-yarn-pnpm-comparison.html">Package Managers: npm vs Yarn vs pnpm</a></h3>
+                        <p>JavaScript package managers karşılaştırması. Performance, features, security ve use case analizi.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 30 dakika okuma</span>
+                            <span class="difficulty intermediate">📊 Orta</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category design">Design Tools</span>
+                        </div>
+                        <h3><a href="figma-developer-handoff-guide.html">Figma Developer Handoff Guide</a></h3>
+                        <p>Figma'dan kod'a geçiş rehberi. Design tokens, component extraction, developer-designer collaboration workflow.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 25 dakika okuma</span>
+                            <span class="difficulty beginner">👶 Başlangıç</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category api">API Tools</span>
+                        </div>
+                        <h3><a href="postman-api-testing-automation.html">Postman API Testing & Automation</a></h3>
+                        <p>Postman ile API testing, collection management, environment variables ve automated testing workflows.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 35 dakika okuma</span>
+                            <span class="difficulty intermediate">📊 Orta</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category kubernetes">Kubernetes</span>
+                        </div>
+                        <h3><a href="kubernetes-local-development-setup.html">Kubernetes Local Development Setup</a></h3>
+                        <p>Local Kubernetes development environment. Minikube, Docker Desktop Kubernetes, kubectl ve development workflow.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 55 dakika okuma</span>
+                            <span class="difficulty advanced">🔥 İleri</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category monitoring">Monitoring</span>
+                        </div>
+                        <h3><a href="application-monitoring-setup-guide.html">Application Monitoring Setup Guide</a></h3>
+                        <p>Production uygulamaları için monitoring setup. Sentry, New Relic, logging strategies ve alerting systems.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 40 dakika okuma</span>
+                            <span class="difficulty advanced">🔥 İleri</span>
+                        </div>
+                    </article>
+
+                    <article class="article-item">
+                        <div class="article-meta">
+                            <span class="article-date">19 Ağustos 2025</span>
+                            <span class="article-category productivity">Productivity</span>
+                        </div>
+                        <h3><a href="developer-productivity-tools-2025.html">Developer Productivity Tools 2025</a></h3>
+                        <p>2025'de developer productivity'yi artıran araçlar. Time tracking, note-taking, automation tools ve workflow optimization.</p>
+                        <div class="article-stats">
+                            <span class="read-time">⏱️ 30 dakika okuma</span>
+                            <span class="difficulty beginner">👶 Başlangıç</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Popular Tools -->
+            <section class="popular-tools-section">
+                <h2>🔥 2025'in En Popüler Developer Tools</h2>
+                <div class="tools-showcase">
+                    <div class="tool-item featured">
+                        <div class="tool-logo">💻</div>
+                        <h4>Visual Studio Code</h4>
+                        <p>En popüler code editor. Extensible, fast ve free.</p>
+                        <div class="tool-stats">
+                            <span class="popularity">95% Developers</span>
+                            <span class="category">Code Editor</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-item">
+                        <div class="tool-logo">📋</div>
+                        <h4>Git</h4>
+                        <p>Distributed version control system standart'ı.</p>
+                        <div class="tool-stats">
+                            <span class="popularity">90% Developers</span>
+                            <span class="category">Version Control</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-item">
+                        <div class="tool-logo">🐳</div>
+                        <h4>Docker</h4>
+                        <p>Containerization ve consistent environments.</p>
+                        <div class="tool-stats">
+                            <span class="popularity">75% Developers</span>
+                            <span class="category">DevOps</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-item">
+                        <div class="tool-logo">📮</div>
+                        <h4>Postman</h4>
+                        <p>API development ve testing platform'u.</p>
+                        <div class="tool-stats">
+                            <span class="popularity">70% Developers</span>
+                            <span class="category">API Testing</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-item">
+                        <div class="tool-logo">🎨</div>
+                        <h4>Figma</h4>
+                        <p>Collaborative design tool ve developer handoff.</p>
+                        <div class="tool-stats">
+                            <span class="popularity">65% Teams</span>
+                            <span class="category">Design</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-item">
+                        <div class="tool-logo">⚡</div>
+                        <h4>GitHub Actions</h4>
+                        <p>Native CI/CD ve workflow automation.</p>
+                        <div class="tool-stats">
+                            <span class="popularity">60% Projects</span>
+                            <span class="category">CI/CD</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Newsletter -->
+            <section class="newsletter-section tools-theme">
+                <div class="newsletter-content">
+                    <h2>🛠️ Developer Tools Newsletter</h2>
+                    <p>Yeni araçlar, updates ve productivity tips'leri kaçırmayın!</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Email adresinizi girin...">
+                        <button type="submit">Tool Updates Al</button>
+                    </div>
+                    <small>Haftada bir developer tool haberleri, spam yok!</small>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 AI Python Eğitimi. Tüm hakları saklıdır.</p>
+            <div class="footer-links">
+                <a href="../../index.html">Ana Sayfa</a>
+                <a href="../index.html">Blog</a>
+                <a href="../../python-kursu.html">Python Kursu</a>
+                <a href="../../veri-analizi.html">Veri Analizi</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enhanced Tools Styles -->
+    <style>
+        /* Tools themed gradients */
+        .vscode-gradient {
+            background: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
+        }
+        
+        .git-gradient {
+            background: linear-gradient(135deg, #f05032 0%, #c73e1d 100%);
+        }
+        
+        .docker-gradient {
+            background: linear-gradient(135deg, #2496ed 0%, #0db7ed 100%);
+        }
+
+        /* Category colors */
+        .category.vscode {
+            background: #007acc;
+        }
+        
+        .category.git {
+            background: #f05032;
+        }
+        
+        .category.docker {
+            background: #2496ed;
+        }
+        
+        .category.terminal {
+            background: #2d3748;
+        }
+        
+        .category.cicd {
+            background: #28a745;
+        }
+        
+        .category.ide {
+            background: #ff6f00;
+        }
+        
+        .category.package {
+            background: #cb3837;
+        }
+        
+        .category.design {
+            background: #f24e1e;
+        }
+        
+        .category.api {
+            background: #ff6c37;
+        }
+        
+        .category.kubernetes {
+            background: #326ce5;
+        }
+        
+        .category.monitoring {
+            background: #9c27b0;
+        }
+        
+        .category.productivity {
+            background: #4caf50;
+        }
+
+        /* Article categories */
+        .article-category.vscode { background: #e3f2fd; color: #0277bd; }
+        .article-category.git { background: #ffeae6; color: #d84315; }
+        .article-category.docker { background: #e1f5fe; color: #0277bd; }
+        .article-category.terminal { background: #eceff1; color: #455a64; }
+        .article-category.cicd { background: #e8f5e8; color: #2e7d32; }
+        .article-category.ide { background: #fff3e0; color: #f57c00; }
+        .article-category.package { background: #ffebee; color: #c62828; }
+        .article-category.design { background: #ffeae6; color: #d84315; }
+        .article-category.api { background: #fff3e0; color: #ef6c00; }
+        .article-category.kubernetes { background: #e3f2fd; color: #1565c0; }
+        .article-category.monitoring { background: #f3e5f5; color: #7b1fa2; }
+        .article-category.productivity { background: #e8f5e8; color: #2e7d32; }
+
+        /* Categories grid enhancement */
+        .categories-section {
+            margin-bottom: 4rem;
+        }
+
+        .categories-section h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .category-card:hover {
+            border-color: #007acc;
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .category-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-count {
+            background: #007acc;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .category-tools {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tool {
+            background: #f0f0f0;
+            color: #666;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        /* Popular tools showcase */
+        .popular-tools-section {
+            margin: 4rem 0;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            padding: 3rem;
+            border-radius: 15px;
+        }
+
+        .popular-tools-section h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .tools-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .tool-item:hover {
+            transform: translateY(-5px);
+            border-color: #007acc;
+        }
+
+        .tool-item.featured {
+            border-color: #4caf50;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+        }
+
+        .tool-logo {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-item h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-item p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .tool-stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .popularity {
+            background: #4caf50;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+        }
+
+        .tool-stats .category {
+            background: #e0e0e0;
+            color: #666;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+        }
+
+        /* Tools-themed newsletter */
+        .newsletter-section.tools-theme {
+            background: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
+        }
+
+        .newsletter-section.tools-theme .newsletter-form button {
+            background: #f05032;
+        }
+
+        .newsletter-section.tools-theme .newsletter-form button:hover {
+            background: #c73e1d;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tools-showcase {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+
+    <!-- JavaScript -->
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Animation and scroll effects
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Newsletter form
+        document.querySelector('.newsletter-form button').addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = document.querySelector('.newsletter-form input').value;
+            if (email) {
+                alert('Harika! Developer Tools Newsletter\'a kaydoldunuz: ' + email);
+                document.querySelector('.newsletter-form input').value = '';
+            }
+        });
+
+        // Interactive tool cards
+        document.querySelectorAll('.tool-item, .category-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Tool popularity animation
+        const toolsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const popularityElement = entry.target.querySelector('.popularity');
+                    if (popularityElement) {
+                        popularityElement.style.animation = 'bounce 1s ease-in-out';
+                    }
+                    toolsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.tool-item').forEach(tool => {
+            toolsObserver.observe(tool);
+        });
+
+        // Add bounce animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bounce {
+                0%, 20%, 53%, 80%, 100% {
+                    transform: translateY(0);
+                }
+                40%, 43% {
+                    transform: translateY(-10px);
+                }
+                70% {
+                    transform: translateY(-5px);
+                }
+                90% {
+                    transform: translateY(-2px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Statistics animation
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numberElement = entry.target.querySelector('.stat-number');
+                    const finalValue = parseInt(numberElement.textContent.replace(/[^0-9]/g, ''));
+                    animateValue(numberElement, 0, finalValue, 2000);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerText = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        document.querySelectorAll('.stat').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+    </script>
+</body>
+</html>

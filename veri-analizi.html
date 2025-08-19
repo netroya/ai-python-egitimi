@@ -3,1113 +3,806 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Programlama Kursu - Sıfırdan İleri Seviyeye | AI Python Eğitimi</title>
-    <meta name="description" content="Kapsamlı Python ile veri analizi öğrenin. Pandas, NumPy, Matplotlib ve data science teknikleri.">
-    <meta name="keywords" content="veri analizi, python data science, pandas, numpy, matplotlib, data analysis">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Python Programlama Kursu - Sıfırdan İleri Seviyeye">
-    <meta property="og:description" content="Kapsamlı Python ile veri analizi öğrenin. Pandas, NumPy, Matplotlib ve data science teknikleri.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://netroya.github.io/ai-python-egitimi/veri-analizi.html">
-    
-    <!-- Schema.org -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "Python Programlama Kursu - Sıfırdan İleri Seviyeye",
-      "description": "Kapsamlı Python ile veri analizi öğrenin. Pandas, NumPy, Matplotlib ve data science teknikleri.",
-      "url": "https://netroya.github.io/ai-python-egitimi/veri-analizi.html",
-      "datePublished": "18.08.2025",
-      "author": {
-        "@type": "Organization",
-        "name": "AI Python Eğitimi"
-      }
-    }
-    </script>
-    
+    <title>Python Veri Analizi Kursu - Data Science & Analytics | 2025</title>
+    <meta name="description" content="Python ile profesyonel veri analizi öğrenin. Pandas, NumPy, Matplotlib, Seaborn ile data science ve machine learning temellerini öğrenin.">
+    <meta name="keywords" content="python veri analizi, data science kursu, pandas tutorial, numpy, matplotlib, data visualization, veri bilimi">
     <link rel="stylesheet" href="premium-styles.css">
-    <link rel="canonical" href="https://netroya.github.io/ai-python-egitimi/veri-analizi.html">
-    
-    <!-- AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023802833968711" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="hero-styles.css">
 </head>
 <body>
-    <!-- Header Ad Zone -->
-    <div class="ad-zone-header">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9023802833968711" data-ad-slot="3838714977" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">🎯 AI Python Eğitimi</a>
             <div class="nav-menu">
                 <a href="index.html" class="nav-link">Ana Sayfa</a>
-                <a href="veri-analizi.html" class="nav-link">Python Kursu</a>
+                <a href="python-kursu.html" class="nav-link">Python Kursu</a>
                 <a href="yapay-zeka-rehberi.html" class="nav-link">AI Rehberi</a>
-                <a href="veri-analizi.html" class="nav-link">Veri Analizi</a>
+                <a href="veri-analizi.html" class="nav-link active">Veri Analizi</a>
                 <a href="web-gelistirme.html" class="nav-link">Web Geliştirme</a>
-                <a href="kariyer-rehberi.html" class="nav-link">Kariyer</a>
                 <a href="blog/index.html" class="nav-link">Blog</a>
             </div>
         </div>
     </nav>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content animate-in">
+            <div class="hero-badge">📊 Data Science & Analytics 2025</div>
+            <h1>Veri Analizi Uzmanı Ol<br><span class="highlight">Data ile Hikaye Anlat</span></h1>
+            <p class="subtitle">Python ile profesyonel veri analizi, görselleştirme ve istatistiksel analiz öğrenin. Pandas, NumPy, Matplotlib ile gerçek projeler yapın.</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Kütüphane</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Veri Seti</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">25+</span>
+                    <span class="stat-label">Pratik Proje</span>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <button class="cta-button primary" onclick="scrollToSection('course-overview')">
+                    📈 Kursa Başla
+                </button>
+                <button class="cta-button secondary" onclick="scrollToSection('data-tools')">
+                    🛠️ Araçları Keşfet
+                </button>
+            </div>
+            
+            <div class="hero-features">
+                <div class="feature">
+                    <span class="feature-icon">🐼</span>
+                    <span class="feature-text">Pandas</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🔢</span>
+                    <span class="feature-text">NumPy</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">📊</span>
+                    <span class="feature-text">Matplotlib</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎨</span>
+                    <span class="feature-text">Seaborn</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Main Content -->
     <main class="main-content">
         <div class="content-wrapper">
             <article class="article-content">
-                <header class="article-header">
-                    <h1>Python Programlama Kursu - Sıfırdan İleri Seviyeye</h1>
-                    <p class="article-meta">📅 18.08.2025 • ⏱️ {{READ_time}} dakika okuma</p>
-                </header>
-
-                <!-- Mid-Content Ad -->
-                <div class="ad-zone-content">
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9023802833968711" data-ad-slot="4515379030"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
-
-                
-        
-        <section class="course-intro">
-            <h2>📊 Python ile Veri Analizi</h2>
-            <p>Veri bilimi dünyasının kapılarını aralayın! Python kullanarak büyük veri setlerini analiz etmeyi, görselleştirmeyi ve anlamlı sonuçlar çıkarmayı öğrenin.</p>
-            
-            <div class="course-highlights">
-                <div class="highlight-item">
-                    <h3>🎯 Ne Öğreneceksiniz?</h3>
-                    <ul>
-                        <li>📊 Pandas ile veri manipülasyonu</li>
-                        <li>🔢 NumPy ile numerical computing</li>
-                        <li>📈 Matplotlib/Seaborn ile visualization</li>
-                        <li>🧮 İstatistiksel analiz teknikleri</li>
-                        <li>🗄️ Database bağlantıları</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="curriculum">
-            <h2>📚 Kurs Müfredatı</h2>
-            
-            <div class="module">
-                <h3>Modül 1: Veri Analizi Temelleri</h3>
-                <div class="topics">
-                    <div class="topic">
-                        <h4>📊 Pandas Kütüphanesi</h4>
-                        <ul>
-                            <li>DataFrame ve Series kavramları</li>
-                            <li>CSV, Excel, JSON veri okuma</li>
-                            <li>Veri temizleme ve preprocessing</li>
-                            <li>Groupby ve aggregation işlemleri</li>
-                            <li>Merge, join, concat operasyonları</li>
-                        </ul>
-                    </div>
+                <!-- Course Overview -->
+                <section id="course-overview" class="course-intro">
+                    <h2>📊 Python Veri Analizi Kursu</h2>
+                    <p>Bu kapsamlı kursta Python'un güçlü veri analizi kütüphanelerini kullanarak profesyonel veri analisti olmak için gerekli tüm becerileri kazanacaksınız. Gerçek veri setleri üzerinde çalışarak, ham veriden anlamlı içgörüler çıkarmayı öğreneceksiniz.</p>
                     
-                    <div class="topic">
-                        <h4>🔢 NumPy ile Numerical Computing</h4>
-                        <ul>
-                            <li>Array yapıları ve operations</li>
-                            <li>Broadcasting ve vectorization</li>
-                            <li>Linear algebra işlemleri</li>
-                            <li>Random number generation</li>
-                            <li>Performance optimizations</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="module">
-                <h3>Modül 2: Veri Görselleştirme</h3>
-                <div class="topics">
-                    <div class="topic">
-                        <h4>📈 Matplotlib ile Plotting</h4>
-                        <ul>
-                            <li>Line plots, scatter plots, bar charts</li>
-                            <li>Histograms ve box plots</li>
-                            <li>Subplots ve figure customization</li>
-                            <li>Annotation ve styling</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="topic">
-                        <h4>🎨 Seaborn ile Statistical Plots</h4>
-                        <ul>
-                            <li>Distribution plots</li>
-                            <li>Categorical plots</li>
-                            <li>Regression plots</li>
-                            <li>Heatmaps ve correlation matrices</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="module">
-                <h3>Modül 3: İleri Veri Analizi</h3>
-                <div class="topics">
-                    <div class="topic">
-                        <h4>📊 İstatistiksel Analiz</h4>
-                        <ul>
-                            <li>Descriptive statistics</li>
-                            <li>Hypothesis testing</li>
-                            <li>Correlation analysis</li>
-                            <li>Time series analysis</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="topic">
-                        <h4>🗄️ Database İşlemleri</h4>
-                        <ul>
-                            <li>SQL queries with pandas</li>
-                            <li>SQLite, PostgreSQL connections</li>
-                            <li>Big data processing</li>
-                            <li>API'lerden veri çekme</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="practical-projects">
-            <h2>🚀 Gerçek Dünya Projeleri</h2>
-            
-            <div class="project-showcase">
-                <div class="project-card featured">
-                    <div class="project-icon">📈</div>
-                    <h3>E-ticaret Satış Analizi</h3>
-                    <p>Gerçek e-ticaret verisi ile satış trendlerini analiz edin, müşteri segmentasyonu yapın.</p>
-                    <div class="project-tech">
-                        <span class="tech">Pandas</span>
-                        <span class="tech">Seaborn</span>
-                        <span class="tech">Customer Analytics</span>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-icon">🏠</div>
-                    <h3>Emlak Fiyat Analizi</h3>
-                    <p>Konut fiyatlarını etkileyen faktörleri analiz edin, fiyat tahmin modeli geliştirin.</p>
-                    <div class="project-tech">
-                        <span class="tech">Regression Analysis</span>
-                        <span class="tech">Feature Engineering</span>
-                        <span class="tech">Visualization</span>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-icon">💰</div>
-                    <h3>Borsa Verileri Analizi</h3>
-                    <p>Hisse senedi fiyatlarını analiz edin, teknik analiz göstergeleri hesaplayın.</p>
-                    <div class="project-tech">
-                        <span class="tech">Time Series</span>
-                        <span class="tech">Financial Data</span>
-                        <span class="tech">Technical Analysis</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="tools-section">
-            <h2>🛠️ Veri Analizi Araçları</h2>
-            
-            <div class="tools-grid">
-                <div class="tool-category">
-                    <h3>📊 Core Libraries</h3>
-                    <div class="tool-items">
-                        <div class="tool-item">
-                            <h4>🐼 Pandas</h4>
-                            <p>Veri manipülasyonu ve analiz için temel kütüphane</p>
-                            <div class="difficulty">Zorluk: Orta</div>
+                    <div class="course-highlights">
+                        <div class="highlight-item">
+                            <h3>🎯 Öğrenecekleriniz</h3>
+                            <ul>
+                                <li>Python veri analizi temellerinde uzmanlaşma</li>
+                                <li>Pandas ile veri manipülasyonu ve temizleme</li>
+                                <li>NumPy ile sayısal hesaplamalar</li>
+                                <li>Matplotlib & Seaborn ile veri görselleştirme</li>
+                                <li>İstatistiksel analiz ve hipotez testleri</li>
+                                <li>Makine öğrenmesine giriş</li>
+                                <li>SQL ve veritabanı entegrasyonu</li>
+                                <li>Dashboard ve raporlama</li>
+                            </ul>
                         </div>
-                        <div class="tool-item">
-                            <h4>🔢 NumPy</h4>
-                            <p>Numerical computing için optimized arrays</p>
-                            <div class="difficulty">Zorluk: Kolay</div>
+                        
+                        <div class="highlight-item">
+                            <h3>🏆 Kazanımlar</h3>
+                            <ul>
+                                <li>📈 Profesyonel veri analiz becerileri</li>
+                                <li>🎨 Etkili veri görselleştirme teknikleri</li>
+                                <li>📋 İş dünyasında kullanılabilir raporlar</li>
+                                <li>🤖 Makine öğrenmesi temelleri</li>
+                                <li>📊 İstatistiksel analiz yetkinliği</li>
+                                <li>💼 Portfolio projeleri</li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                
-                <div class="tool-category">
-                    <h3>📈 Visualization</h3>
-                    <div class="tool-items">
-                        <div class="tool-item">
-                            <h4>📊 Matplotlib</h4>
-                            <p>Comprehensive plotting kütüphanesi</p>
-                            <div class="difficulty">Zorluk: Orta</div>
+                </section>
+
+                <!-- Data Analysis Tools -->
+                <section id="data-tools" class="tools-section">
+                    <h2>🛠️ Veri Analizi Araç Seti</h2>
+                    
+                    <div class="tools-grid">
+                        <div class="tool-category">
+                            <h3>📊 Temel Kütüphaneler</h3>
+                            <div class="tool-items">
+                                <div class="tool-item">
+                                    <h4>🐼 Pandas</h4>
+                                    <p>Veri manipülasyonu ve analizi için en güçlü araç. CSV, Excel, SQL verileriyle çalışma.</p>
+                                    <div class="difficulty">Zorluk: ⭐⭐⭐</div>
+                                </div>
+                                <div class="tool-item">
+                                    <h4>🔢 NumPy</h4>
+                                    <p>Sayısal hesaplamalar, lineer cebir ve array işlemleri için temel kütüphane.</p>
+                                    <div class="difficulty">Zorluk: ⭐⭐</div>
+                                </div>
+                                <div class="tool-item">
+                                    <h4>📈 Matplotlib</h4>
+                                    <p>Profesyonel grafik ve görselleştirme için Python'un standard library'si.</p>
+                                    <div class="difficulty">Zorluk: ⭐⭐⭐</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tool-item">
-                            <h4>🎨 Seaborn</h4>
-                            <p>Statistical data visualization</p>
-                            <div class="difficulty">Zorluk: Kolay</div>
+                        
+                        <div class="tool-category">
+                            <h3>🎨 Görselleştirme</h3>
+                            <div class="tool-items">
+                                <div class="tool-item">
+                                    <h4>🎨 Seaborn</h4>
+                                    <p>İstatistiksel veri görselleştirme için güzel ve kullanışlı grafikler.</p>
+                                    <div class="difficulty">Zorluk: ⭐⭐</div>
+                                </div>
+                                <div class="tool-item">
+                                    <h4>🗺️ Plotly</h4>
+                                    <p>İnteraktif grafikler, dashboard'lar ve web tabanlı görselleştirmeler.</p>
+                                    <div class="difficulty">Zorluk: ⭐⭐⭐</div>
+                                </div>
+                                <div class="tool-item">
+                                    <h4>📊 Bokeh</h4>
+                                    <p>Web tarayıcıları için interaktif görselleştirme ve dashboard'lar.</p>
+                                    <div class="difficulty">Zorluk: ⭐⭐⭐⭐</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tool-item">
-                            <h4>📊 Plotly</h4>
-                            <p>İnteraktif web tabanlı grafikler</p>
-                            <div class="difficulty">Zorluk: Orta</div>
+                        
+                        <div class="tool-category">
+                            <h3>🤖 İleri Düzey</h3>
+                            <div class="tool-items">
+                                <div class="tool-item">
+                                    <h4>⚡ Scikit-learn</h4>
+                                    <p>Makine öğrenmesi algoritmaları ve model değerlendirme araçları.</p>
+                                    <div class="difficulty">Zorluk: ⭐⭐⭐⭐</div>
+                                </div>
+                                <div class="tool-item">
+                                    <h4>📊 SciPy</h4>
+                                    <p>İstatistiksel testler, optimizasyon ve ileri matematik fonksiyonları.</p>
+                                    <div class="difficulty">Zorluk: ⭐⭐⭐⭐</div>
+                                </div>
+                                <div class="tool-item">
+                                    <h4>📋 Streamlit</h4>
+                                    <p>Veri analizi uygulamaları için web tabanlı dashboard'lar.</p>
+                                    <div class="difficulty">Zorluk: ⭐⭐</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
+                </section>
 
-        <section class="career-section">
-            <h2>💼 Veri Analisti Kariyer Yolu</h2>
-            
-            <div class="career-paths">
-                <div class="career-card">
-                    <h3>📊 Data Analyst</h3>
-                    <div class="salary-range">💰 8,000 - 25,000 ₺/ay</div>
-                    <div class="responsibilities">
-                        <h4>Sorumluluklar:</h4>
-                        <ul>
-                            <li>Business metrikleri analizi</li>
-                            <li>Raporlama ve dashboard oluşturma</li>
-                            <li>A/B test analizi</li>
-                            <li>Trend analizi ve forecasting</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="career-card featured">
-                    <h3>🧠 Data Scientist</h3>
-                    <div class="salary-range">💰 15,000 - 45,000 ₺/ay</div>
-                    <div class="responsibilities">
-                        <h4>Sorumluluklar:</h4>
-                        <ul>
-                            <li>Makine öğrenmesi modelleri</li>
-                            <li>Predictive analytics</li>
-                            <li>Statistical modeling</li>
-                            <li>Advanced data mining</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="career-card">
-                    <h3>⚙️ Data Engineer</h3>
-                    <div class="salary-range">💰 12,000 - 35,000 ₺/ay</div>
-                    <div class="responsibilities">
-                        <h4>Sorumluluklar:</h4>
-                        <ul>
-                            <li>Data pipeline oluşturma</li>
-                            <li>ETL process design</li>
-                            <li>Database optimization</li>
-                            <li>Big data infrastructure</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-      
-
-        <section class="curriculum">
-            <h2>📋 Kurs İçeriği</h2>
-            
-            <div class="module">
-                <h3>Bölüm 1: Python Temelleri (0-2 hafta)</h3>
-                <div class="topics">
-                    <div class="topic">
-                        <h4>🚀 Python'a Giriş</h4>
-                        <ul>
-                            <li>Python nedir ve neden öğrenmeli?</li>
-                            <li>Kurulum ve IDE seçimi</li>
-                            <li>İlk Python programınız</li>
-                            <li>IDLE ve VS Code kullanımı</li>
-                        </ul>
-                    </div>
+                <!-- Learning Path -->
+                <section id="learning-path" class="learning-path">
+                    <h2>🛣️ Veri Analizi Öğrenme Yolu</h2>
                     
-                    <div class="topic">
-                        <h4>📊 Veri Tipleri ve Değişkenler</h4>
-                        <ul>
-                            <li>String, Integer, Float, Boolean</li>
-                            <li>Liste, Tuple, Dictionary, Set</li>
-                            <li>Değişken tanımlama ve kullanımı</li>
-                            <li>Type conversion işlemleri</li>
-                        </ul>
+                    <div class="roadmap-container">
+                        <div class="roadmap-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>🐍 Python Temelleri</h3>
+                                <p>Python programlama dilinin temellerini öğrenin. Variables, data types, loops ve functions.</p>
+                                <div class="tech-stack">
+                                    <span class="tech">Python Basics</span>
+                                    <span class="tech">Jupyter Notebook</span>
+                                    <span class="tech">Git Basics</span>
+                                </div>
+                                <div class="time-estimate">⏱️ 2-3 hafta</div>
+                            </div>
+                        </div>
+                        
+                        <div class="roadmap-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>🔢 NumPy ile Sayısal Hesaplamalar</h3>
+                                <p>Arrays, mathematical operations, broadcasting ve linear algebra işlemleri.</p>
+                                <div class="tech-stack">
+                                    <span class="tech">NumPy Arrays</span>
+                                    <span class="tech">Mathematical Operations</span>
+                                    <span class="tech">Broadcasting</span>
+                                </div>
+                                <div class="time-estimate">⏱️ 1-2 hafta</div>
+                            </div>
+                        </div>
+                        
+                        <div class="roadmap-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>🐼 Pandas ile Veri Manipülasyonu</h3>
+                                <p>DataFrames, data cleaning, filtering, grouping ve merging operations.</p>
+                                <div class="tech-stack">
+                                    <span class="tech">DataFrames</span>
+                                    <span class="tech">Data Cleaning</span>
+                                    <span class="tech">GroupBy Operations</span>
+                                </div>
+                                <div class="time-estimate">⏱️ 3-4 hafta</div>
+                            </div>
+                        </div>
+                        
+                        <div class="roadmap-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>📊 Veri Görselleştirme</h3>
+                                <p>Matplotlib ve Seaborn ile profesyonel grafikler, charts ve plots oluşturmak.</p>
+                                <div class="tech-stack">
+                                    <span class="tech">Matplotlib</span>
+                                    <span class="tech">Seaborn</span>
+                                    <span class="tech">Plotly</span>
+                                </div>
+                                <div class="time-estimate">⏱️ 2-3 hafta</div>
+                            </div>
+                        </div>
+                        
+                        <div class="roadmap-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>📈 İstatistiksel Analiz</h3>
+                                <p>Descriptive statistics, hypothesis testing, correlation analysis ve distribution studies.</p>
+                                <div class="tech-stack">
+                                    <span class="tech">Statistical Tests</span>
+                                    <span class="tech">Correlation</span>
+                                    <span class="tech">Probability</span>
+                                </div>
+                                <div class="time-estimate">⏱️ 2-3 hafta</div>
+                            </div>
+                        </div>
+                        
+                        <div class="roadmap-step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <h3>🤖 Makine Öğrenmesine Giriş</h3>
+                                <p>Supervised learning, unsupervised learning ve model evaluation techniques.</p>
+                                <div class="tech-stack">
+                                    <span class="tech">Scikit-learn</span>
+                                    <span class="tech">ML Algorithms</span>
+                                    <span class="tech">Model Evaluation</span>
+                                </div>
+                                <div class="time-estimate">⏱️ 3-4 hafta</div>
+                            </div>
+                        </div>
                     </div>
+                </section>
+
+                <!-- Practical Projects -->
+                <section id="projects" class="practical-projects">
+                    <h2>💻 Gerçek Dünya Projeleri</h2>
                     
-                    <div class="topic">
-                        <h4>🔄 Kontrol Yapıları</h4>
-                        <ul>
-                            <li>if, elif, else koşulları</li>
-                            <li>for ve while döngüleri</li>
-                            <li>break, continue, pass</li>
-                            <li>Nested loops (iç içe döngüler)</li>
-                        </ul>
+                    <div class="project-showcase">
+                        <div class="project-card featured">
+                            <div class="project-icon">🏪</div>
+                            <h3>E-Commerce Veri Analizi</h3>
+                            <p>Kaggle'dan gerçek e-commerce veri seti ile müşteri davranışları, satış trendleri ve ürün performansı analizi.</p>
+                            <div class="tech-stack">
+                                <span class="tech">Pandas</span>
+                                <span class="tech">Matplotlib</span>
+                                <span class="tech">Seaborn</span>
+                                <span class="tech">Plotly</span>
+                            </div>
+                            <div class="project-level">🔥 Advanced</div>
+                            <div class="project-features">
+                                <h4>📋 Özellikler:</h4>
+                                <ul>
+                                    <li>Customer segmentation analysis</li>
+                                    <li>Sales forecasting</li>
+                                    <li>Product recommendation insights</li>
+                                    <li>Interactive dashboard</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="project-icon">🏠</div>
+                            <h3>Emlak Fiyat Analizi</h3>
+                            <p>İstanbul emlak piyasası verileri ile fiyat trendleri, konum analizi ve fiyat tahmin modeli geliştirme.</p>
+                            <div class="tech-stack">
+                                <span class="tech">Pandas</span>
+                                <span class="tech">GeoPandas</span>
+                                <span class="tech">Folium</span>
+                                <span class="tech">Scikit-learn</span>
+                            </div>
+                            <div class="project-level">📊 Intermediate</div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="project-icon">💰</div>
+                            <h3>Borsa ve Crypto Analizi</h3>
+                            <p>Finansal piyasa verileri ile teknik analiz, volatilite hesaplama ve trading stratejileri geliştirme.</p>
+                            <div class="tech-stack">
+                                <span class="tech">yfinance</span>
+                                <span class="tech">TA-Lib</span>
+                                <span class="tech">Plotly</span>
+                                <span class="tech">NumPy</span>
+                            </div>
+                            <div class="project-level">🔥 Advanced</div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="project-icon">🏥</div>
+                            <h3>Sağlık Verisi Analizi</h3>
+                            <p>COVID-19 ve genel sağlık verileri ile epidemiyolojik analiz, trend analizi ve görselleştirme.</p>
+                            <div class="tech-stack">
+                                <span class="tech">Pandas</span>
+                                <span class="tech">SciPy</span>
+                                <span class="tech">Matplotlib</span>
+                                <span class="tech">Statsmodels</span>
+                            </div>
+                            <div class="project-level">📊 Intermediate</div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="project-icon">🌦️</div>
+                            <h3>Hava Durumu Analizi</h3>
+                            <p>Meteoroloji verileri ile iklim değişikliği analizi, seasonal patterns ve tahmin modelleri.</p>
+                            <div class="tech-stack">
+                                <span class="tech">OpenWeatherMap API</span>
+                                <span class="tech">Time Series</span>
+                                <span class="tech">Prophet</span>
+                                <span class="tech">Bokeh</span>
+                            </div>
+                            <div class="project-level">📊 Intermediate</div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="project-icon">📱</div>
+                            <h3>Social Media Analytics</h3>
+                            <p>Twitter API ile sosyal medya verileri analizi, sentiment analysis ve trend detection.</p>
+                            <div class="tech-stack">
+                                <span class="tech">Tweepy</span>
+                                <span class="tech">NLTK</span>
+                                <span class="tech">WordCloud</span>
+                                <span class="tech">NetworkX</span>
+                            </div>
+                            <div class="project-level">🔥 Advanced</div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </section>
 
-            <div class="module">
-                <h3>Bölüm 2: Fonksiyonlar ve Modüller (2-4 hafta)</h3>
-                <div class="topics">
-                    <div class="topic">
-                        <h4>⚙️ Fonksiyonlar</h4>
-                        <ul>
-                            <li>Fonksiyon tanımlama (def)</li>
-                            <li>Parametre ve return değerleri</li>
-                            <li>Local vs Global değişkenler</li>
-                            <li>Lambda fonksiyonları</li>
-                            <li>Decorator kullanımı</li>
-                        </ul>
-                    </div>
+                <!-- Career Paths -->
+                <section id="career-paths" class="career-section">
+                    <h2>💼 Data Science Kariyeri</h2>
                     
-                    <div class="topic">
-                        <h4>📦 Modüller ve Paketler</h4>
-                        <ul>
-                            <li>import ve from import</li>
-                            <li>Standart kütüphaneler</li>
-                            <li>pip ile paket yönetimi</li>
-                            <li>Virtual environment</li>
-                        </ul>
+                    <div class="career-paths">
+                        <div class="career-card featured">
+                            <h4>📊 Data Analyst</h4>
+                            <div class="salary-range">💰 10.000-25.000 TL/ay</div>
+                            <div class="responsibilities">
+                                <h4>📝 Sorumluluklar</h4>
+                                <ul>
+                                    <li>Veri toplama ve temizleme</li>
+                                    <li>Raporlama ve dashboard oluşturma</li>
+                                    <li>İstatistiksel analiz yapma</li>
+                                    <li>İş departmanlarını destekleme</li>
+                                </ul>
+                            </div>
+                            <div class="required-skills">
+                                <h4>🎯 Gerekli Yetenekler</h4>
+                                <div class="skill-tags">
+                                    <span class="skill">Excel</span>
+                                    <span class="skill">SQL</span>
+                                    <span class="skill">Python/R</span>
+                                    <span class="skill">Tableau/Power BI</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="career-card">
+                            <h4>🤖 Data Scientist</h4>
+                            <div class="salary-range">💰 18.000-50.000 TL/ay</div>
+                            <div class="responsibilities">
+                                <h4>📝 Sorumluluklar</h4>
+                                <ul>
+                                    <li>Makine öğrenmesi modelleri geliştirme</li>
+                                    <li>Predictive analytics</li>
+                                    <li>A/B testing ve deneysel tasarım</li>
+                                    <li>Büyük veri setleriyle çalışma</li>
+                                </ul>
+                            </div>
+                            <div class="required-skills">
+                                <h4>🎯 Gerekli Yetenekler</h4>
+                                <div class="skill-tags">
+                                    <span class="skill">Python</span>
+                                    <span class="skill">Machine Learning</span>
+                                    <span class="skill">Statistics</span>
+                                    <span class="skill">Deep Learning</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="career-card">
+                            <h4>🏗️ Data Engineer</h4>
+                            <div class="salary-range">💰 15.000-40.000 TL/ay</div>
+                            <div class="responsibilities">
+                                <h4>📝 Sorumluluklar</h4>
+                                <ul>
+                                    <li>Data pipeline'ları oluşturma</li>
+                                    <li>ETL süreçlerini yönetme</li>
+                                    <li>Big data technologies kullanma</li>
+                                    <li>Data infrastructure kurma</li>
+                                </ul>
+                            </div>
+                            <div class="required-skills">
+                                <h4>🎯 Gerekli Yetenekler</h4>
+                                <div class="skill-tags">
+                                    <span class="skill">Python/Java</span>
+                                    <span class="skill">SQL</span>
+                                    <span class="skill">Spark</span>
+                                    <span class="skill">Cloud Platforms</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </section>
 
-            <div class="module">
-                <h3>Bölüm 3: Object-Oriented Programming (4-6 hafta)</h3>
-                <div class="topics">
-                    <div class="topic">
-                        <h4>🏗️ OOP Temelleri</h4>
-                        <ul>
-                            <li>Class ve Object kavramları</li>
-                            <li>Constructor (__init__) metodları</li>
-                            <li>Instance ve class variables</li>
-                            <li>Method tanımlama ve kullanımı</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="topic">
-                        <h4>🔒 Encapsulation ve Inheritance</h4>
-                        <ul>
-                            <li>Private ve protected members</li>
-                            <li>Getter ve setter metodları</li>
-                            <li>Inheritance (kalıtım) kavramı</li>
-                            <li>super() fonksiyonu</li>
-                            <li>Multiple inheritance</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="topic">
-                        <h4>🎭 Polymorphism ve Abstraction</h4>
-                        <ul>
-                            <li>Method overriding</li>
-                            <li>Abstract classes</li>
-                            <li>Interface benzeri yapılar</li>
-                            <li>Magic methods (__str__, __len__, vb.)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="practical-projects">
-            <h2>💻 Pratik Projeler</h2>
-            
-            <div class="project-grid">
-                <div class="project-card">
-                    <h3>📱 Hesap Makinesi</h3>
-                    <p>Temel matematiksel işlemleri gerçekleştiren GUI hesap makinesi.</p>
-                    <div class="tech-stack">
-                        <span class="tech">Python</span>
-                        <span class="tech">Tkinter</span>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <h3>📊 Hava Durumu Uygulaması</h3>
-                    <p>API kullanarak şehirlerin hava durumu bilgilerini gösteren uygulama.</p>
-                    <div class="tech-stack">
-                        <span class="tech">Python</span>
-                        <span class="tech">Requests</span>
-                        <span class="tech">JSON</span>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <h3>🎮 Kelime Oyunu</h3>
-                    <p>Random kelimeler ile kelime tahmin oyunu.</p>
-                    <div class="tech-stack">
-                        <span class="tech">Python</span>
-                        <span class="tech">Random</span>
-                        <span class="tech">File I/O</span>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <h3>📈 Borsa Takip Uygulaması</h3>
-                    <p>Hisse senedi fiyatlarını takip eden ve analiz yapan uygulama.</p>
-                    <div class="tech-stack">
-                        <span class="tech">Python</span>
-                        <span class="tech">pandas</span>
-                        <span class="tech">matplotlib</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="learning-path">
-            <h2>🛣️ Öğrenme Yolu</h2>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker">1</div>
-                    <div class="timeline-content">
-                        <h3>🎯 Hedef Belirleme (1 gün)</h3>
-                        <p>Python ile ne yapmak istediğinizi belirleyin: Web geliştirme, veri analizi, otomasyon vs.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-marker">2</div>
-                    <div class="timeline-content">
-                        <h3>🏗️ Temel Kurulum (1-2 gün)</h3>
-                        <p>Python kurulumu, IDE seçimi, geliştirme ortamını hazırlayın.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-marker">3</div>
-                    <div class="timeline-content">
-                        <h3>📚 Temel Syntax (1-2 hafta)</h3>
-                        <p>Variables, data types, control structures gibi temel konuları öğrenin.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-marker">4</div>
-                    <div class="timeline-content">
-                        <h3>⚙️ Fonksiyonlar ve Modüller (2-3 hafta)</h3>
-                        <p>Kod organizasyonu, functions, modules ve packages konularını öğrenin.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-marker">5</div>
-                    <div class="timeline-content">
-                        <h3>🏗️ OOP Kavramları (3-4 hafta)</h3>
-                        <p>Object-oriented programming prensiplerini öğrenin ve uygulayın.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-marker">6</div>
-                    <div class="timeline-content">
-                        <h3>💻 Projeler ve Portfolio (4-8 hafta)</h3>
-                        <p>Gerçek projeler yaparak portfolio oluşturun ve deneyim kazanın.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta-section">
-            <div class="cta-content">
-                <h2>🚀 Python Yolculuğuna Başla!</h2>
-                <p>Bugün Python öğrenmeye başla, yarın harika projeler geliştir!</p>
-                <div class="cta-buttons">
-                    <a href="https://www.python.org/downloads/" target="_blank" class="cta-btn primary">Python İndir</a>
-                    <a href="https://code.visualstudio.com/" target="_blank" class="cta-btn secondary">VS Code İndir</a>
-                </div>
-                
-                <div class="course-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">50+</span>
-                        <span class="stat-label">Saat Video</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">100+</span>
-                        <span class="stat-label">Kod Örneği</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">10+</span>
-                        <span class="stat-label">Proje</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-      
-    <style>
-      .course-intro, .ai-intro {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          color: white;
-          padding: 3rem;
-          border-radius: 12px;
-          margin-bottom: 3rem;
-      }
-      
-      .course-highlights, .tools-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 2rem;
-          margin: 2rem 0;
-      }
-      
-      .highlight-item, .tool-category {
-          background: #f8f9fa;
-          padding: 2rem;
-          border-radius: 8px;
-          border-left: 4px solid #4CAF50;
-      }
-      
-      .curriculum .module {
-          background: white;
-          padding: 2rem;
-          margin: 2rem 0;
-          border-radius: 8px;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      }
-      
-      .curriculum .topic {
-          margin: 1.5rem 0;
-          padding: 1rem;
-          background: #f8f9fa;
-          border-radius: 6px;
-      }
-      
-      .project-grid, .project-showcase {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 2rem;
-          margin: 2rem 0;
-      }
-      
-      .project-card {
-          background: white;
-          padding: 2rem;
-          border-radius: 8px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-          transition: transform 0.3s;
-          border: 1px solid #eee;
-      }
-      
-      .project-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-      }
-      
-      .project-card.featured {
-          border: 2px solid #4CAF50;
-          position: relative;
-      }
-      
-      .project-card.featured::before {
-          content: "⭐ Önerilen";
-          position: absolute;
-          top: -10px;
-          right: 10px;
-          background: #4CAF50;
-          color: white;
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          font-size: 0.8rem;
-      }
-      
-      .tech-stack, .skill-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-          margin-top: 1rem;
-      }
-      
-      .tech, .skill {
-          background: #e3f2fd;
-          color: #1976d2;
-          padding: 0.25rem 0.75rem;
-          border-radius: 15px;
-          font-size: 0.8rem;
-          font-weight: 500;
-      }
-      
-      .timeline {
-          position: relative;
-          padding: 2rem 0;
-      }
-      
-      .timeline::before {
-          content: '';
-          position: absolute;
-          left: 2rem;
-          top: 0;
-          bottom: 0;
-          width: 2px;
-          background: #4CAF50;
-      }
-      
-      .timeline-item {
-          position: relative;
-          margin: 2rem 0;
-          padding-left: 5rem;
-      }
-      
-      .timeline-marker {
-          position: absolute;
-          left: 1.25rem;
-          width: 1.5rem;
-          height: 1.5rem;
-          background: #4CAF50;
-          color: white;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: bold;
-          font-size: 0.9rem;
-      }
-      
-      .timeline-content {
-          background: white;
-          padding: 1.5rem;
-          border-radius: 8px;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      }
-      
-      .roadmap-container {
-          display: flex;
-          flex-direction: column;
-          gap: 2rem;
-          margin: 2rem 0;
-      }
-      
-      .roadmap-step {
-          display: flex;
-          align-items: flex-start;
-          background: white;
-          padding: 2rem;
-          border-radius: 12px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      }
-      
-      .step-number {
-          background: linear-gradient(135deg, #4CAF50, #45a049);
-          color: white;
-          width: 3rem;
-          height: 3rem;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.5rem;
-          font-weight: bold;
-          margin-right: 2rem;
-          flex-shrink: 0;
-      }
-      
-      .step-content {
-          flex: 1;
-      }
-      
-      .time-estimate {
-          background: #f0f8ff;
-          color: #1976d2;
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          font-size: 0.9rem;
-          display: inline-block;
-          margin-top: 1rem;
-      }
-      
-      .tool-items {
-          display: grid;
-          gap: 1rem;
-          margin-top: 1rem;
-      }
-      
-      .tool-item {
-          background: white;
-          padding: 1rem;
-          border-radius: 6px;
-          border: 1px solid #ddd;
-      }
-      
-      .difficulty {
-          color: #666;
-          font-size: 0.8rem;
-          margin-top: 0.5rem;
-      }
-      
-      .project-icon {
-          font-size: 3rem;
-          text-align: center;
-          margin-bottom: 1rem;
-      }
-      
-      .project-level {
-          background: #fff3e0;
-          color: #f57c00;
-          padding: 0.25rem 0.75rem;
-          border-radius: 15px;
-          font-size: 0.8rem;
-          display: inline-block;
-          margin-top: 1rem;
-      }
-      
-      .career-paths {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: 2rem;
-          margin: 2rem 0;
-      }
-      
-      .career-card {
-          background: white;
-          padding: 2rem;
-          border-radius: 12px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-          border: 1px solid #eee;
-      }
-      
-      .career-card.featured {
-          border: 2px solid #4CAF50;
-          transform: scale(1.02);
-      }
-      
-      .salary-range {
-          background: linear-gradient(135deg, #4CAF50, #45a049);
-          color: white;
-          padding: 0.75rem 1rem;
-          border-radius: 8px;
-          font-weight: bold;
-          text-align: center;
-          margin: 1rem 0;
-      }
-      
-      .responsibilities, .required-skills {
-          margin: 1.5rem 0;
-      }
-      
-      .responsibilities h4, .required-skills h4 {
-          color: #333;
-          margin-bottom: 0.5rem;
-      }
-      
-      .cta-section {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          color: white;
-          padding: 4rem 2rem;
-          border-radius: 12px;
-          text-align: center;
-          margin: 3rem 0;
-      }
-      
-      .cta-buttons {
-          display: flex;
-          justify-content: center;
-          gap: 1rem;
-          margin: 2rem 0;
-      }
-      
-      .cta-btn {
-          padding: 1rem 2rem;
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: bold;
-          transition: transform 0.3s;
-      }
-      
-      .cta-btn.primary {
-          background: #4CAF50;
-          color: white;
-      }
-      
-      .cta-btn.secondary {
-          background: transparent;
-          color: white;
-          border: 2px solid white;
-      }
-      
-      .cta-btn:hover {
-          transform: translateY(-2px);
-      }
-      
-      .course-stats {
-          display: flex;
-          justify-content: center;
-          gap: 3rem;
-          margin-top: 2rem;
-      }
-      
-      .stat-item {
-          text-align: center;
-      }
-      
-      .stat-number {
-          display: block;
-          font-size: 2.5rem;
-          font-weight: bold;
-          color: #4CAF50;
-      }
-      
-      .stat-label {
-          display: block;
-          font-size: 0.9rem;
-          opacity: 0.9;
-      }
-      
-      .getting-started {
-          margin: 3rem 0;
-      }
-      
-      .start-options {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 2rem;
-          margin: 2rem 0;
-      }
-      
-      .option-card {
-          background: white;
-          padding: 2rem;
-          border-radius: 12px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-          text-align: center;
-      }
-      
-      .start-btn {
-          background: #4CAF50;
-          color: white;
-          padding: 1rem 2rem;
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: bold;
-          display: inline-block;
-          margin-top: 1rem;
-          transition: transform 0.3s;
-      }
-      
-      .start-btn:hover {
-          transform: translateY(-2px);
-          background: #45a049;
-      }
-      
-      @media (max-width: 768px) {
-          .roadmap-step {
-              flex-direction: column;
-              text-align: center;
-          }
-          
-          .step-number {
-              margin-right: 0;
-              margin-bottom: 1rem;
-          }
-          
-          .cta-buttons {
-              flex-direction: column;
-              align-items: center;
-          }
-          
-          .course-stats {
-              flex-direction: column;
-              gap: 1rem;
-          }
-      }
-    </style>
-  
-
-                <!-- Related Articles -->
-                <section class="related-articles">
-                    <h3>📚 İlgili Makaleler</h3>
-                    <div class="related-grid">
-                        <a href="veri-analizi.html" class="related-card">
-                            <h4>Veri Analizi Kursu - Python ile Data Science</h4>
-                            <p>Sıfırdan ileri seviyeye Python öğrenin</p>
-                        </a>
-                        <a href="yapay-zeka-rehberi.html" class="related-card">
-                            <h4>🤖 Yapay Zeka Rehberi</h4>
-                            <p>AI ve Machine Learning dünyasına giriş</p>
-                        </a>
-                        <a href="veri-analizi.html" class="related-card">
-                            <h4>📊 Veri Analizi Kursu</h4>
-                            <p>Pandas, NumPy ve veri bilimi</p>
-                        </a>
+                <!-- CTA Section -->
+                <section class="cta-section">
+                    <div class="cta-content">
+                        <h2>🚀 Veri Analizi Yolculuğuna Başla!</h2>
+                        <p>Bugün başla, 6 ay içinde profesyonel data analyst ol. Gerçek projeler, uzman mentorlar ve career support ile.</p>
+                        <div class="cta-buttons">
+                            <a href="https://jupyter.org/" target="_blank" class="cta-btn primary">Jupyter Notebook İndir</a>
+                            <a href="https://www.anaconda.com/" target="_blank" class="cta-btn secondary">Anaconda Kur</a>
+                        </div>
+                        
+                        <div class="course-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">15+</span>
+                                <span class="stat-label">Python Libraries</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">25+</span>
+                                <span class="stat-label">Real Projects</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">85%</span>
+                                <span class="stat-label">Job Success Rate</span>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </article>
-
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <div class="ad-zone-sidebar">
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9023802833968711" data-ad-slot="2077956392" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
-                
-                <!-- Quick Links -->
-                <div class="sidebar-widget">
-                    <h3>🚀 Hızlı Linkler</h3>
-                    <ul class="quick-links">
-                        <li><a href="veri-analizi.html">Python Kursu</a></li>
-                        <li><a href="yapay-zeka-rehberi.html">AI Rehberi</a></li>
-                        <li><a href="programlama-araclari.html">Araçlar</a></li>
-                        <li><a href="kariyer-rehberi.html">Kariyer</a></li>
-                    </ul>
-                </div>
-            </aside>
         </div>
     </main>
-
-    <!-- Footer Ad -->
-    <div class="ad-zone-header">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9023802833968711" data-ad-slot="9486093631" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2025 AI Python Eğitimi. Tüm hakları saklıdır.</p>
-            <div class="footer-links">
-                <a href="gizlilik-politikasi.html">Gizlilik Politikası</a>
-                <a href="kullanim-kosullari.html">Kullanım Koşulları</a>
-            </div>
         </div>
     </footer>
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-40X5D8K6WH"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-40X5D8K6WH');
-    </script>
-
+    <!-- Enhanced Styles -->
     <style>
-        .navbar {
-            background: #1a1a1a;
-            padding: 1rem 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-        .nav-logo {
-            color: #4CAF50;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-        }
-        .nav-link {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .nav-link:hover {
-            color: #4CAF50;
-        }
-        .main-content {
-            margin-top: 80px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 2rem;
-        }
-        .content-wrapper {
+        /* Project Showcase */
+        .project-showcase {
             display: grid;
-            grid-template-columns: 1fr 300px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-        }
-        .article-content {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .article-header h1 {
-            color: #333;
-            margin-bottom: 1rem;
-        }
-        .article-meta {
-            color: #666;
-            margin-bottom: 2rem;
-        }
-        .related-articles {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #eee;
-        }
-        .related-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .related-card {
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #333;
-            transition: transform 0.3s;
-        }
-        .related-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        .sidebar-widget {
-            background: #f9f9f9;
-            padding: 1.5rem;
-            border-radius: 8px;
-        }
-        .quick-links {
-            list-style: none;
-            padding: 0;
-        }
-        .quick-links li {
-            margin-bottom: 0.5rem;
-        }
-        .quick-links a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-        .footer {
-            background: #1a1a1a;
-            color: #fff;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-        .footer-links {
-            margin-top: 1rem;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
+            margin: 2rem 0;
         }
         
+        .project-features {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .project-features h4 {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .project-features li {
+            padding: 0.25rem 0;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .project-features li:before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        /* Tools Grid Enhancement */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .tool-category {
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #4CAF50;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .tool-category h3 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .tool-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .tool-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.3s ease;
+        }
+        
+        .tool-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .tool-item h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .tool-item p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        
+        .difficulty {
+            font-size: 0.8rem;
+            color: #888;
+            font-weight: 500;
+        }
+        
+        /* Data Analysis Specific Styles */
+        .data-pipeline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .pipeline-step {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .pipeline-step h4 {
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pipeline-arrow {
+            font-size: 1.5rem;
+            color: #1976d2;
+            margin: 0 0.5rem;
+        }
+        
+        /* Statistics Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4CAF50;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card .label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Enhancements */
         @media (max-width: 768px) {
-            .content-wrapper {
+            .data-pipeline {
+                flex-direction: column;
+            }
+            
+            .pipeline-arrow {
+                transform: rotate(90deg);
+                margin: 0.5rem 0;
+            }
+            
+            .tools-grid {
                 grid-template-columns: 1fr;
             }
-            .nav-menu {
-                display: none;
+            
+            .project-showcase {
+                grid-template-columns: 1fr;
             }
         }
+        
+        /* Interactive Elements */
+        .interactive-demo {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 1px solid #dee2e6;
+        }
+        
+        .demo-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-tab {
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .demo-tab.active {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .demo-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        /* Code Blocks */
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .code-example .keyword {
+            color: #63b3ed;
+        }
+        
+        .code-example .string {
+            color: #68d391;
+        }
+        
+        .code-example .comment {
+            color: #a0aec0;
+            font-style: italic;
+        }
     </style>
+
+    <!-- JavaScript -->
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        // Interactive Demo Tabs
+        document.querySelectorAll('.demo-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Show corresponding demo content
+                const targetDemo = this.getAttribute('data-demo');
+                document.querySelectorAll('.demo-content').forEach(content => {
+                    content.style.display = content.getAttribute('data-demo') === targetDemo ? 'block' : 'none';
+                });
+            });
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Dynamic statistics animation
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerText = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        // Animate stats when they come into view
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numberElement = entry.target.querySelector('.stat-number');
+                    const finalValue = parseInt(numberElement.textContent.replace(/[^0-9]/g, ''));
+                    animateValue(numberElement, 0, finalValue, 2000);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+        
+        document.querySelectorAll('.stat').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+    </script>
 </body>
 </html>

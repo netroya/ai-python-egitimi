@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB Database Tutorial - NoSQL Veritabanı Rehberi</title>
+    <meta name="description" content="MongoDB ile NoSQL veritabanı geliştirme. CRUD işlemleri, aggregation, indexing ve performance optimization.">
+    <meta name="keywords" content="mongodb, nosql, database, crud, aggregation, mongoose">
+    <link rel="stylesheet" href="../blog-styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/python-kursu.html">Python Kursu</a></li>
+                <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header class="post-header">
+            <div class="post-meta">
+                <span class="category">📚 Tutorial</span>
+                <time datetime="2025-08-19">19 Ağustos 2025</time>
+                <span class="read-time">⏱️ 35 dakika okuma</span>
+            </div>
+            <h1>MongoDB Database Tutorial - NoSQL Veritabanı Rehberi</h1>
+            <p class="lead">MongoDB ile modern NoSQL veritabanı geliştirme, CRUD işlemleri ve performance optimization</p>
+        </header>
+
+        <div class="post-content">
+            <h2>MongoDB Nedir?</h2>
+            <p>MongoDB, document-oriented NoSQL veritabanıdır. JSON-benzeri BSON formatında verileri depolar ve geleneksel relational veritabanlarına alternative sunar. Scalability, flexibility ve performance odaklıdır.</p>
+
+            <h2>MongoDB'nin Avantajları</h2>
+            <ul>
+                <li><strong>Schema Flexibility:</strong> Dinamik schema yapısı</li>
+                <li><strong>Horizontal Scaling:</strong> Sharding ile kolay ölçeklendirme</li>
+                <li><strong>Rich Query Language:</strong> Güçlü sorgulama dili</li>
+                <li><strong>High Performance:</strong> Memory-mapped files ve indexing</li>
+                <li><strong>JSON-like Documents:</strong> Uygulama objelerine yakın format</li>
+                <li><strong>Aggregation Framework:</strong> Güçlü veri analizi</li>
+            </ul>
+
+            <h2>1. MongoDB Kurulumu</h2>
+
+            <h3>MongoDB Community Server</h3>
+            <pre><code># Ubuntu/Debian
+wget -qO - https://www.mongodb.org/static/pgp/server-7.0.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+
+# macOS
+brew tap mongodb/brew
+brew install mongodb-community
+
+# Windows
+# MongoDB Compass ile birlikte installer'ı indirin
+# https://www.mongodb.com/try/download/community</code></pre>
+
+            <h3>MongoDB Başlatma</h3>
+            <pre><code># Service olarak başlat (Linux/macOS)
+sudo systemctl start mongod
+sudo systemctl enable mongod
+
+# Manuel başlatma
+mongod --dbpath /data/db
+
+# Bağlantı test
+mongo
+# veya
+mongosh</code></pre>
+
+            <h3>MongoDB Compass (GUI)</h3>
+            <pre><code># MongoDB Compass kurulumu
+# GUI tool olarak kullanımı kolay
+# Veritabanı görselleştirme ve query tools
+# https://www.mongodb.com/products/compass</code></pre>
+
+            <h2>2. Temel MongoDB Kavramları</h2>
+
+            <h3>Terminology Karşılaştırması</h3>
+            <pre><code>SQL Database    →   MongoDB
+Database        →   Database
+Table           →   Collection  
+Row             →   Document
+Column          →   Field
+Index           →   Index
+Table Join      →   Embedded Documents / Linking</code></pre>
+
+            <h3>BSON Document Structure</h3>
+            <pre><code>// MongoDB document örneği
+{
+  "_id": ObjectId("507f1f77bcf86cd799439011"),
+  "name": "John Doe",
+  "age": 30,
+  "email": "john@example.com",
+  "address": {
+    "street": "123 Main St",
+    "city": "New York",
+    "zipCode": "10001"
+  },
+  "hobbies": ["reading", "swimming", "coding"],
+  "isActive": true,
+  "createdAt": ISODate("2025-08-19T10:30:00Z")
+}</code></pre>
+
+            <h2>3. CRUD Operations</h2>
+
+            <h3>Create (Insert) Operations</h3>
+            <pre><code># Tek document insert
+db.users.insertOne({
+  name: "Alice Johnson",
+  age: 28,
+  email: "alice@example.com",
+  department: "Engineering"
+});
+
+# Birden fazla document insert
+db.users.insertMany([
+  {
+    name: "Bob Smith",
+    age: 32,
+    email: "bob@example.com",
+    department: "Marketing"
+  },
+  {
+    name: "Carol Davis",
+    age: 29,
+    email: "carol@example.com",
+    department: "Sales"
+  }
+]);
+
+# Insert with custom _id
+db.products.insertOne({
+  _id: "PROD-001",
+  name: "Laptop",
+  price: 999.99,
+  category: "Electronics",
+  inStock: true
+});</code></pre>
+
+            <h3>Read (Find) Operations</h3>
+            <pre><code># Tüm documents
+db.users.find();
+
+# Pretty format
+db.users.find().pretty();
+
+# Tek document bulma
+db.users.findOne({ name: "Alice Johnson" });
+
+# Koşullu sorgular
+db.users.find({ age: { $gt: 30 } });      # age > 30
+db.users.find({ age: { $gte: 25, $lt: 35 } }); # 25 <= age < 35
+db.users.find({ department: { $in: ["Engineering", "Sales"] } });
+
+# Logical operators
+db.users.find({
+  $and: [
+    { age: { $gte: 25 } },
+    { department: "Engineering" }
+  ]
+});
+
+db.users.find({
+  $or: [
+    { age: { $lt: 25 } },
+    { department: "Marketing" }
+  ]
+});
+
+# Field projection (sadece belirli fieldları getir)
+db.users.find({}, { name: 1, email: 1, _id: 0 });
+
+# Sorting
+db.users.find().sort({ age: 1 });    # Ascending
+db.users.find().sort({ age: -1 });   # Descending
+
+# Pagination
+db.users.find().skip(10).limit(5);
+
+# Count
+db.users.countDocuments({ age: { $gte: 30 } });</code></pre>
+
+            <h3>Update Operations</h3>
+            <pre><code># Tek document update
+db.users.updateOne(
+  { name: "Alice Johnson" },
+  { $set: { age: 29, department: "Senior Engineering" } }
+);
+
+# Birden fazla document update
+db.users.updateMany(
+  { department: "Engineering" },
+  { $set: { bonus: 1000 } }
+);
+
+# Upsert (yoksa insert, varsa update)
+db.users.updateOne(
+  { email: "david@example.com" },
+  { 
+    $set: { 
+      name: "David Wilson", 
+      age: 27, 
+      department: "IT" 
+    } 
+  },
+  { upsert: true }
+);
+
+# Array operations
+db.users.updateOne(
+  { name: "Alice Johnson" },
+  { $push: { skills: "Python" } }
+);
+
+db.users.updateOne(
+  { name: "Alice Johnson" },
+  { $pull: { skills: "Python" } }
+);
+
+db.users.updateOne(
+  { name: "Alice Johnson" },
+  { $addToSet: { skills: { $each: ["JavaScript", "React"] } } }
+);
+
+# Increment/Decrement
+db.products.updateOne(
+  { _id: "PROD-001" },
+  { $inc: { views: 1, price: -50 } }
+);</code></pre>
+
+            <h3>Delete Operations</h3>
+            <pre><code># Tek document silme
+db.users.deleteOne({ name: "Bob Smith" });
+
+# Birden fazla document silme
+db.users.deleteMany({ department: "Marketing" });
+
+# Collection'daki tüm documents'i silme
+db.users.deleteMany({});
+
+# Collection'ı tamamen silme
+db.users.drop();</code></pre>
+
+            <h2>4. Advanced Queries</h2>
+
+            <h3>Array Queries</h3>
+            <pre><code># Array içinde exact match
+db.users.find({ skills: "JavaScript" });
+
+# Array'de birden fazla element
+db.users.find({ skills: { $all: ["JavaScript", "React"] } });
+
+# Array size
+db.users.find({ skills: { $size: 3 } });
+
+# Array element match with condition
+db.users.find({ "skills.0": "Python" }); # First element
+
+# $elemMatch for complex array queries
+db.products.find({
+  reviews: {
+    $elemMatch: {
+      rating: { $gte: 4 },
+      date: { $gte: ISODate("2025-01-01") }
+    }
+  }
+});</code></pre>
+
+            <h3>Embedded Document Queries</h3>
+            <pre><code># Nested field query
+db.users.find({ "address.city": "New York" });
+
+# Nested document exact match
+db.users.find({
+  address: {
+    street: "123 Main St",
+    city: "New York",
+    zipCode: "10001"
+  }
+});
+
+# Multiple nested fields
+db.users.find({
+  $and: [
+    { "address.city": "New York" },
+    { "address.zipCode": { $regex: /^100/ } }
+  ]
+});</code></pre>
+
+            <h3>Regular Expressions</h3>
+            <pre><code># Case-insensitive search
+db.users.find({ name: { $regex: /john/i } });
+
+# Starts with
+db.users.find({ email: { $regex: /^alice/ } });
+
+# Contains
+db.products.find({ name: { $regex: /laptop/i } });
+
+# Ends with
+db.users.find({ email: { $regex: /@gmail\.com$/ } });</code></pre>
+
+            <h2>5. Aggregation Framework</h2>
+
+            <h3>Basic Aggregation Pipeline</h3>
+            <pre><code># Group by ve count
+db.users.aggregate([
+  {
+    $group: {
+      _id: "$department",
+      count: { $sum: 1 },
+      averageAge: { $avg: "$age" }
+    }
+  }
+]);
+
+# Match, group ve sort
+db.sales.aggregate([
+  {
+    $match: {
+      date: { $gte: ISODate("2025-01-01") }
+    }
+  },
+  {
+    $group: {
+      _id: "$product",
+      totalSales: { $sum: "$amount" },
+      averagePrice: { $avg: "$price" }
+    }
+  },
+  {
+    $sort: { totalSales: -1 }
+  },
+  {
+    $limit: 10
+  }
+]);</code></pre>
+
+            <h3>Advanced Aggregation Operators</h3>
+            <pre><code># $lookup (join operations)
+db.orders.aggregate([
+  {
+    $lookup: {
+      from: "products",
+      localField: "productId",
+      foreignField: "_id",
+      as: "productDetails"
+    }
+  },
+  {
+    $unwind: "$productDetails"
+  },
+  {
+    $project: {
+      orderDate: 1,
+      quantity: 1,
+      "productDetails.name": 1,
+      "productDetails.price": 1,
+      totalAmount: {
+        $multiply: ["$quantity", "$productDetails.price"]
+      }
+    }
+  }
+]);
+
+# $project for field transformation
+db.users.aggregate([
+  {
+    $project: {
+      name: 1,
+      email: 1,
+      age: 1,
+      ageGroup: {
+        $switch: {
+          branches: [
+            { case: { $lt: ["$age", 25] }, then: "Young" },
+            { case: { $lt: ["$age", 35] }, then: "Adult" },
+            { case: { $gte: ["$age", 35] }, then: "Senior" }
+          ],
+          default: "Unknown"
+        }
+      }
+    }
+  }
+]);
+
+# Date aggregation
+db.orders.aggregate([
+  {
+    $group: {
+      _id: {
+        year: { $year: "$orderDate" },
+        month: { $month: "$orderDate" }
+      },
+      totalOrders: { $sum: 1 },
+      totalRevenue: { $sum: "$amount" }
+    }
+  },
+  {
+    $sort: { "_id.year": -1, "_id.month": -1 }
+  }
+]);</code></pre>
+
+            <h2>6. Indexing</h2>
+
+            <h3>Index Types ve Oluşturma</h3>
+            <pre><code># Single field index
+db.users.createIndex({ email: 1 });      # Ascending
+db.users.createIndex({ age: -1 });       # Descending
+
+# Compound index
+db.users.createIndex({ department: 1, age: -1 });
+
+# Text index (full-text search)
+db.products.createIndex({ 
+  name: "text", 
+  description: "text" 
+});
+
+# Text search kullanımı
+db.products.find({ $text: { $search: "laptop gaming" } });
+
+# Geospatial index
+db.locations.createIndex({ coordinates: "2dsphere" });
+
+# Geospatial query
+db.locations.find({
+  coordinates: {
+    $near: {
+      $geometry: { type: "Point", coordinates: [-73.9857, 40.7484] },
+      $maxDistance: 1000
+    }
+  }
+});
+
+# Unique index
+db.users.createIndex({ email: 1 }, { unique: true });
+
+# Partial index (conditional)
+db.users.createIndex(
+  { email: 1 },
+  { 
+    partialFilterExpression: { 
+      email: { $exists: true } 
+    } 
+  }
+);
+
+# TTL index (time-based expiration)
+db.sessions.createIndex(
+  { createdAt: 1 },
+  { expireAfterSeconds: 3600 }  # 1 hour
+);</code></pre>
+
+            <h3>Index Management</h3>
+            <pre><code># List all indexes
+db.users.getIndexes();
+
+# Index stats
+db.users.getIndexStats();
+
+# Drop index
+db.users.dropIndex({ email: 1 });
+db.users.dropIndex("email_1");
+
+# Query execution plan
+db.users.find({ email: "alice@example.com" }).explain("executionStats");
+
+# Index usage stats
+db.runCommand({ collStats: "users", indexDetails: true });</code></pre>
+
+            <h2>7. Schema Design Patterns</h2>
+
+            <h3>Embedding vs Referencing</h3>
+            <pre><code># Embedding (One-to-Few relationship)
+{
+  _id: ObjectId("..."),
+  name: "Blog Post",
+  content: "...",
+  comments: [
+    {
+      author: "John Doe",
+      text: "Great post!",
+      date: ISODate("2025-08-19")
+    },
+    {
+      author: "Jane Smith", 
+      text: "Very helpful!",
+      date: ISODate("2025-08-20")
+    }
+  ]
+}
+
+# Referencing (One-to-Many relationship)
+# Users collection
+{
+  _id: ObjectId("..."),
+  name: "John Doe",
+  email: "john@example.com"
+}
+
+# Orders collection
+{
+  _id: ObjectId("..."),
+  userId: ObjectId("..."),  # Reference to user
+  products: [...],
+  totalAmount: 299.99,
+  orderDate: ISODate("2025-08-19")
+}</code></pre>
+
+            <h3>Advanced Schema Patterns</h3>
+            <pre><code># Bucket Pattern (Time-series data)
+{
+  _id: ObjectId("..."),
+  sensor_id: "sensor_001",
+  timestamp: ISODate("2025-08-19T10:00:00Z"),
+  measurements: [
+    { time: ISODate("2025-08-19T10:00:00Z"), temperature: 23.5 },
+    { time: ISODate("2025-08-19T10:01:00Z"), temperature: 23.7 },
+    { time: ISODate("2025-08-19T10:02:00Z"), temperature: 23.6 }
+  ]
+}
+
+# Subset Pattern (Large arrays)
+# Main document with frequently accessed items
+{
+  _id: ObjectId("..."),
+  name: "Popular Product",
+  recent_reviews: [...], # Last 10 reviews
+  total_reviews: 1000
+}
+
+# Separate collection for all reviews
+{
+  _id: ObjectId("..."),
+  product_id: ObjectId("..."),
+  review: "...",
+  rating: 5,
+  date: ISODate("2025-08-19")
+}</code></pre>
+
+            <h2>8. Transactions</h2>
+
+            <h3>Multi-Document Transactions</h3>
+            <pre><code># MongoDB 4.0+ replica set gerekli
+const session = db.getMongo().startSession();
+
+session.startTransaction();
+
+try {
+  # Transfer operation
+  db.accounts.updateOne(
+    { _id: "account1" },
+    { $inc: { balance: -100 } },
+    { session: session }
+  );
+  
+  db.accounts.updateOne(
+    { _id: "account2" },
+    { $inc: { balance: 100 } },
+    { session: session }
+  );
+  
+  # Transaction log
+  db.transactions.insertOne({
+    from: "account1",
+    to: "account2", 
+    amount: 100,
+    date: new Date()
+  }, { session: session });
+  
+  session.commitTransaction();
+} catch (error) {
+  session.abortTransaction();
+  throw error;
+} finally {
+  session.endSession();
+}</code></pre>
+
+            <h2>9. Performance Optimization</h2>
+
+            <h3>Query Optimization</h3>
+            <pre><code># Explain plan analizi
+db.users.find({ age: { $gt: 25 }, department: "Engineering" })
+        .explain("executionStats");
+
+# Index hint
+db.users.find({ age: { $gt: 25 } }).hint({ age: 1 });
+
+# Limit kullanımı
+db.users.find().limit(10);  # İlk 10 document
+
+# Projection ile veri miktarını azalt
+db.users.find({}, { name: 1, email: 1, _id: 0 });
+
+# Compound index sıralaması önemli
+db.users.createIndex({ department: 1, age: 1 });
+
+# Efficient query for compound index
+db.users.find({ department: "Engineering", age: { $gt: 25 } });</code></pre>
+
+            <h3>Memory ve Storage Optimization</h3>
+            <pre><code># Database stats
+db.stats();
+
+# Collection stats
+db.users.stats();
+
+# Index size
+db.users.totalIndexSize();
+
+# Compact operation (maintenance)
+db.runCommand({ compact: "users" });
+
+# Connection pooling (application level)
+const MongoClient = require('mongodb').MongoClient;
+
+const client = new MongoClient(uri, {
+  maxPoolSize: 10,
+  maxIdleTimeMS: 30000,
+  maxConnecting: 2,
+  connectTimeoutMS: 10000
+});</code></pre>
+
+            <h2>10. Node.js ile MongoDB (Mongoose)</h2>
+
+            <h3>Mongoose Setup</h3>
+            <pre><code># Installation
+npm install mongoose
+
+# Connection
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/myapp', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});</code></pre>
+
+            <h3>Mongoose Schemas ve Models</h3>
+            <pre><code>// User schema
+const userSchema = new mongoose.Schema({
+  name: { 
+    type: String, 
+    required: true,
+    trim: true,
+    maxlength: 100
+  },
+  email: { 
+    type: String, 
+    required: true, 
+    unique: true,
+    lowercase: true,
+    validate: {
+      validator: function(v) {
+        return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v);
+      },
+      message: props => `${props.value} is not a valid email!`
+    }
+  },
+  age: { 
+    type: Number, 
+    min: 0, 
+    max: 120 
+  },
+  department: {
+    type: String,
+    enum: ['Engineering', 'Marketing', 'Sales', 'HR']
+  },
+  skills: [String],
+  address: {
+    street: String,
+    city: String,
+    zipCode: String
+  },
+  isActive: { 
+    type: Boolean, 
+    default: true 
+  },
+  createdAt: { 
+    type: Date, 
+    default: Date.now 
+  }
+});
+
+// Middleware (pre/post hooks)
+userSchema.pre('save', function(next) {
+  if (this.isModified('name')) {
+    this.name = this.name.charAt(0).toUpperCase() + this.name.slice(1);
+  }
+  next();
+});
+
+// Instance methods
+userSchema.methods.getFullProfile = function() {
+  return {
+    name: this.name,
+    email: this.email,
+    department: this.department,
+    isActive: this.isActive
+  };
+};
+
+// Static methods
+userSchema.statics.findByDepartment = function(department) {
+  return this.find({ department, isActive: true });
+};
+
+// Create model
+const User = mongoose.model('User', userSchema);</code></pre>
+
+            <h3>Mongoose CRUD Operations</h3>
+            <pre><code>// Create
+const newUser = new User({
+  name: 'Alice Johnson',
+  email: 'alice@example.com',
+  age: 28,
+  department: 'Engineering',
+  skills: ['JavaScript', 'React', 'Node.js']
+});
+
+newUser.save()
+  .then(user => console.log('User created:', user))
+  .catch(err => console.error('Error:', err));
+
+// Create with Model.create()
+User.create({
+  name: 'Bob Smith',
+  email: 'bob@example.com',
+  age: 32,
+  department: 'Marketing'
+})
+.then(user => console.log('User created:', user));
+
+// Read
+User.findById(userId)
+  .then(user => console.log(user));
+
+User.findOne({ email: 'alice@example.com' })
+  .select('name email department')
+  .then(user => console.log(user));
+
+User.find({ age: { $gte: 25 } })
+  .sort({ createdAt: -1 })
+  .limit(10)
+  .then(users => console.log(users));
+
+// Update
+User.findByIdAndUpdate(
+  userId,
+  { age: 29, department: 'Senior Engineering' },
+  { new: true, runValidators: true }
+)
+.then(user => console.log('Updated user:', user));
+
+User.updateMany(
+  { department: 'Engineering' },
+  { $push: { skills: 'TypeScript' } }
+)
+.then(result => console.log('Modified count:', result.modifiedCount));
+
+// Delete
+User.findByIdAndDelete(userId)
+  .then(user => console.log('Deleted user:', user));
+
+User.deleteMany({ isActive: false })
+  .then(result => console.log('Deleted count:', result.deletedCount));</code></pre>
+
+            <h2>11. Security Best Practices</h2>
+
+            <h3>Authentication ve Authorization</h3>
+            <pre><code># MongoDB user oluşturma
+use admin
+db.createUser({
+  user: "adminUser",
+  pwd: "securePassword123",
+  roles: ["root"]
+});
+
+use myapp
+db.createUser({
+  user: "appUser",
+  pwd: "appPassword123",
+  roles: [
+    { role: "readWrite", db: "myapp" }
+  ]
+});
+
+# Authentication ile bağlantı
+mongosh "mongodb://appUser:appPassword123@localhost:27017/myapp"</code></pre>
+
+            <h3>Network Security</h3>
+            <pre><code># mongod.conf
+security:
+  authorization: enabled
+  
+net:
+  bindIp: 127.0.0.1,10.0.0.5  # Specific IPs only
+  port: 27017
+  
+# SSL/TLS configuration
+net:
+  ssl:
+    mode: requireSSL
+    PEMKeyFile: /etc/ssl/mongodb.pem
+    CAFile: /etc/ssl/ca.pem</code></pre>
+
+            <h3>Data Validation</h3>
+            <pre><code># Schema validation
+db.createCollection("users", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["name", "email"],
+      properties: {
+        name: {
+          bsonType: "string",
+          description: "must be a string and is required"
+        },
+        email: {
+          bsonType: "string",
+          pattern: "^.+@.+$",
+          description: "must be a valid email address"
+        },
+        age: {
+          bsonType: "int",
+          minimum: 0,
+          maximum: 120,
+          description: "must be an integer between 0 and 120"
+        }
+      }
+    }
+  }
+});</code></pre>
+
+            <h2>Sonuç</h2>
+            <p>MongoDB modern uygulamaların vazgeçilmez NoSQL veritabanıdır. Bu tutorial'da öğrendiklerinizi özetlersek:</p>
+
+            <h3>MongoDB'nin Güçlü Yönleri:</h3>
+            <ul>
+                <li>Flexible schema yapısı</li>
+                <li>Horizontal scaling capabilities</li>
+                <li>Rich query language ve aggregation</li>
+                <li>High performance indexing</li>
+                <li>JSON-like document structure</li>
+            </ul>
+
+            <h3>Best Practices:</h3>
+            <ul>
+                <li>Appropriate indexing strategies</li>
+                <li>Efficient schema design patterns</li>
+                <li>Query optimization techniques</li>
+                <li>Security implementation</li>
+                <li>Performance monitoring</li>
+            </ul>
+
+            <p>MongoDB'yi öğrenmek için pratik projeler yapın ve farklı use case'lerde deneyim kazanın. Document-based thinking'e alışmak relational database background'ından gelenler için önemlidir.</p>
+        </div>
+    </article>
+</body>
+</html>

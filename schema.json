@@ -1,0 +1,44 @@
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "AI Python Eğitimi",
+  "description": "Python programlama ve yapay zeka eğitimi platformu",
+  "url": "https://netroya.github.io/ai-python-egitimi",
+  "logo": "https://netroya.github.io/ai-python-egitimi/logo.png",
+  "sameAs": [
+    "https://github.com/netroya/ai-python-egitimi"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Educational Support",
+    "availableLanguage": "Turkish"
+  },
+  "offers": [
+    {
+      "@type": "Course",
+      "name": "Python Programlama Kursu",
+      "description": "Sıfırdan ileri seviyeye Python programlama",
+      "provider": {
+        "@type": "Organization",
+        "name": "AI Python Eğitimi"
+      },
+      "courseMode": "online",
+      "educationalCredentialAwarded": "Certificate of Completion"
+    },
+    {
+      "@type": "Course",
+      "name": "Yapay Zeka ve Makine Öğrenmesi",
+      "description": "AI ve ML algoritmaları eğitimi",
+      "provider": {
+        "@type": "Organization",
+        "name": "AI Python Eğitimi"
+      },
+      "courseMode": "online"
+    }
+  ],
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://netroya.github.io/ai-python-egitimi/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Container Tutorial - Containerization Rehberi</title>
+    <meta name="description" content="Docker ile containerization öğrenin. Dockerfile yazma, image oluşturma, container yönetimi ve best practices.">
+    <meta name="keywords" content="docker, containerization, dockerfile, devops, microservices">
+    <link rel="stylesheet" href="../blog-styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/python-kursu.html">Python Kursu</a></li>
+                <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header class="post-header">
+            <div class="post-meta">
+                <span class="category">📚 Tutorial</span>
+                <time datetime="2025-08-19">19 Ağustos 2025</time>
+                <span class="read-time">⏱️ 35 dakika okuma</span>
+            </div>
+            <h1>Docker Container Tutorial - Containerization Rehberi</h1>
+            <p class="lead">Docker ile containerization teknolojisini öğrenin ve modern geliştirme süreçlerini optimize edin</p>
+        </header>
+
+        <div class="post-content">
+            <h2>Docker Nedir?</h2>
+            <p>Docker, uygulamaları container'larda paketlemek ve çalıştırmak için kullanılan bir platformdur. Container'lar uygulamanızı tüm dependencies'leri ile birlikte paketler ve her ortamda tutarlı çalışmasını sağlar.</p>
+
+            <h2>Docker'ın Avantajları</h2>
+            <ul>
+                <li><strong>Portability:</strong> Herhangi bir ortamda çalışır</li>
+                <li><strong>Consistency:</strong> Dev, test ve production aynı environment</li>
+                <li><strong>Scalability:</strong> Kolay ölçeklendirme</li>
+                <li><strong>Resource Efficiency:</strong> VM'lere göre daha az kaynak kullanır</li>
+                <li><strong>Fast Deployment:</strong> Hızlı başlatma ve durdurma</li>
+            </ul>
+
+            <h2>1. Docker Kurulumu</h2>
+            
+            <h3>Windows</h3>
+            <pre><code># Docker Desktop'ı indirin ve kurun
+# https://www.docker.com/products/docker-desktop
+
+# WSL 2 backend gerekli (Windows 10/11)
+wsl --install
+wsl --set-default-version 2</code></pre>
+
+            <h3>macOS</h3>
+            <pre><code># Docker Desktop'ı indirin ve kurun
+# https://www.docker.com/products/docker-desktop
+
+# Homebrew ile
+brew install --cask docker</code></pre>
+
+            <h3>Ubuntu/Linux</h3>
+            <pre><code># Official Docker repository ekle
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Docker'ı kur
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io
+
+# User'ı docker grubuna ekle
+sudo usermod -aG docker $USER</code></pre>
+
+            <h3>Kurulum Testi</h3>
+            <pre><code># Docker version kontrol
+docker --version
+docker-compose --version
+
+# Test container çalıştır
+docker run hello-world</code></pre>
+
+            <h2>2. Temel Docker Komutları</h2>
+
+            <h3>Image Yönetimi</h3>
+            <pre><code># Image'leri listele
+docker images
+docker image ls
+
+# Image indir
+docker pull nginx:latest
+docker pull python:3.9
+
+# Image sil
+docker rmi image_name:tag
+docker rmi image_id
+
+# Kullanılmayan image'leri temizle
+docker image prune</code></pre>
+
+            <h3>Container Yönetimi</h3>
+            <pre><code># Container çalıştır
+docker run nginx
+docker run -d nginx                    # Detached mode
+docker run -p 8080:80 nginx           # Port mapping
+docker run --name my-nginx nginx      # Container ismi ver
+
+# Çalışan container'ları listele
+docker ps
+docker container ls
+
+# Tüm container'ları listele (durmuş olanlar dahil)
+docker ps -a
+
+# Container durdur
+docker stop container_name
+docker stop container_id
+
+# Container başlat
+docker start container_name
+
+# Container sil
+docker rm container_name
+docker rm container_id
+
+# Çalışan container'ı sil
+docker rm -f container_name</code></pre>
+
+            <h3>Container İnteraksiyon</h3>
+            <pre><code># Container içine bash ile gir
+docker exec -it container_name bash
+docker exec -it container_name sh
+
+# Container loglarını görüntüle
+docker logs container_name
+docker logs -f container_name  # Follow mode
+
+# Container resource kullanımını görüntüle
+docker stats
+docker stats container_name</code></pre>
+
+            <h2>3. Dockerfile Yazma</h2>
+            <p>Dockerfile, Docker image'ı nasıl oluşturacağınızı tanımlayan text dosyasıdır.</p>
+
+            <h3>Basit Python Uygulaması</h3>
+            <pre><code># app.py
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return 'Hello, Docker!'
+
+@app.route('/health')
+def health():
+    return {'status': 'healthy'}
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)</code></pre>
+
+            <pre><code># requirements.txt
+Flask==2.3.2</code></pre>
+
+            <pre><code># Dockerfile
+FROM python:3.9-slim
+
+# Working directory ayarla
+WORKDIR /app
+
+# Requirements dosyasını kopyala ve install et
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Uygulama dosyalarını kopyala
+COPY . .
+
+# Port expose et
+EXPOSE 5000
+
+# Health check ekle
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:5000/health || exit 1
+
+# Uygulama çalıştır
+CMD ["python", "app.py"]</code></pre>
+
+            <h3>Image Build Etme</h3>
+            <pre><code># Image build et
+docker build -t my-flask-app .
+docker build -t my-flask-app:v1.0 .
+
+# Build cache kullanmadan
+docker build --no-cache -t my-flask-app .
+
+# Multi-stage build example
+# Dockerfile.multi-stage</code></pre>
+
+            <h3>Multi-stage Build</h3>
+            <pre><code># Multi-stage Dockerfile (Node.js örneği)
+# Build stage
+FROM node:16-alpine AS builder
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY . .
+RUN npm run build
+
+# Production stage
+FROM nginx:alpine
+
+# Build stage'den sadece gerekli dosyaları kopyala
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Nginx config
+COPY nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]</code></pre>
+
+            <h2>4. Docker Compose</h2>
+            <p>Docker Compose, multi-container uygulamaları tanımlamak ve çalıştırmak için kullanılır.</p>
+
+            <h3>docker-compose.yml</h3>
+            <pre><code># docker-compose.yml
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/myapp
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - .:/app
+    networks:
+      - app-network
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=myapp
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  redis:
+    image: redis:6-alpine
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - web
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge</code></pre>
+
+            <h3>Docker Compose Komutları</h3>
+            <pre><code># Servisleri başlat
+docker-compose up
+docker-compose up -d        # Detached mode
+docker-compose up --build  # Build ile başlat
+
+# Belirli servisi başlat
+docker-compose up web
+
+# Servisleri durdur
+docker-compose down
+docker-compose down -v      # Volume'leri de sil
+
+# Logları görüntüle
+docker-compose logs
+docker-compose logs web
+docker-compose logs -f web  # Follow mode
+
+# Servislerin durumunu göster
+docker-compose ps
+
+# Servis scale et
+docker-compose up --scale web=3</code></pre>
+
+            <h2>5. Docker Volumes</h2>
+            <p>Volumes, container'lardaki veriyi persist etmek için kullanılır.</p>
+
+            <h3>Volume Türleri</h3>
+            <pre><code># Named Volume
+docker volume create my-vol
+docker run -d -v my-vol:/app/data nginx
+
+# Bind Mount (Host path'i container'a mount et)
+docker run -d -v /host/path:/container/path nginx
+docker run -d -v $(pwd):/app python:3.9
+
+# Anonymous Volume
+docker run -d -v /app/data nginx</code></pre>
+
+            <h3>Volume Yönetimi</h3>
+            <pre><code># Volume'leri listele
+docker volume ls
+
+# Volume detaylarını göster
+docker volume inspect volume_name
+
+# Volume oluştur
+docker volume create my-data
+
+# Volume sil
+docker volume rm volume_name
+
+# Kullanılmayan volume'leri temizle
+docker volume prune</code></pre>
+
+            <h2>6. Docker Networks</h2>
+            <p>Container'lar arası iletişimi sağlamak için network'ler kullanılır.</p>
+
+            <h3>Network Türleri</h3>
+            <pre><code># Bridge Network (default)
+docker network create my-bridge-network
+docker run -d --network my-bridge-network --name web1 nginx
+docker run -d --network my-bridge-network --name web2 nginx
+
+# Host Network
+docker run -d --network host nginx
+
+# None Network (no networking)
+docker run -d --network none nginx</code></pre>
+
+            <h3>Network Yönetimi</h3>
+            <pre><code># Network'leri listele
+docker network ls
+
+# Network detaylarını göster
+docker network inspect network_name
+
+# Network oluştur
+docker network create --driver bridge my-network
+
+# Container'ı network'e bağla
+docker network connect network_name container_name
+
+# Container'ı network'ten ayır
+docker network disconnect network_name container_name
+
+# Network sil
+docker network rm network_name</code></pre>
+
+            <h2>7. Docker Registry</h2>
+
+            <h3>Docker Hub</h3>
+            <pre><code># Docker Hub'a login
+docker login
+
+# Image'ı tag'le
+docker tag my-app:latest username/my-app:latest
+docker tag my-app:latest username/my-app:v1.0
+
+# Image'ı push et
+docker push username/my-app:latest
+docker push username/my-app:v1.0
+
+# Image'ı pull et
+docker pull username/my-app:latest</code></pre>
+
+            <h3>Private Registry</h3>
+            <pre><code># Local registry çalıştır
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
+
+# Image'ı local registry'ye push et
+docker tag my-app:latest localhost:5000/my-app:latest
+docker push localhost:5000/my-app:latest
+
+# Local registry'den pull et
+docker pull localhost:5000/my-app:latest</code></pre>
+
+            <h2>8. Docker Best Practices</h2>
+
+            <h3>Dockerfile Best Practices</h3>
+            <pre><code># ✅ İyi practices
+FROM python:3.9-slim
+
+# Non-root user oluştur
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+
+# Working directory
+WORKDIR /app
+
+# Dependencies'leri önce kopyala (cache için)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Uygulama dosyalarını kopyala
+COPY . .
+
+# Ownership değiştir
+RUN chown -R appuser:appuser /app
+USER appuser
+
+# Specific port expose et
+EXPOSE 8000
+
+# Health check ekle
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Signal handling için exec form kullan
+CMD ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]</code></pre>
+
+            <h3>.dockerignore</h3>
+            <pre><code># .dockerignore
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
+.git
+.gitignore
+README.md
+.env
+.nyc_output
+coverage
+.nyc_output
+.coverage
+.pytest_cache
+__pycache__</code></pre>
+
+            <h3>Security Best Practices</h3>
+            <pre><code># ❌ Root user kullanma
+USER root
+
+# ✅ Non-root user kullan
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+# ❌ Latest tag kullanma
+FROM python:latest
+
+# ✅ Specific version kullan
+FROM python:3.9.16-slim
+
+# ❌ Tüm port'ları expose etme
+EXPOSE 0-65535
+
+# ✅ Sadece gerekli port'u expose et
+EXPOSE 8000</code></pre>
+
+            <h2>9. Container Monitoring</h2>
+
+            <h3>Resource Monitoring</h3>
+            <pre><code># Container resource kullanımı
+docker stats
+
+# Belirli container
+docker stats container_name
+
+# Memory limit koy
+docker run -d --memory="256m" nginx
+
+# CPU limit koy
+docker run -d --cpus="1.5" nginx
+
+# Container processes
+docker exec container_name ps aux</code></pre>
+
+            <h3>Logging</h3>
+            <pre><code># Log driver ayarla
+docker run -d --log-driver json-file --log-opt max-size=10m --log-opt max-file=3 nginx
+
+# Log görüntüle
+docker logs container_name
+docker logs --tail 50 container_name
+docker logs --since="2023-01-01T00:00:00" container_name
+
+# Log export et
+docker logs container_name > container_logs.txt</code></pre>
+
+            <h2>10. Production Ready Setup</h2>
+
+            <h3>Multi-stage Production Build</h3>
+            <pre><code># Dockerfile.prod
+FROM python:3.9-slim as builder
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+FROM python:3.9-slim
+
+# Security: non-root user
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+
+# Copy dependencies from builder
+COPY --from=builder /root/.local /home/appuser/.local
+
+WORKDIR /app
+COPY . .
+RUN chown -R appuser:appuser /app
+
+USER appuser
+
+# Make sure scripts in .local are usable
+ENV PATH=/home/appuser/.local/bin:$PATH
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]</code></pre>
+
+            <h3>Production docker-compose.yml</h3>
+            <pre><code># docker-compose.prod.yml
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    expose:
+      - "8000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - SECRET_KEY=${SECRET_KEY}
+    networks:
+      - app-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.prod.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - web
+    networks:
+      - app-network
+
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge</code></pre>
+
+            <h2>11. Troubleshooting</h2>
+
+            <h3>Yaygın Problemler ve Çözümleri</h3>
+            <pre><code># Container başlamıyor
+docker logs container_name
+docker exec -it container_name sh
+
+# Port conflicts
+docker ps -a  # Kullanılan port'ları kontrol et
+docker run -p 8080:80 nginx  # Farklı port kullan
+
+# Volume mount problems
+docker inspect container_name  # Volume mount'ları kontrol et
+docker run -v $(pwd):/app alpine ls /app  # Mount test et
+
+# Network connectivity
+docker network inspect bridge
+docker exec container1 ping container2
+
+# Resource issues
+docker system df  # Disk usage
+docker system prune  # Cleanup unused resources</code></pre>
+
+            <h3>Debug Commands</h3>
+            <pre><code># Container içindeki processes
+docker exec container_name ps aux
+
+# Container file system
+docker exec container_name ls -la
+docker exec container_name df -h
+
+# Network test
+docker exec container_name ping google.com
+docker exec container_name netstat -tuln
+
+# Environment variables
+docker exec container_name env</code></pre>
+
+            <h2>Sonuç</h2>
+            <p>Bu tutorial'da Docker'ın temellerinden production-ready deployment'a kadar geniş bir yelpazede konuları ele aldık. Docker modern yazılım geliştirmenin vazgeçilmez bir parçası haline gelmiştir.</p>
+
+            <h3>Önemli Noktalar:</h3>
+            <ul>
+                <li>Container'lar VM'lerden daha hafif ve hızlıdır</li>
+                <li>Dockerfile best practices'lerini takip edin</li>
+                <li>Security için non-root user kullanın</li>
+                <li>Multi-stage build ile image size'ı optimize edin</li>
+                <li>Production'da proper logging ve monitoring yapın</li>
+                <li>Docker Compose ile multi-container uygulamaları yönetin</li>
+            </ul>
+
+            <p>Docker'ı öğrenmek için en iyi yol practice yapmaktır. Kendi uygulamalarınızı containerize ederek deneyim kazanın!</p>
+        </div>
+    </article>
+</body>
+</html>

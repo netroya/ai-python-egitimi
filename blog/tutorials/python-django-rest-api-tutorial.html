@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django REST API Tutorial - Adım Adım Web API Geliştirme</title>
+    <meta name="description" content="Django ve Django REST Framework ile profesyonel web API'leri oluşturun. Adım adım tutorial ile CRUD işlemlerini öğrenin.">
+    <meta name="keywords" content="django rest api, python web api, django tutorial, rest framework">
+    <link rel="stylesheet" href="../blog-styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/python-kursu.html">Python Kursu</a></li>
+                <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header class="post-header">
+            <div class="post-meta">
+                <span class="category">📚 Tutorial</span>
+                <time datetime="2025-08-19">19 Ağustos 2025</time>
+                <span class="read-time">⏱️ 25 dakika okuma</span>
+            </div>
+            <h1>Django REST API Tutorial - Adım Adım Web API Geliştirme</h1>
+            <p class="lead">Django ve Django REST Framework kullanarak profesyonel web API'leri nasıl oluşturulacağını öğrenin</p>
+        </header>
+
+        <div class="post-content">
+            <h2>Giriş</h2>
+            <p>Bu tutorial'da Django ve Django REST Framework (DRF) kullanarak modern bir web API'si oluşturacağız. CRUD işlemleri, authentication ve best practices konularını ele alacağız.</p>
+
+            <h2>Gereksinimler</h2>
+            <ul>
+                <li>Python 3.8+</li>
+                <li>Temel Django bilgisi</li>
+                <li>HTTP ve REST API kavramları</li>
+            </ul>
+
+            <h2>1. Proje Kurulumu</h2>
+            <pre><code># Virtual environment oluştur
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\\Scripts\\activate    # Windows
+
+# Gerekli paketleri yükle
+pip install django
+pip install djangorestframework
+pip install django-cors-headers
+
+# Django projesi oluştur
+django-admin startproject blogapi
+cd blogapi
+
+# App oluştur
+python manage.py startapp posts</code></pre>
+
+            <h2>2. Django Ayarları</h2>
+            <pre><code># settings.py
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
+    'posts',
+]
+
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    # ... diğer middleware'ler
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20
+}
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]</code></pre>
+
+            <h2>3. Model Oluşturma</h2>
+            <pre><code># posts/models.py
+from django.db import models
+from django.contrib.auth.models import User
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural = "Categories"
+    
+    def __str__(self):
+        return self.name
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True)
+    content = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=False)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return self.title</code></pre>
+
+            <h2>4. Serializer Oluşturma</h2>
+            <pre><code># posts/serializers.py
+from rest_framework import serializers
+from .models import Post, Category
+from django.contrib.auth.models import User
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+class PostSerializer(serializers.ModelSerializer):
+    author = UserSerializer(read_only=True)
+    category = CategorySerializer(read_only=True)
+    category_id = serializers.IntegerField(write_only=True)
+    
+    class Meta:
+        model = Post
+        fields = ['id', 'title', 'slug', 'content', 'author', 
+                 'category', 'category_id', 'created_at', 
+                 'updated_at', 'is_published']
+        read_only_fields = ['slug']
+    
+    def create(self, validated_data):
+        validated_data['author'] = self.context['request'].user
+        return super().create(validated_data)</code></pre>
+
+            <h2>5. ViewSet Oluşturma</h2>
+            <pre><code># posts/views.py
+from rest_framework import viewsets, filters, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+from .models import Post, Category
+from .serializers import PostSerializer, CategorySerializer
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.filter(is_published=True)
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['category', 'author']
+    search_fields = ['title', 'content']
+    ordering_fields = ['created_at', 'updated_at']
+    
+    def get_queryset(self):
+        queryset = Post.objects.all()
+        if self.request.user.is_authenticated:
+            return queryset
+        return queryset.filter(is_published=True)
+    
+    @action(detail=False, methods=['get'])
+    def my_posts(self, request):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, 
+                          status=status.HTTP_401_UNAUTHORIZED)
+        
+        posts = Post.objects.filter(author=request.user)
+        serializer = self.get_serializer(posts, many=True)
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['post'])
+    def publish(self, request, pk=None):
+        post = self.get_object()
+        if post.author != request.user and not request.user.is_staff:
+            return Response({'error': 'Permission denied'}, 
+                          status=status.HTTP_403_FORBIDDEN)
+        
+        post.is_published = True
+        post.save()
+        return Response({'status': 'post published'})</code></pre>
+
+            <h2>6. URL Yapılandırması</h2>
+            <pre><code># posts/urls.py
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import PostViewSet, CategoryViewSet
+
+router = DefaultRouter()
+router.register(r'posts', PostViewSet)
+router.register(r'categories', CategoryViewSet)
+
+urlpatterns = [
+    path('api/', include(router.urls)),
+]
+
+# blogapi/urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('posts.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+]</code></pre>
+
+            <h2>7. Migration ve Test</h2>
+            <pre><code># Migration oluştur ve uygula
+python manage.py makemigrations
+python manage.py migrate
+
+# Superuser oluştur
+python manage.py createsuperuser
+
+# Development server başlat
+python manage.py runserver</code></pre>
+
+            <h2>8. API Test Etme</h2>
+            <pre><code># GET istekleri
+GET /api/posts/                    # Tüm postlar
+GET /api/posts/?search=python      # Arama
+GET /api/posts/?category=1         # Kategoriye göre filtre
+GET /api/categories/               # Tüm kategoriler
+
+# POST istekleri (Authentication gerekli)
+POST /api/posts/
+{
+    "title": "Yeni Post",
+    "content": "Post içeriği...",
+    "category_id": 1
+}
+
+# PUT/PATCH istekleri
+PUT /api/posts/1/
+PATCH /api/posts/1/
+
+# DELETE istekleri
+DELETE /api/posts/1/</code></pre>
+
+            <h2>9. Authentication Ekleme</h2>
+            <pre><code># settings.py
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+}
+
+INSTALLED_APPS = [
+    # ...
+    'rest_framework.authtoken',
+]
+
+# Migration sonrası token oluştur
+python manage.py migrate
+python manage.py drf_create_token username</code></pre>
+
+            <h2>10. Validasyon ve Error Handling</h2>
+            <pre><code># posts/serializers.py
+class PostSerializer(serializers.ModelSerializer):
+    # ...
+    
+    def validate_title(self, value):
+        if len(value) < 5:
+            raise serializers.ValidationError("Title must be at least 5 characters")
+        return value
+    
+    def validate(self, data):
+        if data.get('content') and len(data['content']) < 10:
+            raise serializers.ValidationError("Content too short")
+        return data</code></pre>
+
+            <h2>11. Pagination ve Filtering</h2>
+            <pre><code># posts/pagination.py
+from rest_framework.pagination import PageNumberPagination
+
+class CustomPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+# views.py
+class PostViewSet(viewsets.ModelViewSet):
+    pagination_class = CustomPagination
+    # ...</code></pre>
+
+            <h2>12. Testing</h2>
+            <pre><code># posts/tests.py
+from rest_framework.test import APITestCase
+from rest_framework import status
+from django.contrib.auth.models import User
+from .models import Post, Category
+
+class PostAPITest(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='testuser',
+            password='testpass123'
+        )
+        self.category = Category.objects.create(
+            name='Test Category',
+            slug='test-category'
+        )
+    
+    def test_get_posts(self):
+        response = self.client.get('/api/posts/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    
+    def test_create_post(self):
+        self.client.force_authenticate(user=self.user)
+        data = {
+            'title': 'Test Post',
+            'content': 'Test content...',
+            'category_id': self.category.id
+        }
+        response = self.client.post('/api/posts/', data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)</code></pre>
+
+            <h2>Sonuç</h2>
+            <p>Bu tutorial'da Django REST Framework ile modern bir web API'si oluşturduk. Ana özellikler:</p>
+            <ul>
+                <li>CRUD operasyonları</li>
+                <li>Authentication ve Authorization</li>
+                <li>Filtering, Searching ve Pagination</li>
+                <li>Validation ve Error Handling</li>
+                <li>Testing</li>
+                <li>Best Practices</li>
+            </ul>
+
+            <p>Bu temel yapı üzerine daha kompleks özellikler ekleyebilir ve production'a hazır hale getirebilirsiniz.</p>
+        </div>
+    </article>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</body>
+</html>

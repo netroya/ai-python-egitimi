@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scikit-learn ile Makine Öğrenmesi: Başlangıç Rehberi | AI Python Eğitimi Blog</title>
+    <meta name="description" content="Scikit-learn kütüphanesi ile makine öğrenmesi algoritmalarını öğrenin. Sınıflandırma, regresyon ve kümeleme örnekleri.">
+    <meta name="keywords" content="scikit-learn, makine-öğrenmesi, python, ai">
+    <link rel="canonical" href="https://netroya.github.io/ai-python-egitimi/blog/ai-ml/scikit-learn-ile-makine-ogrenmesi-rehberi.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://netroya.github.io/ai-python-egitimi/blog/ai-ml/scikit-learn-ile-makine-ogrenmesi-rehberi.html">
+    <meta property="og:title" content="Scikit-learn ile Makine Öğrenmesi: Başlangıç Rehberi">
+    <meta property="og:description" content="Scikit-learn kütüphanesi ile makine öğrenmesi algoritmalarını öğrenin. Sınıflandırma, regresyon ve kümeleme örnekleri.">
+    <meta property="og:image" content="https://netroya.github.io/ai-python-egitimi/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://netroya.github.io/ai-python-egitimi/blog/ai-ml/scikit-learn-ile-makine-ogrenmesi-rehberi.html">
+    <meta property="twitter:title" content="Scikit-learn ile Makine Öğrenmesi: Başlangıç Rehberi">
+    <meta property="twitter:description" content="Scikit-learn kütüphanesi ile makine öğrenmesi algoritmalarını öğrenin. Sınıflandırma, regresyon ve kümeleme örnekleri.">
+    <meta property="twitter:image" content="https://netroya.github.io/ai-python-egitimi/og-image.jpg">
+
+    <link rel="stylesheet" href="../../premium-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Scikit-learn ile Makine Öğrenmesi: Başlangıç Rehberi",
+        "description": "Scikit-learn kütüphanesi ile makine öğrenmesi algoritmalarını öğrenin. Sınıflandırma, regresyon ve kümeleme örnekleri.",
+        "author": {
+            "@type": "Person",
+            "name": "AI Python Eğitimi"
+        },
+        "datePublished": "2025-08-19T04:17:42.471Z",
+        "dateModified": "2025-08-19T04:17:42.471Z",
+        "publisher": {
+            "@type": "Organization",
+            "name": "AI Python Eğitimi",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://netroya.github.io/ai-python-egitimi/logo.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://netroya.github.io/ai-python-egitimi/blog/ai-ml/scikit-learn-ile-makine-ogrenmesi-rehberi.html"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">🐍 AI Python</a>
+            <div class="nav-menu">
+                <a href="../../index.html" class="nav-link">Ana Sayfa</a>
+                <a href="../../python-kursu.html" class="nav-link">Python Kursu</a>
+                <a href="../../yapay-zeka-rehberi.html" class="nav-link">AI Rehberi</a>
+                <a href="../index.html" class="nav-link active">Blog</a>
+                <a href="../../kariyer-rehberi.html" class="nav-link">Kariyer</a>
+            </div>
+        </div>
+    </nav>
+
+    <main style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
+        <nav style="margin-bottom: 30px; font-size: 0.9rem; color: var(--text-light);">
+            <a href="../../index.html" style="color: var(--text-light); text-decoration: none;">Ana Sayfa</a> / 
+            <a href="../index.html" style="color: var(--text-light); text-decoration: none;">Blog</a> / 
+            <span>Scikit-learn ile Makine Öğrenmesi: Başlangıç Rehberi</span>
+        </nav>
+
+        <article>
+            <header style="margin-bottom: 40px; text-align: center;">
+                <div style="margin-bottom: 20px;">
+                    <span style="background: var(--primary); color: white; padding: 6px 12px; border-radius: 12px; font-size: 0.9rem; font-weight: 600;">AI-ML</span>
+                </div>
+                <h1 style="font-size: 2.5rem; margin-bottom: 20px; line-height: 1.2; color: var(--text);">Scikit-learn ile Makine Öğrenmesi: Başlangıç Rehberi</h1>
+                <div style="display: flex; justify-content: center; gap: 20px; color: var(--text-light); font-size: 0.9rem;">
+                    <span>📅 19.08.2025</span>
+                    <span>⏱️ 12 dk okuma</span>
+                    <span>👤 AI Python Eğitimi</span>
+                </div>
+            </header>
+
+            <!-- AdSense Header Ad -->
+            <div class="ad-zone-header">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            </div>
+
+            <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text);">
+                
+                    <h2>🤖 Scikit-learn Nedir?</h2>
+                    <p>Scikit-learn, Python için en popüler makine öğrenmesi kütüphanesidir. Basit ve verimli veri madenciliği ve veri analizi araçları sunar.</p>
+
+                    <h3>Scikit-learn'ün Özellikleri:</h3>
+                    <ul>
+                        <li><strong>Geniş Algoritma Yelpazesi:</strong> Sınıflandırma, regresyon, kümeleme</li>
+                        <li><strong>Tutarlı API:</strong> Tüm algoritmalar aynı yapıyı takip eder</li>
+                        <li><strong>İyi Dokümantasyon:</strong> Örnekler ve açıklamalarla zengin</li>
+                        <li><strong>NumPy/SciPy Entegrasyonu:</strong> Hızlı ve verimli</li>
+                    </ul>
+
+                    <h2>📦 Kurulum</h2>
+                    <pre><code>pip install scikit-learn</code></pre>
+
+                    <h2>📊 İlk Makine Öğrenmesi Modeli</h2>
+                    
+                    <h3>Veri Seti Hazırlama</h3>
+                    <pre><code>from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+
+# Iris veri seti (çiçek türü sınıflandırma)
+iris = datasets.load_iris()
+X = iris.data  # Özellikler
+y = iris.target  # Hedef değişken
+
+print(f"Veri seti boyutu: {X.shape}")
+print(f"Özellik isimleri: {iris.feature_names}")
+print(f"Sınıf isimleri: {iris.target_names}")</code></pre>
+
+                    <h3>Veriyi Bölme (Train-Test Split)</h3>
+                    <pre><code># Veriyi eğitim ve test olarak ayırma
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+print(f"Eğitim seti boyutu: {X_train.shape}")
+print(f"Test seti boyutu: {X_test.shape}")</code></pre>
+
+                    <h2>🔧 Veri Ön İşleme</h2>
+                    
+                    <h3>Standartlaştırma</h3>
+                    <pre><code># Özellikleri standartlaştırma (0 ortalama, 1 standart sapma)
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+print(f"Orijinal veri ortalama: {X_train.mean(axis=0)}")
+print(f"Standartlaştırılmış veri ortalama: {X_train_scaled.mean(axis=0)}")</code></pre>
+
+                    <h2>🎯 Sınıflandırma Algoritmaları</h2>
+                    
+                    <h3>K-En Yakın Komşu (KNN)</h3>
+                    <pre><code>from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, classification_report
+
+# Model oluşturma
+knn = KNeighborsClassifier(n_neighbors=3)
+
+# Modeli eğitme
+knn.fit(X_train_scaled, y_train)
+
+# Tahmin yapma
+y_pred = knn.predict(X_test_scaled)
+
+# Sonuçları değerlendirme
+accuracy = accuracy_score(y_test, y_pred)
+print(f"KNN Doğruluk: {accuracy:.3f}")
+print(f"Detaylı rapor:\n{classification_report(y_test, y_pred)}")</code></pre>
+
+                    <h3>Random Forest</h3>
+                    <pre><code>from sklearn.ensemble import RandomForestClassifier
+
+# Random Forest modeli
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf.fit(X_train, y_train)
+rf_pred = rf.predict(X_test)
+
+# Özellik önemliliği
+importances = rf.feature_importances_
+for i, importance in enumerate(importances):
+    print(f"{iris.feature_names[i]}: {importance:.3f}")
+
+print(f"Random Forest doğruluk: {accuracy_score(y_test, rf_pred):.3f}")</code></pre>
+
+                    <h3>Destek Vektör Makineleri (SVM)</h3>
+                    <pre><code>from sklearn.svm import SVC
+
+# SVM modeli
+svm = SVC(kernel='rbf', random_state=42)
+svm.fit(X_train_scaled, y_train)
+svm_pred = svm.predict(X_test_scaled)
+
+print(f"SVM doğruluk: {accuracy_score(y_test, svm_pred):.3f}")</code></pre>
+
+                    <h2>📈 Regresyon</h2>
+                    
+                    <h3>Basit Doğrusal Regresyon</h3>
+                    <pre><code>from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import matplotlib.pyplot as plt
+
+# Basit bir veri seti oluşturma
+np.random.seed(42)
+X_reg = np.random.rand(100, 1) * 10
+y_reg = 3 * X_reg.ravel() + 2 + np.random.normal(0, 2, 100)
+
+# Train-test split
+X_train_reg, X_test_reg, y_train_reg, y_test_reg = train_test_split(
+    X_reg, y_reg, test_size=0.3, random_state=42
+)
+
+# Doğrusal regresyon
+lin_reg = LinearRegression()
+lin_reg.fit(X_train_reg, y_train_reg)
+y_pred_reg = lin_reg.predict(X_test_reg)
+
+# Değerlendirme
+mse = mean_squared_error(y_test_reg, y_pred_reg)
+r2 = r2_score(y_test_reg, y_pred_reg)
+
+print(f"Mean Squared Error: {mse:.2f}")
+print(f"R² Score: {r2:.3f}")
+print(f"Model katsayısı: {lin_reg.coef_[0]:.2f}")
+print(f"Model bias: {lin_reg.intercept_:.2f}")</code></pre>
+
+                    <h2>🎯 Kümeleme</h2>
+                    
+                    <h3>K-Means Kümeleme</h3>
+                    <pre><code>from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+# K-means kümeleme
+kmeans = KMeans(n_clusters=3, random_state=42)
+clusters = kmeans.fit_predict(X)
+
+print(f"Küme merkezleri: {kmeans.cluster_centers_}")
+print(f"Inertia (WCSS): {kmeans.inertia_:.2f}")</code></pre>
+
+                    <h2>🔬 Model Değerlendirme</h2>
+                    
+                    <h3>Çapraz Doğrulama</h3>
+                    <pre><code>from sklearn.model_selection import cross_val_score
+
+# 5-fold çapraz doğrulama
+cv_scores = cross_val_score(knn, X_train_scaled, y_train, cv=5)
+
+print(f"CV Skorları: {cv_scores}")
+print(f"CV Ortalama: {cv_scores.mean():.3f}")
+print(f"CV Standart Sapma: {cv_scores.std():.3f}")</code></pre>
+
+                    <h3>Hiperparametre Optimizasyonu</h3>
+                    <pre><code>from sklearn.model_selection import GridSearchCV
+
+# KNN için en iyi k değerini bulma
+param_grid = {'n_neighbors': [3, 5, 7, 9, 11]}
+grid_search = GridSearchCV(KNeighborsClassifier(), param_grid, cv=5)
+grid_search.fit(X_train_scaled, y_train)
+
+print(f"En iyi parametreler: {grid_search.best_params_}")
+print(f"En iyi CV skoru: {grid_search.best_score_:.3f}")
+
+# Test seti ile final değerlendirme
+best_model = grid_search.best_estimator_
+test_score = best_model.score(X_test_scaled, y_test)
+print(f"Test skoru: {test_score:.3f}")</code></pre>
+
+                    <h2>🔄 Pipeline Kullanımı</h2>
+                    <pre><code>from sklearn.pipeline import Pipeline
+
+# Pipeline oluşturma
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('classifier', KNeighborsClassifier(n_neighbors=5))
+])
+
+# Pipeline'ı eğitme
+pipeline.fit(X_train, y_train)
+pipeline_accuracy = pipeline.score(X_test, y_test)
+
+print(f"Pipeline doğruluğu: {pipeline_accuracy:.3f}")
+
+# Pipeline ile hiperparametre optimizasyonu
+pipeline_grid = GridSearchCV(pipeline, {
+    'classifier__n_neighbors': [3, 5, 7, 9]
+}, cv=5)
+pipeline_grid.fit(X_train, y_train)
+
+print(f"Pipeline en iyi parametreler: {pipeline_grid.best_params_}")</code></pre>
+
+                    <h2>🏆 Sonuç</h2>
+                    <p>Scikit-learn ile makine öğrenmesine başlamak oldukça kolay! Bu rehberde öğrendiklerinizle artık gerçek veri setleri üzerinde çalışabilir ve makine öğrenmesi projeleri geliştirebilirsiniz. Sürekli pratik yaparak becerilerinizi geliştirmeye devam edin!</p>
+                
+            </div>
+
+            <div style="margin: 40px 0; display: flex; flex-wrap: wrap; gap: 8px;">
+                <strong style="color: var(--text); margin-right: 10px;">Etiketler:</strong>
+                <span style="background: var(--bg-alt); color: var(--text); padding: 4px 10px; border-radius: 8px; font-size: 0.85rem;">scikit-learn</span> <span style="background: var(--bg-alt); color: var(--text); padding: 4px 10px; border-radius: 8px; font-size: 0.85rem;">makine-öğrenmesi</span> <span style="background: var(--bg-alt); color: var(--text); padding: 4px 10px; border-radius: 8px; font-size: 0.85rem;">python</span> <span style="background: var(--bg-alt); color: var(--text); padding: 4px 10px; border-radius: 8px; font-size: 0.85rem;">ai</span>
+            </div>
+
+            <!-- Social Sharing -->
+            <div style="margin: 40px 0; padding: 30px; background: var(--bg-alt); border-radius: 12px; text-align: center;">
+                <h3 style="margin-bottom: 20px; color: var(--text);">Bu yazıyı paylaş</h3>
+                <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                    <a href="https://twitter.com/intent/tweet?text=Scikit-learn%20ile%20Makine%20%C3%96%C4%9Frenmesi%3A%20Ba%C5%9Flang%C4%B1%C3%A7%20Rehberi&url=https%3A%2F%2Fnetroya.github.io%2Fai-python-egitimi%2Fblog%2Fai-ml%2Fscikit-learn-ile-makine-ogrenmesi-rehberi.html" target="_blank" style="background: #1DA1F2; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">Twitter</a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnetroya.github.io%2Fai-python-egitimi%2Fblog%2Fai-ml%2Fscikit-learn-ile-makine-ogrenmesi-rehberi.html" target="_blank" style="background: #4267B2; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">Facebook</a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fnetroya.github.io%2Fai-python-egitimi%2Fblog%2Fai-ml%2Fscikit-learn-ile-makine-ogrenmesi-rehberi.html" target="_blank" style="background: #0077B5; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">LinkedIn</a>
+                </div>
+            </div>
+
+            <!-- AdSense Content Ad -->
+            <div class="ad-zone-content">
+                <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX"></ins>
+            </div>
+        </article>
+
+        <section style="margin-top: 60px; padding: 40px; background: var(--bg-alt); border-radius: 16px; text-align: center;">
+            <h3 style="color: var(--text); margin-bottom: 20px;">🚀 Python ve AI öğrenmeye devam et!</h3>
+            <p style="color: var(--text-light); margin-bottom: 30px;">Ücretsiz Python kursumuza katıl ve AI dünyasında kariyerine başla.</p>
+            <a href="../../python-kursu.html" style="background: var(--primary); color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Python Kursuna Başla</a>
+        </section>
+    </main>
+
+    <script>
+        // AdSense ads
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yazılım Geliştirici Kariyer Rehberi 2025 | Adım Adım Başarı Yol Haritası</title>
+    <meta name="description" content="2025 yılında yazılım geliştirici olarak kariyer yapmak için kapsamlı rehber. Hangi teknolojileri öğrenmeli, nasıl iş bulmalı, maaş beklentileri ne olmalı?">
+    <meta name="keywords" content="yazılım geliştirici, kariyer rehberi, programcı maaşları, teknoloji kariyeri, yazılım mühendisi">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Yazılım Geliştirici Kariyer Rehberi 2025",
+        "description": "2025 yılında yazılım geliştirici olarak kariyer yapmak için kapsamlı rehber",
+        "author": {
+            "@type": "Person",
+            "name": "AI & Python Eğitimi"
+        },
+        "datePublished": "2025-08-19",
+        "dateModified": "2025-08-19",
+        "publisher": {
+            "@type": "Organization",
+            "name": "AI & Python Eğitimi"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://netroya.github.io/ai-python-egitimi/blog/career/yazilim-gelistirici-kariyer-rehberi-2025.html"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="../blog-styles.css">
+    
+    <style>
+        .career-roadmap {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .career-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .career-level {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+        }
+        
+        .junior { border-left-color: #27ae60; }
+        .mid { border-left-color: #f39c12; }
+        .senior { border-left-color: #e74c3c; }
+        .lead { border-left-color: #9b59b6; }
+        
+        .salary-range {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            color: #27ae60;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tech-tag {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #667eea;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin: 30px 0;
+            padding-left: 80px;
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .skills-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .skill-category {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .companies-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .company-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .company-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .resource-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .interactive-calculator {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .calculator-input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .calculator-result {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/python-kursu.html">Python Kursu</a></li>
+                <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header class="post-header">
+            <div class="post-meta">
+                <span class="category">💼 Kariyer</span>
+                <time datetime="2025-08-19">19 Ağustos 2025</time>
+                <span class="read-time">⏱️ 15 dakika okuma</span>
+            </div>
+            <h1>Yazılım Geliştirici Kariyer Rehberi 2025</h1>
+            <p class="lead">2025 yılında yazılım geliştirici olarak kariyer yapmak için kapsamlı rehber, maaş beklentileri ve başarı stratejileri</p>
+        </header>
+
+        <div class="post-content">
+            <div class="career-roadmap">
+                <h2>🎯 Yazılım Kariyeri: 2025 Yol Haritası</h2>
+                <p>Yazılım geliştirici olarak başarılı bir kariyer için takip etmeniz gereken aşamalar ve stratejiler</p>
+            </div>
+
+            <div class="table-of-contents">
+                <h3>📋 İçerik</h3>
+                <ul>
+                    <li><a href="#baslangic">Kariyere Başlangıç</a></li>
+                    <li><a href="#seviyeler">Kariyer Seviyeleri</a></li>
+                    <li><a href="#teknolojiler">Öğrenilmesi Gereken Teknolojiler</a></li>
+                    <li><a href="#maas-beklentileri">Maaş Beklentileri</a></li>
+                    <li><a href="#sirketler">En İyi Şirketler</a></li>
+                    <li><a href="#beceriler">Gerekli Beceriler</a></li>
+                    <li><a href="#is-arama">İş Arama Stratejileri</a></li>
+                    <li><a href="#kaynaklar">Öğrenme Kaynakları</a></li>
+                </ul>
+            </div>
+
+            <section id="baslangic">
+                <h2>🚀 Kariyere Başlangıç</h2>
+                <p>Yazılım geliştirici olarak kariyere başlamak 2025 yılında hala en popüler ve kazançlı mesleklerden biri. İşte başlangıç için atacağınız adımlar:</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">1</div>
+                        <h4>Programlama Diline Karar Verin (0-2 ay)</h4>
+                        <p>Python, JavaScript, Java veya C# gibi popüler dillerden birini seçin. Yeni başlayanlar için Python önerilir.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon">2</div>
+                        <h4>Temelleri Öğrenin (3-6 ay)</h4>
+                        <p>Değişkenler, fonksiyonlar, döngüler, koşullar ve veri yapıları gibi temel konuları öğrenin.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon">3</div>
+                        <h4>İlk Projenizi Yapın (6-8 ay)</h4>
+                        <p>Basit bir web sitesi, mobil uygulama veya desktop program geliştirin.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon">4</div>
+                        <h4>Portföy Oluşturun (8-10 ay)</h4>
+                        <p>GitHub'da projelerinizi paylaşın ve kişisel web sitenizi oluşturun.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon">5</div>
+                        <h4>İş Başvurularına Başlayın (10-12 ay)</h4>
+                        <p>Junior pozisyonlara başvurun ve mülakat sürecine hazırlanın.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="seviyeler">
+                <h2>📊 Kariyer Seviyeleri ve Beklentiler</h2>
+                
+                <div class="career-levels">
+                    <div class="career-level junior">
+                        <h3>🌱 Junior Developer (0-2 yıl)</h3>
+                        <div class="salary-range">15.000₺ - 25.000₺ / ay</div>
+                        <p><strong>Sorumluluklarınız:</strong></p>
+                        <ul>
+                            <li>Basit özellikler geliştirmek</li>
+                            <li>Bug fixleri yapmak</li>
+                            <li>Senior geliştiricilerden öğrenmek</li>
+                            <li>Kod review süreçlerine katılmak</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Git</span>
+                            <span class="tech-tag">SQL</span>
+                        </div>
+                    </div>
+                    
+                    <div class="career-level mid">
+                        <h3>⚡ Mid-Level Developer (2-4 yıl)</h3>
+                        <div class="salary-range">25.000₺ - 40.000₺ / ay</div>
+                        <p><strong>Sorumluluklarınız:</strong></p>
+                        <ul>
+                            <li>Karmaşık özellikler geliştirmek</li>
+                            <li>Proje planlamasına katılmak</li>
+                            <li>Junior geliştiricilere mentörlük</li>
+                            <li>Teknik kararlar almak</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React/Vue</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">AWS</span>
+                        </div>
+                    </div>
+                    
+                    <div class="career-level senior">
+                        <h3>🏆 Senior Developer (4-7 yıl)</h3>
+                        <div class="salary-range">40.000₺ - 70.000₺ / ay</div>
+                        <p><strong>Sorumluluklarınız:</strong></p>
+                        <ul>
+                            <li>Sistem mimarisi tasarlama</li>
+                            <li>Takım liderliği</li>
+                            <li>Teknik stratejiler belirleme</li>
+                            <li>Performans optimizasyonu</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Microservices</span>
+                            <span class="tech-tag">Kubernetes</span>
+                            <span class="tech-tag">System Design</span>
+                            <span class="tech-tag">DevOps</span>
+                        </div>
+                    </div>
+                    
+                    <div class="career-level lead">
+                        <h3>👑 Tech Lead / Architect (7+ yıl)</h3>
+                        <div class="salary-range">70.000₺ - 150.000₺ / ay</div>
+                        <p><strong>Sorumluluklarınız:</strong></p>
+                        <ul>
+                            <li>Teknoloji stratejisi belirleme</li>
+                            <li>Çapraz takım koordinasyonu</li>
+                            <li>Şirket düzeyinde kararlar</li>
+                            <li>Mentor ve lider olma</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Enterprise Architecture</span>
+                            <span class="tech-tag">Team Management</span>
+                            <span class="tech-tag">Strategic Planning</span>
+                            <span class="tech-tag">Innovation</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="teknolojiler">
+                <h2>💻 2025'te Öğrenilmesi Gereken Teknolojiler</h2>
+                
+                <div class="skills-matrix">
+                    <div class="skill-category">
+                        <h4>🔥 En Popüler Diller</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 95%"></div>
+                        </div>
+                        <p><strong>Python</strong> - AI/ML ve backend</p>
+                        
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                        <p><strong>JavaScript</strong> - Web development</p>
+                        
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                        <p><strong>TypeScript</strong> - Enterprise apps</p>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>🌐 Frontend Teknolojileri</h4>
+                        <ul>
+                            <li>React.js / Next.js</li>
+                            <li>Vue.js / Nuxt.js</li>
+                            <li>Svelte / SvelteKit</li>
+                            <li>Tailwind CSS</li>
+                            <li>WebAssembly</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>⚙️ Backend Teknolojileri</h4>
+                        <ul>
+                            <li>Node.js / Express</li>
+                            <li>Python / FastAPI</li>
+                            <li>Go / Gin</li>
+                            <li>Rust / Actix</li>
+                            <li>Serverless Functions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>🧠 AI/ML Teknolojileri</h4>
+                        <ul>
+                            <li>TensorFlow / PyTorch</li>
+                            <li>Hugging Face</li>
+                            <li>LangChain</li>
+                            <li>OpenAI API</li>
+                            <li>Computer Vision</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>☁️ Cloud & DevOps</h4>
+                        <ul>
+                            <li>AWS / Azure / GCP</li>
+                            <li>Docker / Kubernetes</li>
+                            <li>CI/CD Pipelines</li>
+                            <li>Terraform</li>
+                            <li>Monitoring Tools</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>🗄️ Database Teknolojileri</h4>
+                        <ul>
+                            <li>PostgreSQL</li>
+                            <li>MongoDB</li>
+                            <li>Redis</li>
+                            <li>GraphQL</li>
+                            <li>Vector Databases</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="maas-beklentileri">
+                <h2>💰 Maaş Beklentileri ve Faktörler</h2>
+                
+                <div class="interactive-calculator">
+                    <h3>💼 Maaş Hesaplayıcı</h3>
+                    <p>Deneyim seviyeniz ve lokasyonunuza göre tahmini maaş hesaplayın:</p>
+                    
+                    <select id="experience" class="calculator-input">
+                        <option value="junior">Junior (0-2 yıl)</option>
+                        <option value="mid">Mid-Level (2-4 yıl)</option>
+                        <option value="senior">Senior (4-7 yıl)</option>
+                        <option value="lead">Tech Lead (7+ yıl)</option>
+                    </select>
+                    
+                    <select id="location" class="calculator-input">
+                        <option value="istanbul">İstanbul</option>
+                        <option value="ankara">Ankara</option>
+                        <option value="izmir">İzmir</option>
+                        <option value="remote">Remote</option>
+                    </select>
+                    
+                    <select id="company-size" class="calculator-input">
+                        <option value="startup">Startup (1-50 kişi)</option>
+                        <option value="scale">Scale-up (50-200 kişi)</option>
+                        <option value="corporate">Büyük Şirket (200+ kişi)</option>
+                        <option value="international">Uluslararası Şirket</option>
+                    </select>
+                    
+                    <button onclick="calculateSalary()" class="btn-primary" style="width: 100%; padding: 12px; background: white; color: #667eea; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px;">
+                        💰 Maaş Hesapla
+                    </button>
+                    
+                    <div id="salary-result" class="calculator-result" style="display: none;">
+                        <h4>📊 Tahmini Maaş Aralığınız:</h4>
+                        <p id="salary-range"></p>
+                        <p id="yearly-salary"></p>
+                        <p id="market-position"></p>
+                    </div>
+                </div>
+
+                <h3>📈 Maaş Artırma Stratejileri</h3>
+                <ul>
+                    <li><strong>Teknik Becerilerinizi Geliştirin:</strong> Yeni teknolojiler öğrenin</li>
+                    <li><strong>Sertifikasyon Alın:</strong> AWS, Google Cloud, Microsoft Azure</li>
+                    <li><strong>Side Project Yapın:</strong> Kişisel projeler geliştirin</li>
+                    <li><strong>Open Source Katkı:</strong> GitHub'da aktif olun</li>
+                    <li><strong>Network Oluşturun:</strong> Tech meetuplarına katılın</li>
+                    <li><strong>Remote Çalışma:</strong> Uluslararası şirketlere başvurun</li>
+                </ul>
+            </section>
+
+            <section id="sirketler">
+                <h2>🏢 En İyi Yazılım Şirketleri</h2>
+                
+                <div class="companies-list">
+                    <div class="company-card">
+                        <h4>🔥 Startup'lar</h4>
+                        <ul>
+                            <li>Trendyol</li>
+                            <li>Getir</li>
+                            <li>BiTaksi</li>
+                            <li>Peak Games</li>
+                            <li>Insider</li>
+                        </ul>
+                        <p><strong>Avantajlar:</strong> Hızlı büyüme, equity, dinamik ortam</p>
+                    </div>
+                    
+                    <div class="company-card">
+                        <h4>🏛️ Büyük Şirketler</h4>
+                        <ul>
+                            <li>Microsoft Türkiye</li>
+                            <li>Google İstanbul</li>
+                            <li>Amazon</li>
+                            <li>Turkcell</li>
+                            <li>Accenture</li>
+                        </ul>
+                        <p><strong>Avantajlar:</strong> İstikrar, yan haklar, eğitim</p>
+                    </div>
+                    
+                    <div class="company-card">
+                        <h4>🌍 Remote Şirketler</h4>
+                        <ul>
+                            <li>GitLab</li>
+                            <li>Spotify</li>
+                            <li>Stripe</li>
+                            <li>Shopify</li>
+                            <li>Buffer</li>
+                        </ul>
+                        <p><strong>Avantajlar:</strong> Esneklik, global deneyim, yüksek maaş</p>
+                    </div>
+                    
+                    <div class="company-card">
+                        <h4>🏦 Fintech</h4>
+                        <ul>
+                            <li>İyzico</li>
+                            <li>Papara</li>
+                            <li>Klarna</li>
+                            <li>N26</li>
+                            <li>Revolut</li>
+                        </ul>
+                        <p><strong>Avantajlar:</strong> Yüksek maaş, innovation, hızlı büyüme</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="beceriler">
+                <h2>🎯 Gerekli Soft Skills</h2>
+                
+                <div class="skills-matrix">
+                    <div class="skill-category">
+                        <h4>💬 İletişim</h4>
+                        <ul>
+                            <li>Takım çalışması</li>
+                            <li>Problem çözme</li>
+                            <li>Sunum yapabilme</li>
+                            <li>İngilizce</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>🧠 Analitik Düşünce</h4>
+                        <ul>
+                            <li>Algoritma tasarımı</li>
+                            <li>System design</li>
+                            <li>Debug yapabilme</li>
+                            <li>Performance analizi</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>📚 Öğrenme</h4>
+                        <ul>
+                            <li>Sürekli gelişim</li>
+                            <li>Yeni teknolojiler</li>
+                            <li>Adaptasyon</li>
+                            <li>Araştırma</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>👥 Liderlik</h4>
+                        <ul>
+                            <li>Mentörlük</li>
+                            <li>Proje yönetimi</li>
+                            <li>Karar alma</li>
+                            <li>Vizyon sahibi</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="is-arama">
+                <h2>🔍 İş Arama Stratejileri</h2>
+                
+                <h3>📝 CV Hazırlama İpuçları</h3>
+                <ul>
+                    <li><strong>Teknik becerilerinizi öne çıkarın</strong> - Kullandığınız teknolojileri listeleyin</li>
+                    <li><strong>Projelerinizi detaylandırın</strong> - Ne yaptığınızı ve nasıl yaptığınızı açıklayın</li>
+                    <li><strong>Ölçülebilir sonuçlar ekleyin</strong> - "Performance %30 artırdım" gibi</li>
+                    <li><strong>GitHub linkini ekleyin</strong> - Kodlarınızı gösterin</li>
+                    <li><strong>Kısa ve öz tutun</strong> - 1-2 sayfa yeterli</li>
+                </ul>
+
+                <h3>🎯 Mülakat Hazırlığı</h3>
+                <ul>
+                    <li><strong>Algoritma soruları çözün</strong> - LeetCode, HackerRank kullanın</li>
+                    <li><strong>System design öğrenin</strong> - Scalable sistemler tasarlayın</li>
+                    <li><strong>Behavioral sorulara hazırlanın</strong> - STAR metodunu kullanın</li>
+                    <li><strong>Şirket araştırması yapın</strong> - Kültür ve değerlerini öğrenin</li>
+                    <li><strong>Sorular hazırlayın</strong> - İşveren size de sorular sorsun</li>
+                </ul>
+
+                <h3>🌐 İş Arama Platformları</h3>
+                <ul>
+                    <li><strong>LinkedIn</strong> - Professional network oluşturun</li>
+                    <li><strong>Kariyer.net</strong> - Türkiye'nin en büyük iş sitesi</li>
+                    <li><strong>Secret.cv</strong> - Tech odaklı platform</li>
+                    <li><strong>AngelList</strong> - Startup pozisyonları</li>
+                    <li><strong>RemoteOK</strong> - Remote iş fırsatları</li>
+                    <li><strong>GitHub Jobs</strong> - Developer pozisyonları</li>
+                </ul>
+            </section>
+
+            <section id="kaynaklar">
+                <h2>📚 Öğrenme Kaynakları</h2>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>🎓 Online Eğitim Platformları</h4>
+                        <ul>
+                            <li><strong>Coursera</strong> - University courses</li>
+                            <li><strong>Udemy</strong> - Practical courses</li>
+                            <li><strong>Pluralsight</strong> - Tech skills</li>
+                            <li><strong>Frontend Masters</strong> - Web development</li>
+                            <li><strong>Codecademy</strong> - Interactive learning</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h4>📖 Kitaplar</h4>
+                        <ul>
+                            <li><strong>Clean Code</strong> - Robert Martin</li>
+                            <li><strong>System Design Interview</strong> - Alex Xu</li>
+                            <li><strong>Cracking the Coding Interview</strong></li>
+                            <li><strong>You Don't Know JS</strong> - Kyle Simpson</li>
+                            <li><strong>Python Crash Course</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h4>🎥 YouTube Kanalları</h4>
+                        <ul>
+                            <li><strong>Traversy Media</strong> - Web development</li>
+                            <li><strong>TechWorld with Nana</strong> - DevOps</li>
+                            <li><strong>Corey Schafer</strong> - Python</li>
+                            <li><strong>The Net Ninja</strong> - JavaScript</li>
+                            <li><strong>Mosh Hamedani</strong> - Programming</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h4>🏃 Practice Platformları</h4>
+                        <ul>
+                            <li><strong>LeetCode</strong> - Algorithm practice</li>
+                            <li><strong>HackerRank</strong> - Coding challenges</li>
+                            <li><strong>Codewars</strong> - Code kata</li>
+                            <li><strong>FreeCodeCamp</strong> - Full stack</li>
+                            <li><strong>Exercism</strong> - Code mentoring</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h4>👥 Community</h4>
+                        <ul>
+                            <li><strong>Stack Overflow</strong> - Q&A</li>
+                            <li><strong>Reddit r/programming</strong></li>
+                            <li><strong>Discord Tech Communities</strong></li>
+                            <li><strong>Local Meetups</strong></li>
+                            <li><strong>Tech Twitter</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h4>🔧 Araçlar</h4>
+                        <ul>
+                            <li><strong>VS Code</strong> - Code editor</li>
+                            <li><strong>Git</strong> - Version control</li>
+                            <li><strong>Docker</strong> - Containerization</li>
+                            <li><strong>Postman</strong> - API testing</li>
+                            <li><strong>Figma</strong> - Design</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <div class="cta-section">
+                <h3>🚀 Kariyerinizi Bir Sonraki Seviyeye Taşıyın!</h3>
+                <p>Bu rehber size yol göstersin diye hazırlandı. Unutmayın, başarı sürekli öğrenmek ve kendini geliştirmekten geçer.</p>
+                <div class="cta-buttons">
+                    <a href="/python-kursu.html" class="cta-button">🐍 Python Öğrenmeye Başla</a>
+                    <a href="/newsletter.html" class="cta-button secondary">📧 Haftalık İpuçları Al</a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🚀 AI & Python Eğitimi</h3>
+                <p>Modern yazılım geliştirme teknolojilerini öğrenin</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>📚 Eğitimler</h4>
+                <ul>
+                    <li><a href="/python-kursu.html">Python Kursu</a></li>
+                    <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                    <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>🔗 Bağlantılar</h4>
+                <ul>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/newsletter.html">Newsletter</a></li>
+                    <li><a href="/kariyer-rehberi.html">Kariyer</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 AI & Python Eğitimi. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script>
+        function calculateSalary() {
+            const experience = document.getElementById('experience').value;
+            const location = document.getElementById('location').value;
+            const companySize = document.getElementById('company-size').value;
+            
+            // Base salary ranges (in TL)
+            const baseSalaries = {
+                junior: { min: 15000, max: 25000 },
+                mid: { min: 25000, max: 40000 },
+                senior: { min: 40000, max: 70000 },
+                lead: { min: 70000, max: 150000 }
+            };
+            
+            // Location multipliers
+            const locationMultipliers = {
+                istanbul: 1.2,
+                ankara: 1.0,
+                izmir: 1.1,
+                remote: 1.5
+            };
+            
+            // Company size multipliers
+            const companySizeMultipliers = {
+                startup: 0.9,
+                scale: 1.0,
+                corporate: 1.1,
+                international: 1.4
+            };
+            
+            const base = baseSalaries[experience];
+            const locMultiplier = locationMultipliers[location];
+            const compMultiplier = companySizeMultipliers[companySize];
+            
+            const minSalary = Math.round(base.min * locMultiplier * compMultiplier);
+            const maxSalary = Math.round(base.max * locMultiplier * compMultiplier);
+            const yearlySalary = Math.round((minSalary + maxSalary) / 2 * 12);
+            
+            document.getElementById('salary-range').textContent = 
+                `${minSalary.toLocaleString()}₺ - ${maxSalary.toLocaleString()}₺ aylık`;
+            document.getElementById('yearly-salary').textContent = 
+                `Yıllık tahmini: ${yearlySalary.toLocaleString()}₺`;
+            
+            let marketPosition = '';
+            if (companySize === 'international' && location === 'remote') {
+                marketPosition = '🔥 Piyasanın üst segmentindesiniz!';
+            } else if (companySize === 'startup') {
+                marketPosition = '💡 Startup ortamında hızlı büyüme fırsatı!';
+            } else {
+                marketPosition = '📊 Piyasa ortalamasında bir pozisyon.';
+            }
+            
+            document.getElementById('market-position').textContent = marketPosition;
+            document.getElementById('salary-result').style.display = 'block';
+        }
+        
+        // Animate progress bars on scroll
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.width = entry.target.style.width;
+                    }
+                });
+            });
+            
+            progressBars.forEach(bar => observer.observe(bar));
+        }
+        
+        document.addEventListener('DOMContentLoaded', animateProgressBars);
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</body>
+</html>

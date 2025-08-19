@@ -1,23 +1,36 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Sitemap
 Sitemap: https://netroya.github.io/ai-python-egitimi/sitemap.xml
 
-# Crawl-delay (optional)
-Crawl-delay: 1
-
-# Disallow certain paths (if any)
-# Disallow: /admin/
-# Disallow: /private/
-
-# Allow specific bots
+# Popular bots
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-# SEO friendly
-# This site contains educational content about Python programming,
-# AI, machine learning, and web development tutorials.
+User-agent: Slurp
+Allow: /
+
+# Crawl-delay for all bots
+Crawl-delay: 1
+
+# Block specific paths if needed
+# Disallow: /private/
+# Disallow: /admin/
+
+# Allow all images
+User-agent: *
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.webp$
+Allow: /*.svg$
+
+# Allow CSS and JS
+User-agent: *
+Allow: /*.css$
+Allow: /*.js$

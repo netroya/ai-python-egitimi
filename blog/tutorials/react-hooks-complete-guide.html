@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Hooks Complete Guide - useState, useEffect ve Daha Fazlası</title>
+    <meta name="description" content="React Hooks'ları derinlemesine öğrenin. useState, useEffect, useContext, custom hooks ve best practices rehberi.">
+    <meta name="keywords" content="react hooks, usestate, useeffect, react tutorial, hooks guide">
+    <link rel="stylesheet" href="../blog-styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/python-kursu.html">Python Kursu</a></li>
+                <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header class="post-header">
+            <div class="post-meta">
+                <span class="category">📚 Tutorial</span>
+                <time datetime="2025-08-19">19 Ağustos 2025</time>
+                <span class="read-time">⏱️ 30 dakika okuma</span>
+            </div>
+            <h1>React Hooks Complete Guide - useState, useEffect ve Daha Fazlası</h1>
+            <p class="lead">React Hooks'ları derinlemesine öğrenerek modern React uygulamaları geliştirin</p>
+        </header>
+
+        <div class="post-content">
+            <h2>React Hooks Nedir?</h2>
+            <p>React Hooks, function component'lerde state ve diğer React özelliklerini kullanmamızı sağlayan fonksiyonlardır. React 16.8'de tanıtılmıştır ve modern React geliştirmenin temelini oluşturur.</p>
+
+            <h2>1. useState Hook</h2>
+            <p>useState, function component'lerde state yönetimi için kullanılan temel hook'tur.</p>
+
+            <h3>Temel Kullanım</h3>
+            <pre><code>import React, { useState } from 'react';
+
+function Counter() {
+    const [count, setCount] = useState(0);
+    
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Count: {count}&lt;/p&gt;
+            &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+                Increment
+            &lt;/button&gt;
+            &lt;button onClick={() =&gt; setCount(count - 1)}&gt;
+                Decrement
+            &lt;/button&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+            <h3>Object State Kullanımı</h3>
+            <pre><code>function UserProfile() {
+    const [user, setUser] = useState({
+        name: '',
+        email: '',
+        age: 0
+    });
+    
+    const updateUser = (field, value) =&gt; {
+        setUser(prevUser =&gt; ({
+            ...prevUser,
+            [field]: value
+        }));
+    };
+    
+    return (
+        &lt;form&gt;
+            &lt;input 
+                value={user.name}
+                onChange={(e) =&gt; updateUser('name', e.target.value)}
+                placeholder="Name"
+            /&gt;
+            &lt;input 
+                value={user.email}
+                onChange={(e) =&gt; updateUser('email', e.target.value)}
+                placeholder="Email"
+            /&gt;
+        &lt;/form&gt;
+    );
+}</code></pre>
+
+            <h2>2. useEffect Hook</h2>
+            <p>useEffect, side effect'leri yönetmek için kullanılır. componentDidMount, componentDidUpdate ve componentWillUnmount'un yerini alır.</p>
+
+            <h3>Temel Kullanım</h3>
+            <pre><code>import React, { useState, useEffect } from 'react';
+
+function UserList() {
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    
+    useEffect(() =&gt; {
+        // Component mount olduğunda çalışır
+        fetchUsers();
+    }, []); // Empty dependency array
+    
+    const fetchUsers = async () =&gt; {
+        try {
+            setLoading(true);
+            const response = await fetch('/api/users');
+            const userData = await response.json();
+            setUsers(userData);
+        } catch (error) {
+            console.error('Error fetching users:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    
+    if (loading) return &lt;div&gt;Loading...&lt;/div&gt;;
+    
+    return (
+        &lt;ul&gt;
+            {users.map(user =&gt; (
+                &lt;li key={user.id}&gt;{user.name}&lt;/li&gt;
+            ))}
+        &lt;/ul&gt;
+    );
+}</code></pre>
+
+            <h3>Dependency Array</h3>
+            <pre><code>function SearchResults({ query }) {
+    const [results, setResults] = useState([]);
+    
+    useEffect(() =&gt; {
+        if (query) {
+            searchAPI(query).then(setResults);
+        }
+    }, [query]); // query değiştiğinde çalışır
+    
+    return (
+        &lt;div&gt;
+            {results.map(result =&gt; (
+                &lt;div key={result.id}&gt;{result.title}&lt;/div&gt;
+            ))}
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+            <h3>Cleanup Functions</h3>
+            <pre><code>function Timer() {
+    const [seconds, setSeconds] = useState(0);
+    
+    useEffect(() =&gt; {
+        const interval = setInterval(() =&gt; {
+            setSeconds(s =&gt; s + 1);
+        }, 1000);
+        
+        // Cleanup function
+        return () =&gt; clearInterval(interval);
+    }, []);
+    
+    return &lt;div&gt;Seconds: {seconds}&lt;/div&gt;;
+}</code></pre>
+
+            <h2>3. useContext Hook</h2>
+            <p>useContext, Context API'sini kullanarak component'ler arası veri paylaşımını sağlar.</p>
+
+            <pre><code>import React, { createContext, useContext, useState } from 'react';
+
+// Context oluştur
+const AuthContext = createContext();
+
+// Provider component
+export function AuthProvider({ children }) {
+    const [user, setUser] = useState(null);
+    
+    const login = (userData) =&gt; {
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+    };
+    
+    const logout = () =&gt; {
+        setUser(null);
+        localStorage.removeItem('user');
+    };
+    
+    const value = {
+        user,
+        login,
+        logout,
+        isAuthenticated: !!user
+    };
+    
+    return (
+        &lt;AuthContext.Provider value={value}&gt;
+            {children}
+        &lt;/AuthContext.Provider&gt;
+    );
+}
+
+// Custom hook
+export function useAuth() {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+    return context;
+}
+
+// Kullanım
+function LoginButton() {
+    const { user, login, logout, isAuthenticated } = useAuth();
+    
+    if (isAuthenticated) {
+        return (
+            &lt;div&gt;
+                Welcome, {user.name}!
+                &lt;button onClick={logout}&gt;Logout&lt;/button&gt;
+            &lt;/div&gt;
+        );
+    }
+    
+    return &lt;button onClick={() =&gt; login({ name: 'John' })}&gt;Login&lt;/button&gt;;
+}</code></pre>
+
+            <h2>4. useReducer Hook</h2>
+            <p>Kompleks state logic için useReducer kullanılır. Redux pattern'ini component seviyesinde uygular.</p>
+
+            <pre><code>import React, { useReducer } from 'react';
+
+// Reducer function
+function todoReducer(state, action) {
+    switch (action.type) {
+        case 'ADD_TODO':
+            return {
+                ...state,
+                todos: [...state.todos, {
+                    id: Date.now(),
+                    text: action.payload,
+                    completed: false
+                }]
+            };
+        case 'TOGGLE_TODO':
+            return {
+                ...state,
+                todos: state.todos.map(todo =&gt;
+                    todo.id === action.payload
+                        ? { ...todo, completed: !todo.completed }
+                        : todo
+                )
+            };
+        case 'DELETE_TODO':
+            return {
+                ...state,
+                todos: state.todos.filter(todo =&gt; todo.id !== action.payload)
+            };
+        default:
+            return state;
+    }
+}
+
+// Initial state
+const initialState = {
+    todos: []
+};
+
+function TodoApp() {
+    const [state, dispatch] = useReducer(todoReducer, initialState);
+    const [inputValue, setInputValue] = useState('');
+    
+    const addTodo = () =&gt; {
+        if (inputValue.trim()) {
+            dispatch({ type: 'ADD_TODO', payload: inputValue });
+            setInputValue('');
+        }
+    };
+    
+    return (
+        &lt;div&gt;
+            &lt;input 
+                value={inputValue}
+                onChange={(e) =&gt; setInputValue(e.target.value)}
+                onKeyPress={(e) =&gt; e.key === 'Enter' && addTodo()}
+            /&gt;
+            &lt;button onClick={addTodo}&gt;Add Todo&lt;/button&gt;
+            
+            &lt;ul&gt;
+                {state.todos.map(todo =&gt; (
+                    &lt;li key={todo.id}&gt;
+                        &lt;span 
+                            style={{ 
+                                textDecoration: todo.completed ? 'line-through' : 'none' 
+                            }}
+                            onClick={() =&gt; dispatch({ 
+                                type: 'TOGGLE_TODO', 
+                                payload: todo.id 
+                            })}
+                        &gt;
+                            {todo.text}
+                        &lt;/span&gt;
+                        &lt;button onClick={() =&gt; dispatch({ 
+                            type: 'DELETE_TODO', 
+                            payload: todo.id 
+                        })}&gt;
+                            Delete
+                        &lt;/button&gt;
+                    &lt;/li&gt;
+                ))}
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+            <h2>5. useMemo Hook</h2>
+            <p>useMemo, expensive calculations'ı cache'lemek için kullanılır.</p>
+
+            <pre><code>import React, { useMemo, useState } from 'react';
+
+function ExpensiveComponent({ items, searchTerm }) {
+    // Bu hesaplama sadece items veya searchTerm değiştiğinde yapılır
+    const filteredItems = useMemo(() =&gt; {
+        console.log('Filtering items...'); // Debug için
+        return items.filter(item =&gt;
+            item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }, [items, searchTerm]);
+    
+    const expensiveValue = useMemo(() =&gt; {
+        console.log('Calculating expensive value...');
+        let result = 0;
+        for (let i = 0; i &lt; 1000000; i++) {
+            result += i;
+        }
+        return result;
+    }, []); // Empty array - sadece bir kez hesaplanır
+    
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Expensive Value: {expensiveValue}&lt;/p&gt;
+            &lt;ul&gt;
+                {filteredItems.map(item =&gt; (
+                    &lt;li key={item.id}&gt;{item.name}&lt;/li&gt;
+                ))}
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+            <h2>6. useCallback Hook</h2>
+            <p>useCallback, function'ları cache'lemek için kullanılır. Child component'lere geçirilen callback'leri optimize eder.</p>
+
+            <pre><code>import React, { useState, useCallback, memo } from 'react';
+
+// Child component - React.memo ile wrap edilmiş
+const ChildComponent = memo(({ onButtonClick, name }) =&gt; {
+    console.log('ChildComponent rendered for:', name);
+    return (
+        &lt;button onClick={onButtonClick}&gt;
+            Click me ({name})
+        &lt;/button&gt;
+    );
+});
+
+function ParentComponent() {
+    const [count, setCount] = useState(0);
+    const [otherState, setOtherState] = useState(0);
+    
+    // Bu callback sadece count değiştiğinde yeniden oluşturulur
+    const handleButtonClick = useCallback(() =&gt; {
+        console.log('Button clicked, count:', count);
+        setCount(c =&gt; c + 1);
+    }, [count]);
+    
+    // Bu callback hiç değişmez
+    const handleOtherClick = useCallback(() =&gt; {
+        setOtherState(s =&gt; s + 1);
+    }, []);
+    
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Count: {count}&lt;/p&gt;
+            &lt;p&gt;Other State: {otherState}&lt;/p&gt;
+            
+            &lt;ChildComponent 
+                onButtonClick={handleButtonClick} 
+                name="counter"
+            /&gt;
+            &lt;ChildComponent 
+                onButtonClick={handleOtherClick} 
+                name="other"
+            /&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+            <h2>7. Custom Hooks</h2>
+            <p>Custom hook'lar, logic'i component'ler arasında paylaşmak için kullanılır.</p>
+
+            <h3>useLocalStorage Hook</h3>
+            <pre><code>import { useState, useEffect } from 'react';
+
+function useLocalStorage(key, initialValue) {
+    // State'i localStorage'dan al veya initial value kullan
+    const [storedValue, setStoredValue] = useState(() =&gt; {
+        try {
+            const item = window.localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+        } catch (error) {
+            console.error(`Error reading localStorage key "${key}":`, error);
+            return initialValue;
+        }
+    });
+    
+    // State değişikliklerini localStorage'a yaz
+    const setValue = (value) =&gt; {
+        try {
+            setStoredValue(value);
+            window.localStorage.setItem(key, JSON.stringify(value));
+        } catch (error) {
+            console.error(`Error setting localStorage key "${key}":`, error);
+        }
+    };
+    
+    return [storedValue, setValue];
+}
+
+// Kullanım
+function Settings() {
+    const [theme, setTheme] = useLocalStorage('theme', 'light');
+    const [language, setLanguage] = useLocalStorage('language', 'en');
+    
+    return (
+        &lt;div&gt;
+            &lt;select value={theme} onChange={(e) =&gt; setTheme(e.target.value)}&gt;
+                &lt;option value="light"&gt;Light&lt;/option&gt;
+                &lt;option value="dark"&gt;Dark&lt;/option&gt;
+            &lt;/select&gt;
+            
+            &lt;select value={language} onChange={(e) =&gt; setLanguage(e.target.value)}&gt;
+                &lt;option value="en"&gt;English&lt;/option&gt;
+                &lt;option value="tr"&gt;Türkçe&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+            <h3>useFetch Hook</h3>
+            <pre><code>import { useState, useEffect } from 'react';
+
+function useFetch(url, options = {}) {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
+    useEffect(() =&gt; {
+        let isCancelled = false;
+        
+        const fetchData = async () =&gt; {
+            try {
+                setLoading(true);
+                setError(null);
+                
+                const response = await fetch(url, options);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                if (!isCancelled) {
+                    setData(result);
+                }
+            } catch (err) {
+                if (!isCancelled) {
+                    setError(err.message);
+                }
+            } finally {
+                if (!isCancelled) {
+                    setLoading(false);
+                }
+            }
+        };
+        
+        fetchData();
+        
+        // Cleanup function
+        return () =&gt; {
+            isCancelled = true;
+        };
+    }, [url, JSON.stringify(options)]);
+    
+    return { data, loading, error };
+}
+
+// Kullanım
+function UserProfile({ userId }) {
+    const { data: user, loading, error } = useFetch(`/api/users/${userId}`);
+    
+    if (loading) return &lt;div&gt;Loading...&lt;/div&gt;;
+    if (error) return &lt;div&gt;Error: {error}&lt;/div&gt;;
+    
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;{user.name}&lt;/h2&gt;
+            &lt;p&gt;{user.email}&lt;/p&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+            <h2>8. Hook Rules (Kurallar)</h2>
+            <p>React Hook'ları kullanırken uymanız gereken önemli kurallar:</p>
+
+            <h3>1. Sadece Function Component'lerde veya Custom Hook'larda Kullanın</h3>
+            <pre><code>// ✅ Doğru - Function component içinde
+function MyComponent() {
+    const [state, setState] = useState(0);
+    return &lt;div&gt;{state}&lt;/div&gt;;
+}
+
+// ✅ Doğru - Custom hook içinde
+function useCounter() {
+    const [count, setCount] = useState(0);
+    return { count, setCount };
+}
+
+// ❌ Yanlış - Class component içinde
+class MyClassComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        const [state, setState] = useState(0); // Hata!
+    }
+}</code></pre>
+
+            <h3>2. Hook'ları En Üst Seviyede Çağırın</h3>
+            <pre><code>// ✅ Doğru
+function MyComponent() {
+    const [count, setCount] = useState(0);
+    const [name, setName] = useState('');
+    
+    // Logic buraya
+    
+    return &lt;div&gt;...&lt;/div&gt;;
+}
+
+// ❌ Yanlış - Koşullu hook kullanımı
+function MyComponent() {
+    if (someCondition) {
+        const [count, setCount] = useState(0); // Hata!
+    }
+    
+    // ❌ Yanlış - Loop içinde hook
+    for (let i = 0; i &lt; 5; i++) {
+        useEffect(() =&gt; {}, []); // Hata!
+    }
+    
+    return &lt;div&gt;...&lt;/div&gt;;
+}</code></pre>
+
+            <h2>9. Performance Optimization</h2>
+            
+            <h3>useState Lazy Initial State</h3>
+            <pre><code>// ❌ Bu her render'da çalışır
+const [state, setState] = useState(expensiveCalculation());
+
+// ✅ Bu sadece ilk render'da çalışır
+const [state, setState] = useState(() =&gt; expensiveCalculation());</code></pre>
+
+            <h3>useEffect Dependency Array</h3>
+            <pre><code>// ❌ Her render'da çalışır
+useEffect(() =&gt; {
+    fetchData();
+});
+
+// ❌ Sadece mount/unmount'da çalışır ama dependency eksik
+useEffect(() =&gt; {
+    fetchData(userId);
+}, []);
+
+// ✅ userId değiştiğinde çalışır
+useEffect(() =&gt; {
+    fetchData(userId);
+}, [userId]);</code></pre>
+
+            <h2>10. Best Practices</h2>
+
+            <h3>1. Hook'ları Gruplayın</h3>
+            <pre><code>function MyComponent() {
+    // State hooks
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState([]);
+    
+    // Effect hooks
+    useEffect(() =&gt; {
+        // ...
+    }, []);
+    
+    // Custom hooks
+    const { user } = useAuth();
+    const theme = useTheme();
+    
+    // Component logic
+    // ...
+}</code></pre>
+
+            <h3>2. Custom Hook'ları Kullanın</h3>
+            <pre><code>// Logic'i custom hook'a taşıyın
+function useApiData(url) {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
+    useEffect(() =&gt; {
+        // fetch logic
+    }, [url]);
+    
+    return { data, loading, error };
+}</code></pre>
+
+            <h3>3. Dependency Array'i Doğru Kullanın</h3>
+            <pre><code>// ESLint plugin kullanın: eslint-plugin-react-hooks
+// Bu otomatik olarak eksik dependency'leri tespit eder
+
+useEffect(() =&gt; {
+    // count ve name kullanılıyor
+    console.log(count, name);
+}, [count, name]); // İkisini de dependency'e ekleyin</code></pre>
+
+            <h2>Sonuç</h2>
+            <p>React Hooks modern React geliştirmenin temelidir. Bu rehberde öğrendiklerinizi özetlersek:</p>
+            <ul>
+                <li><strong>useState:</strong> State yönetimi</li>
+                <li><strong>useEffect:</strong> Side effect'ler ve lifecycle</li>
+                <li><strong>useContext:</strong> Global state paylaşımı</li>
+                <li><strong>useReducer:</strong> Kompleks state logic</li>
+                <li><strong>useMemo/useCallback:</strong> Performance optimization</li>
+                <li><strong>Custom Hooks:</strong> Logic paylaşımı</li>
+            </ul>
+
+            <p>Hook'ları öğrenmek React'te daha temiz, daha okunabilir ve daha maintainable kod yazmanızı sağlar. Practice yaparak bu kavramları pekiştirin!</p>
+        </div>
+    </article>
+</body>
+</html>

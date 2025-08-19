@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeScript Complete Guide - Modern JavaScript Development</title>
+    <meta name="description" content="TypeScript'i derinlemesine öğrenin. Type system, interfaces, generics, decorators ve advanced patterns ile modern web development.">
+    <meta name="keywords" content="typescript, javascript, type system, web development, programming">
+    <link rel="stylesheet" href="../blog-styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/python-kursu.html">Python Kursu</a></li>
+                <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header class="post-header">
+            <div class="post-meta">
+                <span class="category">📚 Tutorial</span>
+                <time datetime="2025-08-19">19 Ağustos 2025</time>
+                <span class="read-time">⏱️ 45 dakika okuma</span>
+            </div>
+            <h1>TypeScript Complete Guide - Modern JavaScript Development</h1>
+            <p class="lead">TypeScript ile type-safe, maintainable ve scalable JavaScript uygulamaları geliştirme rehberi</p>
+        </header>
+
+        <div class="post-content">
+            <h2>TypeScript Nedir?</h2>
+            <p>TypeScript, Microsoft tarafından geliştirilen, JavaScript'e static type checking ekleyen bir programlama dilidir. JavaScript'in tüm özelliklerini içerir ve compile-time'da type checking yaparak runtime hatalarını önler.</p>
+
+            <h2>TypeScript'in Avantajları</h2>
+            <ul>
+                <li><strong>Type Safety:</strong> Compile-time hata yakalama</li>
+                <li><strong>Better IDE Support:</strong> IntelliSense, refactoring, navigation</li>
+                <li><strong>Early Bug Detection:</strong> Development sürecinde hata yakalama</li>
+                <li><strong>Better Documentation:</strong> Kod kendi kendini dokümante eder</li>
+                <li><strong>Refactoring Support:</strong> Güvenli kod değişiklikleri</li>
+                <li><strong>ES6+ Features:</strong> Modern JavaScript özelliklerini destekler</li>
+            </ul>
+
+            <h2>1. TypeScript Kurulumu ve Konfigürasyonu</h2>
+
+            <h3>Global Kurulum</h3>
+            <pre><code># TypeScript compiler'ı global olarak kur
+npm install -g typescript
+
+# Version kontrol
+tsc --version
+
+# TypeScript dosyasını compile et
+tsc hello.ts
+
+# Watch mode
+tsc hello.ts --watch</code></pre>
+
+            <h3>Proje Kurulumu</h3>
+            <pre><code># Yeni Node.js projesi
+mkdir my-ts-project
+cd my-ts-project
+npm init -y
+
+# TypeScript development dependency olarak kur
+npm install -D typescript @types/node
+
+# tsconfig.json oluştur
+npx tsc --init
+
+# Development server için
+npm install -D ts-node nodemon</code></pre>
+
+            <h3>tsconfig.json Konfigürasyonu</h3>
+            <pre><code>{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020", "DOM"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}</code></pre>
+
+            <h2>2. Temel Type System</h2>
+
+            <h3>Primitive Types</h3>
+            <pre><code>// String
+let message: string = "Hello, TypeScript!";
+let template: string = `Welcome ${message}`;
+
+// Number
+let integer: number = 42;
+let float: number = 3.14;
+let hex: number = 0xff;
+let binary: number = 0b1010;
+
+// Boolean
+let isActive: boolean = true;
+let isCompleted: boolean = false;
+
+// Null ve Undefined
+let nullValue: null = null;
+let undefinedValue: undefined = undefined;
+
+// Any (TypeScript avantajlarını kaybedersiniz)
+let anything: any = 42;
+anything = "string";
+anything = true;
+
+// Unknown (type-safe any)
+let userInput: unknown;
+userInput = 5;
+userInput = "text";
+if (typeof userInput === "string") {
+    console.log(userInput.toUpperCase()); // Type guard gerekli
+}
+
+// Void (genellikle function return type)
+function logMessage(): void {
+    console.log("This function returns nothing");
+}
+
+// Never (asla return etmeyen functions)
+function throwError(message: string): never {
+    throw new Error(message);
+}</code></pre>
+
+            <h3>Arrays ve Tuples</h3>
+            <pre><code>// Arrays
+let numbers: number[] = [1, 2, 3, 4, 5];
+let strings: Array&lt;string&gt; = ["a", "b", "c"];
+let mixed: (string | number)[] = [1, "two", 3, "four"];
+
+// Readonly arrays
+let readonlyNumbers: readonly number[] = [1, 2, 3];
+// readonlyNumbers.push(4); // Error!
+
+// Tuples (fixed length arrays with specific types)
+let person: [string, number] = ["John", 30];
+let coordinates: [number, number, number] = [10, 20, 30];
+
+// Named tuples
+let namedTuple: [name: string, age: number] = ["Alice", 25];
+
+// Optional tuple elements
+let optionalTuple: [string, number?] = ["Bob"];
+
+// Rest in tuples
+let restTuple: [string, ...number[]] = ["values", 1, 2, 3, 4];</code></pre>
+
+            <h2>3. Object Types ve Interfaces</h2>
+
+            <h3>Object Type Annotations</h3>
+            <pre><code>// Inline object type
+let user: { name: string; age: number; email?: string } = {
+    name: "John Doe",
+    age: 30
+};
+
+// Type alias
+type User = {
+    id: number;
+    name: string;
+    email: string;
+    isActive?: boolean; // Optional property
+    readonly createdAt: Date; // Read-only property
+};
+
+let newUser: User = {
+    id: 1,
+    name: "Jane Smith",
+    email: "jane@example.com",
+    createdAt: new Date()
+};
+
+// newUser.createdAt = new Date(); // Error: readonly property</code></pre>
+
+            <h3>Interfaces</h3>
+            <pre><code>// Interface definition
+interface Product {
+    id: number;
+    name: string;
+    price: number;
+    category: string;
+    description?: string;
+    readonly sku: string;
+}
+
+// Interface implementation
+const laptop: Product = {
+    id: 1,
+    name: "MacBook Pro",
+    price: 2499,
+    category: "Electronics",
+    sku: "MBP-001"
+};
+
+// Interface extending
+interface ElectronicProduct extends Product {
+    warranty: number;
+    brand: string;
+}
+
+// Multiple interface extending
+interface SmartDevice extends Product {
+    connectivity: string[];
+    batteryLife?: number;
+}
+
+interface SmartPhone extends ElectronicProduct, SmartDevice {
+    screenSize: number;
+    operatingSystem: string;
+}
+
+// Interface for functions
+interface Calculator {
+    (a: number, b: number): number;
+}
+
+const add: Calculator = (x, y) =&gt; x + y;
+const multiply: Calculator = (x, y) =&gt; x * y;</code></pre>
+
+            <h3>Index Signatures</h3>
+            <pre><code>// Index signature for objects with dynamic keys
+interface StringDictionary {
+    [key: string]: string;
+}
+
+let config: StringDictionary = {
+    apiUrl: "https://api.example.com",
+    version: "1.0.0",
+    environment: "production"
+};
+
+// Mixed index signature
+interface MixedDictionary {
+    [key: string]: string | number | boolean;
+    // specific properties can also be defined
+    name: string;
+    count: number;
+}
+
+// Numeric index signature
+interface NumberArray {
+    [index: number]: string;
+    length: number;
+}</code></pre>
+
+            <h2>4. Functions ve Type Signatures</h2>
+
+            <h3>Function Type Annotations</h3>
+            <pre><code>// Function declaration
+function greet(name: string): string {
+    return `Hello, ${name}!`;
+}
+
+// Function expression
+const multiply = function(a: number, b: number): number {
+    return a * b;
+};
+
+// Arrow function
+const divide = (a: number, b: number): number =&gt; a / b;
+
+// Optional parameters
+function buildName(firstName: string, lastName?: string): string {
+    return lastName ? `${firstName} ${lastName}` : firstName;
+}
+
+// Default parameters
+function createUser(name: string, age: number = 18): User {
+    return { name, age };
+}
+
+// Rest parameters
+function sum(...numbers: number[]): number {
+    return numbers.reduce((total, num) =&gt; total + num, 0);
+}
+
+// Function overloads
+function format(value: string): string;
+function format(value: number): string;
+function format(value: boolean): string;
+function format(value: string | number | boolean): string {
+    return String(value);
+}</code></pre>
+
+            <h3>Higher-Order Functions</h3>
+            <pre><code>// Function as parameter
+function processArray&lt;T&gt;(
+    arr: T[], 
+    callback: (item: T, index: number) =&gt; T
+): T[] {
+    return arr.map(callback);
+}
+
+// Function as return type
+function createCounter(): () =&gt; number {
+    let count = 0;
+    return () =&gt; ++count;
+}
+
+const counter = createCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+
+// Async functions
+async function fetchUser(id: number): Promise&lt;User&gt; {
+    const response = await fetch(`/api/users/${id}`);
+    return response.json();
+}
+
+// Generic function
+function identity&lt;T&gt;(arg: T): T {
+    return arg;
+}
+
+let output1 = identity&lt;string&gt;("hello");
+let output2 = identity&lt;number&gt;(42);</code></pre>
+
+            <h2>5. Union Types ve Type Guards</h2>
+
+            <h3>Union Types</h3>
+            <pre><code>// Union type
+type Status = "loading" | "success" | "error";
+type ID = string | number;
+
+function processId(id: ID): string {
+    // Type narrowing required
+    if (typeof id === "string") {
+        return id.toUpperCase();
+    }
+    return id.toString();
+}
+
+// Discriminated unions
+type LoadingState = { status: "loading" };
+type SuccessState = { status: "success"; data: any };
+type ErrorState = { status: "error"; message: string };
+
+type ApiState = LoadingState | SuccessState | ErrorState;
+
+function handleApiState(state: ApiState) {
+    switch (state.status) {
+        case "loading":
+            console.log("Loading...");
+            break;
+        case "success":
+            console.log("Data:", state.data);
+            break;
+        case "error":
+            console.log("Error:", state.message);
+            break;
+        default:
+            // Exhaustiveness check
+            const _exhaustive: never = state;
+            return _exhaustive;
+    }
+}</code></pre>
+
+            <h3>Type Guards</h3>
+            <pre><code>// typeof type guard
+function processValue(value: string | number): string {
+    if (typeof value === "string") {
+        return value.toUpperCase(); // TypeScript knows it's string
+    }
+    return value.toFixed(2); // TypeScript knows it's number
+}
+
+// instanceof type guard
+class Cat {
+    meow() { console.log("Meow!"); }
+}
+
+class Dog {
+    bark() { console.log("Woof!"); }
+}
+
+function makeSound(animal: Cat | Dog) {
+    if (animal instanceof Cat) {
+        animal.meow(); // TypeScript knows it's Cat
+    } else {
+        animal.bark(); // TypeScript knows it's Dog
+    }
+}
+
+// Custom type guard
+interface Fish {
+    swim(): void;
+}
+
+interface Bird {
+    fly(): void;
+}
+
+function isFish(pet: Fish | Bird): pet is Fish {
+    return (pet as Fish).swim !== undefined;
+}
+
+function move(pet: Fish | Bird) {
+    if (isFish(pet)) {
+        pet.swim(); // TypeScript knows it's Fish
+    } else {
+        pet.fly(); // TypeScript knows it's Bird
+    }
+}
+
+// 'in' operator type guard
+type Vehicle = { drive(): void } | { fly(): void };
+
+function operate(vehicle: Vehicle) {
+    if ("drive" in vehicle) {
+        vehicle.drive();
+    } else {
+        vehicle.fly();
+    }
+}</code></pre>
+
+            <h2>6. Generics</h2>
+
+            <h3>Generic Functions</h3>
+            <pre><code>// Basic generic function
+function identity&lt;T&gt;(arg: T): T {
+    return arg;
+}
+
+// Generic with constraints
+interface Lengthwise {
+    length: number;
+}
+
+function logAndReturn&lt;T extends Lengthwise&gt;(arg: T): T {
+    console.log(arg.length);
+    return arg;
+}
+
+// Multiple generic parameters
+function merge&lt;T, U&gt;(obj1: T, obj2: U): T & U {
+    return { ...obj1, ...obj2 };
+}
+
+const merged = merge({ name: "John" }, { age: 30 });
+// merged has type { name: string } & { age: number }
+
+// Generic with keyof
+function getProperty&lt;T, K extends keyof T&gt;(obj: T, key: K): T[K] {
+    return obj[key];
+}
+
+const person = { name: "Alice", age: 30, city: "New York" };
+const name = getProperty(person, "name"); // type: string
+const age = getProperty(person, "age");   // type: number</code></pre>
+
+            <h3>Generic Classes</h3>
+            <pre><code>// Generic class
+class Container&lt;T&gt; {
+    private contents: T[] = [];
+
+    add(item: T): void {
+        this.contents.push(item);
+    }
+
+    get(index: number): T | undefined {
+        return this.contents[index];
+    }
+
+    getAll(): T[] {
+        return [...this.contents];
+    }
+
+    size(): number {
+        return this.contents.length;
+    }
+}
+
+const stringContainer = new Container&lt;string&gt;();
+stringContainer.add("hello");
+stringContainer.add("world");
+
+const numberContainer = new Container&lt;number&gt;();
+numberContainer.add(1);
+numberContainer.add(2);
+
+// Generic interface
+interface Repository&lt;T&gt; {
+    create(item: T): Promise&lt;T&gt;;
+    findById(id: string): Promise&lt;T | null&gt;;
+    findAll(): Promise&lt;T[]&gt;;
+    update(id: string, item: Partial&lt;T&gt;): Promise&lt;T&gt;;
+    delete(id: string): Promise&lt;void&gt;;
+}
+
+class UserRepository implements Repository&lt;User&gt; {
+    async create(user: User): Promise&lt;User&gt; {
+        // Implementation
+        return user;
+    }
+    
+    async findById(id: string): Promise&lt;User | null&gt; {
+        // Implementation
+        return null;
+    }
+    
+    // ... other methods
+}</code></pre>
+
+            <h2>7. Advanced Types</h2>
+
+            <h3>Utility Types</h3>
+            <pre><code>interface User {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    isActive: boolean;
+}
+
+// Partial - all properties optional
+type PartialUser = Partial&lt;User&gt;;
+// equivalent to:
+// {
+//     id?: number;
+//     name?: string;
+//     email?: string;
+//     password?: string;
+//     isActive?: boolean;
+// }
+
+// Required - all properties required
+type RequiredUser = Required&lt;PartialUser&gt;;
+
+// Pick - select specific properties
+type PublicUser = Pick&lt;User, 'id' | 'name' | 'email'&gt;;
+
+// Omit - exclude specific properties
+type UserWithoutPassword = Omit&lt;User, 'password'&gt;;
+
+// Record - create type with specific keys and values
+type UserRoles = Record&lt;'admin' | 'user' | 'guest', string[]&gt;;
+const roles: UserRoles = {
+    admin: ['read', 'write', 'delete'],
+    user: ['read', 'write'],
+    guest: ['read']
+};
+
+// Exclude/Extract with union types
+type Status = 'pending' | 'approved' | 'rejected';
+type ActiveStatus = Exclude&lt;Status, 'rejected'&gt;; // 'pending' | 'approved'
+type NonActiveStatus = Extract&lt;Status, 'rejected'&gt;; // 'rejected'
+
+// ReturnType - extract return type from function
+function getUser(): User {
+    return {} as User;
+}
+type UserReturnType = ReturnType&lt;typeof getUser&gt;; // User
+
+// Parameters - extract parameter types
+type GetUserParams = Parameters&lt;typeof getUser&gt;; // []</code></pre>
+
+            <h3>Mapped Types</h3>
+            <pre><code>// Create read-only version of type
+type ReadOnly&lt;T&gt; = {
+    readonly [P in keyof T]: T[P];
+};
+
+// Create optional version of type
+type Optional&lt;T&gt; = {
+    [P in keyof T]?: T[P];
+};
+
+// Create nullable version of type
+type Nullable&lt;T&gt; = {
+    [P in keyof T]: T[P] | null;
+};
+
+type NullableUser = Nullable&lt;User&gt;;
+
+// Conditional types
+type IsString&lt;T&gt; = T extends string ? true : false;
+type Test1 = IsString&lt;string&gt;; // true
+type Test2 = IsString&lt;number&gt;; // false
+
+// More complex conditional type
+type ApiResponse&lt;T&gt; = T extends string 
+    ? { message: T } 
+    : T extends number 
+    ? { code: T } 
+    : { data: T };
+
+type StringResponse = ApiResponse&lt;string&gt;; // { message: string }
+type NumberResponse = ApiResponse&lt;number&gt;; // { code: number }
+type ObjectResponse = ApiResponse&lt;User&gt;;   // { data: User }</code></pre>
+
+            <h2>8. Decorators</h2>
+
+            <h3>Class Decorators</h3>
+            <pre><code>// Class decorator
+function Component(target: any) {
+    target.prototype.render = function() {
+        console.log("Rendering component...");
+    };
+}
+
+@Component
+class MyComponent {
+    name = "MyComponent";
+}
+
+const component = new MyComponent();
+(component as any).render(); // "Rendering component..."
+
+// Decorator factory
+function Entity(tableName: string) {
+    return function(target: any) {
+        target.prototype.tableName = tableName;
+    };
+}
+
+@Entity("users")
+class User {
+    id: number;
+    name: string;
+}</code></pre>
+
+            <h3>Method Decorators</h3>
+            <pre><code>// Method decorator
+function Log(target: any, propertyName: string, descriptor: PropertyDescriptor) {
+    const method = descriptor.value;
+    
+    descriptor.value = function (...args: any[]) {
+        console.log(`Calling ${propertyName} with args:`, args);
+        const result = method.apply(this, args);
+        console.log(`${propertyName} returned:`, result);
+        return result;
+    };
+}
+
+class Calculator {
+    @Log
+    add(a: number, b: number): number {
+        return a + b;
+    }
+    
+    @Log
+    multiply(a: number, b: number): number {
+        return a * b;
+    }
+}
+
+// Property decorator
+function MinLength(length: number) {
+    return function (target: any, propertyName: string) {
+        let value: string;
+        
+        const getter = () =&gt; value;
+        const setter = (newValue: string) =&gt; {
+            if (newValue.length &lt; length) {
+                throw new Error(`${propertyName} must be at least ${length} characters`);
+            }
+            value = newValue;
+        };
+        
+        Object.defineProperty(target, propertyName, {
+            get: getter,
+            set: setter,
+            enumerable: true,
+            configurable: true
+        });
+    };
+}
+
+class User {
+    @MinLength(3)
+    public name: string;
+}</code></pre>
+
+            <h2>9. Modules ve Namespaces</h2>
+
+            <h3>ES6 Modules</h3>
+            <pre><code>// user.ts
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+}
+
+export class UserService {
+    private users: User[] = [];
+    
+    addUser(user: User): void {
+        this.users.push(user);
+    }
+    
+    getUsers(): User[] {
+        return this.users;
+    }
+}
+
+export const DEFAULT_USER: User = {
+    id: 0,
+    name: "Anonymous",
+    email: "anonymous@example.com"
+};
+
+// Default export
+export default class ApiClient {
+    baseUrl: string;
+    
+    constructor(baseUrl: string) {
+        this.baseUrl = baseUrl;
+    }
+}
+
+// main.ts
+import ApiClient, { User, UserService, DEFAULT_USER } from './user';
+import * as UserModule from './user';
+
+const client = new ApiClient('https://api.example.com');
+const userService = new UserModule.UserService();</code></pre>
+
+            <h3>Namespaces</h3>
+            <pre><code>// shapes.ts
+namespace Shapes {
+    export interface Point {
+        x: number;
+        y: number;
+    }
+    
+    export class Circle {
+        constructor(public center: Point, public radius: number) {}
+        
+        area(): number {
+            return Math.PI * this.radius ** 2;
+        }
+    }
+    
+    export class Rectangle {
+        constructor(
+            public topLeft: Point, 
+            public width: number, 
+            public height: number
+        ) {}
+        
+        area(): number {
+            return this.width * this.height;
+        }
+    }
+}
+
+// Usage
+const circle = new Shapes.Circle({ x: 0, y: 0 }, 10);
+const rectangle = new Shapes.Rectangle({ x: 0, y: 0 }, 20, 30);</code></pre>
+
+            <h2>10. Best Practices</h2>
+
+            <h3>Type Safety Best Practices</h3>
+            <pre><code>// ✅ Use strict TypeScript configuration
+// tsconfig.json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true
+  }
+}
+
+// ✅ Use type assertions carefully
+// Bad
+const element = document.getElementById('my-element') as HTMLInputElement;
+
+// Good
+const element = document.getElementById('my-element');
+if (element instanceof HTMLInputElement) {
+    element.value = 'typed value';
+}
+
+// ✅ Use type guards for runtime checks
+function isString(value: unknown): value is string {
+    return typeof value === 'string';
+}
+
+// ✅ Prefer interfaces for object shapes
+interface UserConfig {
+    apiUrl: string;
+    timeout: number;
+    retries?: number;
+}
+
+// ✅ Use enums for related constants
+enum HttpStatus {
+    OK = 200,
+    NotFound = 404,
+    InternalServerError = 500
+}
+
+// ✅ Use readonly for immutable data
+interface ReadonlyConfig {
+    readonly apiUrl: string;
+    readonly features: readonly string[];
+}</code></pre>
+
+            <h3>Performance ve Organization</h3>
+            <pre><code>// ✅ Use index signatures efficiently
+interface Config {
+    [key: string]: string | number | boolean;
+    // Known properties for better type checking
+    apiUrl: string;
+    timeout: number;
+}
+
+// ✅ Organize types in separate files
+// types/user.ts
+export interface User {
+    id: string;
+    name: string;
+    email: string;
+}
+
+export type UserRole = 'admin' | 'user' | 'guest';
+
+// types/api.ts
+export interface ApiResponse&lt;T&gt; {
+    data: T;
+    status: number;
+    message?: string;
+}
+
+// types/index.ts
+export * from './user';
+export * from './api';
+
+// ✅ Use barrel exports
+// index.ts
+export { UserService } from './services/UserService';
+export { ApiClient } from './clients/ApiClient';
+export * from './types';</code></pre>
+
+            <h2>11. Real-World Examples</h2>
+
+            <h3>Express.js with TypeScript</h3>
+            <pre><code>// types.ts
+export interface CreateUserRequest {
+    name: string;
+    email: string;
+    password: string;
+}
+
+export interface User {
+    id: string;
+    name: string;
+    email: string;
+    createdAt: Date;
+}
+
+// userController.ts
+import { Request, Response } from 'express';
+import { CreateUserRequest, User } from './types';
+
+export class UserController {
+    async createUser(
+        req: Request&lt;{}, User, CreateUserRequest&gt;, 
+        res: Response&lt;User | { error: string }&gt;
+    ): Promise&lt;void&gt; {
+        try {
+            const { name, email, password } = req.body;
+            
+            const user: User = {
+                id: generateId(),
+                name,
+                email,
+                createdAt: new Date()
+            };
+            
+            // Save user logic...
+            
+            res.status(201).json(user);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
+}
+
+// app.ts
+import express from 'express';
+import { UserController } from './userController';
+
+const app = express();
+const userController = new UserController();
+
+app.use(express.json());
+app.post('/users', userController.createUser.bind(userController));
+
+export default app;</code></pre>
+
+            <h3>React with TypeScript</h3>
+            <pre><code>// components/UserCard.tsx
+import React from 'react';
+
+interface UserCardProps {
+    user: {
+        id: string;
+        name: string;
+        email: string;
+        avatar?: string;
+    };
+    onEdit: (userId: string) =&gt; void;
+    onDelete: (userId: string) =&gt; void;
+    className?: string;
+}
+
+export const UserCard: React.FC&lt;UserCardProps&gt; = ({ 
+    user, 
+    onEdit, 
+    onDelete, 
+    className 
+}) =&gt; {
+    const handleEdit = () =&gt; onEdit(user.id);
+    const handleDelete = () =&gt; onDelete(user.id);
+    
+    return (
+        &lt;div className={`user-card ${className || ''}`}&gt;
+            {user.avatar && (
+                &lt;img src={user.avatar} alt={`${user.name}'s avatar`} /&gt;
+            )}
+            &lt;h3&gt;{user.name}&lt;/h3&gt;
+            &lt;p&gt;{user.email}&lt;/p&gt;
+            &lt;div className="actions"&gt;
+                &lt;button onClick={handleEdit}&gt;Edit&lt;/button&gt;
+                &lt;button onClick={handleDelete}&gt;Delete&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+};
+
+// hooks/useUsers.ts
+import { useState, useEffect } from 'react';
+
+interface User {
+    id: string;
+    name: string;
+    email: string;
+}
+
+export const useUsers = () =&gt; {
+    const [users, setUsers] = useState&lt;User[]&gt;([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState&lt;string | null&gt;(null);
+    
+    useEffect(() =&gt; {
+        fetchUsers();
+    }, []);
+    
+    const fetchUsers = async (): Promise&lt;void&gt; =&gt; {
+        try {
+            setLoading(true);
+            const response = await fetch('/api/users');
+            if (!response.ok) {
+                throw new Error('Failed to fetch users');
+            }
+            const userData: User[] = await response.json();
+            setUsers(userData);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Unknown error');
+        } finally {
+            setLoading(false);
+        }
+    };
+    
+    return { users, loading, error, refetch: fetchUsers };
+};</code></pre>
+
+            <h2>Sonuç</h2>
+            <p>TypeScript modern web development'ın vazgeçilmez bir parçası haline gelmiştir. Bu rehberde öğrendiklerinizi özetlersek:</p>
+
+            <h3>Ana Faydalar:</h3>
+            <ul>
+                <li>Compile-time hata yakalama ile daha güvenli kod</li>
+                <li>Mükemmel IDE desteği ve IntelliSense</li>
+                <li>Büyük projelerde maintainability</li>
+                <li>Team collaboration'da consistency</li>
+                <li>Refactoring güvenliği</li>
+            </ul>
+
+            <h3>Best Practices:</h3>
+            <ul>
+                <li>Strict mode kullanın</li>
+                <li>Type guards ile runtime checks yapın</li>
+                <li>Generic'leri type safety için kullanın</li>
+                <li>Utility types'lar ile kod tekrarını azaltın</li>
+                <li>Types'ları organize edin ve export edin</li>
+            </ul>
+
+            <p>TypeScript öğrenmek için en iyi yol mevcut JavaScript projelerinizi kademeli olarak TypeScript'e migrate etmektir. Başlangıçta basic type annotations kullanarak başlayın ve zamanla advanced features'ları projenize entegre edin.</p>
+        </div>
+    </article>
+</body>
+</html>

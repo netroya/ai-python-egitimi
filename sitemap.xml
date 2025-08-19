@@ -3,81 +3,81 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  
   <url>
     <loc>https://netroya.github.io/ai-python-egitimi/</loc>
-    <lastmod>2025-08-18</lastmod>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
   <url>
     <loc>https://netroya.github.io/ai-python-egitimi/python-kursu.html</loc>
-    <lastmod>2025-08-18</lastmod>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
   <url>
     <loc>https://netroya.github.io/ai-python-egitimi/yapay-zeka-rehberi.html</loc>
-    <lastmod>2025-08-18</lastmod>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
+  <url>
+    <loc>https://netroya.github.io/ai-python-egitimi/interactive-python-editor.html</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://netroya.github.io/ai-python-egitimi/newsletter.html</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://netroya.github.io/ai-python-egitimi/veri-analizi.html</loc>
-    <lastmod>2025-08-18</lastmod>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>https://netroya.github.io/ai-python-egitimi/web-gelistirme.html</loc>
-    <lastmod>2025-08-18</lastmod>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>https://netroya.github.io/ai-python-egitimi/programlama-araclari.html</loc>
-    <lastmod>2025-08-18</lastmod>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
   <url>
     <loc>https://netroya.github.io/ai-python-egitimi/kariyer-rehberi.html</loc>
-    <lastmod>2025-08-18</lastmod>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-
   <url>
     <loc>https://netroya.github.io/ai-python-egitimi/blog/</loc>
-    <lastmod>2025-08-18</lastmod>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
   <url>
-    <loc>https://netroya.github.io/ai-python-egitimi/blog/python/python-pandas-veri-analizi-rehberi.html</loc>
-    <lastmod>2025-08-18</lastmod>
+    <loc>https://netroya.github.io/ai-python-egitimi/blog/python/python-ogrenmeye-nereden-baslanir-2025-rehber.html</loc>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
   <url>
-    <loc>https://netroya.github.io/ai-python-egitimi/blog/ai-ml/yapay-zeka-makine-ogrenmesi-2025-yol-haritasi.html</loc>
-    <lastmod>2025-08-18</lastmod>
+    <loc>https://netroya.github.io/ai-python-egitimi/blog/python/numpy-ile-sayisal-hesaplamalar-veri-bilimi.html</loc>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
   <url>
-    <loc>https://netroya.github.io/ai-python-egitimi/blog/web-dev/web-gelistirme-2025-modern-javascript-frameworkleri.html</loc>
-    <lastmod>2025-08-18</lastmod>
+    <loc>https://netroya.github.io/ai-python-egitimi/blog/ai-ml/scikit-learn-ile-makine-ogrenmesi-rehberi.html</loc>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

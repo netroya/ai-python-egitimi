@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Advanced Workflow Tutorial - Profesyonel Git Kullanımı</title>
+    <meta name="description" content="Git'in ileri düzey özelliklerini öğrenin. Branch stratejileri, merge conflicts, rebase, hooks ve team workflow'ları.">
+    <meta name="keywords" content="git tutorial, git workflow, git rebase, git hooks, version control">
+    <link rel="stylesheet" href="../blog-styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/python-kursu.html">Python Kursu</a></li>
+                <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header class="post-header">
+            <div class="post-meta">
+                <span class="category">📚 Tutorial</span>
+                <time datetime="2025-08-19">19 Ağustos 2025</time>
+                <span class="read-time">⏱️ 40 dakika okuma</span>
+            </div>
+            <h1>Git Advanced Workflow Tutorial - Profesyonel Git Kullanımı</h1>
+            <p class="lead">Git'in ileri düzey özelliklerini öğrenerek profesyonel development workflow'ları kurun</p>
+        </header>
+
+        <div class="post-content">
+            <h2>Giriş</h2>
+            <p>Bu tutorial, Git'in temellerini bildiğinizi varsayarak ileri düzey konuları ele alır. Professional development ortamında kullanılan branch stratejileri, conflict resolution, code review süreçleri ve automation konularını öğreneceksiniz.</p>
+
+            <h2>1. Advanced Branch Management</h2>
+
+            <h3>Git Flow Strategy</h3>
+            <p>Git Flow, feature development için yapılandırılmış bir branching model'dir:</p>
+
+            <pre><code># Git flow initialize et
+git flow init
+
+# Feature branch başlat
+git flow feature start new-user-authentication
+# Çalışma yap...
+git flow feature finish new-user-authentication
+
+# Release branch başlat
+git flow release start v1.2.0
+# Bug fix'ler yap...
+git flow release finish v1.2.0
+
+# Hotfix branch başlat
+git flow hotfix start critical-security-fix
+# Fix yap...
+git flow hotfix finish critical-security-fix</code></pre>
+
+            <h3>Manual Git Flow Implementation</h3>
+            <pre><code># Ana branch'leri oluştur
+git checkout -b develop
+git push -u origin develop
+
+# Feature branch oluştur
+git checkout develop
+git checkout -b feature/user-dashboard
+# Development...
+git add .
+git commit -m "Add user dashboard functionality"
+
+# Feature'ı develop'a merge et
+git checkout develop
+git merge --no-ff feature/user-dashboard
+git branch -d feature/user-dashboard
+git push origin develop
+
+# Release branch oluştur
+git checkout develop
+git checkout -b release/v1.1.0
+# Version number güncelle, documentation...
+git commit -m "Prepare v1.1.0 release"
+
+# Release'i main'e merge et
+git checkout main
+git merge --no-ff release/v1.1.0
+git tag -a v1.1.0 -m "Version 1.1.0"
+git push origin main --tags
+
+# Release'i develop'a da merge et
+git checkout develop
+git merge --no-ff release/v1.1.0
+git branch -d release/v1.1.0</code></pre>
+
+            <h3>GitHub Flow (Simplified)</h3>
+            <pre><code># Feature branch oluştur
+git checkout main
+git pull origin main
+git checkout -b feature/add-payment-integration
+
+# Development ve commits...
+git add .
+git commit -m "Add Stripe payment integration"
+git push -u origin feature/add-payment-integration
+
+# Pull request oluştur (GitHub UI'da)
+# Code review sonrası main'e merge
+# GitHub'da "Squash and merge" veya "Merge pull request"
+
+# Lokal cleanup
+git checkout main
+git pull origin main
+git branch -d feature/add-payment-integration</code></pre>
+
+            <h2>2. Advanced Merge Strategies</h2>
+
+            <h3>Merge vs Rebase</h3>
+            <pre><code># Standard merge (commit history korunur)
+git checkout main
+git merge feature/new-feature
+
+# Fast-forward merge (linear history)
+git checkout main
+git merge --ff-only feature/new-feature
+
+# No fast-forward merge (her zaman merge commit)
+git checkout main
+git merge --no-ff feature/new-feature
+
+# Rebase (linear history, commit history değişir)
+git checkout feature/new-feature
+git rebase main
+
+# Interactive rebase (commit'leri düzenle)
+git rebase -i HEAD~3
+# pick, squash, edit, drop options kullanarak commits'i düzenle</code></pre>
+
+            <h3>Merge Conflict Resolution</h3>
+            <pre><code># Conflict durumunda
+git merge feature/conflicting-changes
+# Auto-merging file.txt
+# CONFLICT (content): Merge conflict in file.txt
+
+# Conflict'i manuel resolve et
+# File.txt içinde &lt;&lt;&lt;&lt;&lt;&lt;&lt;, =======, &gt;&gt;&gt;&gt;&gt;&gt;&gt; markers'ları düzenle
+
+# Düzenleme sonrası
+git add file.txt
+git commit -m "Resolve merge conflict in file.txt"
+
+# Merge'i iptal etmek için
+git merge --abort
+
+# Rebase conflict resolution
+git rebase main
+# Conflict resolve et
+git add conflicted_file.txt
+git rebase --continue
+
+# Rebase'i iptal et
+git rebase --abort</code></pre>
+
+            <h3>Advanced Merge Tools</h3>
+            <pre><code># Merge tool konfigürasyonu
+git config --global merge.tool vimdiff
+git config --global merge.tool meld
+git config --global merge.tool vscode
+
+# VSCode merge tool setup
+git config --global merge.tool vscode
+git config --global mergetool.vscode.cmd 'code --wait $MERGED'
+
+# Merge tool kullan
+git mergetool</code></pre>
+
+            <h2>3. Interactive Rebase Mastery</h2>
+
+            <h3>Commit History Düzenleme</h3>
+            <pre><code># Son 5 commit'i düzenle
+git rebase -i HEAD~5
+
+# Rebase options:
+# pick = commit'i olduğu gibi kullan
+# reword = commit message'ı değiştir
+# edit = commit'i düzenlemek için dur
+# squash = commit'i önceki commit ile birleştir
+# fixup = squash gibi ama commit message'ı atla
+# drop = commit'i sil
+
+# Örnek interactive rebase session:
+pick a1b2c3d Add user authentication
+reword e4f5g6h Fix typo in login form
+squash h7i8j9k Update authentication tests
+drop k0l1m2n Remove debug code
+edit n3o4p5q Add password validation</code></pre>
+
+            <h3>Commit Düzenleme Örnekleri</h3>
+            <pre><code># Commit message değiştir
+git commit --amend -m "New commit message"
+
+# Son commit'e dosya ekle (yeni commit oluşturmadan)
+git add forgotten_file.txt
+git commit --amend --no-edit
+
+# Commit'i böl (edit option ile)
+git rebase -i HEAD~2
+# Edit seç
+git reset HEAD~
+git add specific_file.txt
+git commit -m "First part of the change"
+git add remaining_files.txt
+git commit -m "Second part of the change"
+git rebase --continue</code></pre>
+
+            <h2>4. Advanced Git Commands</h2>
+
+            <h3>Git Stash Advanced Usage</h3>
+            <pre><code># Stash with message
+git stash save "Work in progress on feature X"
+
+# Stash specific files
+git stash push -m "Stash only config file" config.json
+
+# Stash including untracked files
+git stash -u
+
+# List stashes
+git stash list
+
+# Show stash content
+git stash show -p stash@{0}
+
+# Apply stash without removing from stash list
+git stash apply stash@{1}
+
+# Pop stash (apply and remove)
+git stash pop
+
+# Drop specific stash
+git stash drop stash@{2}
+
+# Clear all stashes
+git stash clear</code></pre>
+
+            <h3>Git Cherry-pick</h3>
+            <pre><code># Specific commit'i başka branch'e al
+git checkout target-branch
+git cherry-pick abc123
+
+# Multiple commits
+git cherry-pick abc123 def456 ghi789
+
+# Range of commits
+git cherry-pick abc123..ghi789
+
+# Cherry-pick without commit (staging area'ya al)
+git cherry-pick -n abc123
+
+# Conflict durumunda
+git cherry-pick abc123
+# Conflict resolve et
+git add resolved_files.txt
+git cherry-pick --continue
+
+# Cherry-pick iptal et
+git cherry-pick --abort</code></pre>
+
+            <h3>Git Bisect (Bug Finding)</h3>
+            <pre><code># Bisect başlat
+git bisect start
+
+# Bad commit (bug olan commit)
+git bisect bad HEAD
+
+# Good commit (bug olmayan commit)
+git bisect good v1.0.0
+
+# Git otomatik olarak ortadaki commit'e checkout yapar
+# Test et ve sonucu bildir
+git bisect good  # veya git bisect bad
+
+# Bu process devam eder ta ki problematic commit bulunana kadar
+
+# Bisect'i sıfırla
+git bisect reset
+
+# Automated bisect with test script
+git bisect start HEAD v1.0.0
+git bisect run test_script.sh</code></pre>
+
+            <h2>5. Git Hooks</h2>
+
+            <h3>Client-side Hooks</h3>
+            <pre><code># .git/hooks/pre-commit
+#!/bin/bash
+# Commit öncesi çalışır
+
+# Python kod formatını kontrol et
+black --check .
+if [ $? -ne 0 ]; then
+    echo "Code formatting issues found. Run 'black .' to fix."
+    exit 1
+fi
+
+# Tests çalıştır
+python -m pytest
+if [ $? -ne 0 ]; then
+    echo "Tests failed. Fix tests before committing."
+    exit 1
+fi
+
+echo "Pre-commit checks passed!"</code></pre>
+
+            <pre><code># .git/hooks/commit-msg
+#!/bin/bash
+# Commit message formatını kontrol et
+
+commit_regex='^(feat|fix|docs|style|refactor|test|chore)(\(.+\))?: .{1,50}'
+
+if ! grep -qE "$commit_regex" "$1"; then
+    echo "Invalid commit message format!"
+    echo "Format: type(scope): description"
+    echo "Example: feat(auth): add user login functionality"
+    exit 1
+fi</code></pre>
+
+            <h3>Server-side Hooks</h3>
+            <pre><code># hooks/pre-receive
+#!/bin/bash
+# Server'a push öncesi çalışır
+
+while read oldrev newrev refname; do
+    # main branch'e direct push engelle
+    if [ "$refname" = "refs/heads/main" ]; then
+        echo "Direct push to main branch is not allowed!"
+        echo "Please create a pull request."
+        exit 1
+    fi
+done</code></pre>
+
+            <h3>Husky ile Hook Management</h3>
+            <pre><code># package.json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.py": ["black", "flake8"],
+    "*.js": ["eslint --fix", "prettier --write"],
+    "*.{md,json}": ["prettier --write"]
+  }
+}</code></pre>
+
+            <h2>6. Advanced Configuration</h2>
+
+            <h3>Git Aliases</h3>
+            <pre><code># Useful aliases
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+
+# Advanced aliases
+git config --global alias.unstage 'reset HEAD --'
+git config --global alias.last 'log -1 HEAD'
+git config --global alias.visual '!gitk'
+
+# Complex aliases
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+git config --global alias.contributors "shortlog --summary --numbered --email"</code></pre>
+
+            <h3>Global Git Configuration</h3>
+            <pre><code># .gitconfig
+[user]
+    name = Your Name
+    email = your.email@example.com
+
+[core]
+    editor = code --wait
+    autocrlf = input
+    ignorecase = false
+
+[push]
+    default = simple
+    followTags = true
+
+[pull]
+    rebase = true
+
+[merge]
+    tool = vscode
+    conflictstyle = diff3
+
+[diff]
+    tool = vscode
+
+[branch]
+    autosetuprebase = always
+
+[rerere]
+    enabled = true
+
+[help]
+    autocorrect = 1</code></pre>
+
+            <h2>7. Advanced Workflows</h2>
+
+            <h3>Monorepo Management</h3>
+            <pre><code># Sparse checkout for large repos
+git clone --filter=blob:none --sparse https://github.com/large-repo.git
+cd large-repo
+git sparse-checkout set path/to/needed/directory
+
+# Subtree for including external repos
+git subtree add --prefix=vendor/library https://github.com/library.git main --squash
+
+# Update subtree
+git subtree pull --prefix=vendor/library https://github.com/library.git main --squash
+
+# Submodule alternative
+git submodule add https://github.com/library.git vendor/library
+git submodule update --init --recursive</code></pre>
+
+            <h3>Release Management</h3>
+            <pre><code># Semantic versioning with tags
+git tag -a v1.0.0 -m "Release version 1.0.0"
+git tag -a v1.0.1 -m "Patch release 1.0.1"
+git tag -a v1.1.0 -m "Minor release 1.1.0"
+
+# Push tags
+git push origin --tags
+git push origin v1.0.0
+
+# Release branch automation script
+#!/bin/bash
+VERSION=$1
+
+if [ -z "$VERSION" ]; then
+    echo "Usage: $0 <version>"
+    exit 1
+fi
+
+# Create release branch
+git checkout develop
+git pull origin develop
+git checkout -b release/$VERSION
+
+# Update version in files
+sed -i "s/version = .*/version = '$VERSION'/" setup.py
+git add setup.py
+git commit -m "Bump version to $VERSION"
+
+# Merge to main
+git checkout main
+git pull origin main
+git merge --no-ff release/$VERSION
+git tag -a v$VERSION -m "Release $VERSION"
+
+# Merge back to develop
+git checkout develop
+git merge --no-ff release/$VERSION
+git branch -d release/$VERSION
+
+# Push everything
+git push origin main
+git push origin develop
+git push origin --tags</code></pre>
+
+            <h2>8. Git Security Best Practices</h2>
+
+            <h3>Commit Signing</h3>
+            <pre><code># GPG key oluştur
+gpg --full-generate-key
+
+# Git'e GPG key'i tanıt
+git config --global user.signingkey YOUR_KEY_ID
+git config --global commit.gpgsign true
+
+# Signed commit oluştur
+git commit -S -m "Signed commit"
+
+# Verify signatures
+git log --show-signature</code></pre>
+
+            <h3>Sensitive Data Protection</h3>
+            <pre><code># .gitignore patterns
+*.env
+*.key
+*.pem
+config/secrets.yml
+.env.local
+.env.production
+
+# Remove sensitive data from history
+git filter-branch --force --index-filter \
+'git rm --cached --ignore-unmatch secrets.txt' \
+--prune-empty --tag-name-filter cat -- --all
+
+# Modern alternative: git-filter-repo
+pip install git-filter-repo
+git filter-repo --path secrets.txt --invert-paths</code></pre>
+
+            <h2>9. Performance Optimization</h2>
+
+            <h3>Large Repository Optimization</h3>
+            <pre><code># Cleanup repository
+git gc --aggressive --prune=now
+
+# Reduce repository size
+git reflog expire --expire=now --all
+git gc --prune=now
+
+# Check repository size
+git count-objects -vH
+
+# Partial clone for large repos
+git clone --filter=blob:limit=1m https://github.com/large-repo.git
+
+# Shallow clone
+git clone --depth 1 https://github.com/repo.git
+
+# Convert shallow to full
+git fetch --unshallow</code></pre>
+
+            <h3>Git LFS (Large File Storage)</h3>
+            <pre><code># Install Git LFS
+git lfs install
+
+# Track large files
+git lfs track "*.psd"
+git lfs track "*.zip"
+git lfs track "models/*.h5"
+
+# Add .gitattributes
+git add .gitattributes
+
+# Normal git workflow
+git add large_file.psd
+git commit -m "Add design file"
+git push origin main
+
+# LFS info
+git lfs ls-files
+git lfs status</code></pre>
+
+            <h2>10. Troubleshooting Common Issues</h2>
+
+            <h3>Recovering Lost Commits</h3>
+            <pre><code># Find lost commits
+git reflog
+git log --oneline --graph --all
+
+# Recover lost commit
+git checkout lost_commit_hash
+git checkout -b recovery-branch
+
+# Reset to previous state
+git reset --hard HEAD~1  # Dangerous!
+git reset --soft HEAD~1  # Safe, keeps changes staged
+git reset --mixed HEAD~1 # Default, unstages changes
+
+# Undo last commit (keeping changes)
+git reset --soft HEAD~1
+
+# Undo last commit (discarding changes)
+git reset --hard HEAD~1</code></pre>
+
+            <h3>Fixing Common Mistakes</h3>
+            <pre><code># Wrong commit message
+git commit --amend -m "Correct message"
+
+# Forgot to add files to commit
+git add forgotten_file.txt
+git commit --amend --no-edit
+
+# Committed to wrong branch
+git checkout correct-branch
+git cherry-pick commit_hash
+git checkout wrong-branch
+git reset --hard HEAD~1
+
+# Accidentally merged wrong branch
+git reset --hard ORIG_HEAD
+
+# Remove file from staging
+git restore --staged file.txt
+git reset HEAD file.txt  # older git versions</code></pre>
+
+            <h2>11. CI/CD Integration</h2>
+
+            <h3>GitHub Actions Workflow</h3>
+            <pre><code># .github/workflows/ci.yml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, 3.10]
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pytest black flake8
+    
+    - name: Lint with flake8
+      run: flake8 .
+    
+    - name: Check formatting with black
+      run: black --check .
+    
+    - name: Test with pytest
+      run: pytest
+  
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Deploy to production
+      run: |
+        echo "Deploying to production..."</code></pre>
+
+            <h2>Sonuç</h2>
+            <p>Bu advanced Git tutorial'ında modern development workflow'larının temelini oluşturan konuları ele aldık. Git'in güçlü özelliklerini kullanarak:</p>
+
+            <ul>
+                <li>Temiz ve organize commit history oluşturun</li>
+                <li>Effective branching strategies uygulayın</li>
+                <li>Code quality'yi hooks ile otomatize edin</li>
+                <li>Team collaboration'ı optimize edin</li>
+                <li>Security best practices'leri takip edin</li>
+            </ul>
+
+            <p>Git mastery, professional development'ın kritik bir parçasıdır. Bu teknikleri practice ederek team productivity'nizi ve code quality'nizi önemli ölçüde artırabilirsiniz.</p>
+        </div>
+    </article>
+</body>
+</html>

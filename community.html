@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - Developer Topluluğu | AI & Python Eğitimi</title>
+    <meta name="description" content="Python ve AI geliştiricilerin buluşma noktası. Sorularınızı sorun, deneyimlerinizi paylaşın, networking yapın.">
+    <meta name="keywords" content="python community, developer topluluk, programming forum, tech community">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "AI & Python Community",
+        "description": "Python ve AI geliştiriciler için topluluk platformu",
+        "url": "https://netroya.github.io/ai-python-egitimi/community.html",
+        "sameAs": [
+            "https://discord.gg/python-ai",
+            "https://github.com/python-ai-community"
+        ]
+    }
+    </script>
+    
+    <link rel="stylesheet" href="premium-styles.css">
+    
+    <style>
+        .community-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .community-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="30" cy="30" r="20" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="60" r="15" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="80" r="10" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 15s infinite linear;
+        }
+        
+        .forum-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .forum-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #666;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        .forum-sections {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .forum-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .forum-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .forum-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .forum-tab {
+            flex: 1;
+            padding: 15px 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .forum-tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .forum-content {
+            padding: 0;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .post-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .post-item {
+            border-bottom: 1px solid #f1f3f4;
+            padding: 20px;
+            transition: background 0.3s;
+        }
+        
+        .post-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .post-item:last-child {
+            border-bottom: none;
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .post-meta {
+            flex: 1;
+        }
+        
+        .post-author {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+        
+        .post-time {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .post-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        
+        .post-title:hover {
+            color: #667eea;
+        }
+        
+        .post-preview {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .post-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        
+        .post-tag {
+            background: #e9ecef;
+            color: #495057;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .post-tag:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .post-stats {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .post-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .sidebar-widget {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .widget-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .widget-content {
+            padding: 20px;
+        }
+        
+        .online-users {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .online-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f3f4;
+        }
+        
+        .online-user:last-child {
+            border-bottom: none;
+        }
+        
+        .user-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #27ae60;
+        }
+        
+        .online-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .online-info {
+            flex: 1;
+        }
+        
+        .online-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .online-role {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .trending-topics {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .trending-topic {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f3f4;
+            cursor: pointer;
+        }
+        
+        .trending-topic:hover {
+            color: #667eea;
+        }
+        
+        .trending-topic:last-child {
+            border-bottom: none;
+        }
+        
+        .topic-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .topic-stats {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .new-post-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .new-post-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .discord-widget {
+            background: #5865F2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .discord-btn {
+            background: white;
+            color: #5865F2;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+        
+        .discord-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .github-widget {
+            background: #24292e;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+        }
+        
+        .github-btn {
+            background: white;
+            color: #24292e;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+        
+        .github-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .post-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            margin: 0;
+            color: #2c3e50;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-control[type="textarea"] {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .forum-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .forum-tabs {
+                flex-direction: column;
+            }
+            
+            .post-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .post-actions {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .new-post-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">🚀 AI & Python Eğitimi</a>
+            <ul class="nav-menu">
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/python-kursu.html">Python Kursu</a></li>
+                <li><a href="/veri-analizi.html">Veri Analizi</a></li>
+                <li><a href="/yapay-zeka-rehberi.html">AI Rehberi</a></li>
+                <li><a href="/community.html" class="active">Community</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="community-hero">
+        <div class="container">
+            <h1>👥 Developer Community</h1>
+            <p class="lead">Python ve AI geliştiricilerinin buluşma noktası</p>
+            <p>Sorularınızı sorun, deneyimlerinizi paylaşın, birlikte öğrenin</p>
+        </div>
+    </section>
+
+    <div class="forum-container">
+        <div class="forum-stats">
+            <div class="stat-card">
+                <span class="stat-number">2.5K+</span>
+                <div class="stat-label">Aktif Üyeler</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">450+</span>
+                <div class="stat-label">Tartışma Konusu</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">1.2K+</span>
+                <div class="stat-label">Çözülen Problem</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">185</span>
+                <div class="stat-label">Online Şimdi</div>
+            </div>
+        </div>
+
+        <div class="forum-sections">
+            <div class="main-content">
+                <div class="forum-header">
+                    <h2 class="forum-title">🗣️ Topluluk Tartışmaları</h2>
+                    <p>En aktif konular ve son paylaşımlar</p>
+                </div>
+                
+                <div class="forum-tabs">
+                    <button class="forum-tab active" onclick="switchForumTab('recent')">🕒 En Yeni</button>
+                    <button class="forum-tab" onclick="switchForumTab('popular')">🔥 Popüler</button>
+                    <button class="forum-tab" onclick="switchForumTab('solved')">✅ Çözülmüş</button>
+                    <button class="forum-tab" onclick="switchForumTab('questions')">❓ Sorular</button>
+                </div>
+                
+                <div class="forum-content">
+                    <!-- Recent Posts Tab -->
+                    <div id="recent-tab" class="tab-content active">
+                        <ul class="post-list">
+                            <li class="post-item">
+                                <div class="post-header">
+                                    <div class="user-avatar">AK</div>
+                                    <div class="post-meta">
+                                        <div class="post-author">Ahmet Kaya</div>
+                                        <div class="post-time">5 dakika önce</div>
+                                    </div>
+                                </div>
+                                <h3 class="post-title" onclick="openPost('pandas-performance')">
+                                    Pandas DataFrame performance optimizasyonu için ipuçları
+                                </h3>
+                                <p class="post-preview">
+                                    Büyük veri setleri ile çalışırken Pandas'ın yavaş kaldığını fark ettim. Memory usage ve processing speed için hangi teknikleri önerirsiniz?
+                                </p>
+                                <div class="post-tags">
+                                    <span class="post-tag">pandas</span>
+                                    <span class="post-tag">performance</span>
+                                    <span class="post-tag">optimization</span>
+                                </div>
+                                <div class="post-actions">
+                                    <div class="post-stats">
+                                        <span class="post-stat">👍 12</span>
+                                        <span class="post-stat">💬 8</span>
+                                        <span class="post-stat">👁️ 156</span>
+                                    </div>
+                                    <span class="post-category">📊 Veri Analizi</span>
+                                </div>
+                            </li>
+                            
+                            <li class="post-item">
+                                <div class="post-header">
+                                    <div class="user-avatar">ZM</div>
+                                    <div class="post-meta">
+                                        <div class="post-author">Zeynep Mutlu</div>
+                                        <div class="post-time">15 dakika önce</div>
+                                    </div>
+                                </div>
+                                <h3 class="post-title" onclick="openPost('fastapi-async')">
+                                    FastAPI ile async/await kullanımında best practices
+                                </h3>
+                                <p class="post-preview">
+                                    API endpoint'lerimi async yaparak performance artırmaya çalışıyorum. Database operations ve external API calls için hangi pattern'ları kullanmalıyım?
+                                </p>
+                                <div class="post-tags">
+                                    <span class="post-tag">fastapi</span>
+                                    <span class="post-tag">async</span>
+                                    <span class="post-tag">python</span>
+                                </div>
+                                <div class="post-actions">
+                                    <div class="post-stats">
+                                        <span class="post-stat">👍 24</span>
+                                        <span class="post-stat">💬 15</span>
+                                        <span class="post-stat">👁️ 287</span>
+                                    </div>
+                                    <span class="post-category">🌐 Web Development</span>
+                                </div>
+                            </li>
+                            
+                            <li class="post-item">
+                                <div class="post-header">
+                                    <div class="user-avatar">MS</div>
+                                    <div class="post-meta">
+                                        <div class="post-author">Mehmet Şahin</div>
+                                        <div class="post-time">1 saat önce</div>
+                                    </div>
+                                </div>
+                                <h3 class="post-title" onclick="openPost('tensorflow-gpu')">
+                                    TensorFlow GPU kurulumu Ubuntu 22.04'te sorun
+                                </h3>
+                                <p class="post-preview">
+                                    CUDA ve cuDNN kurduktan sonra TensorFlow GPU'yu tanımıyor. tf.config.list_physical_devices('GPU') boş liste döndürüyor. Yardımcı olabilir misiniz?
+                                </p>
+                                <div class="post-tags">
+                                    <span class="post-tag">tensorflow</span>
+                                    <span class="post-tag">gpu</span>
+                                    <span class="post-tag">cuda</span>
+                                    <span class="post-tag">ubuntu</span>
+                                </div>
+                                <div class="post-actions">
+                                    <div class="post-stats">
+                                        <span class="post-stat">👍 8</span>
+                                        <span class="post-stat">💬 12</span>
+                                        <span class="post-stat">👁️ 95</span>
+                                    </div>
+                                    <span class="post-category">🤖 Machine Learning</span>
+                                </div>
+                            </li>
+                            
+                            <li class="post-item">
+                                <div class="post-header">
+                                    <div class="user-avatar">EA</div>
+                                    <div class="post-meta">
+                                        <div class="post-author">Elif Aydın</div>
+                                        <div class="post-time">2 saat önce</div>
+                                    </div>
+                                </div>
+                                <h3 class="post-title" onclick="openPost('career-advice')">
+                                    Junior developer'dan senior'a geçiş süreci
+                                </h3>
+                                <p class="post-preview">
+                                    2 yıldır Python ile çalışıyorum ama hala kendimi junior hissediyorum. Senior developer olmak için hangi becerileri geliştirmeliyim?
+                                </p>
+                                <div class="post-tags">
+                                    <span class="post-tag">career</span>
+                                    <span class="post-tag">junior</span>
+                                    <span class="post-tag">senior</span>
+                                    <span class="post-tag">advice</span>
+                                </div>
+                                <div class="post-actions">
+                                    <div class="post-stats">
+                                        <span class="post-stat">👍 45</span>
+                                        <span class="post-stat">💬 23</span>
+                                        <span class="post-stat">👁️ 378</span>
+                                    </div>
+                                    <span class="post-category">💼 Kariyer</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Popular Posts Tab -->
+                    <div id="popular-tab" class="tab-content">
+                        <ul class="post-list">
+                            <li class="post-item">
+                                <div class="post-header">
+                                    <div class="user-avatar">OY</div>
+                                    <div class="post-meta">
+                                        <div class="post-author">Onur Yılmaz</div>
+                                        <div class="post-time">1 gün önce</div>
+                                    </div>
+                                </div>
+                                <h3 class="post-title">2025 Python Developer Roadmap - Kapsamlı Rehber</h3>
+                                <p class="post-preview">
+                                    Python öğrenmeye başlayanlar için detaylı yol haritası hazırladım. Hangi sırayla ne öğrenmeli, hangi projeleri yapmalı?
+                                </p>
+                                <div class="post-tags">
+                                    <span class="post-tag">python</span>
+                                    <span class="post-tag">roadmap</span>
+                                    <span class="post-tag">beginner</span>
+                                </div>
+                                <div class="post-actions">
+                                    <div class="post-stats">
+                                        <span class="post-stat">👍 156</span>
+                                        <span class="post-stat">💬 87</span>
+                                        <span class="post-stat">👁️ 2.1K</span>
+                                    </div>
+                                    <span class="post-category">🐍 Python</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Solved Posts Tab -->
+                    <div id="solved-tab" class="tab-content">
+                        <ul class="post-list">
+                            <li class="post-item">
+                                <div class="post-header">
+                                    <div class="user-avatar">BK</div>
+                                    <div class="post-meta">
+                                        <div class="post-author">Burak Kaya</div>
+                                        <div class="post-time">3 saat önce</div>
+                                    </div>
+                                </div>
+                                <h3 class="post-title">✅ Docker container'da Python app memory leak problemi</h3>
+                                <p class="post-preview">
+                                    Çözüldü: memory_profiler kullanarak leak'i buldum. Pandas DataFrame'leri düzgün temizlememiştim.
+                                </p>
+                                <div class="post-tags">
+                                    <span class="post-tag">docker</span>
+                                    <span class="post-tag">memory-leak</span>
+                                    <span class="post-tag">solved</span>
+                                </div>
+                                <div class="post-actions">
+                                    <div class="post-stats">
+                                        <span class="post-stat">👍 18</span>
+                                        <span class="post-stat">💬 6</span>
+                                        <span class="post-stat">👁️ 124</span>
+                                    </div>
+                                    <span class="post-category">🐳 DevOps</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Questions Tab -->
+                    <div id="questions-tab" class="tab-content">
+                        <ul class="post-list">
+                            <li class="post-item">
+                                <div class="post-header">
+                                    <div class="user-avatar">SA</div>
+                                    <div class="post-meta">
+                                        <div class="post-author">Selin Arslan</div>
+                                        <div class="post-time">30 dakika önce</div>
+                                    </div>
+                                </div>
+                                <h3 class="post-title">❓ Scikit-learn model serialization best practice?</h3>
+                                <p class="post-preview">
+                                    Trained model'imi production'a deploy etmek istiyorum. Pickle, joblib yoksa başka yöntem mi kullanmalıyım?
+                                </p>
+                                <div class="post-tags">
+                                    <span class="post-tag">scikit-learn</span>
+                                    <span class="post-tag">deployment</span>
+                                    <span class="post-tag">serialization</span>
+                                </div>
+                                <div class="post-actions">
+                                    <div class="post-stats">
+                                        <span class="post-stat">👍 5</span>
+                                        <span class="post-stat">💬 3</span>
+                                        <span class="post-stat">👁️ 67</span>
+                                    </div>
+                                    <span class="post-category">🤖 Machine Learning</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <!-- Discord Widget -->
+                <div class="discord-widget">
+                    <h4>💬 Discord Sunucumuz</h4>
+                    <p>Anlık sohbet ve hızlı yardım için Discord'umuza katıl!</p>
+                    <p><strong>1,250+ aktif üye</strong></p>
+                    <button class="discord-btn" onclick="joinDiscord()">Discord'a Katıl</button>
+                </div>
+                
+                <!-- GitHub Widget -->
+                <div class="github-widget">
+                    <h4>🐙 GitHub Repo</h4>
+                    <p>Projelerimize katkıda bulun ve açık kaynak topluluğa katıl!</p>
+                    <button class="github-btn" onclick="visitGitHub()">GitHub'ı Ziyaret Et</button>
+                </div>
+                
+                <!-- Online Users -->
+                <div class="sidebar-widget">
+                    <div class="widget-header">
+                        🟢 Online Üyeler (12)
+                    </div>
+                    <div class="widget-content">
+                        <ul class="online-users">
+                            <li class="online-user">
+                                <div class="user-status"></div>
+                                <div class="online-avatar">MK</div>
+                                <div class="online-info">
+                                    <div class="online-name">Murat Koç</div>
+                                    <div class="online-role">Senior Developer</div>
+                                </div>
+                            </li>
+                            <li class="online-user">
+                                <div class="user-status"></div>
+                                <div class="online-avatar">AY</div>
+                                <div class="online-info">
+                                    <div class="online-name">Ayşe Yılmaz</div>
+                                    <div class="online-role">Data Scientist</div>
+                                </div>
+                            </li>
+                            <li class="online-user">
+                                <div class="user-status"></div>
+                                <div class="online-avatar">TD</div>
+                                <div class="online-info">
+                                    <div class="online-name">Tolga Demir</div>
+                                    <div class="online-role">ML Engineer</div>
+                                </div>
+                            </li>
+                            <li class="online-user">
+                                <div class="user-status"></div>
+                                <div class="online-avatar">EK</div>
+                                <div class="online-info">
+                                    <div class="online-name">Ece Kara</div>
+                                    <div class="online-role">Full Stack Dev</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Trending Topics -->
+                <div class="sidebar-widget">
+                    <div class="widget-header">
+                        🔥 Trend Konular
+                    </div>
+                    <div class="widget-content">
+                        <ul class="trending-topics">
+                            <li class="trending-topic" onclick="searchTopic('python-3.12')">
+                                <div class="topic-title">#python-3.12</div>
+                                <div class="topic-stats">24 tartışma • 156 mesaj</div>
+                            </li>
+                            <li class="trending-topic" onclick="searchTopic('langchain')">
+                                <div class="topic-title">#langchain</div>
+                                <div class="topic-stats">18 tartışma • 89 mesaj</div>
+                            </li>
+                            <li class="trending-topic" onclick="searchTopic('fastapi')">
+                                <div class="topic-title">#fastapi</div>
+                                <div class="topic-stats">15 tartışma • 67 mesaj</div>
+                            </li>
+                            <li class="trending-topic" onclick="searchTopic('pytorch')">
+                                <div class="topic-title">#pytorch</div>
+                                <div class="topic-stats">12 tartışma • 45 mesaj</div>
+                            </li>
+                            <li class="trending-topic" onclick="searchTopic('career-advice')">
+                                <div class="topic-title">#career-advice</div>
+                                <div class="topic-stats">28 tartışma • 234 mesaj</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Post Button -->
+    <button class="new-post-btn" onclick="openNewPostModal()">✍️</button>
+
+    <!-- New Post Modal -->
+    <div id="post-modal" class="post-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">✍️ Yeni Gönderi Oluştur</h3>
+                <button class="close-modal" onclick="closeNewPostModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="new-post-form">
+                    <div class="form-group">
+                        <label for="post-category">📁 Kategori:</label>
+                        <select id="post-category" class="form-control">
+                            <option value="python">🐍 Python</option>
+                            <option value="data-science">📊 Veri Analizi</option>
+                            <option value="machine-learning">🤖 Machine Learning</option>
+                            <option value="web-dev">🌐 Web Development</option>
+                            <option value="career">💼 Kariyer</option>
+                            <option value="general">💬 Genel</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-title-input">📝 Başlık:</label>
+                        <input type="text" id="post-title-input" class="form-control" placeholder="Gönderinizin başlığını yazın..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-content">💭 İçerik:</label>
+                        <textarea id="post-content" class="form-control" placeholder="Ne düşünüyorsunuz? Sorunuzu, deneyiminizi veya çözümünüzü paylaşın..." rows="6" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-tags-input">🏷️ Etiketler (virgülle ayırın):</label>
+                        <input type="text" id="post-tags-input" class="form-control" placeholder="python, django, web-development">
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">🚀 Gönder</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🚀 AI & Python Eğitimi</h3>
+                <p>Modern yazılım geliştirme teknolojilerini öğrenin</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Discord">💬</a>
+                    <a href="#" aria-label="GitHub">🐙</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>👥 Community</h4>
+                <ul>
+                    <li><a href="/community.html">Forum</a></li>
+                    <li><a href="#" onclick="joinDiscord()">Discord</a></li>
+                    <li><a href="#" onclick="visitGitHub()">GitHub</a></li>
+                    <li><a href="/newsletter.html">Newsletter</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>📚 Kaynaklar</h4>
+                <ul>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/video-egitimler.html">Video Eğitimler</a></li>
+                    <li><a href="/blog/tools/python-kod-editoru.html">Code Editor</a></li>
+                    <li><a href="/blog/tools/api-test-araci.html">API Tester</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>📊 İstatistikler</h4>
+                <p>Topluluk: 2,500+ üye</p>
+                <p>Online: 185 kişi</p>
+                <p>Çözülen: 1,200+ problem</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 AI & Python Eğitimi Community. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        function switchForumTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.forum-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // New post modal functionality
+        function openNewPostModal() {
+            document.getElementById('post-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeNewPostModal() {
+            document.getElementById('post-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Form submission
+        document.getElementById('new-post-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('post-title-input').value;
+            const content = document.getElementById('post-content').value;
+            const category = document.getElementById('post-category').value;
+            const tags = document.getElementById('post-tags-input').value;
+            
+            // Simulate post creation
+            alert('🎉 Gönderiniz başarıyla oluşturuldu!\\n\\nBaşlık: ' + title + '\\nKategori: ' + category);
+            
+            // Reset form
+            this.reset();
+            closeNewPostModal();
+            
+            // In real implementation, you would send this to a backend API
+            console.log('New post created:', { title, content, category, tags });
+        });
+        
+        // External links
+        function joinDiscord() {
+            // Simulate Discord invite
+            alert('🚀 Discord sunucumuza yönlendiriliyorsunuz!\\n\\nGerçek uygulamada Discord davet linki açılacak.');
+            // window.open('https://discord.gg/your-invite-code', '_blank');
+        }
+        
+        function visitGitHub() {
+            // Simulate GitHub link
+            alert('🐙 GitHub organizasyonumuza yönlendiriliyorsunuz!\\n\\nGerçek uygulamada GitHub sayfası açılacak.');
+            // window.open('https://github.com/your-organization', '_blank');
+        }
+        
+        // Search functionality
+        function searchTopic(topic) {
+            alert('🔍 "' + topic + '" konusu için arama yapılıyor...\\n\\nGerçek uygulamada filtrelenmiş sonuçlar gösterilecek.');
+            // In real implementation, filter posts by topic
+        }
+        
+        // Post opening
+        function openPost(postId) {
+            alert('📖 Gönderi açılıyor: ' + postId + '\\n\\nGerçek uygulamada detay sayfasına yönlendirilecek.');
+            // In real implementation, navigate to post detail page
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('post-modal');
+            if (event.target === modal) {
+                closeNewPostModal();
+            }
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeNewPostModal();
+            }
+            
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                if (document.getElementById('post-modal').style.display === 'block') {
+                    document.getElementById('new-post-form').dispatchEvent(new Event('submit'));
+                }
+            }
+        });
+        
+        // Animate stats on scroll
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const text = target.textContent;
+                        const hasPlus = text.includes('+');
+                        const hasK = text.includes('K');
+                        
+                        let number = parseInt(text.replace(/\D/g, ''));
+                        if (hasK) {
+                            number = parseFloat(text.replace(/[^\d.]/g, '')) * 1000;
+                        }
+                        
+                        if (number > 0) {
+                            let suffix = hasPlus ? '+' : '';
+                            if (hasK) suffix = 'K+';
+                            
+                            animateNumber(target, 0, hasK ? number/1000 : number, suffix, 2000);
+                        }
+                    }
+                });
+            });
+            
+            statNumbers.forEach(stat => observer.observe(stat));
+        }
+        
+        function animateNumber(element, start, end, suffix, duration) {
+            const increment = end / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= end) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                
+                if (suffix.includes('K')) {
+                    element.textContent = current.toFixed(1) + suffix;
+                } else {
+                    element.textContent = Math.floor(current) + suffix;
+                }
+            }, 16);
+        }
+        
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            animateStats();
+        });
+        
+        // Simulate real-time updates
+        function simulateRealTimeUpdates() {
+            // Update online count every 30 seconds
+            setInterval(() => {
+                const onlineCount = document.querySelector('.stat-card .stat-number:last-of-type');
+                if (onlineCount) {
+                    const current = parseInt(onlineCount.textContent);
+                    const change = Math.floor(Math.random() * 11) - 5; // -5 to +5
+                    const newCount = Math.max(100, current + change);
+                    onlineCount.textContent = newCount;
+                }
+            }, 30000);
+        }
+        
+        // Start real-time simulation
+        simulateRealTimeUpdates();
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</body>
+</html>
