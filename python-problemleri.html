@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Problem Çözümleri - Nasıl Yapılır Rehberleri | 2025</title>
+    <meta name="description" content="Python programlamada karşılaştığınız problemlerin çözümleri. Hata çözümleri, debugging teknikleri ve nasıl yapılır rehberleri.">
+    <meta name="keywords" content="python hata çözümü, python debugging, python problemi, nasıl yapılır, python error, bug fix, troubleshooting">
+    <link rel="stylesheet" href="premium-styles.css">
+    <link rel="stylesheet" href="hero-styles.css">
+    
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023802833968711" crossorigin="anonymous"></script>
+    
+    <!-- Code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+    
+    <style>
+        .problem-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .problem-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .problem-type {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .error-fix { background: #fee2e2; color: #991b1b; }
+        .how-to { background: #dbeafe; color: #1e40af; }
+        .optimization { background: #d1fae5; color: #166534; }
+        .debugging { background: #fef3c7; color: #92400e; }
+        
+        .problem-title {
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .problem-description {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .error-code {
+            background: #451a03;
+            border-left: 4px solid #dc2626;
+        }
+        
+        .solution-code {
+            background: #0c4a6e;
+            border-left: 4px solid #10b981;
+        }
+        
+        .code-label {
+            background: #374151;
+            color: #f9fafb;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px 4px 0 0;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: -1px;
+        }
+        
+        .error-label { background: #dc2626; }
+        .solution-label { background: #10b981; }
+        
+        .step-by-step {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+            margin: 1rem 0;
+        }
+        
+        .step-list li {
+            counter-increment: step-counter;
+            margin: 1rem 0;
+            padding: 1rem 1rem 1rem 3rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #3b82f6;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #3b82f6;
+            color: white;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .warning-box {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .tip-box {
+            background: #f0fdf4;
+            border: 1px solid #22c55e;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-tab {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            background: #f1f5f9;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 0.9rem;
+        }
+        
+        .filter-tab:hover, .filter-tab.active {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .search-box:focus {
+            border-color: #3b82f6;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🎯 AI Python Eğitimi</a>
+            <div class="nav-menu">
+                <a href="python-kursu.html" class="nav-link">Python Kursu</a>
+                <a href="python-tutorial.html" class="nav-link">Tutorial</a>
+                <a href="python-projeleri.html" class="nav-link">Projeler</a>
+                <a href="python-problemleri.html" class="nav-link active">Problem Çözümleri</a>
+                <a href="yapay-zeka-rehberi.html" class="nav-link">AI Rehberi</a>
+                <a href="veri-analizi.html" class="nav-link">Veri Analizi</a>
+                <a href="interactive-python-editor.html" class="nav-link">Kod Editörü</a>
+                <a href="blog/index.html" class="nav-link">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content animate-in">
+            <h1>🔧 Python Problem Çözümleri</h1>
+            <p class="subtitle">Python programlamada karşılaştığınız hataları çözün, debugging teknikleri öğrenin ve "Nasıl Yapılır" rehberleri ile becerilerinizi geliştirin.</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Hata Çözümü</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Nasıl Yapılır</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">25+</span>
+                    <span class="stat-label">Debugging İpucu</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="problem-container">
+        <!-- Search and Filter -->
+        <input type="text" class="search-box" id="searchBox" placeholder="🔍 Problem ara... (örn: 'indentation error', 'liste', 'fonksiyon')">
+        
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">🔍 Tümü</button>
+            <button class="filter-tab" data-filter="error-fix">❌ Hata Çözümleri</button>
+            <button class="filter-tab" data-filter="how-to">❓ Nasıl Yapılır</button>
+            <button class="filter-tab" data-filter="optimization">⚡ Optimizasyon</button>
+            <button class="filter-tab" data-filter="debugging">🐛 Debugging</button>
+        </div>
+
+        <!-- Problems Grid -->
+        <div class="problem-grid" id="problemsGrid">
+            <!-- Problem 1: Indentation Error -->
+            <div class="problem-card" data-category="error-fix">
+                <div class="problem-type error-fix">HATA ÇÖZÜMÜ</div>
+                <h3 class="problem-title">IndentationError: expected an indented block</h3>
+                <p class="problem-description">Python'da en sık karşılaşılan hatalardan biri. Girinti (indentation) hatası nasıl çözülür?</p>
+                
+                <div class="code-label error-label">HATA</div>
+                <div class="code-block error-code">
+                    <pre><code class="python">if x > 5:
+print("Büyük sayı")  # IndentationError!</code></pre>
+                </div>
+                
+                <div class="code-label solution-label">ÇÖZÜM</div>
+                <div class="code-block solution-code">
+                    <pre><code class="python">if x > 5:
+    print("Büyük sayı")  # Doğru girinti (4 boşluk)
+    
+# Veya tab kullanarak:
+if x > 5:
+	print("Büyük sayı")  # 1 tab</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <h4>💡 İpucu</h4>
+                    <p>Python'da girinti çok önemli! Her zaman 4 boşluk veya 1 tab kullanın, karıştırmayın.</p>
+                </div>
+            </div>
+
+            <!-- Problem 2: List Index Error -->
+            <div class="problem-card" data-category="error-fix">
+                <div class="problem-type error-fix">HATA ÇÖZÜMÜ</div>
+                <h3 class="problem-title">IndexError: list index out of range</h3>
+                <p class="problem-description">Liste sınırları dışında erişim hatası ve güvenli erişim yöntemleri.</p>
+                
+                <div class="code-label error-label">HATA</div>
+                <div class="code-block error-code">
+                    <pre><code class="python">liste = [1, 2, 3]
+print(liste[5])  # IndexError: list index out of range</code></pre>
+                </div>
+                
+                <div class="code-label solution-label">GÜVENLİ ERİŞİM</div>
+                <div class="code-block solution-code">
+                    <pre><code class="python">liste = [1, 2, 3]
+
+# Yöntem 1: Uzunluğu kontrol et
+if len(liste) > 5:
+    print(liste[5])
+else:
+    print("Liste çok kısa!")
+
+# Yöntem 2: try-except kullan
+try:
+    print(liste[5])
+except IndexError:
+    print("Geçersiz indeks!")
+
+# Yöntem 3: get() benzeri fonksiyon
+def safe_get(lst, index, default=None):
+    return lst[index] if 0 <= index < len(lst) else default
+
+print(safe_get(liste, 5, "Bulunamadı"))  # "Bulunamadı"</code></pre>
+                </div>
+            </div>
+
+            <!-- Problem 3: How to Read Files -->
+            <div class="problem-card" data-category="how-to">
+                <div class="problem-type how-to">NASIL YAPILIR</div>
+                <h3 class="problem-title">Python'da Dosya Okuma ve Yazma</h3>
+                <p class="problem-description">Metin dosyalarını güvenli şekilde okuma, yazma ve işleme rehberi.</p>
+                
+                <div class="step-by-step">
+                    <h4>📋 Adım Adım Rehber:</h4>
+                    <ol class="step-list">
+                        <li><strong>Basit dosya okuma:</strong> open() fonksiyonu ile dosyayı aç</li>
+                        <li><strong>İçeriği oku:</strong> read(), readline() veya readlines() kullan</li>
+                        <li><strong>Dosyayı kapat:</strong> close() ile dosyayı kapat</li>
+                        <li><strong>Güvenli kullanım:</strong> with statement kullan</li>
+                    </ol>
+                </div>
+                
+                <div class="code-label solution-label">ÖRNEK KODLAR</div>
+                <div class="code-block solution-code">
+                    <pre><code class="python"># Temel dosya okuma
+with open('dosya.txt', 'r', encoding='utf-8') as f:
+    icerik = f.read()
+    print(icerik)
+
+# Satır satır okuma
+with open('dosya.txt', 'r', encoding='utf-8') as f:
+    for satir in f:
+        print(satir.strip())  # strip() ile boşlukları temizle
+
+# Dosyaya yazma
+veriler = ["Python", "öğreniyorum", "çok", "eğlenceli"]
+with open('yeni_dosya.txt', 'w', encoding='utf-8') as f:
+    for veri in veriler:
+        f.write(veri + '\n')
+
+# JSON dosyası ile çalışma
+import json
+
+# JSON yazma
+data = {"ad": "Ahmet", "yas": 25, "sehir": "İstanbul"}
+with open('data.json', 'w', encoding='utf-8') as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
+
+# JSON okuma
+with open('data.json', 'r', encoding='utf-8') as f:
+    data = json.load(f)
+    print(data["ad"])</code></pre>
+                </div>
+            </div>
+
+            <!-- Problem 4: API Requests -->
+            <div class="problem-card" data-category="how-to">
+                <div class="problem-type how-to">NASIL YAPILIR</div>
+                <h3 class="problem-title">API'den Veri Çekme (HTTP Requests)</h3>
+                <p class="problem-description">Web API'lerinden veri çekme, hata yönetimi ve JSON işleme.</p>
+                
+                <div class="code-label solution-label">TEMEL API ÇAĞRISI</div>
+                <div class="code-block solution-code">
+                    <pre><code class="python">import requests
+import json
+
+# Basit GET isteği
+response = requests.get('https://api.github.com/users/octocat')
+
+if response.status_code == 200:
+    data = response.json()
+    print(f"Kullanıcı: {data['name']}")
+    print(f"Takipçi sayısı: {data['followers']}")
+else:
+    print(f"Hata: {response.status_code}")
+
+# POST isteği (veri gönderme)
+user_data = {
+    "name": "Ahmet",
+    "email": "ahmet@example.com"
+}
+
+response = requests.post(
+    'https://api.example.com/users',
+    json=user_data,
+    headers={'Content-Type': 'application/json'}
+)
+
+# Hata yönetimi ile güvenli API çağrısı
+def api_request(url, timeout=5):
+    try:
+        response = requests.get(url, timeout=timeout)
+        response.raise_for_status()  # HTTP hata durumunda exception fırlat
+        return response.json()
+    except requests.exceptions.ConnectionError:
+        return {"error": "Bağlantı hatası"}
+    except requests.exceptions.Timeout:
+        return {"error": "Zaman aşımı"}
+    except requests.exceptions.HTTPError as e:
+        return {"error": f"HTTP hatası: {e}"}
+    except requests.exceptions.RequestException as e:
+        return {"error": f"İstek hatası: {e}"}
+
+# Kullanım
+result = api_request('https://api.github.com/users/octocat')
+if 'error' in result:
+    print(result['error'])
+else:
+    print(f"API'den alınan veri: {result['name']}")</code></pre>
+                </div>
+            </div>
+
+            <!-- Problem 5: Memory Optimization -->
+            <div class="problem-card" data-category="optimization">
+                <div class="problem-type optimization">OPTİMİZASYON</div>
+                <h3 class="problem-title">Python Bellek Optimizasyonu</h3>
+                <p class="problem-description">Büyük veri setleri ile çalışırken bellek kullanımını optimize etme teknikleri.</p>
+                
+                <div class="code-label error-label">İNEFİKIENT KOD</div>
+                <div class="code-block error-code">
+                    <pre><code class="python"># Yanlış: Tüm veriyi belleğe yükler
+def process_large_file(filename):
+    with open(filename, 'r') as f:
+        lines = f.readlines()  # Tüm dosya belleğe yüklenir!
+    
+    results = []
+    for line in lines:
+        results.append(line.upper())
+    return results</code></pre>
+                </div>
+                
+                <div class="code-label solution-label">OPTİMİZE EDİLMİŞ KOD</div>
+                <div class="code-block solution-code">
+                    <pre><code class="python"># Doğru: Generator kullanarak bellek tasarrufu
+def process_large_file_optimized(filename):
+    def line_processor():
+        with open(filename, 'r') as f:
+            for line in f:  # Her seferinde tek satır okur
+                yield line.upper()
+    return line_processor()
+
+# Liste comprehension yerine generator expression
+def get_squares(numbers):
+    return (x**2 for x in numbers)  # Generator (lazy evaluation)
+
+# Büyük listeler için __slots__ kullanımı
+class OptimizedPerson:
+    __slots__ = ['name', 'age', 'email']  # Bellek tasarrufu
+    
+    def __init__(self, name, age, email):
+        self.name = name
+        self.age = age
+        self.email = email
+
+# Pandas ile büyük dosyalar
+import pandas as pd
+
+# Chunk halinde okuma
+def process_large_csv(filename, chunk_size=1000):
+    for chunk in pd.read_csv(filename, chunksize=chunk_size):
+        # Her chunk'ı ayrı ayrı işle
+        processed_chunk = chunk.groupby('category').sum()
+        yield processed_chunk
+
+# Memory profiling
+import tracemalloc
+
+tracemalloc.start()
+# Kodunuz buraya...
+current, peak = tracemalloc.get_traced_memory()
+print(f"Mevcut bellek: {current / 1024 / 1024:.1f} MB")
+print(f"Peak bellek: {peak / 1024 / 1024:.1f} MB")
+tracemalloc.stop()</code></pre>
+                </div>
+            </div>
+
+            <!-- Problem 6: Debugging Techniques -->
+            <div class="problem-card" data-category="debugging">
+                <div class="problem-type debugging">DEBUGGING</div>
+                <h3 class="problem-title">Python Debugging Teknikleri</h3>
+                <p class="problem-description">Kodunuzdaki hataları bulma ve çözme için profesyonel debugging yöntemleri.</p>
+                
+                <div class="code-label solution-label">DEBUGGING ARACLARı</div>
+                <div class="code-block solution-code">
+                    <pre><code class="python">import pdb
+import logging
+
+# 1. Print debugging (basit ama etkili)
+def problematic_function(numbers):
+    print(f"Gelen veri: {numbers}")  # Debug print
+    total = 0
+    for i, num in enumerate(numbers):
+        print(f"Adım {i}: {num} -> Toplam: {total}")  # Her adımı izle
+        total += num
+    print(f"Sonuç: {total}")
+    return total
+
+# 2. PDB debugger kullanımı
+def debug_example():
+    x = 10
+    y = 5
+    pdb.set_trace()  # Breakpoint - kod burada durur
+    result = x / y
+    return result
+
+# 3. Logging ile profesyonel debugging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+def calculate_average(numbers):
+    logging.debug(f"calculate_average çağrıldı: {numbers}")
+    
+    if not numbers:
+        logging.error("Boş liste gönderildi!")
+        return None
+    
+    total = sum(numbers)
+    average = total / len(numbers)
+    
+    logging.info(f"Ortalama hesaplandı: {average}")
+    return average
+
+# 4. Exception handling ile debugging
+def safe_divide(a, b):
+    try:
+        result = a / b
+        return result
+    except ZeroDivisionError as e:
+        logging.error(f"Sıfıra bölme hatası: {a} / {b}")
+        raise
+    except Exception as e:
+        logging.error(f"Beklenmeyen hata: {e}")
+        raise
+
+# 5. Assert kullanımı
+def validate_input(value):
+    assert isinstance(value, int), f"Değer integer olmalı, {type(value)} verildi"
+    assert value > 0, f"Değer pozitif olmalı, {value} verildi"
+    return value * 2
+
+# 6. Decorator ile fonksiyon izleme
+def debug_decorator(func):
+    def wrapper(*args, **kwargs):
+        print(f"Çağrılan fonksiyon: {func.__name__}")
+        print(f"Argümanlar: {args}, {kwargs}")
+        result = func(*args, **kwargs)
+        print(f"Sonuç: {result}")
+        return result
+    return wrapper
+
+@debug_decorator
+def multiply(x, y):
+    return x * y</code></pre>
+                </div>
+            </div>
+
+            <!-- Problem 7: Virtual Environment -->
+            <div class="problem-card" data-category="how-to">
+                <div class="problem-type how-to">NASIL YAPILIR</div>
+                <h3 class="problem-title">Virtual Environment Kurulumu</h3>
+                <p class="problem-description">Python projeleriniz için izole çalışma ortamları oluşturma rehberi.</p>
+                
+                <div class="step-by-step">
+                    <h4>📋 Virtual Environment Adımları:</h4>
+                    <ol class="step-list">
+                        <li><strong>Virtual environment oluştur:</strong> python -m venv myproject</li>
+                        <li><strong>Aktifleştir:</strong> Windows: myproject\Scripts\activate | Mac/Linux: source myproject/bin/activate</li>
+                        <li><strong>Kütüphaneleri yükle:</strong> pip install package_name</li>
+                        <li><strong>Requirements dosyası:</strong> pip freeze > requirements.txt</li>
+                        <li><strong>Deaktif et:</strong> deactivate komutu</li>
+                    </ol>
+                </div>
+                
+                <div class="code-label solution-label">TERMINAL KOMUTLARI</div>
+                <div class="code-block solution-code">
+                    <pre><code class="bash"># Virtual environment oluşturma
+python -m venv myproject
+
+# Windows'ta aktifleştirme
+myproject\Scripts\activate
+
+# Mac/Linux'ta aktifleştirme  
+source myproject/bin/activate
+
+# Kütüphane yükleme
+pip install requests pandas numpy
+
+# Requirements dosyası oluşturma
+pip freeze > requirements.txt
+
+# Requirements'tan yükleme
+pip install -r requirements.txt
+
+# Deaktif etme
+deactivate</code></pre>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Dikkat</h4>
+                    <p>Her proje için ayrı virtual environment kullanın. Bu şekilde kütüphane çakışmalarını önlersiniz.</p>
+                </div>
+            </div>
+
+            <!-- Problem 8: String Operations -->
+            <div class="problem-card" data-category="how-to">
+                <div class="problem-type how-to">NASIL YAPILIR</div>
+                <h3 class="problem-title">Python String İşlemleri</h3>
+                <p class="problem-description">Metin işleme, temizleme ve dönüştürme teknikleri.</p>
+                
+                <div class="code-label solution-label">STRING MANIPÜLASYONU</div>
+                <div class="code-block solution-code">
+                    <pre><code class="python"># Temel string işlemleri
+text = "  Python Programlama Dilini Öğreniyorum  "
+
+# Temizleme işlemleri
+clean_text = text.strip()  # Baştaki ve sondaki boşlukları sil
+lower_text = text.lower()  # Küçük harfe çevir
+upper_text = text.upper()  # Büyük harfe çevir
+title_text = text.title()  # İlk harfleri büyük yap
+
+# String arama ve değiştirme
+if "Python" in text:
+    print("Python bulundu!")
+
+new_text = text.replace("Python", "Java")
+index = text.find("Programlama")  # Kelimeyi bulur, -1 döner bulamazsa
+
+# String bölme ve birleştirme
+words = text.strip().split()  # Kelimelere böl
+sentence = " ".join(words)  # Kelimeleri birleştir
+
+# Format işlemleri
+name = "Ahmet"
+age = 25
+city = "İstanbul"
+
+# f-string (Python 3.6+)
+message = f"Merhaba {name}, {age} yaşındasın ve {city}'da yaşıyorsun."
+
+# .format() metodu
+message = "Merhaba {}, {} yaşındasın ve {}'da yaşıyorsun.".format(name, age, city)
+
+# % formatting (eski stil)
+message = "Merhaba %s, %d yaşındasın." % (name, age)
+
+# String validasyon
+def validate_email(email):
+    import re
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(pattern, email) is not None
+
+# Türkçe karakter dönüşümü
+def turkce_normalize(text):
+    turkce_chars = "çğıöşüÇĞIÖŞÜ"
+    english_chars = "cgiosucgIOSU"
+    trans_table = str.maketrans(turkce_chars, english_chars)
+    return text.translate(trans_table)
+
+# String encoding/decoding
+text = "Türkçe karakterler: çğıöşü"
+encoded = text.encode('utf-8')
+decoded = encoded.decode('utf-8')</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mid-Content Ad -->
+        <div class="ad-zone-content" style="margin: 3rem 0;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-9023802833968711"
+                 data-ad-slot="4515379030"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Quick Reference Section -->
+        <div class="tutorial-section" style="background: white; padding: 2rem; border-radius: 12px; margin-top: 3rem;">
+            <h2>🚀 Hızlı Referans</h2>
+            
+            <div class="concept-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                    <h4>🔧 Debugging Checklist</h4>
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <li>Hata mesajını dikkatli oku</li>
+                        <li>Satır numarasını kontrol et</li>
+                        <li>Print statement ekle</li>
+                        <li>Veri tiplerini kontrol et</li>
+                        <li>İnternetten ara</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #10b981;">
+                    <h4>⚡ Performans İpuçları</h4>
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <li>List comprehension kullan</li>
+                        <li>Generator'ları tercih et</li>
+                        <li>Gereksiz döngülerden kaçın</li>
+                        <li>Built-in fonksiyonları kullan</li>
+                        <li>Profiling araçları kullan</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                    <h4>📚 En Çok Kullanılan Kütüphaneler</h4>
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <li>requests (HTTP istekleri)</li>
+                        <li>pandas (veri analizi)</li>
+                        <li>numpy (sayısal hesaplar)</li>
+                        <li>matplotlib (grafikler)</li>
+                        <li>json (JSON işleme)</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #dc2626;">
+                    <h4>❌ Yaygın Hatalar</h4>
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <li>IndentationError</li>
+                        <li>IndexError</li>
+                        <li>KeyError</li>
+                        <li>TypeError</li>
+                        <li>NameError</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div style="text-align: center; padding: 3rem; background: white; border-radius: 12px; margin-top: 2rem;">
+            <h2>🎯 Probleminizi Çözemedik mi?</h2>
+            <p style="margin-bottom: 2rem; color: #64748b;">Karşılaştığınız problemi burada bulamadıysanız, kod editörümüzde deneyin veya topluluk desteği alın.</p>
+            <div>
+                <a href="interactive-python-editor.html" class="cta-button" style="margin-right: 1rem;">💻 Kod Editörü</a>
+                <a href="blog/index.html" class="cta-button secondary">📝 Blog & Çözümler</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Syntax highlighting
+        hljs.highlightAll();
+        
+        // Search functionality
+        const searchBox = document.getElementById('searchBox');
+        const problemsGrid = document.getElementById('problemsGrid');
+        const problemCards = document.querySelectorAll('.problem-card');
+        
+        searchBox.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            problemCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+        
+        // Filter functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                filterTabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                
+                problemCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-40X5D8K6WH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-40X5D8K6WH');
+    </script>
+</body>
+</html>

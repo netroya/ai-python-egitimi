@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Tutorial - Kod Örnekleriyle Öğrenin | 2025</title>
+    <meta name="description" content="Python programlamayı kod örnekleriyle öğrenin. Temellerden ileri seviyeye kadar interaktif tutorial'lar ve pratik alıştırmalar.">
+    <meta name="keywords" content="python tutorial, python öğren, kod örnekleri, python dersleri, programlama eğitimi, python kurs">
+    <link rel="stylesheet" href="premium-styles.css">
+    <link rel="stylesheet" href="hero-styles.css">
+    
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023802833968711" crossorigin="anonymous"></script>
+    
+    <!-- Code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+    
+    <style>
+        .tutorial-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .tutorial-nav {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .tutorial-nav h3 {
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+        
+        .nav-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+        }
+        
+        .nav-links a {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #64748b;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover {
+            background: #f1f5f9;
+            color: #3b82f6;
+        }
+        
+        .tutorial-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .tutorial-section h2 {
+            color: #1e293b;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .code-example {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-example pre {
+            margin: 0;
+            color: #f8fafc;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.5;
+        }
+        
+        .code-header {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            border-radius: 6px 6px 0 0;
+            margin-bottom: -1px;
+        }
+        
+        .output-box {
+            background: #0f172a;
+            color: #10b981;
+            padding: 1rem;
+            border-radius: 0 0 8px 8px;
+            font-family: 'Fira Code', monospace;
+            border-top: 2px solid #374151;
+        }
+        
+        .try-it-box {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .try-it-box h4 {
+            color: #0c4a6e;
+            margin-bottom: 1rem;
+        }
+        
+        .exercise-box {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .exercise-box h4 {
+            color: #92400e;
+            margin-bottom: 1rem;
+        }
+        
+        .tip-box {
+            background: #f0fdf4;
+            border: 1px solid #22c55e;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tip-box h4 {
+            color: #166534;
+            margin-bottom: 1rem;
+        }
+        
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .concept-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
+            transition: width 1s ease;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #374151;
+            color: #f8fafc;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #4b5563;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🎯 AI Python Eğitimi</a>
+            <div class="nav-menu">
+                <a href="python-kursu.html" class="nav-link">Python Kursu</a>
+                <a href="python-tutorial.html" class="nav-link active">Tutorial</a>
+                <a href="python-projeleri.html" class="nav-link">Projeler</a>
+                <a href="python-problemleri.html" class="nav-link">Problem Çözümleri</a>
+                <a href="yapay-zeka-rehberi.html" class="nav-link">AI Rehberi</a>
+                <a href="veri-analizi.html" class="nav-link">Veri Analizi</a>
+                <a href="interactive-python-editor.html" class="nav-link">Kod Editörü</a>
+                <a href="blog/index.html" class="nav-link">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content animate-in">
+            <h1>📚 Python Tutorial</h1>
+            <p class="subtitle">Kod örnekleriyle Python öğrenin! Her konu için detaylı açıklamalar, çalışan kodlar ve pratik alıştırmalar.</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Konu</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">200+</span>
+                    <span class="stat-label">Kod Örneği</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Alıştırma</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="tutorial-container">
+        <!-- Tutorial Navigation -->
+        <div class="tutorial-nav">
+            <h3>📋 Tutorial İçeriği</h3>
+            <div class="nav-links">
+                <a href="#temel-kavramlar">🔧 Temel Kavramlar</a>
+                <a href="#veri-tipleri">📊 Veri Tipleri</a>
+                <a href="#kontrol-yapilari">🔄 Kontrol Yapıları</a>
+                <a href="#fonksiyonlar">⚙️ Fonksiyonlar</a>
+                <a href="#oop">🏗️ Object-Oriented</a>
+                <a href="#dosya-islemleri">📁 Dosya İşlemleri</a>
+                <a href="#hata-yonetimi">❗ Hata Yönetimi</a>
+                <a href="#kutuphane-kullanimi">📚 Kütüphane Kullanımı</a>
+            </div>
+        </div>
+
+        <!-- Tutorial Sections -->
+        <div id="temel-kavramlar" class="tutorial-section">
+            <h2>🔧 Python Temel Kavramları</h2>
+            
+            <p>Python programlamaya başlamak için temel kavramları öğrenelim. İlk olarak değişkenler ve print fonksiyonu ile başlayacağız.</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>💾 Değişkenler</h4>
+                    <p>Verileri bellekte saklamak için kullanılır</p>
+                </div>
+                <div class="concept-card">
+                    <h4>🖨️ Print Fonksiyonu</h4>
+                    <p>Verileri ekrana yazdırmak için kullanılır</p>
+                </div>
+                <div class="concept-card">
+                    <h4>💬 Yorumlar</h4>
+                    <p>Kodu açıklamak için kullanılan notlar</p>
+                </div>
+            </div>
+
+            <div class="code-header">🐍 Python Kodu - Değişkenler ve Print</div>
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Kopyala</button>
+                <pre><code class="python"># Değişken tanımlama
+isim = "Ahmet"
+yas = 25
+boy = 1.75
+ogrenci_mi = True
+
+# Değişkenleri yazdırma
+print("Merhaba, ben", isim)
+print(f"Yaşım: {yas}")
+print(f"Boyum: {boy} metre")
+print(f"Öğrenci miyim? {ogrenci_mi}")
+
+# Matematiksel işlemler
+a = 10
+b = 5
+toplam = a + b
+print(f"{a} + {b} = {toplam}")</code></pre>
+            </div>
+            
+            <div class="output-box">
+                <strong>Çıktı:</strong><br>
+                Merhaba, ben Ahmet<br>
+                Yaşım: 25<br>
+                Boyum: 1.75 metre<br>
+                Öğrenci miyim? True<br>
+                10 + 5 = 15
+            </div>
+
+            <div class="try-it-box">
+                <h4>🎯 Deneyin!</h4>
+                <p>Kendi bilgilerinizle değişkenler oluşturun:</p>
+                <ul>
+                    <li>Adınızı ve soyadınızı ayrı değişkenlerde saklayın</li>
+                    <li>Yaşınızı ve doğum yılınızı hesaplayın</li>
+                    <li>Hepsini formatted string ile yazdırın</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="veri-tipleri" class="tutorial-section">
+            <h2>📊 Python Veri Tipleri</h2>
+            
+            <p>Python'da farklı türde verileri saklamak için çeşitli veri tipleri vardır. Her birinin kendine özgü özellikleri ve kullanım alanları bulunur.</p>
+
+            <div class="code-header">🎯 Veri Tipleri Örnekleri</div>
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Kopyala</button>
+                <pre><code class="python"># String (Metin)
+mesaj = "Python öğreniyorum!"
+uzun_metin = """Bu çok satırlı
+bir metin örneğidir."""
+
+# Sayılar
+tamsayi = 42
+ondalikli = 3.14159
+buyuk_sayi = 1e6  # 1,000,000
+
+# Boolean (Doğru/Yanlış)
+dogru = True
+yanlis = False
+
+# List (Liste) - değiştirilebilir
+meyveler = ["elma", "muz", "portakal"]
+sayilar = [1, 2, 3, 4, 5]
+karisik = ["Python", 3.8, True, [1, 2, 3]]
+
+# Tuple (Demet) - değiştirilemez
+koordinat = (10, 20)
+renkler = ("kırmızı", "mavi", "yeşil")
+
+# Dictionary (Sözlük) - anahtar-değer çiftleri
+kisi = {
+    "ad": "Mehmet",
+    "yas": 30,
+    "sehir": "İstanbul",
+    "hobiler": ["kitap okuma", "müzik"]
+}
+
+# Set (Küme) - tekrarsız elemanlar
+benzersiz_sayilar = {1, 2, 3, 4, 5}
+renkler_set = {"kırmızı", "mavi", "yeşil"}
+
+# Veri tiplerini kontrol etme
+print(f"mesaj'ın tipi: {type(mesaj)}")
+print(f"tamsayi'nın tipi: {type(tamsayi)}")
+print(f"meyveler'in tipi: {type(meyveler)}")
+print(f"kisi'nin tipi: {type(kisi)}")</code></pre>
+            </div>
+            
+            <div class="output-box">
+                <strong>Çıktı:</strong><br>
+                mesaj'ın tipi: &lt;class 'str'&gt;<br>
+                tamsayi'nın tipi: &lt;class 'int'&gt;<br>
+                meyveler'in tipi: &lt;class 'list'&gt;<br>
+                kisi'nin tipi: &lt;class 'dict'&gt;
+            </div>
+
+            <div class="exercise-box">
+                <h4>🏋️ Alıştırma</h4>
+                <p><strong>Görev:</strong> Bir öğrenci bilgi sistemi oluşturun:</p>
+                <ol>
+                    <li>Öğrenci bilgilerini dictionary olarak saklayın</li>
+                    <li>Notları list olarak ekleyin</li>
+                    <li>Ortalamayı hesaplayın ve yazdırın</li>
+                </ol>
+            </div>
+        </div>
+
+        <div id="kontrol-yapilari" class="tutorial-section">
+            <h2>🔄 Kontrol Yapıları</h2>
+            
+            <p>Programların akışını kontrol etmek için if-else koşulları ve döngüler kullanılır.</p>
+
+            <h3>🎯 If-Else Koşulları</h3>
+            <div class="code-header">Koşullu İfadeler</div>
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Kopyala</button>
+                <pre><code class="python"># Basit if-else
+yas = 18
+
+if yas >= 18:
+    print("Ehliyet alabilirsin!")
+else:
+    print("Daha ehliyet alamazsın.")
+
+# Çoklu koşul
+not_ortalamasi = 85
+
+if not_ortalamasi >= 90:
+    harf_notu = "AA"
+elif not_ortalamasi >= 80:
+    harf_notu = "BA"
+elif not_ortalamasi >= 70:
+    harf_notu = "BB"
+elif not_ortalamasi >= 60:
+    harf_notu = "CB"
+else:
+    harf_notu = "FF"
+
+print(f"Harf notunuz: {harf_notu}")
+
+# Mantıksal operatörler
+kullanici_adi = "admin"
+sifre = "123456"
+
+if kullanici_adi == "admin" and sifre == "123456":
+    print("Giriş başarılı!")
+elif kullanici_adi == "admin" or sifre == "123456":
+    print("Kullanıcı adı veya şifre hatalı!")
+else:
+    print("Geçersiz bilgiler!")</code></pre>
+            </div>
+
+            <h3>🔂 Döngüler</h3>
+            <div class="code-header">For ve While Döngüleri</div>
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Kopyala</button>
+                <pre><code class="python"># For döngüsü - liste üzerinde
+meyveler = ["elma", "muz", "portakal", "üzüm"]
+
+print("Meyve listesi:")
+for meyve in meyveler:
+    print(f"- {meyve}")
+
+# For döngüsü - sayılar
+print("\n1'den 5'e kadar sayılar:")
+for i in range(1, 6):
+    print(f"Sayı: {i}")
+
+# For döngüsü - enumerate ile
+print("\nİndeks ile birlikte:")
+for index, meyve in enumerate(meyveler):
+    print(f"{index + 1}. {meyve}")
+
+# While döngüsü
+sayac = 1
+print("\nWhile döngüsü:")
+while sayac <= 5:
+    print(f"Döngü {sayac}")
+    sayac += 1
+
+# List comprehension (kısa döngü)
+kareler = [x**2 for x in range(1, 6)]
+print(f"\nKareler: {kareler}")
+
+# Çift sayıları filtreleme
+sayilar = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+cift_sayilar = [x for x in sayilar if x % 2 == 0]
+print(f"Çift sayılar: {cift_sayilar}")</code></pre>
+            </div>
+
+            <div class="tip-box">
+                <h4>💡 Pro İpucu</h4>
+                <p><strong>List Comprehension:</strong> Döngüleri tek satırda yazmanın etkili yoludur. Özellikle filtreleme ve dönüştürme işlemlerinde kullanışlıdır.</p>
+            </div>
+        </div>
+
+        <!-- Mid-Content Ad -->
+        <div class="ad-zone-content" style="margin: 3rem 0;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-9023802833968711"
+                 data-ad-slot="4515379030"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div id="fonksiyonlar" class="tutorial-section">
+            <h2>⚙️ Fonksiyonlar</h2>
+            
+            <p>Fonksiyonlar, tekrar kullanılabilir kod blokları oluşturmamızı sağlar. Kodun daha düzenli ve modüler olmasına yardımcı olur.</p>
+
+            <div class="code-header">Fonksiyon Tanımlama ve Kullanma</div>
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Kopyala</button>
+                <pre><code class="python"># Basit fonksiyon
+def selamla():
+    print("Merhaba Python!")
+
+# Parametreli fonksiyon
+def kişisel_selamlama(isim, yas=None):
+    if yas:
+        print(f"Merhaba {isim}! {yas} yaşındasın.")
+    else:
+        print(f"Merhaba {isim}!")
+
+# Geri değer döndüren fonksiyon
+def toplam_hesapla(a, b):
+    sonuc = a + b
+    return sonuc
+
+def daire_alan(yaricap):
+    import math
+    alan = math.pi * yaricap ** 2
+    return alan
+
+# Çoklu değer döndürme
+def istatistik_hesapla(sayilar):
+    toplam = sum(sayilar)
+    ortalama = toplam / len(sayilar)
+    minimum = min(sayilar)
+    maksimum = max(sayilar)
+    return toplam, ortalama, minimum, maksimum
+
+# Lambda fonksiyonları (anonim fonksiyonlar)
+kare_al = lambda x: x ** 2
+toplama = lambda x, y: x + y
+
+# Fonksiyonları kullanma
+selamla()
+kişisel_selamlama("Ahmet")
+kişisel_selamlama("Ayşe", 25)
+
+sonuc = toplam_hesapla(10, 15)
+print(f"Toplam: {sonuc}")
+
+alan = daire_alan(5)
+print(f"Daire alanı: {alan:.2f}")
+
+sayilar = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+top, ort, min_val, max_val = istatistik_hesapla(sayilar)
+print(f"İstatistikler - Toplam: {top}, Ortalama: {ort:.2f}")
+
+print(f"Lambda ile kare: {kare_al(5)}")
+print(f"Lambda ile toplama: {toplama(3, 7)}")</code></pre>
+            </div>
+
+            <div class="exercise-box">
+                <h4>🏋️ Fonksiyon Alıştırması</h4>
+                <p><strong>Görev:</strong> Aşağıdaki fonksiyonları yazın:</p>
+                <ol>
+                    <li><code>asal_mi(sayi)</code> - Sayının asal olup olmadığını kontrol eder</li>
+                    <li><code>faktoriyel(n)</code> - Faktöriyel hesaplar</li>
+                    <li><code>kelime_sayisi(metin)</code> - Metindeki kelime sayısını bulur</li>
+                </ol>
+            </div>
+        </div>
+
+        <div id="oop" class="tutorial-section">
+            <h2>🏗️ Object-Oriented Programming (OOP)</h2>
+            
+            <p>OOP, kodlarımızı sınıflar (class) ve nesneler (object) halinde organize etmemizi sağlar.</p>
+
+            <div class="code-header">Sınıf Tanımlama ve Kullanma</div>
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Kopyala</button>
+                <pre><code class="python"># Basit sınıf tanımı
+class Araba:
+    # Sınıf değişkeni
+    tekerlek_sayisi = 4
+    
+    # Constructor (yapıcı metod)
+    def __init__(self, marka, model, yil, renk):
+        self.marka = marka
+        self.model = model  
+        self.yil = yil
+        self.renk = renk
+        self.km = 0
+        self.calisiyor_mu = False
+    
+    # Instance metodlar
+    def calistir(self):
+        self.calisiyor_mu = True
+        print(f"{self.marka} {self.model} çalıştırıldı!")
+    
+    def durdur(self):
+        self.calisiyor_mu = False
+        print(f"{self.marka} {self.model} durduruldu.")
+    
+    def sur(self, mesafe):
+        if self.calisiyor_mu:
+            self.km += mesafe
+            print(f"{mesafe} km yol alındı. Toplam: {self.km} km")
+        else:
+            print("Önce arabayı çalıştır!")
+    
+    def bilgi_goster(self):
+        durum = "Çalışıyor" if self.calisiyor_mu else "Durdu"
+        print(f"""
+        Marka: {self.marka}
+        Model: {self.model}
+        Yıl: {self.yil}
+        Renk: {self.renk}
+        KM: {self.km}
+        Durum: {durum}
+        """)
+
+# Miras alma (Inheritance)
+class ElektrikliAraba(Araba):
+    def __init__(self, marka, model, yil, renk, batarya_kapasitesi):
+        super().__init__(marka, model, yil, renk)  # Üst sınıfın constructor'ını çağır
+        self.batarya_kapasitesi = batarya_kapasitesi
+        self.batarya_seviyesi = 100
+    
+    def sarj_et(self, dakika):
+        sarj_miktari = dakika * 2  # Dakikada %2 şarj
+        self.batarya_seviyesi = min(100, self.batarya_seviyesi + sarj_miktari)
+        print(f"{dakika} dakika şarj edildi. Batarya: %{self.batarya_seviyesi}")
+    
+    def sur(self, mesafe):
+        if self.batarya_seviyesi < 10:
+            print("Batarya düşük! Şarj etmelisin.")
+            return
+        
+        batarya_tuketimi = mesafe * 0.2  # KM başına %0.2 batarya
+        self.batarya_seviyesi -= batarya_tuketimi
+        self.km += mesafe
+        print(f"{mesafe} km yol alındı. Batarya: %{self.batarya_seviyesi:.1f}")
+
+# Sınıfları kullanma
+araba1 = Araba("Toyota", "Corolla", 2020, "Beyaz")
+araba1.bilgi_goster()
+araba1.calistir()
+araba1.sur(50)
+
+tesla = ElektrikliAraba("Tesla", "Model 3", 2023, "Kırmızı", 75)
+tesla.calistir()
+tesla.sur(100)
+tesla.sarj_et(30)</code></pre>
+            </div>
+
+            <div class="tip-box">
+                <h4>💡 OOP Temel Kavramları</h4>
+                <ul>
+                    <li><strong>Class (Sınıf):</strong> Nesne şablonu</li>
+                    <li><strong>Object (Nesne):</strong> Sınıftan oluşturulan örnek</li>
+                    <li><strong>Inheritance (Miras):</strong> Sınıfların özelliklerini devralma</li>
+                    <li><strong>Encapsulation (Kapsülleme):</strong> Veri gizleme</li>
+                    <li><strong>Polymorphism (Çok biçimlilik):</strong> Aynı metodun farklı davranışlar sergilemesi</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="tutorial-section">
+            <h2>🎯 Öğrenme İlerlemeniz</h2>
+            <p>Python tutorial'ının hangi bölümlerini tamamladığınızı takip edin:</p>
+            
+            <div style="margin: 2rem 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <span>Temel Kavramlar</span>
+                    <span>100%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;"></div>
+                </div>
+            </div>
+            
+            <div style="margin: 2rem 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <span>Veri Tipleri</span>
+                    <span>85%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%;"></div>
+                </div>
+            </div>
+            
+            <div style="margin: 2rem 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <span>Kontrol Yapıları</span>
+                    <span>70%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 70%;"></div>
+                </div>
+            </div>
+            
+            <div class="try-it-box">
+                <h4>🚀 Sonraki Adımlar</h4>
+                <p>Tutorial'ı tamamladıktan sonra:</p>
+                <ul>
+                    <li><a href="python-projeleri.html">🛠️ Python Projeleri</a> ile pratik yapın</li>
+                    <li><a href="interactive-python-editor.html">💻 Kod Editörü</a> ile kodlarınızı test edin</li>
+                    <li><a href="blog/index.html">📝 Blog</a> yazılarımızı okuyun</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="tutorial-section">
+            <div style="text-align: center; padding: 2rem;">
+                <h2>🎓 Öğrenmeye Devam Edin</h2>
+                <p>Bu tutorial ile Python'un temellerini öğrendiniz. Şimdi gerçek projeler ile deneyim kazanma zamanı!</p>
+                <div style="margin-top: 2rem;">
+                    <a href="python-projeleri.html" class="cta-button" style="margin-right: 1rem;">🛠️ Projelere Başla</a>
+                    <a href="interactive-python-editor.html" class="cta-button secondary">💻 Kodu Test Et</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Syntax highlighting'i başlat
+        hljs.highlightAll();
+        
+        // Kopyalama fonksiyonu
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling.querySelector('code');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                button.textContent = 'Kopyalandı!';
+                button.style.background = '#10b981';
+                
+                setTimeout(function() {
+                    button.textContent = 'Kopyala';
+                    button.style.background = '#374151';
+                }, 2000);
+            });
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-40X5D8K6WH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-40X5D8K6WH');
+    </script>
+</body>
+</html>

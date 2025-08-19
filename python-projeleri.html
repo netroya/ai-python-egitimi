@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Projeleri - Adım Adım Proje Rehberi | 2025</title>
+    <meta name="description" content="Python ile gerçek projeler geliştirin. Web scraper, chatbot, veri analizi, oyun geliştirme ve API projeleri adım adım anlatım.">
+    <meta name="keywords" content="python projeleri, python örnekleri, python tutorial, proje tabanlı öğrenme, python kodlama, pratik projeler">
+    <link rel="stylesheet" href="premium-styles.css">
+    <link rel="stylesheet" href="hero-styles.css">
+    
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023802833968711" crossorigin="anonymous"></script>
+    
+    <style>
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid #3b82f6;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .project-difficulty {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .beginner { background: #dcfce7; color: #166534; }
+        .intermediate { background: #fef3c7; color: #92400e; }
+        .advanced { background: #fee2e2; color: #991b1b; }
+        
+        .project-stats {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-tag {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .code-preview {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        
+        .step-list li {
+            counter-increment: step-counter;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 3px solid #3b82f6;
+        }
+        
+        .step-list li:before {
+            content: counter(step-counter);
+            background: #3b82f6;
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+            float: left;
+        }
+        
+        .project-demo {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .project-resources {
+            background: #f7fee7;
+            border: 1px solid #84cc16;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🎯 AI Python Eğitimi</a>
+            <div class="nav-menu">
+                <a href="python-kursu.html" class="nav-link">Python Kursu</a>
+                <a href="python-tutorial.html" class="nav-link">Tutorial</a>
+                <a href="python-projeleri.html" class="nav-link active">Projeler</a>
+                <a href="python-problemleri.html" class="nav-link">Problem Çözümleri</a>
+                <a href="yapay-zeka-rehberi.html" class="nav-link">AI Rehberi</a>
+                <a href="veri-analizi.html" class="nav-link">Veri Analizi</a>
+                <a href="interactive-python-editor.html" class="nav-link">Kod Editörü</a>
+                <a href="blog/index.html" class="nav-link">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content animate-in">
+            <h1>🚀 Python Projeleri</h1>
+            <p class="subtitle">Gerçek projelerle Python öğrenin! Adım adım anlatımlar, kod örnekleri ve pratik uygulamalar ile programlama becerilerinizi geliştirin.</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">25+</span>
+                    <span class="stat-label">Proje</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">150+</span>
+                    <span class="stat-label">Kod Örneği</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Uygulamalı</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <div class="content-wrapper">
+            <main class="content">
+                <!-- Project Grid -->
+                <section class="content-section">
+                    <h2>🔥 Popüler Python Projeleri</h2>
+                    
+                    <div class="project-grid">
+                        <!-- Project 1: Web Scraper -->
+                        <div class="project-card">
+                            <div class="project-difficulty beginner">BAŞLANGIÇ</div>
+                            <h3>🕷️ Web Scraper ile Veri Toplama</h3>
+                            <p>E-ticaret sitelerinden fiyat bilgilerini otomatik olarak toplayan web scraper geliştirin.</p>
+                            
+                            <div class="project-stats">
+                                <span>⏱️ 2-3 saat</span>
+                                <span>📊 Beginner</span>
+                                <span>🔧 3 dosya</span>
+                            </div>
+                            
+                            <div class="project-tech">
+                                <span class="tech-tag">requests</span>
+                                <span class="tech-tag">beautifulsoup4</span>
+                                <span class="tech-tag">pandas</span>
+                                <span class="tech-tag">json</span>
+                            </div>
+
+                            <div class="code-preview">
+<pre># Temel web scraper yapısı
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+def scrape_prices(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    
+    prices = soup.find_all('span', class_='price')
+    return [price.text.strip() for price in prices]</pre>
+                            </div>
+
+                            <h4>📋 Proje Adımları:</h4>
+                            <ol class="step-list">
+                                <li><strong>Kütüphaneleri yükle:</strong> pip install requests beautifulsoup4 pandas</li>
+                                <li><strong>Target URL'i belirle:</strong> Hangi siteyi scrape edeceğinizi seçin</li>
+                                <li><strong>HTML yapısını analiz et:</strong> Developer tools ile element'leri inceleyin</li>
+                                <li><strong>Veri çekme fonksiyonu yaz:</strong> requests ve BeautifulSoup kullanarak</li>
+                                <li><strong>Veriyi temizle ve işle:</strong> pandas ile düzenleyin</li>
+                                <li><strong>CSV'ye kaydet:</strong> Sonuçları dosyaya yazdırın</li>
+                            </ol>
+
+                            <div class="project-demo">
+                                <h4>🎯 Proje Çıktısı:</h4>
+                                <p>Bu projede öğrenecekleriniz:</p>
+                                <ul>
+                                    <li>HTTP istekleri nasıl yapılır</li>
+                                    <li>HTML parsing teknikleri</li>
+                                    <li>Veri temizleme ve dönüştürme</li>
+                                    <li>Rate limiting ve etik scraping</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Project 2: Discord Bot -->
+                        <div class="project-card">
+                            <div class="project-difficulty intermediate">ORTA DÜZEY</div>
+                            <h3>🤖 Discord ChatBot Geliştirme</h3>
+                            <p>Discord sunucunuz için özel komutlar, müzik çalma ve moderasyon özellikli bot yapın.</p>
+                            
+                            <div class="project-stats">
+                                <span>⏱️ 4-6 saat</span>
+                                <span>📊 Intermediate</span>
+                                <span>🔧 8 dosya</span>
+                            </div>
+                            
+                            <div class="project-tech">
+                                <span class="tech-tag">discord.py</span>
+                                <span class="tech-tag">asyncio</span>
+                                <span class="tech-tag">sqlite3</span>
+                                <span class="tech-tag">youtube-dl</span>
+                            </div>
+
+                            <div class="code-preview">
+<pre># Discord bot temel yapısı
+import discord
+from discord.ext import commands
+
+bot = commands.Bot(command_prefix='!')
+
+@bot.event
+async def on_ready():
+    print(f'{bot.user} online!')
+
+@bot.command()
+async def merhaba(ctx):
+    await ctx.send(f'Merhaba {ctx.author.mention}!')
+
+bot.run('YOUR_BOT_TOKEN')</pre>
+                            </div>
+
+                            <h4>📋 Proje Adımları:</h4>
+                            <ol class="step-list">
+                                <li><strong>Discord Developer Portal:</strong> Bot oluştur ve token al</li>
+                                <li><strong>Temel bot kurulumu:</strong> discord.py ile bağlantı</li>
+                                <li><strong>Komut sistemi:</strong> Prefix-based komutlar ekle</li>
+                                <li><strong>Veritabanı entegrasyonu:</strong> Kullanıcı verilerini sakla</li>
+                                <li><strong>Müzik sistemi:</strong> YouTube'dan müzik çalma</li>
+                                <li><strong>Moderasyon özellikleri:</strong> Ban, kick, timeout komutları</li>
+                            </ol>
+
+                            <div class="project-demo">
+                                <h4>🎯 Bot Özellikleri:</h4>
+                                <ul>
+                                    <li>Özel komut sistemi (!help, !info, !stats)</li>
+                                    <li>Müzik çalma ve playlist yönetimi</li>
+                                    <li>Otomatik moderasyon (spam koruması)</li>
+                                    <li>Seviye sistemi ve XP tracking</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Project 3: Stock Price Tracker -->
+                        <div class="project-card">
+                            <div class="project-difficulty intermediate">ORTA DÜZEY</div>
+                            <h3>📈 Borsa Takip Sistemi</h3>
+                            <p>Hisse senedi fiyatlarını takip eden, grafik çizen ve e-posta uyarıları gönderen sistem.</p>
+                            
+                            <div class="project-stats">
+                                <span>⏱️ 3-4 saat</span>
+                                <span>📊 Intermediate</span>
+                                <span>🔧 5 dosya</span>
+                            </div>
+                            
+                            <div class="project-tech">
+                                <span class="tech-tag">yfinance</span>
+                                <span class="tech-tag">matplotlib</span>
+                                <span class="tech-tag">pandas</span>
+                                <span class="tech-tag">smtplib</span>
+                            </div>
+
+                            <div class="code-preview">
+<pre># Borsa veri çekme
+import yfinance as yf
+import matplotlib.pyplot as plt
+
+def get_stock_data(symbol, period="1mo"):
+    stock = yf.Ticker(symbol)
+    data = stock.history(period=period)
+    return data
+
+# Grafik çizimi
+def plot_stock(data, symbol):
+    plt.figure(figsize=(12, 6))
+    plt.plot(data['Close'], linewidth=2)
+    plt.title(f'{symbol} Fiyat Grafiği')
+    plt.xlabel('Tarih')
+    plt.ylabel('Fiyat ($)')
+    plt.grid(True, alpha=0.3)
+    plt.show()</pre>
+                            </div>
+
+                            <div class="project-resources">
+                                <h4>📚 Gerekli Kaynaklar:</h4>
+                                <ul>
+                                    <li><a href="https://pypi.org/project/yfinance/" target="_blank">yfinance Documentation</a></li>
+                                    <li><a href="https://matplotlib.org/stable/gallery/index.html" target="_blank">Matplotlib Gallery</a></li>
+                                    <li><a href="https://finance.yahoo.com/" target="_blank">Yahoo Finance API</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Project 4: Password Manager -->
+                        <div class="project-card">
+                            <div class="project-difficulty advanced">İLERİ DÜZEY</div>
+                            <h3>🔐 Şifre Yönetici Uygulaması</h3>
+                            <p>Güvenli şifre saklama, otomatik şifre üretme ve 2FA desteği olan masaüstü uygulama.</p>
+                            
+                            <div class="project-stats">
+                                <span>⏱️ 8-12 saat</span>
+                                <span>📊 Advanced</span>
+                                <span>🔧 12 dosya</span>
+                            </div>
+                            
+                            <div class="project-tech">
+                                <span class="tech-tag">tkinter</span>
+                                <span class="tech-tag">cryptography</span>
+                                <span class="tech-tag">sqlite3</span>
+                                <span class="tech-tag">pyotp</span>
+                            </div>
+
+                            <div class="code-preview">
+<pre># Şifreleme modülü
+from cryptography.fernet import Fernet
+import base64
+import os
+
+class PasswordManager:
+    def __init__(self, master_password):
+        self.key = self.generate_key(master_password)
+        self.cipher_suite = Fernet(self.key)
+    
+    def generate_key(self, password):
+        password_bytes = password.encode()
+        key = base64.urlsafe_b64encode(password_bytes[:32].ljust(32, b'0'))
+        return key
+    
+    def encrypt_password(self, password):
+        return self.cipher_suite.encrypt(password.encode())
+    
+    def decrypt_password(self, encrypted_password):
+        return self.cipher_suite.decrypt(encrypted_password).decode()</pre>
+                            </div>
+
+                            <h4>📋 Proje Adımları:</h4>
+                            <ol class="step-list">
+                                <li><strong>GUI tasarımı:</strong> Tkinter ile ana arayüz</li>
+                                <li><strong>Şifreleme sistemi:</strong> Fernet ile güvenli şifreleme</li>
+                                <li><strong>Veritabanı tasarımı:</strong> SQLite ile veri saklama</li>
+                                <li><strong>Master password sistemi:</strong> Ana şifre ile koruma</li>
+                                <li><strong>Şifre üretici:</strong> Güçlü şifre oluşturma</li>
+                                <li><strong>2FA entegrasyonu:</strong> Time-based OTP desteği</li>
+                            </ol>
+                        </div>
+
+                        <!-- Project 5: AI Chatbot -->
+                        <div class="project-card">
+                            <div class="project-difficulty advanced">İLERİ DÜZEY</div>
+                            <h3>🧠 AI Destekli Chatbot</h3>
+                            <p>OpenAI GPT API'si kullanarak akıllı sohbet robotu geliştirin.</p>
+                            
+                            <div class="project-stats">
+                                <span>⏱️ 6-8 saat</span>
+                                <span>📊 Advanced</span>
+                                <span>🔧 10 dosya</span>
+                            </div>
+                            
+                            <div class="project-tech">
+                                <span class="tech-tag">openai</span>
+                                <span class="tech-tag">flask</span>
+                                <span class="tech-tag">websockets</span>
+                                <span class="tech-tag">redis</span>
+                            </div>
+
+                            <div class="code-preview">
+<pre># AI Chatbot temel yapısı
+import openai
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+openai.api_key = "your-api-key"
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    user_message = request.json['message']
+    
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": user_message}
+        ]
+    )
+    
+    bot_message = response.choices[0].message.content
+    return jsonify({"response": bot_message})</pre>
+                            </div>
+
+                            <div class="project-demo">
+                                <h4>🎯 Chatbot Özellikleri:</h4>
+                                <ul>
+                                    <li>Doğal dil işleme ile akıllı yanıtlar</li>
+                                    <li>Konuşma geçmişi saklama</li>
+                                    <li>Çoklu dil desteği</li>
+                                    <li>Web arayüzü ile kolay kullanım</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Project 6: Data Visualization Dashboard -->
+                        <div class="project-card">
+                            <div class="project-difficulty intermediate">ORTA DÜZEY</div>
+                            <h3>📊 Veri Görselleştirme Dashboard</h3>
+                            <p>Interactive grafikler ve real-time veri takibi ile dashboard uygulaması.</p>
+                            
+                            <div class="project-stats">
+                                <span>⏱️ 5-7 saat</span>
+                                <span>📊 Intermediate</span>
+                                <span>🔧 8 dosya</span>
+                            </div>
+                            
+                            <div class="project-tech">
+                                <span class="tech-tag">streamlit</span>
+                                <span class="tech-tag">plotly</span>
+                                <span class="tech-tag">pandas</span>
+                                <span class="tech-tag">numpy</span>
+                            </div>
+
+                            <div class="code-preview">
+<pre># Streamlit Dashboard
+import streamlit as st
+import plotly.express as px
+import pandas as pd
+
+st.set_page_config(page_title="Veri Dashboard", layout="wide")
+
+# Sidebar
+st.sidebar.title("📊 Veri Dashboard")
+chart_type = st.sidebar.selectbox(
+    "Grafik Türü Seçin:",
+    ["Line Chart", "Bar Chart", "Scatter Plot"]
+)
+
+# Ana sayfa
+st.title("📈 Interaktif Veri Görselleştirme")
+
+# Veri yükleme
+uploaded_file = st.file_uploader("CSV dosyası yükleyin", type="csv")
+if uploaded_file:
+    df = pd.read_csv(uploaded_file)
+    st.dataframe(df.head())</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mid-Content Ad -->
+                    <div class="ad-zone-content" style="margin: 3rem 0;">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <ins class="adsbygoogle"
+                             style="display:block; text-align:center;"
+                             data-ad-layout="in-article"
+                             data-ad-format="fluid"
+                             data-ad-client="ca-pub-9023802833968711"
+                             data-ad-slot="4515379030"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+
+                    <!-- Tutorial Section -->
+                    <h2>📚 Detaylı Tutorial Rehberleri</h2>
+                    
+                    <div class="project-resources">
+                        <h3>🎯 Proje Tabanlı Öğrenme Yolu:</h3>
+                        <ol>
+                            <li><strong>Temel seviye (1-4 hafta):</strong> Web scraper, basit hesap makinesi, dosya organizeri</li>
+                            <li><strong>Orta seviye (4-8 hafta):</strong> Discord bot, API geliştirme, veri analizi</li>
+                            <li><strong>İleri seviye (8-12 hafta):</strong> AI chatbot, machine learning, web uygulaması</li>
+                        </ol>
+                    </div>
+
+                    <!-- Additional Resources -->
+                    <div class="project-demo">
+                        <h3>🔗 Yararlı Kaynaklar:</h3>
+                        <ul>
+                            <li><a href="interactive-python-editor.html">🖥️ Interaktif Python Editörü</a> - Kodları direkt test edin</li>
+                            <li><a href="blog/index.html">📝 Python Blog</a> - Güncel tutorial'lar ve ipuçları</li>
+                            <li><a href="https://github.com/" target="_blank">💾 GitHub</a> - Projeleri version control ile takip edin</li>
+                            <li><a href="https://stackoverflow.com/" target="_blank">❓ Stack Overflow</a> - Problem çözümleri</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- CTA Section -->
+                <section class="final-cta">
+                    <div class="cta-content">
+                        <h2>🚀 İlk Projenize Başlayın!</h2>
+                        <p>Hangi projeyle başlamak istiyorsunuz? Kod editörümüzde hemen deneyebilirsiniz.</p>
+                        <a href="interactive-python-editor.html" class="cta-button">Kod Editörüne Git</a>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-40X5D8K6WH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-40X5D8K6WH');
+    </script>
+</body>
+</html>
