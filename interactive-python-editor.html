@@ -14,12 +14,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
     
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-40X5D8K6WH"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
+        gtag('config', 'G-40X5D8K6WH');
     </script>
 
     <style>
@@ -224,26 +224,45 @@
                     <div class="panel-title">
                         💻 Python Kodu
                     </div>
-                    <button id="runButton" class="run-button" onclick="runPythonCode()">
-                        ▶️ Çalıştır
-                    </button>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="saveCode()" style="background: #6366f1; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                            💾 Kaydet
+                        </button>
+                        <button onclick="loadCode()" style="background: #8b5cf6; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                            📁 Yükle
+                        </button>
+                        <button id="runButton" class="run-button" onclick="runPythonCode()">
+                            ▶️ Çalıştır
+                        </button>
+                    </div>
                 </div>
-                <textarea id="codeEditor" class="code-editor">print("Merhaba Python Dünyası! 🐍")
+                <textarea id="codeEditor" class="code-editor"># 🐍 AI Python Eğitimi - İnteraktif Kod Editörü
+print("Merhaba Python Dünyası! 🐍")
+print("=" * 40)
 
-# Basit bir hesaplama
-x = 10
-y = 20
-sonuc = x + y
-print(f"x + y = {sonuc}")
+# Basit matematik işlemleri
+x, y = 15, 25
+print(f"x = {x}, y = {y}")
+print(f"Toplama: {x} + {y} = {x + y}")
+print(f"Çıkarma: {x} - {y} = {x - y}")
+print(f"Çarpma: {x} * {y} = {x * y}")
+print(f"Bölme: {x} / {y} = {x / y:.2f}")
 
 # Liste işlemleri
-sayilar = [1, 2, 3, 4, 5]
+print("\n📋 Liste İşlemleri:")
+sayilar = [1, 3, 5, 7, 9]
 print(f"Sayılar: {sayilar}")
 print(f"Toplam: {sum(sayilar)}")
+print(f"En büyük: {max(sayilar)}")
+print(f"En küçük: {min(sayilar)}")
 
-# Döngü örneği
-for i in range(3):
-    print(f"Adım {i + 1}")</textarea>
+# Döngü örneği  
+print("\n🔄 Döngü Örneği:")
+for i in range(1, 6):
+    print(f"⭐ {i}. yıldız")
+    
+print("\n✅ Kod başarıyla tamamlandı!")
+print("💡 Kendi kodlarınızı yazıp test edebilirsiniz!")</textarea>
             </div>
             
             <div class="output-panel">
@@ -309,7 +328,7 @@ for i in range(3):
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
 
     <!-- Pyodide for Python execution -->
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
 
     <script>
         let pyodide = null;
@@ -335,11 +354,20 @@ for i in range(3):
         
         async function initializePyodide() {
             try {
-                document.getElementById('output').textContent = 'Python ortamı yükleniyor... ⏳';
-                pyodide = await loadPyodide();
-                document.getElementById('output').textContent = '✅ Python ortamı hazır! Kodunuzu yazıp çalıştırabilirsiniz.\n\n💡 İpucu: print() fonksiyonuyla çıktı üretebilirsiniz.';
+                document.getElementById('output').textContent = 'Python ortamı yükleniyor... ⏳\n\nBu işlem birkaç saniye sürebilir, lütfen bekleyin.';
+                
+                // Pyodide'ı yükle
+                pyodide = await loadPyodide({
+                    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.1/full/"
+                });
+                
+                // Temel kütüphaneleri yükle
+                await pyodide.loadPackage(['micropip']);
+                
+                document.getElementById('output').textContent = '✅ Python ortamı hazır! Kodunuzu yazıp çalıştırabilirsiniz.\n\n💡 İpucu: print() fonksiyonuyla çıktı üretebilirsiniz.\n\n📦 Mevcut kütüphaneler: math, random, datetime, json ve daha fazlası!';
             } catch (error) {
-                document.getElementById('output').textContent = `❌ Python ortamı yüklenirken hata oluştu: ${error.message}`;
+                console.error('Pyodide initialization error:', error);
+                document.getElementById('output').textContent = `❌ Python ortamı yüklenirken hata oluştu: ${error.message}\n\n🔧 Çözüm önerileri:\n• Sayfayı yenileyin (F5)\n• İnternet bağlantınızı kontrol edin\n• Farklı bir tarayıcı deneyin`;
             }
         }
         
@@ -369,34 +397,54 @@ for i in range(3):
                 document.getElementById('output').textContent = '';
                 
                 // Python kodunu çalıştır
-                pyodide.runPython(\`
+                let output = '';
+                
+                // Pyodide'da stdout'u yakalama
+                pyodide.runPython(`
 import sys
 from io import StringIO
+
+# stdout ve stderr'ı yakalama
+old_stdout = sys.stdout
+old_stderr = sys.stderr
 sys.stdout = StringIO()
 sys.stderr = StringIO()
-
-try:
-\${code}
-    stdout_value = sys.stdout.getvalue()
-    stderr_value = sys.stderr.getvalue()
-    if stdout_value:
-        print("=== ÇIKTI ===")
-        print(stdout_value)
-    if stderr_value:
-        print("=== HATALAR ===")
-        print(stderr_value)
-except Exception as e:
-    print(f"❌ Hata: {e}")
-finally:
-    sys.stdout = sys.__stdout__
-    sys.stderr = sys.__stderr__
-                \`);
+`);
                 
-                const output = pyodide.runPython("sys.stdout.getvalue() + sys.stderr.getvalue()");
+                try {
+                    // Kullanıcı kodunu çalıştır
+                    pyodide.runPython(code);
+                    
+                    // Çıktıları al
+                    const stdout = pyodide.runPython('sys.stdout.getvalue()');
+                    const stderr = pyodide.runPython('sys.stderr.getvalue()');
+                    
+                    if (stdout) {
+                        output = stdout;
+                    }
+                    
+                    if (stderr) {
+                        output += (output ? '\n\n' : '') + `❌ Hatalar:\n${stderr}`;
+                    }
+                    
+                    if (!output) {
+                        output = '✅ Kod başarıyla çalıştırıldı (çıktı yok)';
+                    }
+                    
+                } catch (pythonError) {
+                    output = handlePythonError(pythonError);
+                } finally {
+                    // stdout ve stderr'ı geri yükle
+                    pyodide.runPython(`
+sys.stdout = old_stdout
+sys.stderr = old_stderr
+`);
+                }
+                
                 document.getElementById('output').textContent = output || '✅ Kod başarıyla çalıştırıldı (çıktı yok)';
                 
             } catch (error) {
-                document.getElementById('output').textContent = \`❌ Hata: \${error.message\`);
+                document.getElementById('output').textContent = `❌ Sistem Hatası: ${error.message}`;
             } finally {
                 // Button'u eski haline getir
                 button.innerHTML = originalText;
@@ -562,6 +610,86 @@ print(f"\n📊 Sınıf ortalaması: {sinif_ortalamasi:.1f}")\`
             }
         }
 
+        // Kod kaydetme fonksiyonu
+        function saveCode() {
+            const code = editor.getValue();
+            const blob = new Blob([code], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'python_kodu.py';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            // LocalStorage'a da kaydet
+            localStorage.setItem('python_editor_code', code);
+            document.getElementById('output').textContent = '💾 Kod başarıyla kaydedildi!\n\n• Dosya: python_kodu.py olarak indirildi\n• Tarayıcı belleğine kaydedildi';
+        }
+        
+        // Kod yükleme fonksiyonu
+        function loadCode() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.py,.txt';
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        editor.setValue(e.target.result);
+                        document.getElementById('output').textContent = `📁 Dosya yüklendi: ${file.name}\n\nKod editörüne aktarıldı. "Çalıştır" butonuna tıklayarak test edebilirsiniz.`;
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+        
+        // Sayfa yüklendiğinde kaydedilmiş kodu geri yükle
+        function loadSavedCode() {
+            const savedCode = localStorage.getItem('python_editor_code');
+            if (savedCode) {
+                const currentCode = editor.getValue();
+                // Varsayılan kod ile aynı değilse kayıtlı kodu yükle
+                if (!currentCode.includes('Merhaba Python Dünyası')) {
+                    return;
+                }
+                if (confirm('Daha önce kaydedilmiş kod bulundu. Yüklemek ister misiniz?')) {
+                    editor.setValue(savedCode);
+                }
+            }
+        }
+        
+        // Gelişmiş hata yakalama
+        function handlePythonError(error) {
+            let errorMessage = error.toString();
+            
+            // Yaygın hataları Türkçe açıkla
+            if (errorMessage.includes('SyntaxError')) {
+                errorMessage += '\n\n💡 Syntax Hatası: Kod yazım kurallarında hata var. Parantez, iki nokta üst üste (:) veya girinti kontrolü yapın.';
+            } else if (errorMessage.includes('NameError')) {
+                errorMessage += '\n\n💡 İsim Hatası: Tanımlanmamış değişken kullanılıyor. Değişken ismini kontrol edin.';
+            } else if (errorMessage.includes('IndentationError')) {
+                errorMessage += '\n\n💡 Girinti Hatası: Python\'da girintiler önemlidir. Blokları 4 boşluk ile girintileyin.';
+            } else if (errorMessage.includes('TypeError')) {
+                errorMessage += '\n\n💡 Tip Hatası: Farklı veri tipleri arasında uyumsuz işlem yapılıyor.';
+            }
+            
+            return errorMessage;
+        }
+        
+        // Otomatik kod kaydetme (her 30 saniyede)
+        setInterval(() => {
+            if (editor) {
+                const code = editor.getValue();
+                if (code.trim()) {
+                    localStorage.setItem('python_editor_auto_save', code);
+                }
+            }
+        }, 30000);
+
         // Mobile navigation
         const navToggle = document.querySelector('.nav-toggle');
         const navMenu = document.querySelector('.nav-menu');
@@ -572,6 +700,13 @@ print(f"\n📊 Sınıf ortalaması: {sinif_ortalamasi:.1f}")\`
                 navMenu.classList.toggle('active');
             });
         }
+        
+        // Editör hazır olduğunda otomatik yükleme kontrol et
+        setTimeout(() => {
+            if (editor) {
+                loadSavedCode();
+            }
+        }, 2000);
     </script>
 </body>
 </html>
