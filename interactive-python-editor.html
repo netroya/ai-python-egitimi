@@ -34,7 +34,7 @@
         }
         
         .editor-header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: var(--gradient);
             color: white;
             padding: 40px 20px;
             text-align: center;
@@ -45,10 +45,11 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
-            background: var(--card-bg);
+            background: var(--bg-card);
             border-radius: 0 0 16px 16px;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
         }
         
         .code-panel, .output-panel {
@@ -59,7 +60,7 @@
         }
         
         .panel-header {
-            background: var(--secondary-bg);
+            background: var(--bg-alt);
             padding: 15px 20px;
             border-bottom: 1px solid var(--border);
             display: flex;
@@ -83,8 +84,8 @@
         .output-content {
             flex: 1;
             padding: 20px;
-            background: var(--code-bg);
-            color: var(--terminal-text);
+            background: var(--bg-alt);
+            color: var(--text);
             font-family: 'Fira Code', monospace;
             overflow-y: auto;
             white-space: pre-wrap;
@@ -105,12 +106,13 @@
         }
         
         .run-button:hover {
-            background: #059669;
+            background: var(--success);
+            opacity: 0.9;
             transform: translateY(-1px);
         }
         
         .run-button:disabled {
-            background: #6b7280;
+            background: var(--text-light);
             cursor: not-allowed;
             transform: none;
         }
@@ -118,8 +120,9 @@
         .examples-section {
             margin: 40px 0;
             padding: 30px;
-            background: var(--secondary-bg);
+            background: var(--bg-alt);
             border-radius: 16px;
+            border: 1px solid var(--border);
         }
         
         .example-buttons {
@@ -130,7 +133,7 @@
         }
         
         .example-btn {
-            background: var(--card-bg);
+            background: var(--bg-card);
             border: 2px solid var(--primary);
             color: var(--primary);
             padding: 10px 16px;
@@ -153,10 +156,11 @@
         }
         
         .feature-card {
-            background: var(--card-bg);
+            background: var(--bg-card);
             padding: 25px;
             border-radius: 12px;
             box-shadow: var(--shadow);
+            border: 1px solid var(--border);
             text-align: center;
             transition: transform 0.3s ease;
         }
@@ -174,7 +178,7 @@
             display: inline-block;
             width: 16px;
             height: 16px;
-            border: 2px solid #f3f3f3;
+            border: 2px solid var(--border);
             border-top: 2px solid var(--success);
             border-radius: 50%;
             animation: spin 1s linear infinite;

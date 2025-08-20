@@ -1,57 +1,81 @@
 :root {
-  /* Light mode renkleri */
-  --primary: #3b82f6;
-  --primary-dark: #2563eb;
-  --accent: #f59e0b;
-  --success: #10b981;
+  /* Light mode renkleri - New Modern Color System */
+  --primary: #1e293b;       /* dark navy */
+  --accent: #f59e0b;        /* golden yellow */
+  --success: #10b981;       /* fresh green */
+  --text: #1e293b;          /* dark navy text */
+  --text-light: #64748b;    /* medium gray */
+  --bg: #ffffff;            /* clean white */
+  --bg-alt: #f8fafc;        /* very light gray */
+  --bg-card: #ffffff;       /* card background */
+  --border: #e2e8f0;        /* light border */
+  --shadow: 0 4px 20px rgba(30, 41, 59, 0.08);
+  --shadow-lg: 0 10px 40px rgba(30, 41, 59, 0.12);
+  --shadow-xl: 0 20px 60px rgba(30, 41, 59, 0.15);
+  --gradient: linear-gradient(135deg, var(--primary) 0%, #0f172a 100%);
+  --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #d97706 100%);
+  
+  /* Legacy support */
+  --primary-dark: #0f172a;
   --warning: #f59e0b;
   --danger: #ef4444;
-  --text: #1f2937;
-  --text-light: #6b7280;
-  --bg: #ffffff;
-  --bg-alt: #f8fafc;
-  --border: #e2e8f0;
-  --shadow: 0 10px 25px rgba(0,0,0,0.08);
-  --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
-  --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  --info: #06b6d4;
+  --text-muted: #94a3b8;
+  --border-light: #f1f5f9;
 }
 
-/* Dark mode renkleri */
+/* Dark mode renkleri - New Dark Mode Color System */
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary: #60a5fa;
-    --primary-dark: #3b82f6;
-    --accent: #fbbf24;
-    --success: #34d399;
+    --primary: #f59e0b;       /* golden yellow (primary in dark) */
+    --accent: #06b6d4;        /* fresh cyan */
+    --success: #10b981;       /* same green */
+    --text: #f1f5f9;          /* very light gray */
+    --text-light: #cbd5e1;    /* medium light gray */
+    --bg: #0f172a;            /* dark navy */
+    --bg-alt: #1e293b;        /* medium dark navy */
+    --bg-card: #1e293b;       /* card background */
+    --border: #334155;        /* dark border */
+    --shadow: 0 4px 20px rgba(0,0,0,0.25);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.35);
+    --shadow-xl: 0 20px 60px rgba(0,0,0,0.45);
+    --gradient: linear-gradient(135deg, var(--primary) 0%, #d97706 100%);
+    --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #0891b2 100%);
+    
+    /* Legacy support */
+    --primary-dark: #d97706;
     --warning: #fbbf24;
     --danger: #f87171;
-    --text: #f1f5f9;
-    --text-light: #94a3b8;
-    --bg: #0f172a;
-    --bg-alt: #1e293b;
-    --border: #334155;
-    --shadow: 0 10px 25px rgba(0,0,0,0.3);
-    --shadow-lg: 0 20px 40px rgba(0,0,0,0.4);
-    --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    --info: #38bdf8;
+    --text-muted: #94a3b8;
+    --border-light: #475569;
   }
 }
 
-/* Manuel dark mode toggle için */
+/* Manual dark mode toggle */
 [data-theme="dark"] {
-  --primary: #60a5fa;
-  --primary-dark: #3b82f6;
-  --accent: #fbbf24;
-  --success: #34d399;
+  --primary: #f59e0b;       /* golden yellow (primary in dark) */
+  --accent: #06b6d4;        /* fresh cyan */
+  --success: #10b981;       /* same green */
+  --text: #f1f5f9;          /* very light gray */
+  --text-light: #cbd5e1;    /* medium light gray */
+  --bg: #0f172a;            /* dark navy */
+  --bg-alt: #1e293b;        /* medium dark navy */
+  --bg-card: #1e293b;       /* card background */
+  --border: #334155;        /* dark border */
+  --shadow: 0 4px 20px rgba(0,0,0,0.25);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.35);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,0.45);
+  --gradient: linear-gradient(135deg, var(--primary) 0%, #d97706 100%);
+  --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #0891b2 100%);
+  
+  /* Legacy support */
+  --primary-dark: #d97706;
   --warning: #fbbf24;
   --danger: #f87171;
-  --text: #f1f5f9;
-  --text-light: #94a3b8;
-  --bg: #0f172a;
-  --bg-alt: #1e293b;
-  --border: #334155;
-  --shadow: 0 10px 25px rgba(0,0,0,0.3);
-  --shadow-lg: 0 20px 40px rgba(0,0,0,0.4);
-  --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  --info: #38bdf8;
+  --text-muted: #94a3b8;
+  --border-light: #475569;
 }
 
 /* Smooth transitions for theme changes */

@@ -1,6 +1,6 @@
 /* Hero Section Enhanced Styles */
 .hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: var(--gradient);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -160,14 +160,14 @@
 }
 
 .cta-button.primary {
-    background: linear-gradient(45deg, var(--success), var(--primary));
+    background: var(--gradient-accent);
     color: white;
-    box-shadow: 0 8px 25px rgba(52, 211, 153, 0.4);
+    box-shadow: var(--shadow-lg);
 }
 
 .cta-button.primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(52, 211, 153, 0.6);
+    box-shadow: var(--shadow-xl);
 }
 
 .cta-button.secondary {

@@ -33,16 +33,17 @@
         }
         
         .problem-card {
-            background: var(--card-bg);
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 2rem;
             box-shadow: var(--shadow);
+            border: 1px solid var(--border);
             transition: transform 0.3s, box-shadow 0.3s;
         }
         
         .problem-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: var(--shadow-lg);
         }
         
         .problem-type {
@@ -54,10 +55,10 @@
             margin-bottom: 1rem;
         }
         
-        .error-fix { background: #fee2e2; color: #991b1b; }
-        .how-to { background: #dbeafe; color: #1e40af; }
-        .optimization { background: #d1fae5; color: #166534; }
-        .debugging { background: #fef3c7; color: #92400e; }
+        .error-fix { background: var(--bg-alt); color: var(--primary); border: 1px solid var(--primary); }
+        .how-to { background: var(--bg-alt); color: var(--accent); border: 1px solid var(--accent); }
+        .optimization { background: var(--bg-alt); color: var(--success); border: 1px solid var(--success); }
+        .debugging { background: var(--bg-alt); color: var(--text); border: 1px solid var(--text-light); }
         
         .problem-title {
             color: var(--text);
@@ -66,14 +67,14 @@
         }
         
         .problem-description {
-            color: var(--text-secondary);
+            color: var(--text-light);
             margin-bottom: 1.5rem;
             line-height: 1.6;
         }
         
         .code-block {
-            background: var(--code-bg);
-            color: var(--code-text);
+            background: var(--bg-alt);
+            color: var(--text);
             padding: 1rem;
             border-radius: 8px;
             font-family: 'Fira Code', monospace;
@@ -81,21 +82,22 @@
             overflow-x: auto;
             margin: 1rem 0;
             position: relative;
+            border: 1px solid var(--border);
         }
         
         .error-code {
-            background: var(--error-bg);
-            border-left: 4px solid var(--error);
+            background: var(--bg-alt);
+            border-left: 4px solid var(--primary);
         }
         
         .solution-code {
-            background: var(--success-bg);
+            background: var(--bg-alt);
             border-left: 4px solid var(--success);
         }
         
         .code-label {
-            background: var(--code-label-bg);
-            color: var(--code-label-text);
+            background: var(--text);
+            color: white;
             padding: 0.3rem 0.8rem;
             border-radius: 4px 4px 0 0;
             font-size: 0.7rem;
@@ -104,14 +106,15 @@
             margin-bottom: -1px;
         }
         
-        .error-label { background: var(--error); }
+        .error-label { background: var(--primary); }
         .solution-label { background: var(--success); }
         
         .step-by-step {
-            background: var(--secondary-bg);
+            background: var(--bg-alt);
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
+            border: 1px solid var(--border);
         }
         
         .step-list {
@@ -124,11 +127,11 @@
             counter-increment: step-counter;
             margin: 1rem 0;
             padding: 1rem 1rem 1rem 3rem;
-            background: var(--card-bg);
+            background: var(--bg-card);
             border-radius: 8px;
             border-left: 3px solid var(--primary);
             position: relative;
-            box-shadow: var(--shadow-light);
+            box-shadow: var(--shadow);
         }
         
         .step-list li::before {
@@ -150,15 +153,15 @@
         }
         
         .warning-box {
-            background: var(--warning-bg);
-            border: 1px solid var(--warning);
+            background: var(--bg-alt);
+            border: 1px solid var(--accent);
             border-radius: 8px;
             padding: 1rem;
             margin: 1rem 0;
         }
         
         .tip-box {
-            background: var(--success-bg-light);
+            background: var(--bg-alt);
             border: 1px solid var(--success);
             border-radius: 8px;
             padding: 1rem;
@@ -175,11 +178,11 @@
         .filter-tab {
             padding: 0.5rem 1rem;
             border-radius: 6px;
-            background: var(--secondary-bg);
-            color: var(--text-secondary);
+            background: var(--bg-alt);
+            color: var(--text-light);
             cursor: pointer;
             transition: all 0.3s;
-            border: none;
+            border: 1px solid var(--border);
             font-size: 0.9rem;
         }
         
@@ -195,7 +198,7 @@
             border-radius: 8px;
             font-size: 1rem;
             margin-bottom: 2rem;
-            background: var(--input-bg);
+            background: var(--bg);
             color: var(--text);
         }
         
@@ -219,9 +222,8 @@
                 <a href="veri-analizi.html" class="nav-link">Veri Analizi</a>
                 <a href="interactive-python-editor.html" class="nav-link">Kod Editörü</a>
                 <a href="blog/index.html" class="nav-link">Blog</a>
-                <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
-                    <span class="sun-icon">☀️</span>
-                    <span class="moon-icon">🌙</span>
+                <button id="theme-toggle" class="theme-toggle" title="Dark/Light Mode">
+                    <span class="theme-icon">🌙</span>
                 </button>
             </div>
         </div>
@@ -705,13 +707,13 @@ decoded = encoded.decode('utf-8')</code></pre>
         </div>
 
         <!-- Quick Reference Section -->
-        <div class="tutorial-section" style="background: var(--card-bg); padding: 2rem; border-radius: 12px; margin-top: 3rem;">
+        <div class="tutorial-section" style="background: var(--bg-card); padding: 2rem; border-radius: 12px; margin-top: 3rem; border: 1px solid var(--border);">
             <h2>🚀 Hızlı Referans</h2>
             
             <div class="concept-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
-                <div style="background: var(--secondary-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary);">
+                <div style="background: var(--bg-alt); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary); border: 1px solid var(--border);">
                     <h4>🔧 Debugging Checklist</h4>
-                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem; color: var(--text);">
                         <li>Hata mesajını dikkatli oku</li>
                         <li>Satır numarasını kontrol et</li>
                         <li>Print statement ekle</li>
@@ -720,9 +722,9 @@ decoded = encoded.decode('utf-8')</code></pre>
                     </ul>
                 </div>
                 
-                <div style="background: var(--secondary-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--success);">
+                <div style="background: var(--bg-alt); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--success); border: 1px solid var(--border);">
                     <h4>⚡ Performans İpuçları</h4>
-                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem; color: var(--text);">
                         <li>List comprehension kullan</li>
                         <li>Generator'ları tercih et</li>
                         <li>Gereksiz döngülerden kaçın</li>
@@ -731,9 +733,9 @@ decoded = encoded.decode('utf-8')</code></pre>
                     </ul>
                 </div>
                 
-                <div style="background: var(--secondary-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--warning);">
+                <div style="background: var(--bg-alt); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent); border: 1px solid var(--border);">
                     <h4>📚 En Çok Kullanılan Kütüphaneler</h4>
-                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem; color: var(--text);">
                         <li>requests (HTTP istekleri)</li>
                         <li>pandas (veri analizi)</li>
                         <li>numpy (sayısal hesaplar)</li>
@@ -742,9 +744,9 @@ decoded = encoded.decode('utf-8')</code></pre>
                     </ul>
                 </div>
                 
-                <div style="background: var(--secondary-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--error);">
+                <div style="background: var(--bg-alt); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary); border: 1px solid var(--border);">
                     <h4>❌ Yaygın Hatalar</h4>
-                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem; color: var(--text);">
                         <li>IndentationError</li>
                         <li>IndexError</li>
                         <li>KeyError</li>
@@ -756,9 +758,9 @@ decoded = encoded.decode('utf-8')</code></pre>
         </div>
 
         <!-- CTA Section -->
-        <div style="text-align: center; padding: 3rem; background: var(--card-bg); border-radius: 12px; margin-top: 2rem;">
+        <div style="text-align: center; padding: 3rem; background: var(--bg-card); border-radius: 12px; margin-top: 2rem; border: 1px solid var(--border);">
             <h2>🎯 Probleminizi Çözemedik mi?</h2>
-            <p style="margin-bottom: 2rem; color: var(--text-secondary);">Karşılaştığınız problemi burada bulamadıysanız, kod editörümüzde deneyin veya topluluk desteği alın.</p>
+            <p style="margin-bottom: 2rem; color: var(--text-light);">Karşılaştığınız problemi burada bulamadıysanız, kod editörümüzde deneyin veya topluluk desteği alın.</p>
             <div>
                 <a href="interactive-python-editor.html" class="cta-button" style="margin-right: 1rem;">💻 Kod Editörü</a>
                 <a href="blog/index.html" class="cta-button secondary">📝 Blog & Çözümler</a>
@@ -767,20 +769,29 @@ decoded = encoded.decode('utf-8')</code></pre>
     </div>
 
     <script>
-        // Dark mode functionality
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const body = document.body;
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.querySelector('.theme-icon');
         
-        // Check for saved theme preference or default to 'light'
+        // Load saved theme
         const currentTheme = localStorage.getItem('theme') || 'light';
-        body.classList.add(currentTheme + '-theme');
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️';
+        } else {
+            themeIcon.textContent = '🌙';
+        }
         
-        darkModeToggle.addEventListener('click', () => {
-            if (body.classList.contains('dark-theme')) {
-                body.classList.replace('dark-theme', 'light-theme');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeIcon.textContent = '🌙';
                 localStorage.setItem('theme', 'light');
             } else {
-                body.classList.replace('light-theme', 'dark-theme');
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
                 localStorage.setItem('theme', 'dark');
             }
         });

@@ -47,19 +47,22 @@
 }
 
 .blog-category.money {
-    background: linear-gradient(45deg, #22c55e, #16a34a);
+    background: var(--gradient-accent);
+    color: white;
 }
 
 .blog-category.ai {
-    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    background: var(--gradient);
+    color: white;
 }
 
 .blog-category.freelance {
-    background: linear-gradient(45deg, var(--accent), #d97706);
+    background: linear-gradient(45deg, var(--success), #059669);
+    color: white;
 }
 
 .blog-link.trending {
-    background: linear-gradient(45deg, #22c55e, #16a34a);
+    background: linear-gradient(45deg, var(--success), #059669);
     color: white;
     padding: 8px 16px;
     border-radius: 20px;
@@ -71,7 +74,7 @@
 
 .blog-link.trending:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+    box-shadow: var(--shadow-lg);
 }
 
 .blog-link.ai {
@@ -87,11 +90,11 @@
 
 .blog-link.ai:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--primary-rgb, 59, 130, 246), 0.3);
+    box-shadow: var(--shadow-lg);
 }
 
 .blog-link.freelance {
-    background: linear-gradient(45deg, var(--accent), #d97706);
+    background: var(--gradient-accent);
     color: white;
     padding: 8px 16px;
     border-radius: 20px;
@@ -103,7 +106,7 @@
 
 .blog-link.freelance:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    box-shadow: var(--shadow-lg);
 }
 
 /* Mobile responsive dark mode toggle */

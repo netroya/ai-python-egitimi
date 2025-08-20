@@ -1,7 +1,7 @@
 
 /* Blog Styles */
 .blog-hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: var(--gradient);
     color: white;
     padding: 80px 0;
     text-align: center;
@@ -29,14 +29,15 @@
 }
 
 .category-card {
-    background: white;
+    background: var(--bg-card);
     border-radius: 15px;
     padding: 30px;
     text-align: center;
     box-shadow: var(--shadow);
+    border: 1px solid var(--border);
     transition: all 0.3s ease;
     text-decoration: none;
-    color: inherit;
+    color: var(--text);
 }
 
 .category-card:hover {
@@ -144,7 +145,7 @@
 }
 
 .newsletter {
-    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+    background: linear-gradient(135deg, var(--success) 0%, var(--success) 100%);
     color: white;
     padding: 60px 0;
     text-align: center;
@@ -283,8 +284,8 @@
 }
 
 .blog-post pre {
-    background: #2d3748;
-    color: #e2e8f0;
+    background: var(--bg-alt);
+    color: var(--text);
     padding: 20px;
     border-radius: 8px;
     overflow-x: auto;
@@ -293,8 +294,8 @@
 }
 
 .blog-post code {
-    background: #2d3748;
-    color: #e2e8f0;
+    background: var(--bg-alt);
+    color: var(--text);
     padding: 2px 6px;
     border-radius: 4px;
     font-family: 'Courier New', monospace;
@@ -378,9 +379,9 @@
     transition: all 0.3s ease;
 }
 
-.share-btn.twitter { background: #1DA1F2; }
-.share-btn.facebook { background: #4267B2; }
-.share-btn.linkedin { background: #0077B5; }
+.share-btn.twitter { background: var(--accent); }
+.share-btn.facebook { background: var(--primary); }
+.share-btn.linkedin { background: var(--success); }
 
 .share-btn:hover {
     transform: translateY(-2px);
