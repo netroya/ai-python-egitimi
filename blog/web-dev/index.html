@@ -607,7 +607,16 @@
             });
         }
 
-        // Animation and scroll effects
+        // Ensure hero section is always visible
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.opacity = '1';
+                heroContent.style.transform = 'translateY(0)';
+            }
+        });
+
+        // Animation and scroll effects for other sections
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -615,14 +624,14 @@
 
         const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting && !entry.target.classList.contains('hero')) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('section').forEach(section => {
+        document.querySelectorAll('section:not(.hero)').forEach(section => {
             observer.observe(section);
         });
 
