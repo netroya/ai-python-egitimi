@@ -1,7 +1,7 @@
 /* Hero Section Enhanced Styles */
 .hero {
     background: var(--gradient);
-    min-height: 100vh;
+    min-height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,7 +9,8 @@
     overflow: hidden;
     color: white;
     text-align: center;
-    padding: 2rem;
+    padding: 4rem 2rem;
+    margin-top: 80px;
 }
 
 .hero::before {
