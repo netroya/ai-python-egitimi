@@ -732,8 +732,8 @@
 
         /* Animation */
         .animate-in {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: translateY(0);
             animation: slideInUp 0.8s ease-out forwards;
         }
 
@@ -762,23 +762,19 @@
             }
         });
 
-        // Animation and scroll effects for other sections
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.classList.contains('hero')) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+        // Make all content visible immediately
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make all sections visible
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
             });
-        }, observerOptions);
-
-        document.querySelectorAll('section:not(.hero)').forEach(section => {
-            observer.observe(section);
+            
+            // Make all posts visible
+            document.querySelectorAll('.featured-post, .article-item').forEach(item => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            });
         });
 
         // Newsletter form handling
