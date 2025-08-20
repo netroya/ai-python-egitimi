@@ -30,6 +30,8 @@
     </script>
     
     <link rel="stylesheet" href="premium-styles.css">
+    <link rel="stylesheet" href="hero-styles.css">
+    <link rel="stylesheet" href="blog-enhancement.css">
     <link rel="canonical" href="https://netroya.github.io/ai-python-egitimi/python-kursu.html">
     
     <!-- AdSense -->
@@ -56,6 +58,9 @@
                 <a href="veri-analizi.html" class="nav-link">Veri Analizi</a>
                 <a href="interactive-python-editor.html" class="nav-link">Kod Editörü</a>
                 <a href="blog/index.html" class="nav-link">Blog</a>
+                <button id="theme-toggle" class="theme-toggle" title="Dark/Light Mode">
+                    <span class="theme-icon">🌙</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -323,7 +328,7 @@
       
     <style>
       .course-intro, .ai-intro {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          background: var(--gradient);
           color: white;
           padding: 3rem;
           border-radius: 12px;
@@ -338,24 +343,26 @@
       }
       
       .highlight-item, .tool-category {
-          background: #f8f9fa;
+          background: var(--bg-alt);
           padding: 2rem;
           border-radius: 8px;
-          border-left: 4px solid #4CAF50;
+          border-left: 4px solid var(--success);
+          border: 1px solid var(--border);
       }
       
       .curriculum .module {
-          background: white;
+          background: var(--bg);
           padding: 2rem;
           margin: 2rem 0;
           border-radius: 8px;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          box-shadow: var(--shadow);
+          border: 1px solid var(--border);
       }
       
       .curriculum .topic {
           margin: 1.5rem 0;
           padding: 1rem;
-          background: #f8f9fa;
+          background: var(--bg-alt);
           border-radius: 6px;
       }
       
@@ -367,12 +374,12 @@
       }
       
       .project-card {
-          background: white;
+          background: var(--bg);
           padding: 2rem;
           border-radius: 8px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          box-shadow: var(--shadow);
           transition: transform 0.3s;
-          border: 1px solid #eee;
+          border: 1px solid var(--border);
       }
       
       .project-card:hover {
@@ -381,7 +388,7 @@
       }
       
       .project-card.featured {
-          border: 2px solid #4CAF50;
+          border: 2px solid var(--success);
           position: relative;
       }
       
@@ -390,7 +397,7 @@
           position: absolute;
           top: -10px;
           right: 10px;
-          background: #4CAF50;
+          background: var(--success);
           color: white;
           padding: 0.5rem 1rem;
           border-radius: 20px;
@@ -405,12 +412,13 @@
       }
       
       .tech, .skill {
-          background: #e3f2fd;
-          color: #1976d2;
+          background: var(--bg-alt);
+          color: var(--primary);
           padding: 0.25rem 0.75rem;
           border-radius: 15px;
           font-size: 0.8rem;
           font-weight: 500;
+          border: 1px solid var(--border);
       }
       
       .timeline {
@@ -425,7 +433,7 @@
           top: 0;
           bottom: 0;
           width: 2px;
-          background: #4CAF50;
+          background: var(--success);
       }
       
       .timeline-item {
@@ -439,7 +447,7 @@
           left: 1.25rem;
           width: 1.5rem;
           height: 1.5rem;
-          background: #4CAF50;
+          background: var(--success);
           color: white;
           border-radius: 50%;
           display: flex;
@@ -450,10 +458,11 @@
       }
       
       .timeline-content {
-          background: white;
+          background: var(--bg);
           padding: 1.5rem;
           border-radius: 8px;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          box-shadow: var(--shadow);
+          border: 1px solid var(--border);
       }
       
       .roadmap-container {
@@ -466,14 +475,15 @@
       .roadmap-step {
           display: flex;
           align-items: flex-start;
-          background: white;
+          background: var(--bg);
           padding: 2rem;
           border-radius: 12px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          box-shadow: var(--shadow);
+          border: 1px solid var(--border);
       }
       
       .step-number {
-          background: linear-gradient(135deg, #4CAF50, #45a049);
+          background: linear-gradient(135deg, var(--success), var(--primary));
           color: white;
           width: 3rem;
           height: 3rem;
@@ -492,13 +502,14 @@
       }
       
       .time-estimate {
-          background: #f0f8ff;
-          color: #1976d2;
+          background: var(--bg-alt);
+          color: var(--primary);
           padding: 0.5rem 1rem;
           border-radius: 20px;
           font-size: 0.9rem;
           display: inline-block;
           margin-top: 1rem;
+          border: 1px solid var(--border);
       }
       
       .tool-items {
@@ -508,10 +519,10 @@
       }
       
       .tool-item {
-          background: white;
+          background: var(--bg);
           padding: 1rem;
           border-radius: 6px;
-          border: 1px solid #ddd;
+          border: 1px solid var(--border);
       }
       
       .difficulty {
@@ -576,7 +587,7 @@
       }
       
       .cta-section {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          background: var(--gradient);
           color: white;
           padding: 4rem 2rem;
           border-radius: 12px;
@@ -600,7 +611,7 @@
       }
       
       .cta-btn.primary {
-          background: #4CAF50;
+          background: var(--success);
           color: white;
       }
       
@@ -629,7 +640,7 @@
           display: block;
           font-size: 2.5rem;
           font-weight: bold;
-          color: #4CAF50;
+          color: var(--success);
       }
       
       .stat-label {
@@ -650,15 +661,16 @@
       }
       
       .option-card {
-          background: white;
+          background: var(--bg);
           padding: 2rem;
           border-radius: 12px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          box-shadow: var(--shadow);
           text-align: center;
+          border: 1px solid var(--border);
       }
       
       .start-btn {
-          background: #4CAF50;
+          background: var(--success);
           color: white;
           padding: 1rem 2rem;
           border-radius: 8px;
@@ -671,7 +683,7 @@
       
       .start-btn:hover {
           transform: translateY(-2px);
-          background: #45a049;
+          background: var(--primary);
       }
       
       @media (max-width: 768px) {
@@ -765,6 +777,33 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-40X5D8K6WH');
+        
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.querySelector('.theme-icon');
+
+        // Load saved theme
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️';
+        } else {
+            themeIcon.textContent = '🌙';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
     </script>
 
     <style>
