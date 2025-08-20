@@ -1,0 +1,120 @@
+/* Enhanced Blog Styles */
+.viral-post, .trending-post, .new-post {
+    position: relative;
+    overflow: hidden;
+}
+
+.viral-badge, .trending-badge, .new-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.viral-badge {
+    background: linear-gradient(45deg, #ef4444, #dc2626);
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+.trending-badge {
+    background: linear-gradient(45deg, #22c55e, #16a34a);
+    color: white;
+}
+
+.new-badge {
+    background: linear-gradient(45deg, var(--accent), #d97706);
+    color: white;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+.blog-views, .blog-likes, .blog-success {
+    background: var(--bg-alt);
+    color: var(--text-light);
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.blog-category.money {
+    background: linear-gradient(45deg, #22c55e, #16a34a);
+}
+
+.blog-category.ai {
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+}
+
+.blog-category.freelance {
+    background: linear-gradient(45deg, var(--accent), #d97706);
+}
+
+.blog-link.trending {
+    background: linear-gradient(45deg, #22c55e, #16a34a);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.blog-link.trending:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.blog-link.ai {
+    background: var(--gradient);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.blog-link.ai:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb, 59, 130, 246), 0.3);
+}
+
+.blog-link.freelance {
+    background: linear-gradient(45deg, var(--accent), #d97706);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.blog-link.freelance:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+/* Mobile responsive dark mode toggle */
+@media (max-width: 768px) {
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+        margin-left: 10px;
+    }
+    
+    .theme-icon {
+        font-size: 1rem;
+    }
+}

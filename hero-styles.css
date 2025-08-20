@@ -1,6 +1,6 @@
 /* Hero Section Enhanced Styles */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -67,9 +67,9 @@
 }
 
 .hero h1 .highlight {
-    color: #4CAF50;
-    -webkit-text-fill-color: #4CAF50;
-    text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+    color: var(--success);
+    -webkit-text-fill-color: var(--success);
+    text-shadow: 0 0 20px rgba(52, 211, 153, 0.5);
 }
 
 .hero .subtitle {
@@ -109,9 +109,9 @@
     display: block;
     font-size: 2.5rem;
     font-weight: 800;
-    color: #4CAF50;
+    color: var(--success);
     margin-bottom: 0.5rem;
-    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    text-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
 }
 
 .stat-label {
@@ -160,14 +160,14 @@
 }
 
 .cta-button.primary {
-    background: linear-gradient(45deg, #4CAF50, #45a049);
+    background: linear-gradient(45deg, var(--success), var(--primary));
     color: white;
-    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+    box-shadow: 0 8px 25px rgba(52, 211, 153, 0.4);
 }
 
 .cta-button.primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.6);
+    box-shadow: 0 12px 35px rgba(52, 211, 153, 0.6);
 }
 
 .cta-button.secondary {

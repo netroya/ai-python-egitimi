@@ -1,5 +1,6 @@
 <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Yapay Zeka ve Programlama Eğitimi | Türkiye'nin En Kapsamlı Rehberi</title><meta name="description" content="Python, AI, makine öğrenmesi ve modern programlama teknolojileri eğitimi. Sıfırdan uzman seviyeye."><meta name="keywords" content="python öğrenme, yapay zeka eğitimi, makine öğrenmesi kursu, programlama rehberi, AI teknolojileri"><!-- Open Graph --><meta property="og:title" content="Yapay Zeka ve Programlama Eğitimi"><meta property="og:description" content="Python, AI, makine öğrenmesi ve modern programlama teknolojileri eğitimi. Sıfırdan uzman seviyeye."><meta property="og:type" content="website"><meta property="og:url" content="https://netroya.github.io/ai-python-egitimi"><!-- Schema.org --><script type="application/ld+json"> { "@context": "https://schema.org", "@type": "EducationalOrganization", "name": "Yapay Zeka ve Programlama Eğitimi", "description": "Python, AI, makine öğrenmesi ve modern programlama teknolojileri eğitimi. Sıfırdan uzman seviyeye.", "url": "https://netroya.github.io/ai-python-egitimi", "courseMode": "online", "educationalCredentialAwarded": "Certificate" } </script><link rel="stylesheet" href="premium-styles.css">
 <link rel="stylesheet" href="hero-styles.css">
+<link rel="stylesheet" href="blog-enhancement.css">
 <link rel="canonical" href="https://netroya.github.io/ai-python-egitimi"><!-- AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023802833968711" crossorigin="anonymous"></script>    <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head><body><!-- Header Ad Zone -->
@@ -23,6 +24,9 @@
             <a href="veri-analizi.html" class="nav-link">Veri Analizi</a>
             <a href="interactive-python-editor.html" class="nav-link">Kod Editörü</a>
             <a href="blog/index.html" class="nav-link">Blog</a>
+            <button id="theme-toggle" class="theme-toggle" title="Dark/Light Mode">
+                <span class="theme-icon">🌙</span>
+            </button>
         </div>
         <div class="nav-toggle">
             <span></span>
@@ -212,6 +216,33 @@ document.querySelectorAll('.nav-link').forEach(link => {
         navToggle.classList.remove('active');
         navMenu.classList.remove('active');
     });
+});
+
+// Dark Mode Toggle
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.querySelector('.theme-icon');
+
+// Load saved theme
+const currentTheme = localStorage.getItem('theme') || 'light';
+if (currentTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeIcon.textContent = '☀️';
+} else {
+    themeIcon.textContent = '🌙';
+}
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeIcon.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+    }
 });
 </script>
 
