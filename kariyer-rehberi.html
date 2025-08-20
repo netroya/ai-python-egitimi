@@ -30,6 +30,7 @@
     </script>
     
     <link rel="stylesheet" href="premium-styles.css">
+    <link rel="stylesheet" href="blog-enhancement.css">
     <link rel="canonical" href="https://netroya.github.io/ai-python-egitimi/kariyer-rehberi.html">
     
     <!-- AdSense -->
@@ -55,6 +56,10 @@
                 <a href="web-gelistirme.html" class="nav-link">Web Geliştirme</a>
                 <a href="kariyer-rehberi.html" class="nav-link">Kariyer</a>
                 <a href="blog/index.html" class="nav-link">Blog</a>
+                <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -1141,24 +1146,24 @@
       }
       
       .highlight-item, .tool-category {
-          background: #f8f9fa;
+          background: var(--secondary-bg);
           padding: 2rem;
           border-radius: 8px;
-          border-left: 4px solid #4CAF50;
+          border-left: 4px solid var(--success);
       }
       
       .curriculum .module {
-          background: white;
+          background: var(--card-bg);
           padding: 2rem;
           margin: 2rem 0;
           border-radius: 8px;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          box-shadow: var(--shadow);
       }
       
       .curriculum .topic {
           margin: 1.5rem 0;
           padding: 1rem;
-          background: #f8f9fa;
+          background: var(--secondary-bg);
           border-radius: 6px;
       }
       
@@ -1170,21 +1175,21 @@
       }
       
       .project-card {
-          background: white;
+          background: var(--card-bg);
           padding: 2rem;
           border-radius: 8px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          box-shadow: var(--shadow);
           transition: transform 0.3s;
-          border: 1px solid #eee;
+          border: 1px solid var(--border);
       }
       
       .project-card:hover {
           transform: translateY(-5px);
-          box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+          box-shadow: var(--shadow-hover);
       }
       
       .project-card.featured {
-          border: 2px solid #4CAF50;
+          border: 2px solid var(--success);
           position: relative;
       }
       
@@ -1193,7 +1198,7 @@
           position: absolute;
           top: -10px;
           right: 10px;
-          background: #4CAF50;
+          background: var(--success);
           color: white;
           padding: 0.5rem 1rem;
           border-radius: 20px;
@@ -1253,10 +1258,10 @@
       }
       
       .timeline-content {
-          background: white;
+          background: var(--card-bg);
           padding: 1.5rem;
           border-radius: 8px;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          box-shadow: var(--shadow);
       }
       
       .roadmap-container {
@@ -1269,10 +1274,10 @@
       .roadmap-step {
           display: flex;
           align-items: flex-start;
-          background: white;
+          background: var(--card-bg);
           padding: 2rem;
           border-radius: 12px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          box-shadow: var(--shadow);
       }
       
       .step-number {
@@ -1311,10 +1316,10 @@
       }
       
       .tool-item {
-          background: white;
+          background: var(--card-bg);
           padding: 1rem;
           border-radius: 6px;
-          border: 1px solid #ddd;
+          border: 1px solid var(--border);
       }
       
       .difficulty {
@@ -1347,15 +1352,15 @@
       }
       
       .career-card {
-          background: white;
+          background: var(--card-bg);
           padding: 2rem;
           border-radius: 12px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-          border: 1px solid #eee;
+          box-shadow: var(--shadow);
+          border: 1px solid var(--border);
       }
       
       .career-card.featured {
-          border: 2px solid #4CAF50;
+          border: 2px solid var(--success);
           transform: scale(1.02);
       }
       
@@ -1453,10 +1458,10 @@
       }
       
       .option-card {
-          background: white;
+          background: var(--card-bg);
           padding: 2rem;
           border-radius: 12px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          box-shadow: var(--shadow);
           text-align: center;
       }
       
@@ -1568,11 +1573,31 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-40X5D8K6WH');
+        
+        // Dark mode functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            
+            // Check for saved theme preference or default to 'light'
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            body.classList.add(currentTheme + '-theme');
+            
+            darkModeToggle.addEventListener('click', () => {
+                if (body.classList.contains('dark-theme')) {
+                    body.classList.replace('dark-theme', 'light-theme');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    body.classList.replace('light-theme', 'dark-theme');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        });
     </script>
 
     <style>
         .navbar {
-            background: #1a1a1a;
+            background: var(--nav-bg);
             padding: 1rem 0;
             position: fixed;
             top: 0;
@@ -1588,7 +1613,7 @@
             padding: 0 2rem;
         }
         .nav-logo {
-            color: #4CAF50;
+            color: var(--primary);
             font-size: 1.5rem;
             font-weight: bold;
             text-decoration: none;
@@ -1598,12 +1623,12 @@
             gap: 2rem;
         }
         .nav-link {
-            color: #fff;
+            color: var(--nav-text);
             text-decoration: none;
             transition: color 0.3s;
         }
         .nav-link:hover {
-            color: #4CAF50;
+            color: var(--primary);
         }
         .main-content {
             margin-top: 80px;
@@ -1618,17 +1643,17 @@
             gap: 2rem;
         }
         .article-content {
-            background: #fff;
+            background: var(--card-bg);
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
         }
         .article-header h1 {
-            color: #333;
+            color: var(--text);
             margin-bottom: 1rem;
         }
         .article-meta {
-            color: #666;
+            color: var(--text-secondary);
             margin-bottom: 2rem;
         }
         .related-articles {
@@ -1644,15 +1669,15 @@
         }
         .related-card {
             padding: 1rem;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border);
             border-radius: 8px;
             text-decoration: none;
-            color: #333;
+            color: var(--text);
             transition: transform 0.3s;
         }
         .related-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-hover);
         }
         .sidebar {
             display: flex;
@@ -1660,7 +1685,7 @@
             gap: 2rem;
         }
         .sidebar-widget {
-            background: #f9f9f9;
+            background: var(--secondary-bg);
             padding: 1.5rem;
             border-radius: 8px;
         }
@@ -1672,12 +1697,12 @@
             margin-bottom: 0.5rem;
         }
         .quick-links a {
-            color: #4CAF50;
+            color: var(--primary);
             text-decoration: none;
         }
         .footer {
-            background: #1a1a1a;
-            color: #fff;
+            background: var(--nav-bg);
+            color: var(--nav-text);
             text-align: center;
             padding: 2rem;
             margin-top: 4rem;
@@ -1689,7 +1714,7 @@
             gap: 2rem;
         }
         .footer-links a {
-            color: #ccc;
+            color: var(--text-secondary);
             text-decoration: none;
         }
         

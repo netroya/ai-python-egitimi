@@ -8,6 +8,7 @@
     <meta name="keywords" content="python hata çözümü, python debugging, python problemi, nasıl yapılır, python error, bug fix, troubleshooting">
     <link rel="stylesheet" href="premium-styles.css">
     <link rel="stylesheet" href="hero-styles.css">
+    <link rel="stylesheet" href="blog-enhancement.css">
     
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023802833968711" crossorigin="anonymous"></script>
@@ -32,16 +33,16 @@
         }
         
         .problem-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
             transition: transform 0.3s, box-shadow 0.3s;
         }
         
         .problem-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-hover);
         }
         
         .problem-type {
@@ -59,20 +60,20 @@
         .debugging { background: #fef3c7; color: #92400e; }
         
         .problem-title {
-            color: #1e293b;
+            color: var(--text);
             margin-bottom: 1rem;
             font-size: 1.2rem;
         }
         
         .problem-description {
-            color: #64748b;
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
             line-height: 1.6;
         }
         
         .code-block {
-            background: #1e293b;
-            color: #f8fafc;
+            background: var(--code-bg);
+            color: var(--code-text);
             padding: 1rem;
             border-radius: 8px;
             font-family: 'Fira Code', monospace;
@@ -83,18 +84,18 @@
         }
         
         .error-code {
-            background: #451a03;
-            border-left: 4px solid #dc2626;
+            background: var(--error-bg);
+            border-left: 4px solid var(--error);
         }
         
         .solution-code {
-            background: #0c4a6e;
-            border-left: 4px solid #10b981;
+            background: var(--success-bg);
+            border-left: 4px solid var(--success);
         }
         
         .code-label {
-            background: #374151;
-            color: #f9fafb;
+            background: var(--code-label-bg);
+            color: var(--code-label-text);
             padding: 0.3rem 0.8rem;
             border-radius: 4px 4px 0 0;
             font-size: 0.7rem;
@@ -103,11 +104,11 @@
             margin-bottom: -1px;
         }
         
-        .error-label { background: #dc2626; }
-        .solution-label { background: #10b981; }
+        .error-label { background: var(--error); }
+        .solution-label { background: var(--success); }
         
         .step-by-step {
-            background: #f8fafc;
+            background: var(--secondary-bg);
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
@@ -123,11 +124,11 @@
             counter-increment: step-counter;
             margin: 1rem 0;
             padding: 1rem 1rem 1rem 3rem;
-            background: white;
+            background: var(--card-bg);
             border-radius: 8px;
-            border-left: 3px solid #3b82f6;
+            border-left: 3px solid var(--primary);
             position: relative;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-light);
         }
         
         .step-list li::before {
@@ -136,7 +137,7 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            background: #3b82f6;
+            background: var(--primary);
             color: white;
             width: 1.5rem;
             height: 1.5rem;
@@ -149,16 +150,16 @@
         }
         
         .warning-box {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
+            background: var(--warning-bg);
+            border: 1px solid var(--warning);
             border-radius: 8px;
             padding: 1rem;
             margin: 1rem 0;
         }
         
         .tip-box {
-            background: #f0fdf4;
-            border: 1px solid #22c55e;
+            background: var(--success-bg-light);
+            border: 1px solid var(--success);
             border-radius: 8px;
             padding: 1rem;
             margin: 1rem 0;
@@ -174,8 +175,8 @@
         .filter-tab {
             padding: 0.5rem 1rem;
             border-radius: 6px;
-            background: #f1f5f9;
-            color: #475569;
+            background: var(--secondary-bg);
+            color: var(--text-secondary);
             cursor: pointer;
             transition: all 0.3s;
             border: none;
@@ -183,21 +184,23 @@
         }
         
         .filter-tab:hover, .filter-tab.active {
-            background: #3b82f6;
+            background: var(--primary);
             color: white;
         }
         
         .search-box {
             width: 100%;
             padding: 1rem;
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--border);
             border-radius: 8px;
             font-size: 1rem;
             margin-bottom: 2rem;
+            background: var(--input-bg);
+            color: var(--text);
         }
         
         .search-box:focus {
-            border-color: #3b82f6;
+            border-color: var(--primary);
             outline: none;
         }
     </style>
@@ -216,6 +219,10 @@
                 <a href="veri-analizi.html" class="nav-link">Veri Analizi</a>
                 <a href="interactive-python-editor.html" class="nav-link">Kod Editörü</a>
                 <a href="blog/index.html" class="nav-link">Blog</a>
+                <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -698,11 +705,11 @@ decoded = encoded.decode('utf-8')</code></pre>
         </div>
 
         <!-- Quick Reference Section -->
-        <div class="tutorial-section" style="background: white; padding: 2rem; border-radius: 12px; margin-top: 3rem;">
+        <div class="tutorial-section" style="background: var(--card-bg); padding: 2rem; border-radius: 12px; margin-top: 3rem;">
             <h2>🚀 Hızlı Referans</h2>
             
             <div class="concept-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
-                <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                <div style="background: var(--secondary-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary);">
                     <h4>🔧 Debugging Checklist</h4>
                     <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
                         <li>Hata mesajını dikkatli oku</li>
@@ -713,7 +720,7 @@ decoded = encoded.decode('utf-8')</code></pre>
                     </ul>
                 </div>
                 
-                <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #10b981;">
+                <div style="background: var(--secondary-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--success);">
                     <h4>⚡ Performans İpuçları</h4>
                     <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
                         <li>List comprehension kullan</li>
@@ -724,7 +731,7 @@ decoded = encoded.decode('utf-8')</code></pre>
                     </ul>
                 </div>
                 
-                <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                <div style="background: var(--secondary-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--warning);">
                     <h4>📚 En Çok Kullanılan Kütüphaneler</h4>
                     <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
                         <li>requests (HTTP istekleri)</li>
@@ -735,7 +742,7 @@ decoded = encoded.decode('utf-8')</code></pre>
                     </ul>
                 </div>
                 
-                <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #dc2626;">
+                <div style="background: var(--secondary-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--error);">
                     <h4>❌ Yaygın Hatalar</h4>
                     <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
                         <li>IndentationError</li>
@@ -749,9 +756,9 @@ decoded = encoded.decode('utf-8')</code></pre>
         </div>
 
         <!-- CTA Section -->
-        <div style="text-align: center; padding: 3rem; background: white; border-radius: 12px; margin-top: 2rem;">
+        <div style="text-align: center; padding: 3rem; background: var(--card-bg); border-radius: 12px; margin-top: 2rem;">
             <h2>🎯 Probleminizi Çözemedik mi?</h2>
-            <p style="margin-bottom: 2rem; color: #64748b;">Karşılaştığınız problemi burada bulamadıysanız, kod editörümüzde deneyin veya topluluk desteği alın.</p>
+            <p style="margin-bottom: 2rem; color: var(--text-secondary);">Karşılaştığınız problemi burada bulamadıysanız, kod editörümüzde deneyin veya topluluk desteği alın.</p>
             <div>
                 <a href="interactive-python-editor.html" class="cta-button" style="margin-right: 1rem;">💻 Kod Editörü</a>
                 <a href="blog/index.html" class="cta-button secondary">📝 Blog & Çözümler</a>
@@ -760,6 +767,24 @@ decoded = encoded.decode('utf-8')</code></pre>
     </div>
 
     <script>
+        // Dark mode functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to 'light'
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        body.classList.add(currentTheme + '-theme');
+        
+        darkModeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-theme')) {
+                body.classList.replace('dark-theme', 'light-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.replace('light-theme', 'dark-theme');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
         // Syntax highlighting
         hljs.highlightAll();
         

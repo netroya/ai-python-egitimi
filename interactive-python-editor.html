@@ -7,6 +7,7 @@
     <meta name="description" content="Tarayıcınızda Python kodlarını çalıştırın, test edin ve öğrenin. Ücretsiz interaktif Python editörü.">
     <meta name="keywords" content="python editör, online python, kod çalıştır, python öğren, interaktif programlama">
     <link rel="stylesheet" href="premium-styles.css">
+    <link rel="stylesheet" href="blog-enhancement.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
     
     <!-- AdSense -->
@@ -44,7 +45,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
-            background: white;
+            background: var(--card-bg);
             border-radius: 0 0 16px 16px;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
@@ -58,7 +59,7 @@
         }
         
         .panel-header {
-            background: #f8f9fa;
+            background: var(--secondary-bg);
             padding: 15px 20px;
             border-bottom: 1px solid var(--border);
             display: flex;
@@ -82,8 +83,8 @@
         .output-content {
             flex: 1;
             padding: 20px;
-            background: #1e1e1e;
-            color: #00ff00;
+            background: var(--code-bg);
+            color: var(--terminal-text);
             font-family: 'Fira Code', monospace;
             overflow-y: auto;
             white-space: pre-wrap;
@@ -117,7 +118,7 @@
         .examples-section {
             margin: 40px 0;
             padding: 30px;
-            background: var(--bg-alt);
+            background: var(--secondary-bg);
             border-radius: 16px;
         }
         
@@ -129,7 +130,7 @@
         }
         
         .example-btn {
-            background: white;
+            background: var(--card-bg);
             border: 2px solid var(--primary);
             color: var(--primary);
             padding: 10px 16px;
@@ -152,7 +153,7 @@
         }
         
         .feature-card {
-            background: white;
+            background: var(--card-bg);
             padding: 25px;
             border-radius: 12px;
             box-shadow: var(--shadow);
@@ -209,6 +210,10 @@
                 <a href="veri-analizi.html" class="nav-link">Veri Analizi</a>
                 <a href="interactive-python-editor.html" class="nav-link active">Kod Editörü</a>
                 <a href="blog/index.html" class="nav-link">Blog</a>
+                <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </button>
             </div>
             <div class="nav-toggle">
                 <span></span>
@@ -342,6 +347,24 @@ print("💡 Kendi kodlarınızı yazıp test edebilirsiniz!")</textarea>
     <script>
         let pyodide = null;
         let editor = null;
+        
+        // Dark mode functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to 'light'
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        body.classList.add(currentTheme + '-theme');
+        
+        darkModeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-theme')) {
+                body.classList.replace('dark-theme', 'light-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.replace('light-theme', 'dark-theme');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
         
         // Initialize CodeMirror
         document.addEventListener('DOMContentLoaded', function() {

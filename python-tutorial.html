@@ -8,6 +8,7 @@
     <meta name="keywords" content="python tutorial, python öğren, kod örnekleri, python dersleri, programlama eğitimi, python kurs">
     <link rel="stylesheet" href="premium-styles.css">
     <link rel="stylesheet" href="hero-styles.css">
+    <link rel="stylesheet" href="blog-enhancement.css">
     
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023802833968711" crossorigin="anonymous"></script>
@@ -25,17 +26,17 @@
         }
         
         .tutorial-nav {
-            background: white;
+            background: var(--bg);
             border-radius: 12px;
             padding: 1.5rem;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
             margin-bottom: 2rem;
             position: sticky;
             top: 2rem;
         }
         
         .tutorial-nav h3 {
-            color: #3b82f6;
+            color: var(--primary);
             margin-bottom: 1rem;
         }
         
@@ -49,50 +50,51 @@
             padding: 0.5rem 1rem;
             border-radius: 6px;
             text-decoration: none;
-            color: #64748b;
+            color: var(--text-light);
             transition: all 0.3s;
             font-size: 0.9rem;
         }
         
         .nav-links a:hover {
-            background: #f1f5f9;
-            color: #3b82f6;
+            background: var(--bg-alt);
+            color: var(--primary);
         }
         
         .tutorial-section {
-            background: white;
+            background: var(--bg);
             border-radius: 12px;
             padding: 2.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
         }
         
         .tutorial-section h2 {
-            color: #1e293b;
-            border-bottom: 3px solid #3b82f6;
+            color: var(--text);
+            border-bottom: 3px solid var(--primary);
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
         }
         
         .code-example {
-            background: #1e293b;
+            background: var(--bg-alt);
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
             overflow-x: auto;
             position: relative;
+            border: 1px solid var(--border);
         }
         
         .code-example pre {
             margin: 0;
-            color: #f8fafc;
+            color: var(--text);
             font-family: 'Fira Code', monospace;
             line-height: 1.5;
         }
         
         .code-header {
-            background: #0f172a;
-            color: #94a3b8;
+            background: var(--primary);
+            color: white;
             padding: 0.5rem 1rem;
             font-size: 0.8rem;
             border-radius: 6px 6px 0 0;
@@ -100,50 +102,50 @@
         }
         
         .output-box {
-            background: #0f172a;
-            color: #10b981;
+            background: var(--bg-alt);
+            color: var(--success);
             padding: 1rem;
             border-radius: 0 0 8px 8px;
             font-family: 'Fira Code', monospace;
-            border-top: 2px solid #374151;
+            border-top: 2px solid var(--border);
         }
         
         .try-it-box {
-            background: #f0f9ff;
-            border: 1px solid #0ea5e9;
+            background: var(--bg-alt);
+            border: 1px solid var(--primary);
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
         
         .try-it-box h4 {
-            color: #0c4a6e;
+            color: var(--primary);
             margin-bottom: 1rem;
         }
         
         .exercise-box {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
+            background: var(--bg-alt);
+            border: 1px solid var(--warning);
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
         
         .exercise-box h4 {
-            color: #92400e;
+            color: var(--warning);
             margin-bottom: 1rem;
         }
         
         .tip-box {
-            background: #f0fdf4;
-            border: 1px solid #22c55e;
+            background: var(--bg-alt);
+            border: 1px solid var(--success);
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
         
         .tip-box h4 {
-            color: #166534;
+            color: var(--success);
             margin-bottom: 1rem;
         }
         
@@ -155,16 +157,16 @@
         }
         
         .concept-card {
-            background: #f8fafc;
+            background: var(--bg-alt);
             border-radius: 8px;
             padding: 1.5rem;
-            border-left: 4px solid #3b82f6;
+            border-left: 4px solid var(--primary);
         }
         
         .progress-bar {
             width: 100%;
             height: 6px;
-            background: #e2e8f0;
+            background: var(--border);
             border-radius: 3px;
             overflow: hidden;
             margin: 1rem 0;
@@ -172,7 +174,7 @@
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
+            background: var(--gradient);
             transition: width 1s ease;
         }
         
@@ -180,8 +182,8 @@
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
-            background: #374151;
-            color: #f8fafc;
+            background: var(--primary);
+            color: white;
             border: none;
             padding: 0.3rem 0.8rem;
             border-radius: 4px;
@@ -191,7 +193,7 @@
         }
         
         .copy-btn:hover {
-            background: #4b5563;
+            background: var(--primary-dark);
         }
     </style>
 </head>
@@ -209,6 +211,14 @@
                 <a href="veri-analizi.html" class="nav-link">Veri Analizi</a>
                 <a href="interactive-python-editor.html" class="nav-link">Kod Editörü</a>
                 <a href="blog/index.html" class="nav-link">Blog</a>
+                <button id="theme-toggle" class="theme-toggle" title="Dark/Light Mode">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </nav>
@@ -723,11 +733,11 @@ tesla.sarj_et(30)</code></pre>
             
             navigator.clipboard.writeText(text).then(function() {
                 button.textContent = 'Kopyalandı!';
-                button.style.background = '#10b981';
+                button.style.background = 'var(--success)';
                 
                 setTimeout(function() {
                     button.textContent = 'Kopyala';
-                    button.style.background = '#374151';
+                    button.style.background = 'var(--primary)';
                 }, 2000);
             });
         }
@@ -742,6 +752,33 @@ tesla.sarj_et(30)</code></pre>
                     block: 'start'
                 });
             });
+        });
+        
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.querySelector('.theme-icon');
+        
+        // Load saved theme
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️';
+        } else {
+            themeIcon.textContent = '🌙';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
         });
     </script>
 

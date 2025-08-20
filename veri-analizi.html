@@ -8,6 +8,7 @@
     <meta name="keywords" content="python veri analizi, data science kursu, pandas tutorial, numpy, matplotlib, data visualization, veri bilimi">
     <link rel="stylesheet" href="premium-styles.css">
     <link rel="stylesheet" href="hero-styles.css">
+    <link rel="stylesheet" href="blog-enhancement.css">
     
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023802833968711" crossorigin="anonymous"></script>
@@ -27,6 +28,14 @@
                 <a href="interactive-python-editor.html" class="nav-link">Kod Editörü</a>
                 <a href="blog/index.html" class="nav-link">Blog</a>
             </div>
+            <button id="theme-toggle" class="theme-toggle" title="Dark/Light Mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
+        <div class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </nav>
 
@@ -501,12 +510,12 @@
         .project-features {
             margin-top: 1.5rem;
             padding-top: 1rem;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--border);
         }
         
         .project-features h4 {
             font-size: 0.9rem;
-            color: #333;
+            color: var(--text);
             margin-bottom: 0.5rem;
         }
         
@@ -519,12 +528,12 @@
         .project-features li {
             padding: 0.25rem 0;
             font-size: 0.8rem;
-            color: #666;
+            color: var(--text-light);
         }
         
         .project-features li:before {
             content: "✓ ";
-            color: #4CAF50;
+            color: var(--success);
             font-weight: bold;
         }
         
@@ -537,15 +546,15 @@
         }
         
         .tool-category {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            background: linear-gradient(135deg, var(--bg-alt), var(--bg));
             padding: 2rem;
             border-radius: 15px;
-            border-left: 4px solid #4CAF50;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--success);
+            box-shadow: var(--shadow);
         }
         
         .tool-category h3 {
-            color: #333;
+            color: var(--text);
             margin-bottom: 1.5rem;
             font-size: 1.3rem;
         }
@@ -557,26 +566,26 @@
         }
         
         .tool-item {
-            background: white;
+            background: var(--bg);
             padding: 1.5rem;
             border-radius: 10px;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border);
             transition: transform 0.3s ease;
         }
         
         .tool-item:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-lg);
         }
         
         .tool-item h4 {
-            color: #333;
+            color: var(--text);
             margin-bottom: 0.5rem;
             font-size: 1.1rem;
         }
         
         .tool-item p {
-            color: #666;
+            color: var(--text-light);
             font-size: 0.9rem;
             line-height: 1.5;
             margin-bottom: 0.5rem;
@@ -584,7 +593,7 @@
         
         .difficulty {
             font-size: 0.8rem;
-            color: #888;
+            color: var(--text-light);
             font-weight: 500;
         }
         
@@ -593,12 +602,13 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            background: linear-gradient(135deg, var(--bg-alt), var(--bg));
             padding: 2rem;
             border-radius: 15px;
             margin: 2rem 0;
             flex-wrap: wrap;
             gap: 1rem;
+            border: 1px solid var(--border);
         }
         
         .pipeline-step {
@@ -606,19 +616,20 @@
             min-width: 150px;
             text-align: center;
             padding: 1rem;
-            background: white;
+            background: var(--bg);
             border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
         }
         
         .pipeline-step h4 {
-            color: #1976d2;
+            color: var(--primary);
             margin-bottom: 0.5rem;
         }
         
         .pipeline-arrow {
             font-size: 1.5rem;
-            color: #1976d2;
+            color: var(--primary);
             margin: 0 0.5rem;
         }
         
@@ -631,24 +642,24 @@
         }
         
         .stat-card {
-            background: white;
+            background: var(--bg);
             padding: 1.5rem;
             border-radius: 10px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #e0e0e0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
         }
         
         .stat-card .number {
             font-size: 2.5rem;
             font-weight: bold;
-            color: #4CAF50;
+            color: var(--success);
             display: block;
             margin-bottom: 0.5rem;
         }
         
         .stat-card .label {
-            color: #666;
+            color: var(--text-light);
             font-size: 0.9rem;
         }
         
@@ -674,11 +685,11 @@
         
         /* Interactive Elements */
         .interactive-demo {
-            background: #f8f9fa;
+            background: var(--bg-alt);
             padding: 2rem;
             border-radius: 15px;
             margin: 2rem 0;
-            border: 1px solid #dee2e6;
+            border: 1px solid var(--border);
         }
         
         .demo-tabs {
@@ -689,29 +700,30 @@
         
         .demo-tab {
             padding: 0.5rem 1rem;
-            background: white;
-            border: 1px solid #ddd;
+            background: var(--bg);
+            border: 1px solid var(--border);
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            color: var(--text);
         }
         
         .demo-tab.active {
-            background: #4CAF50;
+            background: var(--success);
             color: white;
         }
         
         .demo-content {
-            background: white;
+            background: var(--bg);
             padding: 1rem;
             border-radius: 8px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border);
         }
         
         /* Code Blocks */
         .code-example {
-            background: #2d3748;
-            color: #e2e8f0;
+            background: var(--bg-alt);
+            color: var(--text);
             padding: 1.5rem;
             border-radius: 8px;
             margin: 1rem 0;
@@ -719,24 +731,49 @@
             font-family: 'Courier New', monospace;
             font-size: 0.9rem;
             line-height: 1.5;
+            border: 1px solid var(--border);
+        }
+        
+        /* Dark mode code styling */
+        [data-theme="dark"] .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
         }
         
         .code-example .keyword {
-            color: #63b3ed;
+            color: var(--primary);
         }
         
         .code-example .string {
-            color: #68d391;
+            color: var(--success);
         }
         
         .code-example .comment {
-            color: #a0aec0;
+            color: var(--text-light);
             font-style: italic;
         }
     </style>
 
     <!-- JavaScript -->
     <script>
+        // Dark Mode Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.querySelector('.theme-icon');
+        
+        // Check for saved theme preference or default to 'dark'
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+
         function scrollToSection(sectionId) {
             document.getElementById(sectionId).scrollIntoView({
                 behavior: 'smooth'
