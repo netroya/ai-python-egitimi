@@ -8,6 +8,7 @@
     <meta name="keywords" content="web development, react, javascript, nodejs, vue.js, html5, css3, web geliştirme, frontend, backend">
     <link rel="stylesheet" href="../blog-styles.css">
     <link rel="stylesheet" href="../../hero-styles.css">
+    <link rel="stylesheet" href="../../premium-styles.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -431,7 +432,7 @@
 
         .topics-section h2 {
             text-align: center;
-            color: #333;
+            color: var(--text);
             margin-bottom: 3rem;
             font-size: 2.5rem;
         }
@@ -443,19 +444,19 @@
         }
 
         .topic-card {
-            background: white;
+            background: var(--bg-card);
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border: 2px solid transparent;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--border);
             transition: all 0.3s ease;
             text-align: center;
         }
 
         .topic-card:hover {
-            border-color: #61dafb;
+            border-color: var(--primary);
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-lg);
         }
 
         .topic-icon {
@@ -464,19 +465,19 @@
         }
 
         .topic-card h3 {
-            color: #333;
+            color: var(--text);
             margin-bottom: 1rem;
         }
 
         .topic-card p {
-            color: #666;
+            color: var(--text-light);
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
 
         .topic-count {
-            background: #61dafb;
-            color: #333;
+            background: var(--primary);
+            color: var(--bg-card);
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -492,8 +493,8 @@
         }
 
         .skill {
-            background: #f0f0f0;
-            color: #666;
+            background: var(--border);
+            color: var(--text-light);
             padding: 0.25rem 0.5rem;
             border-radius: 10px;
             font-size: 0.8rem;
@@ -502,14 +503,14 @@
         /* Trends section */
         .trends-section {
             margin: 4rem 0;
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            background: var(--gradient);
             padding: 3rem;
             border-radius: 15px;
         }
 
         .trends-section h2 {
             text-align: center;
-            color: #333;
+            color: var(--text);
             margin-bottom: 2rem;
         }
 
@@ -520,11 +521,11 @@
         }
 
         .trend-item {
-            background: white;
+            background: var(--bg-card);
             padding: 2rem;
             border-radius: 10px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow);
             transition: transform 0.3s ease;
         }
 
@@ -538,27 +539,28 @@
         }
 
         .trend-item h3 {
-            color: #333;
+            color: var(--text);
             margin-bottom: 0.5rem;
         }
 
         .trend-item p {
-            color: #666;
+            color: var(--text-light);
             font-size: 0.9rem;
             line-height: 1.5;
         }
 
         /* Web-themed newsletter */
         .newsletter-section.web-theme {
-            background: linear-gradient(135deg, #61dafb 0%, #21759b 100%);
+            background: var(--gradient);
         }
 
         .newsletter-section.web-theme .newsletter-form button {
-            background: #4fc08d;
+            background: var(--primary);
         }
 
         .newsletter-section.web-theme .newsletter-form button:hover {
-            background: #42b883;
+            background: var(--primary);
+            opacity: 0.9;
         }
 
         /* Responsive */

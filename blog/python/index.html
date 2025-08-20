@@ -6,6 +6,7 @@
     <title>Python Blog Yazıları - En Güncel Python İçerikleri | 2025</title>
     <meta name="description" content="Python programlama dilinin her yönü hakkında güncel blog yazıları. Python öğrenme rehberleri, ileri düzey konular ve best practices.">
     <meta name="keywords" content="python blog, python tutorial, python öğrenme, python rehberi, python makale, python yazılım">
+    <link rel="stylesheet" href="../../premium-styles.css">
     <link rel="stylesheet" href="../blog-styles.css">
     <link rel="stylesheet" href="../../hero-styles.css">
 </head>
@@ -390,7 +391,7 @@
 
         .featured-section h2 {
             text-align: center;
-            color: #333;
+            color: var(--text);
             margin-bottom: 3rem;
             font-size: 2.5rem;
         }
@@ -402,25 +403,26 @@
         }
 
         .featured-post {
-            background: white;
+            background: var(--bg-card);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border);
         }
 
         .featured-post:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-lg);
         }
 
         .post-image {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient);
             height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
         }
 
         .post-icon {
@@ -439,7 +441,7 @@
         }
 
         .category {
-            background: #4CAF50;
+            background: var(--primary);
             color: white;
             padding: 0.25rem 0.75rem;
             border-radius: 15px;
@@ -448,7 +450,7 @@
         }
 
         .read-time {
-            color: #666;
+            color: var(--text-light);
             font-size: 0.9rem;
         }
 
@@ -458,16 +460,16 @@
         }
 
         .post-content h3 a {
-            color: #333;
+            color: var(--text);
             text-decoration: none;
         }
 
         .post-content h3 a:hover {
-            color: #4CAF50;
+            color: var(--primary);
         }
 
         .post-content p {
-            color: #666;
+            color: var(--text-light);
             line-height: 1.6;
             margin-bottom: 1rem;
         }
@@ -479,8 +481,8 @@
         }
 
         .tag {
-            background: #f0f0f0;
-            color: #666;
+            background: var(--bg-alt);
+            color: var(--text-light);
             padding: 0.25rem 0.5rem;
             border-radius: 10px;
             font-size: 0.8rem;
@@ -493,7 +495,7 @@
 
         .categories-section h2 {
             text-align: center;
-            color: #333;
+            color: var(--text);
             margin-bottom: 3rem;
             font-size: 2.5rem;
         }
@@ -505,17 +507,17 @@
         }
 
         .category-card {
-            background: white;
+            background: var(--bg-card);
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow);
             border: 2px solid transparent;
             transition: all 0.3s ease;
         }
 
         .category-card:hover {
-            border-color: #4CAF50;
+            border-color: var(--primary);
             transform: translateY(-5px);
         }
 
@@ -525,18 +527,18 @@
         }
 
         .category-card h3 {
-            color: #333;
+            color: var(--text);
             margin-bottom: 1rem;
         }
 
         .category-card p {
-            color: #666;
+            color: var(--text-light);
             line-height: 1.5;
             margin-bottom: 1rem;
         }
 
         .category-count {
-            background: #4CAF50;
+            background: var(--primary);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 20px;
@@ -550,7 +552,7 @@
         }
 
         .articles-section h2 {
-            color: #333;
+            color: var(--text);
             margin-bottom: 2rem;
             font-size: 2rem;
         }
@@ -562,17 +564,17 @@
         }
 
         .article-item {
-            background: white;
+            background: var(--bg-card);
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-left: 4px solid #4CAF50;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
             transition: transform 0.3s ease;
         }
 
         .article-item:hover {
             transform: translateX(5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-lg);
         }
 
         .article-meta {
@@ -582,13 +584,13 @@
         }
 
         .article-date {
-            color: #666;
+            color: var(--text-light);
             font-size: 0.9rem;
         }
 
         .article-category {
-            background: #e3f2fd;
-            color: #1976d2;
+            background: var(--bg-alt);
+            color: var(--primary);
             padding: 0.25rem 0.75rem;
             border-radius: 15px;
             font-size: 0.8rem;
@@ -599,16 +601,16 @@
         }
 
         .article-item h3 a {
-            color: #333;
+            color: var(--text);
             text-decoration: none;
         }
 
         .article-item h3 a:hover {
-            color: #4CAF50;
+            color: var(--primary);
         }
 
         .article-item p {
-            color: #666;
+            color: var(--text-light);
             line-height: 1.6;
             margin-bottom: 1rem;
         }
@@ -627,7 +629,7 @@
 
         /* Newsletter Section */
         .newsletter-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient);
             color: white;
             padding: 3rem 2rem;
             border-radius: 15px;
@@ -661,7 +663,7 @@
         }
 
         .newsletter-form button {
-            background: #4CAF50;
+            background: var(--success);
             color: white;
             border: none;
             padding: 1rem 2rem;
@@ -673,7 +675,7 @@
         }
 
         .newsletter-form button:hover {
-            background: #45a049;
+            background: var(--primary);
         }
 
         .newsletter-section small {
