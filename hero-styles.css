@@ -67,9 +67,13 @@
 }
 
 .hero h1 .highlight {
-    color: var(--success);
-    -webkit-text-fill-color: var(--success);
-    text-shadow: 0 0 20px rgba(52, 211, 153, 0.5);
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    background: linear-gradient(45deg, #ffffff, #f0f8ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-weight: 900;
 }
 
 .hero .subtitle {
